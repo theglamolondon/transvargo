@@ -44,7 +44,7 @@ var userAgent = navigator.userAgent.toLowerCase(),
         progressBar: $('.progress-bar'),
         swiper: $(".swiper-slider"),
         isotope: $(".isotope"),
-        mailForm: $('.rd-mailform'),
+        //mailForm: $('.rd-mailform'),
         googleMap: $('#google-map'),
         slick: $('.carousel-slider'),
         rdNavbar: $(".rd-navbar")

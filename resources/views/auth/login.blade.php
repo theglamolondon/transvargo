@@ -32,6 +32,8 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Connexion</button>
                             </form>
+                            <p class="text-uppercase text-gray offset-7">ou</p>
+                            <a href="{{ route('register')  }}" class="btn btn-info-2 btn-sm btn-icon">Nouvelle inscription</a>
                         </div>
                     </div>
                 </div>
@@ -48,8 +50,7 @@
     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
     </fb:login-button>
 
-    <div id="status">
-    </div>
+    <div id="status"></div>
 @endsection
 
 @section('script')
