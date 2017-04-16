@@ -1283,7 +1283,7 @@ output {
   padding: 15px 30px;
   font-size: 16px;
   line-height: 1.5;
-  color: #b7b7b7;
+  color: #444; /* #b7b7b7; */
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
@@ -3699,8 +3699,8 @@ tbody.collapse.in {
 }
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-  color: #82c434;
-  background-color: #e21f2f;
+  border-bottom: solid #e21f2f;
+  color: #282e3e;
 }
 
 .nav-stacked > li {

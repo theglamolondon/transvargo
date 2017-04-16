@@ -1,7 +1,6 @@
 @extends('layouts._site')
 
 @section('content')
-
     <section class="bg-light section-lg">
         <ol class="breadcrumb">
             <li class="active">Connexion</li>
@@ -9,7 +8,7 @@
     </section>
     <section class="section section-inset-1">
         <div class="container">
-            <h2>sign in</h2>
+            <h2>Connexion</h2>
             <hr>
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
@@ -19,21 +18,24 @@
                         <a href="#" class="btn btn-danger btn-sm btn-icon"><span class="icon fa-google-plus"></span> Google+</a></div>
                     <div class="row offset-5">
                         <div class="col-lg-6 col-lg-offset-3">
-                            <p class="text-uppercase text-gray">or</p>
-                            <form class="rd-mailform login-form" method="post" action="{{route('login')}}">
-                                {{csrf_field()}}
+                            <p class="text-uppercase text-gray">ou</p>
+
+                            @if($errors->has('email'))<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $errors->first('email') }}</div>@endif
+
+                            <form class="login-form" method="post" action="{{ route('login') }}">
+                                {{ csrf_field() }}
                                 <div class="mfInput">
                                     <label for="exampleInputEmail"></label>
-                                    <input type="email" placeholder="Username or e-mail..." id="exampleInputEmail" class="form-control">
+                                    <input type="email" placeholder="E-mail..." id="exampleInputEmail" class="form-control" name="email" value="{{ old('email') }}">
                                 </div>
                                 <div class="mfInput">
                                     <label for="exampleInputPassword1"></label>
-                                    <input type="password" placeholder="Password" id="exampleInputPassword1" class="form-control">
+                                    <input type="password" placeholder="Mot de passe..." id="exampleInputPassword1" class="form-control" name="password">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Connexion</button>
                             </form>
                             <p class="text-uppercase text-gray offset-7">ou</p>
-                            <a href="{{ route('register')  }}" class="btn btn-info-2 btn-sm btn-icon">Nouvelle inscription</a>
+                            <a href="{{ route('register')  }}" class="btn btn-sm btn-primary-variant-1 ">Nouvelle inscription</a>
                         </div>
                     </div>
                 </div>

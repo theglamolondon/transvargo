@@ -4,7 +4,11 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +36,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+
         parent::report($exception);
     }
 
@@ -44,6 +49,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        //Log::error($exception->getMessage());
+        if($exception instanceof TokenMismatchException ){
+            return back()->withErrors(["Le formulaire n'a pas été validé. Veuillez recommencer SVP!"]);
+        }
+
+        if($exception instanceof RouteNotFoundException || $exception instanceof NotFoundHttpException ){
+            return response()->view('error.404');
+        }
+
         return parent::render($request, $exception);
     }
 

@@ -20,15 +20,16 @@
 
         <li class="active">
             @if(\Illuminate\Support\Facades\Auth::guest())
-                <a href="{{route('login')}}" class=""> <i></i> Connexion</a>
+                <a href="{{route('login')}}" class=""> <i></i> Connexion </a>
             @else
                 <li>
-                    <a href="#">Shop</a>
+                    <a href="#">Salut {{ request()->user()->authenticable->prenoms }}</a>
                     <ul class="rd-navbar-dropdown">
-                        <li><a href="shop-catalog.html">Product catalog</a></li>
+                        <li><a href="{{ route('client.tableaubord') }}">Mon tableau de bord</a></li>
                         <li><a href="shop-product.html">Single product</a></li>
                         <li><a href="shop-cart.html">Shopping cart</a></li>
                         <li><a href="shop-checkout.html">Checkout</a></li>
+                        <li><a href="{{ route('logout') }}">Déconnexion</a></li>
                     </ul>
                 </li>
                 <a href="#" class="fa-shopping-cart"><span>10</span></a>

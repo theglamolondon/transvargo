@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Client;
+use App\IdentiteAccess;
+use App\Pays;
+use App\Services\Statut;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Ville;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -27,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/accueil.html';
 
     /**
      * Create a new controller instance.
@@ -42,30 +49,65 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     *
+     * @return array
      */
-    protected function validator(array $data)
+    protected function validator()
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+        return  [
+            'nom' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:identiteaccess',
             'password' => 'required|min:6|confirmed',
-        ]);
+            'ville_id' => 'required'
+        ];
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return IdentiteAccess
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $identite = new IdentiteAccess([
             'email' => $data['email'],
+            'ville_id' => $data['ville_id'],
             'password' => bcrypt($data['password']),
+            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF)
         ]);
+        $identite->saveOrFail();
+
+        $client = new Client([
+            'nom' => $data['nom'],
+            'prenoms' => $data['prenoms'],
+            'raisonsociale' => $data['raisonsociale'],
+            'identiteaccess_id' => $identite->id
+        ]);
+        $client->saveOrFail();
+
+        $identite->setAuthenticable($client);
+
+        return $identite;
+    }
+
+    public function showRegistrationForm()
+    {
+        $villes = Ville::orderBy('nom','asc')->get();
+        $countries = Pays::orderBy('nom','asc')->get();
+
+        return view('auth.register',compact("villes","countries"));
+    }
+
+    public function register(Request $request)
+    {
+        $this->validate($request,$this->validator());
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
     }
 }

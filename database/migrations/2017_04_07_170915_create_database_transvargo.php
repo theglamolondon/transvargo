@@ -38,7 +38,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->bigIncrements('id');
             $table->string('email',100)->unique();
             $table->string('password');
-            $table->string('remember_token');
+            $table->string('remember_token')->nullable();
             $table->string('statut',5);
             $table->integer('ville_id')->unsigned();
             $table->foreign('ville_id')->references('id')->on('ville');

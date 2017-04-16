@@ -13,19 +13,19 @@
 
 /* Authentication routes */
 // Authentication Routes...
-$this->get('connexion.html', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('connexion.html', 'Auth\LoginController@login');
-$this->post('deconnexion.html', 'Auth\LoginController@logout')->name('logout');
+Route::get('connexion.html', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('connexion.html', 'Auth\LoginController@login');
+Route::get('deconnexion.html', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
-$this->get('inscription.html', 'Auth\RegisterController@showRegistrationForm')->name('register');
-$this->post('inscription.html', 'Auth\RegisterController@register');
+Route::get('inscription.html', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('inscription.html', 'Auth\RegisterController@register');
 
 // Password Reset Routes...
-$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-$this->post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 /*End authentication route*/
 
 
@@ -35,3 +35,10 @@ Route::get('/accueil.html', 'SiteController@index')->name('accueil');
 Route::get('/conditions-utilisation.html', 'SiteController@showTermOfUsesPage')->name('terms');
 Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
 /* end site route */
+
+/*Client*/
+Route::get('/tableau-bord.html','DashboardController@showDashboard')->name('client.tableaubord');
+Route::get('/tableau-bord/{id}-nouvelle-expedition.html','DashboardController@showDashboard')->name('client.tableaubord.newexpedition')->where(['id' => '[0-9]{3}']);
+Route::get('/tableau-bord/{id}-mes-expeditions.html','DashboardController@showDashboard')->name('client.tableaubord.myexpedition')->where(['id' => '[0-9]{3}']);
+Route::get('/tableau-bord/{id}-mes-factures.html','DashboardController@showDashboard')->name('client.tableaubord.myinvoice')->where(['id' => '[0-9]{3}']);
+Route::get('/tableau-bord/{id}-mon-compte.html','DashboardController@showDashboard')->name('client.tableaubord.myaccount')->where(['id' => '[0-9]{3}']);
