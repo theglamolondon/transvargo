@@ -25,7 +25,7 @@
                 <li>
                     <a href="#">Salut {{ request()->user()->authenticable->prenoms }}</a>
                     <ul class="rd-navbar-dropdown">
-                        <li><a href="{{ route('client.tableaubord') }}">Mon tableau de bord</a></li>
+                        <li><a href="{{ route('client.tableaubord') }}">Tableau de bord</a></li>
                         <li><a href="shop-product.html">Single product</a></li>
                         <li><a href="shop-cart.html">Shopping cart</a></li>
                         <li><a href="shop-checkout.html">Checkout</a></li>

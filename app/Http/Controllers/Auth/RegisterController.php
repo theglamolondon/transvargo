@@ -58,7 +58,8 @@ class RegisterController extends Controller
             'nom' => 'required|max:255',
             'email' => 'required|email|max:255|unique:identiteaccess',
             'password' => 'required|min:6|confirmed',
-            'ville_id' => 'required'
+            'ville_id' => 'required',
+            'terms' => 'accepted',
         ];
     }
 

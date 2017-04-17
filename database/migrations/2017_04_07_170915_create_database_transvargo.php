@@ -40,6 +40,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('password');
             $table->string('remember_token')->nullable();
             $table->string('statut',5);
+            $table->string('terms',5);
             $table->integer('ville_id')->unsigned();
             $table->foreign('ville_id')->references('id')->on('ville');
         });

@@ -12,29 +12,34 @@
             <hr>
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
+
+                    @foreach($errors->all() as $erreur)
+                        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
+                    @endforeach
+
                     <form class="form-horizontal" action="{{ route('register') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <div class="col-sm-6 col-xs-12">
-                                <input type="text" placeholder="Votre prénom..." id="prenoms" name="prenoms" class="form-control">
+                                <input type="text" placeholder="Votre prénom..." id="prenoms" name="prenoms" class="form-control" value="{{old('prenoms')}}">
                             </div>
                             <div class="col-sm-6 col-xs-12">
-                                <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-6 col-xs-12">
-                                <input type="email" placeholder="email..." id="email" name="email" class="form-control">
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <input class="form-control" name="raisonsociale" type="text" placeholder="Votre raison sociale">
+                                <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control" value="{{old('nom')}}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-6 col-xs-12">
-                                <input class="form-control" name="contact" type="text" placeholder="Votre contact...">
+                                <input type="email" placeholder="email..." id="email" name="email" class="form-control" value="{{old('email')}}">
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <input class="form-control" name="raisonsociale" type="text" placeholder="Votre raison sociale" value="{{old('raisonsociale')}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-6 col-xs-12">
+                                <input class="form-control" name="contact" type="text" placeholder="Votre contact..." value="{{old('contact')}}">
                             </div>
                         </div>
 
@@ -42,14 +47,14 @@
                             <div class="col-sm-6 col-xs-12">
                                 <select class="form-control" name="pays">
                                     @foreach($countries as $pays)
-                                    <option value="{{ $pays->id }}">{{ $pays->nom }}</option>
+                                    <option value="{{ $pays->id }}" @if(old('pays') == $pays->id) selected @endif>{{ $pays->nom }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6 col-xs-12">
                                 <select class="form-control" name="ville_id">
                                     @foreach($villes as $ville)
-                                    <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
+                                    <option value="{{ $ville->id }}" @if(old('ville_id') == $ville->id) selected @endif>{{ $ville->nom }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,6 +66,13 @@
                             </div>
                             <div class="col-sm-6 col-xs-12">
                                 <input type="password" placeholder="Confirmation mot de passe" id="password_confirm" name="password_confirm" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-xs-12">
+                                <input name="terms" type="checkbox" value="1">
+                                En cliquant ici, vous acceptez <a class="" href="{{ route('terms') }}">les termes et conditions d'utilisations</a>
                             </div>
                         </div>
 
