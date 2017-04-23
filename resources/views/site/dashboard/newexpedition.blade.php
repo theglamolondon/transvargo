@@ -20,12 +20,20 @@
                         <input type="text" class="form-control autocomplete" name="arrivee" id="arrivee">
                     </div>
                     <div class="form-group distance">
-                        <label for="distance" class="h6">Distance (km) *</label> <span><img src="{{config('app.url')}}/balls.gif" id="spinner" style="left: 101%; position: absolute; top: 30%;"></span>
+                        <label for="distance" class="h6">Distance (km) *</label> <span><img src="{{config('app.url')}}/balls.gif" id="spinner" style="display:none; left: 101%; position: absolute; top: 30%;"></span>
                         <input type="text" class="numbers-only form-control" id="distance" disabled>
                     </div>
                     <div class="form-group weight">
                         <label for="weight" class="h6">Masse (kg)</label>
                         <input type="text" id="weight" class="numbers-only form-control" name="masse">
+                    </div>
+                    <div class="form-group">
+                        <label class="h6">Type de camion</label>
+                        <select name="typecamion_id" class="form-control">
+                            @foreach($types as $type)
+                            <option value="{{ $type->id }}">{{ $type->libelle }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -41,22 +49,8 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <p class="h6">Extra services:</p>
-                        <div class="checkbox-group">
-                            <label class="checkbox-inline">
-                                <input data-price="15" type="checkbox" id="extra1" class="numbers-only"><span class="checkbox-field"></span><span>Insurance</span>
-                            </label>
-                            <label class="checkbox-inline">
-                                <input data-price="20" type="checkbox" id="extra2" class="numbers-only"><span class="checkbox-field"></span><span>Express Delivery</span>
-                            </label>
-                            <label class="checkbox-inline">
-                                <input data-price="25" type="checkbox" id="extra3" class="numbers-only"><span class="checkbox-field"></span><span>Packaging</span>
-                            </label>
-                        </div>
-                    </div>
                     <div class="form-group border-top inset-4 h4">
-                        <p>Total:<span id="total">0</span></p>
+                        <p>Total : <span id="total">0</span> F CFA</p>
                     </div>
                 </div>
                 </form>
@@ -66,10 +60,11 @@
 </div>
 
 @section('script')
-    <script>
+    <script type="application/ecmascript">
+        var DISTANCE_MATRIX_URL = '{{ route('ajax_distancematrix') }}';
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 7.5450345, lng: -7.7914844}, //7.5450345,-7.7914844
+                center: {lat: 7.5450345, lng: -5.240738}, //7.5450345,-7.7914844
                 zoom: 7
             });
             var inputD = document.getElementById('depart');
@@ -189,8 +184,27 @@
             }, function(response, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
+                    $.ajax(DISTANCE_MATRIX_URL,{
+                        method: 'post',
+                        dataType: 'json',
+                        data:{ from: $("#depart").val(), to : $("#arrivee").val()},
+                        beforeSend : function (xhr, obj) {
+                            $("#spinner").show();
+                        },
+                        complete : function (xhr, obj) {
+                            $("#spinner").hide();
+                            xhr.done(function (data) {
+                                //console.log(data);
+                                $("#distance").val(data.rows[0].elements[0].distance.text);
+
+                                var km = (data.rows[0].elements[0].distance.text).replace("/km/",'');
+
+                                $("#total").text(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
+                            })
+                        }
+                    });
                 } else {
-                    window.alert('Directions request failed due to ' + status);
+                    //window.alert('Directions request failed due to ' + status);
                 }
             });
         }

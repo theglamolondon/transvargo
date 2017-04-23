@@ -19,6 +19,8 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('indicatif',4);
             $table->string('monnaie',10);
             $table->string('abbreviation',5);
+            $table->string('longitude',25)->nullable();
+            $table->string('latitude',25)->nullable();
         });
         Schema::create('typeidentite',function (Blueprint $table){
             $table->increments('id');
@@ -116,6 +118,8 @@ class CreateDatabaseTransvargo extends Migration
             $table->bigInteger('prix');
             $table->integer('nature_id')->unsigned();
             $table->integer('client_id')->unsigned();
+            $table->integer('typecamion_id')->unsigned();
+            $table->foreign('typecamion_id')->references('id')->on('typecamion');
             $table->foreign('nature_id')->references('id')->on('nature');
             $table->foreign('client_id')->references('id')->on('client');
         });

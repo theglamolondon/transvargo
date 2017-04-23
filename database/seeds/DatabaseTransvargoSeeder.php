@@ -18,6 +18,18 @@ class DatabaseTransvargoSeeder extends Seeder
             [ "libelle" => "Administrateur" ],
         ]);
 
+        DB::table('typecamion')->insert([
+            [ 'libelle' => 'Camion porteur' ],
+            [ 'libelle' => 'Camion semi-remorque' ],
+            [ 'libelle' => 'Camion plateau' ],
+        ]);
+
+        DB::table('typecamion')->insert([
+            [ 'libelle' => 'Camion porteur' ],
+            [ 'libelle' => 'Camion semi-remorque' ],
+            [ 'libelle' => 'Camion plateau' ],
+        ]);
+
         DB::table('typecontact')->insert([
             [ "libelle" => "Téléphone" ],
             [ "libelle" => "Fax" ],

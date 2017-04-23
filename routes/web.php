@@ -42,3 +42,6 @@ Route::get('/tableau-bord/{id}-nouvelle-expedition.html','DashboardController@sh
 Route::get('/tableau-bord/{id}-mes-expeditions.html','DashboardController@showDashboard')->name('client.tableaubord.myexpedition')->where(['id' => '[0-9]{3}']);
 Route::get('/tableau-bord/{id}-mes-factures.html','DashboardController@showDashboard')->name('client.tableaubord.myinvoice')->where(['id' => '[0-9]{3}']);
 Route::get('/tableau-bord/{id}-mon-compte.html','DashboardController@showDashboard')->name('client.tableaubord.myaccount')->where(['id' => '[0-9]{3}']);
+
+/*AJAX*/
+Route::post('/ajax/distanceMatrix','AjaxController@getDistanceMatrix')->name('ajax_distancematrix');

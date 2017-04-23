@@ -15,4 +15,5 @@ class Client extends Authenticable
 {
     protected $table = 'client';
     protected $guarded = [];
+    public $timestamps = false;
 }
