@@ -16,6 +16,10 @@ class SiteController extends Controller
         return view('site.terms');
     }
 
+    public function showTransporteurTermOfUsesPage(Request $request){
+        return view('carrier.terms');
+    }
+
     public function showContactPage(Request $request){
         return view('site.contact');
     }

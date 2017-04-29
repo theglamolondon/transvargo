@@ -9,8 +9,11 @@
     <meta charset="utf-8">
     <link rel="icon" href="{{config('app.url')}}/images/favicon.ico" type="image/x-icon">
     <!-- Stylesheets-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700%7COpen+Sans:400,300);">
     <link rel="stylesheet" href="{{config('app.url')}}/css/style.css">
+    <link rel="stylesheet" href="{{config('app.url')}}/css/custom.css">
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="Vous utilisez un navigateur ancien et peu sécurisé. Pour une meilleure expérience, veuillez utiliser un navigateur récent."></a></div>
     <script src="{{config('app.url')}}/js/html5shiv.min.js"></script>
@@ -34,8 +37,8 @@
                   <li><a href="#" class="fa-vimeo"></a></li>
                   <li><a href="#" class="fa-google-plus"></a></li>
                   <li><a href="#" class="fa-rss"></a></li>
-                  <li class="text-left"><a href="mailto:#" class="fa-envelope-o">info@transvargo.com</a></li>
-                  <li class="text-left"><a href="callto:#" class="fa-mobile-phone">1-800-1234-567</a></li>
+                  <li class="text-left"><a href="mailto:info@transvargo.com" class="fa-envelope-o">info@transvargo.com</a></li>
+                  <li class="text-left"><a href="callto:#" class="fa-mobile-phone">78-123-456</a></li>
                 </ul>
               </div>
             </div>
@@ -47,7 +50,13 @@
                 <!-- RD Navbar Brand-->
                 <div class="rd-navbar-brand"><a href="{{ route('accueil') }}" class="brand-name"><span class="icon fa-truck"></span><span>Transvargo</span></a></div>
               </div>
-              @include('site.navigation.nav')
+              @if( \Illuminate\Support\Facades\Auth::guest() || request()->user()->typeidentite_id == \App\TypeIdentitite::TYPE_CLIENT )
+                @include('site.navigation.nav')
+              @elseif( request()->user()->typeidentite_id == \App\TypeIdentitite::TYPE_TRANSPORTEUR )
+                @include('carrier.navigation.nav')
+              @elseif( request()->user()->typeidentite_id == \App\TypeIdentitite::TYPE_STAFF_USER )
+                @include('staff.navigation.nav')
+              @endif
             </div>
           </nav>
         </div>
@@ -101,7 +110,7 @@
                   <li><a href="#">Support Forums</a></li>
                   <li><a href="#">Themes</a></li>
                   <li><a href="#">WordPress Blog</a></li>
-                  <li><a href="#">WordPress Planet</a></li>
+                  <li><a href="#">Transporteur</a></li>
                 </ul>
               </div>
               <div class="col-xs-12 col-sm-6 col-lg-3">
@@ -141,7 +150,7 @@
         </section>
         <section class="copyright bg-darkest well5">
           <div class="container">
-            <p class="pull-sm-left">&#169; <span id="copyright-year"></span> Tous droits réservés - <a href="{{route('terms')}}">Conditions d'utilisation</a></p>
+            <p class="pull-sm-left">&#169; <span id="copyright-year"></span> Tous droits réservés - <a href="{{ route('terms') }}">Conditions d'utilisation</a></p>
             <ul class="list-inline pull-sm-right offset-3">
               <li><a href="#" class="fa-facebook"></a></li>
               <li><a href="#" class="fa-twitter"></a></li>
@@ -157,9 +166,23 @@
       <!-- Rd Mailform result field-->
       <div class="rd-mailform-validate"></div>
     </div>
+
+    <div class="message">
+      @if(session()->has(\App\Work\Tools::MESSAGE_SUCCESS))
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Succès!</strong> {{ session(\App\Work\Tools::MESSAGE_SUCCESS) }}
+          </div>
+      @endif
+    </div>
+
     <!-- Java script-->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <script src="{{config('app.url')}}/js/core.min.js"></script>
     <script src="{{config('app.url')}}/js/script.js"></script>
+    <script src="{{config('app.url')}}/js/custom.js"></script>
 
     @yield('script')
 

@@ -43,7 +43,9 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('remember_token')->nullable();
             $table->string('statut',5);
             $table->string('terms',5);
+            $table->integer('typeidentite_id')->unsigned();
             $table->integer('ville_id')->unsigned();
+            $table->foreign('typeidentite_id')->references('id')->on('typeidentite');
             $table->foreign('ville_id')->references('id')->on('ville');
         });
         Schema::create('contact',function (Blueprint $table){
@@ -94,6 +96,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->float('capacite',6,2);
             $table->string('chauffeur',150);
             $table->string('telephone',70);
+            $table->string('statut')->defalut(\App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL);
             $table->integer('transporteur_id')->unsigned();
             $table->integer('typecamion_id')->unsigned();
             $table->foreign('transporteur_id')->references('id')->on('transporteur');
@@ -112,16 +115,22 @@ class CreateDatabaseTransvargo extends Migration
             $table->increments('id');
             $table->string('reference',100);
             $table->dateTime('datecreation');
+            $table->date('datechargement');
+            $table->string('lieudepart',100);
+            $table->string('coorddepart',100);
+            $table->string('lieuarrivee',100);
+            $table->string('coordarrivee',100);
             $table->string('adresselivraison');
             $table->float('masse',6,2);
             $table->string('statut',5);
+            $table->boolean('fragile')->default(false);
             $table->bigInteger('prix');
             $table->integer('nature_id')->unsigned();
             $table->integer('client_id')->unsigned();
             $table->integer('typecamion_id')->unsigned();
             $table->foreign('typecamion_id')->references('id')->on('typecamion');
             $table->foreign('nature_id')->references('id')->on('nature');
-            $table->foreign('client_id')->references('id')->on('client');
+            $table->foreign('client_id')->references('identiteaccess_id')->on('client');
         });
         Schema::create('chargement',function (Blueprint $table){
             $table->increments('id');
@@ -130,10 +139,10 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('nomsociete',100);
             $table->string('nomcontact',100);
             $table->string('contact',70);
-            $table->integer('transporteur_id')->unsigned();
+            $table->integer('vehicule_id')->unsigned();
             $table->integer('expedition_id')->unsigned();
             $table->integer('ville_id')->unsigned();
-            $table->foreign('transporteur_id')->references('id')->on('transporteur');
+            $table->foreign('vehicule_id')->references('id')->on('vehicule');
             $table->foreign('expedition_id')->references('id')->on('expedition');
             $table->foreign('ville_id')->references('id')->on('ville');
         });

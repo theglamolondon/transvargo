@@ -15,7 +15,7 @@ trait MapProcessing
 {
     //@protected
     private function getDataFromGoogleMatrixAPI($origins, $destinations, $unit=null){
-        $GoogleDistanceMatrixURL = "https://maps.googleapis.com/maps/api/distancematrix/json?".$unit."key=".MapController::API_KEY."&origins=".$origins."&destinations=".$destinations;
+        $GoogleDistanceMatrixURL = "https://maps.googleapis.com/maps/api/distancematrix/json?"."key=".MapController::API_KEY."&origins=".$origins."&destinations=".$destinations;
 
         $target = curl_init($GoogleDistanceMatrixURL);
         curl_setopt($target,CURLOPT_SSL_VERIFYPEER,false);
@@ -26,6 +26,6 @@ trait MapProcessing
         if($resultat)
             return $resultat;
         else
-            throwException(new \Exception('Google Distance Matrix API error'));
+            throw (new \Exception('Google Distance Matrix API error'));
     }
 }

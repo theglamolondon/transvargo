@@ -13,9 +13,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expedition extends Model
 {
+    protected $guarded = [];
     protected $table = "expedition";
+    protected $casts = [
+        "fragile" => "boolean"
+    ];
+
     public $timestamps = false;
+
     const UNIT_PRICE = 1000;
+
 
     public function typeCamion(){
         return $this->belongsTo('App\TypeCamion');
@@ -27,5 +34,13 @@ class Expedition extends Model
 
     public function client(){
         return $this->belongsTo('App\Client');
+    }
+
+    public function chargement(){
+        return $this->belongsTo('App\Chargement');
+    }
+
+    public function livraison(){
+        return $this->belongsTo('App\Livraison');
     }
 }

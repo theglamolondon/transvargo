@@ -1,4 +1,12 @@
-<br>
+@extends('layouts._site')
+
+@section('content')
+<section class="bg-light section-lg">
+    <ol class="breadcrumb">
+        <li class="">Client</li>
+        <li class="active">Tableau de bord</li>
+    </ol>
+</section>
 <div class="col-xs-12 section-inset-1">
     <div class="table-responsive">
         <table class="table table-hover text-left">
@@ -72,3 +80,4 @@
     </div>
     <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg offset-5">proceed to checkout</button>
 </div>
+@endsection

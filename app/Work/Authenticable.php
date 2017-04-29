@@ -17,6 +17,7 @@ abstract class Authenticable extends Model
     protected $nom;
     protected $prenoms;
     protected $primaryKey = 'identiteaccess_id';
+    protected $guarded = [];
 
     public $timestamps = false;
 }

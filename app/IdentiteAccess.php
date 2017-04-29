@@ -35,14 +35,14 @@ class IdentiteAccess extends Authenticatable
 
     public function authenticable(){
 
-        if ($this->client())
+        if ( $this->typeidentite_id == TypeIdentitite::TYPE_CLIENT )
             return $this->client();
 
-        if ($this->transporteur())
+        if ( $this->typeidentite_id == TypeIdentitite::TYPE_TRANSPORTEUR)
             return $this->transporteur();
 
-        if ($this->administrateur())
-            return $this->administrateur();
+        if ( $this->typeidentite_id == TypeIdentitite::TYPE_STAFF_USER )
+            return $this->staff();
 
         //return $this->hasOne('App\Work\Authenticable');
     }
@@ -55,7 +55,7 @@ class IdentiteAccess extends Authenticatable
         return $this->hasOne('App\Transporteur','identiteaccess_id');
     }
 
-    public function administrateur(){
+    public function staff(){
         return $this->hasOne('App\Transporteur','identiteaccess_id');
     }
 
