@@ -18,4 +18,5 @@ return [
 
 
     \App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_INACTIF.\App\Services\Statut::AUTRE_NON_NULL => 'Véhicule inactif',
+    \App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL => 'Véhicule actif (disponible)',
 ];

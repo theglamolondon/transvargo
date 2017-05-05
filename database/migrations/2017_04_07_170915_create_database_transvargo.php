@@ -125,6 +125,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('statut',5);
             $table->boolean('fragile')->default(false);
             $table->bigInteger('prix');
+            $table->string('remarque')->nullable();
             $table->integer('nature_id')->unsigned();
             $table->integer('client_id')->unsigned();
             $table->integer('typecamion_id')->unsigned();
@@ -153,6 +154,13 @@ class CreateDatabaseTransvargo extends Migration
             $table->integer('expedition_id')->unsigned();
             $table->foreign('expedition_id')->references('id')->on('expedition');
         });
+        Schema::create('localisation',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('latitude',50);
+            $table->string('longitude',50);
+            $table->integer('vehicule_id')->unsigned();
+            $table->foreign('vehicule_id')->references('id')->on('vehicule');
+        });
     }
 
     /**
@@ -162,6 +170,7 @@ class CreateDatabaseTransvargo extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('localisation');
         Schema::dropIfExists('livraison');
         Schema::dropIfExists('chargement');
         Schema::dropIfExists('expedition');

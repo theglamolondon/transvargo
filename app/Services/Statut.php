@@ -30,8 +30,4 @@ class Statut
     public static function create($type, $etat, $autre = self::AUTRE_NON_NULL){
         return $type.$etat.$autre;
     }
-
-    public function getStringFromCode($code){
-        //$type = strpos($code,);
-    }
 }

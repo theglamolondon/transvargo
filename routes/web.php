@@ -41,18 +41,27 @@ Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
 /* end site route */
 
 /*Client*/
-Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
-Route::get('/tableau-bord/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
-Route::post('/tableau-bord/nouvelle-expedition.html','ClientController@saveNewExpedition');
-Route::get('/tableau-bord/mes-expeditions.html','ClientController@showExpeditions')->name('client.myexpedition');
-Route::get('/tableau-bord/mes-factures.html','ClientController@showDashboard')->name('client.myinvoice');
-Route::get('/tableau-bord/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
+
+Route::group(['middleware' => 'client'],function (){
+    Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
+    Route::get('/tableau-bord/nouvelle-expedition.html','ExpeditionController@showNewExpeditionForm')->name('client.newexpedition');
+    Route::post('/tableau-bord/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
+    Route::get('/tableau-bord/mes-expeditions.html','ExpeditionController@showExpeditions')->name('client.myexpedition');
+    //Route::get('/tableau-bord/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
+    Route::get('/tableau-bord/mes-factures.html','ClientController@showDashboard')->name('client.myinvoice');
+    Route::get('/tableau-bord/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
+});
+
 
 /*Transporteur*/
 Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],function (){
     Route::get('tableau-bord.html','Carrier\TransporteurController@showDashboard')->name('transporteur.tableaubord');
     Route::get('offres.html','Carrier\TransporteurController@showOffersOnMap')->name('transporteur.offres');
+    Route::post('vehicule/ajouter.html','VehiculeController@addNewVehicle')->name('transport.ajoutervehicule');
+    Route::get('offres/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
+    Route::post('offres/{reference}/accepter.html','ExpeditionController@acceptOffer');
 });
 
 /*AJAX*/
-Route::post('/ajax/distanceMatrix','AjaxController@getDistanceMatrix')->name('ajax_distancematrix');
+Route::post('/ajax/distanceMatrix','AjaxController@getDistanceMatrix')->name('ajax.distancematrix');
+Route::get('/ajax/transporteur/offers','AjaxController@getOffers')->name('ajax.offers');

@@ -1,5 +1,9 @@
 @extends('layouts._site')
-{{ $total = 0 }}
+
+@php
+$total = 0;
+@endphp
+
 @section('content')
 <section class="section section-inset-1">
     <div class="container">
@@ -24,9 +28,11 @@
                             <td>{{ $expedition->reference }}</td>
                             <td><a href="#"> De [ {{ $expedition->lieudepart }} ]  à [ {{ $expedition->lieuarrivee }} ]</a></td>
                             <td>{{ $expedition->prix/\App\Expedition::UNIT_PRICE }} km</td>
-                            <td>@Lang('statut.'.$expedition->statut)</td>
-                            <td>{{ number_format($expedition->prix,0,',',' ') }} Fcfa</td>
-                            {{ $total += $expedition->prix }}
+                            <td>@lang('statut.'.$expedition->statut)</td>
+                            <td>{{ number_format($expedition->prix,0,',',' ') }} Fcfa </td>
+                            @php
+                                $total += $expedition->prix
+                            @endphp
                         </tr>
                         @endforeach
                         </tbody>
@@ -36,7 +42,7 @@
                     <div class="mfInput pull-sm-left">
                         <input placeholder="Coupon code">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-sm">apply coupon</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Réduction</button>
                 </form>
 
             </div>
@@ -45,15 +51,11 @@
                     <table class="table table-hover text-left">
                         <thead>
                         <tr class="bg-dark">
-                            <th>Cart Totals</th>
+                            <th>Coût Total</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="text-gray">Subtotal</td>
-                            <td>$58.00</td>
-                        </tr>
                         <tr>
                             <td class="text-gray">Total</td>
                             <td class="font-secondary">{{ number_format($total,0,',',' ') }} F cfa</td>
@@ -61,7 +63,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg offset-5">proceed to checkout</button>
+                <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg offset-5">Payer Maintenant</button>
             </div>
         </div>
     </div>

@@ -1,6 +1,18 @@
 <?php
 
 return [
+    'erreur' => [
+        'expedition' => [
+            'affectation' => 'Oups! Un professionnel vous a dévancé sur ce coup! Cette offre a été déjà acceptée. Soyez plus rapide la prochaine fois.'
+        ],
+        'vehicule' => [
+            'limite' => 'Votre statut de professionnel ne vous permet pas d\'ajouter un véhicule.'
+        ],
+        'offre' => [
+            'nontrouve' => 'L\'offre que vous essayez de traiter est introuvable.'
+        ],
+    ],
+
     'inscription' => [
         'transporteur' => [
             \App\Work\Tools::MESSAGE_SUCCESS => 'Votre inscription a été prise en compte.',
@@ -11,8 +23,14 @@ return [
 
         ]
     ],
+
     'expedition' => [
-        'create' => "Votre expédition a été programmé pour le :date. Vous serez contacté dans de bref délais."
+        'create' => "Votre expédition a été programmé pour le :date. Vous serez contacté dans de bref délais.",
+        'accept' => 'L\'offre d\'expédition :reference a été prise en charge par vous. Veuillez rentrer en contact avec le client dans de bref délais.',
+    ],
+
+    'vehicule' => [
+        'nouveau' => 'Un nouveau véhicule immatriculation :immat a été ajouté à votre flotte.'
     ]
 
 ];

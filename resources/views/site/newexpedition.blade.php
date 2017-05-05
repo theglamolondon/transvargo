@@ -12,6 +12,7 @@
             @foreach($errors->all() as $erreur)
                 <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
             @endforeach
+
             <div class="col-md-5 col-lg-6 visible-md visible-lg">
                 <div class="img-thumbnail-mod-2"><img src="{{config('app.url')}}/images/index-2.jpg" width="705" height="655" alt=""></div>
             </div>
@@ -78,6 +79,12 @@
                                 </label>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="h6">Remarques</label>
+                            <textarea class="form-control" name="remarque" placeholder="Veuillez saisir ici vos remarques sur cette expédition" maxlength="255">{{old('remaque')}}</textarea>
+                        </div>
+
                         <div class="form-group border-top inset-4 h4">
                             <p>Total : <span id="total">0</span> F CFA</p>
                             <input type="hidden" name="prix" id="prix" >
@@ -105,7 +112,7 @@
     </script>
 
     <script type="application/ecmascript">
-        var DISTANCE_MATRIX_URL = '{{ route('ajax_distancematrix') }}';
+        var DISTANCE_MATRIX_URL = '{{ route('ajax.distancematrix') }}';
         var directionsService = null;
         var directionsDisplay = null;
 

@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\NewExpedition' => [
             'App\Listeners\ExpeditionListener'
         ],
+        'App\Events\AcceptExpedition' => [
+            'App\Listeners\ExpeditionAcceptListener'
+        ],
     ];
 
     /**
