@@ -11,7 +11,7 @@
 |
 */
 
-/* Authentication routes */
+/******************************************************************************* Authentication routes ****************************************************/
 // Authentication Routes...
 Route::get('connexion.html', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('connexion.html', 'Auth\LoginController@login');
@@ -30,14 +30,15 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-/*End authentication route*/
+/***************************************************************************** End authentication route **************************************************/
 
 /*Site route*/
 Route::get('/', 'SiteController@index');
 Route::get('/accueil.html', 'SiteController@index')->name('accueil');
 Route::get('/conditions-utilisation.html', 'SiteController@showTermOfUsesPage')->name('terms');
-Route::get('/transporteur/conditions-utilisation.html', 'SiteController@showTransporteurTermOfUsesPage')->name('terms.transporteur');
 Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
+Route::get('validation/{token}', 'SiteController@validation')->name('register.confirmation');
+//Route::get('/transporteur/conditions-utilisation.html', 'SiteController@showTransporteurTermOfUsesPage')->name('terms.transporteur');
 /* end site route */
 
 /*Client*/

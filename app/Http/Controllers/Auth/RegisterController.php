@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Client;
+use App\Events\ExpediteurCreate;
 use App\Events\TransporteurCreate;
 use App\IdentiteAccess;
 use App\Pays;
@@ -14,10 +15,13 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Ville;
 use App\Work\Tools;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -65,8 +69,8 @@ class RegisterController extends Controller
         return  [
             'nom' => 'required|max:255',
             'email' => 'required|email|max:255|unique:identiteaccess,email',
+            'contact' => 'required|unique:client,contact',
             'password' => 'required|min:6|confirmed',
-            'ville_id' => 'required',
             'terms' => 'accepted',
         ];
     }
@@ -81,22 +85,29 @@ class RegisterController extends Controller
     {
         $identite = new IdentiteAccess([
             'email' => $data['email'],
-            'ville_id' => $data['ville_id'],
+            'terms' => $data['terms'],
             'password' => bcrypt($data['password']),
             'typeidentite_id' => TypeIdentitite::TYPE_CLIENT,
-            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF)
+            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_CONFRIME),
+            'activate_token' => base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email'])
         ]);
         $identite->saveOrFail();
+
+        $identite->makeVisible('id');
 
         $client = new Client([
             'nom' => $data['nom'],
             'prenoms' => $data['prenoms'],
+            'contact' => $data['contact'],
             'raisonsociale' => $data['raisonsociale'],
-            'identiteaccess_id' => $identite->id
         ]);
-        $client->saveOrFail();
+        $client->identiteAccess()->associate($identite);
 
         $identite->setAuthenticable($client);
+
+        $client->saveOrFail();
+
+        //Log::error(base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email']));
 
         return $identite;
     }
@@ -127,10 +138,10 @@ class RegisterController extends Controller
     private function createTransporteur(array $data){
         $identite = new IdentiteAccess([
             'email' => $data['email'],
-            'ville_id' => $data['ville_id'],
+            'terms' => $data['terms'],
             'password' => bcrypt($data['password']),
             'typeidentite_id' => TypeIdentitite::TYPE_TRANSPORTEUR,
-            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_INACTIF)
+            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_INACTIF,Statut::AUTRE_NON_CONFRIME)
         ]);
         $identite->saveOrFail();
 
@@ -140,6 +151,7 @@ class RegisterController extends Controller
             'prenoms' => $data['prenoms'],
             'raisonsociale' => $data['raisonsociale'],
             'comptecontribuable' => $data['comptecontribuable'],
+            'ville_id' => $data['ville_id'],
             'typetransporteur_id' => $data['typetransporteur_id'],
         ]);
 
@@ -155,13 +167,16 @@ class RegisterController extends Controller
 
     public function registerTransporteur(Request $request)
     {
+        dd($request);
         $this->validate($request, $this->validatorTransporteur());
-        $dentite = $this->createTransporteur($request->all());
-        event(new TransporteurCreate($dentite->getAuthenticable()));
+
+        $identite = $this->createTransporteur($request->all());
+
+        event(new TransporteurCreate($identite->getAuthenticable()));
 
         //$this->guard()->login($dentite);
 
-        return $this->registered($request, $dentite)
+        return $this->registered($request, $identite)
             ?: redirect()->route('accueil')
                 ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.inscription.transporteur'.Tools::MESSAGE_SUCCESS))
                 ->with(Tools::MESSAGE_INFO,Lang::get('message.inscription.transporteur'.Tools::MESSAGE_INFO));
@@ -179,11 +194,17 @@ class RegisterController extends Controller
     {
         $this->validate($request,$this->validator());
 
-        event(new Registered($user = $this->create($request->all())));
+        try{
+            $user = $this->create($request->all());
 
-        $this->guard()->login($user);
+            event(new ExpediteurCreate($user->getAuthenticable()));
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+            $this->guard()->login($user);
+
+            return redirect()->route('client.tableaubord');
+        }catch (\Exception $e){
+            Log::error($e->getMessage());
+            return back()->withErrors($e->getMessage());
+        }
     }
 }

@@ -20,7 +20,7 @@ return [
             \App\Work\Tools::MESSAGE_WARNING => 'L\'adresse email que vous avez fourni n\'est pas une adresse email valide',
         ],
         'client' => [
-
+            'exprire' => 'Votre jeton de sécurité a expiré. Nous vous avons renvoyé un autre afin de vérifier notre email.',
         ]
     ],
 

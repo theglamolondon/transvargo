@@ -42,11 +42,10 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('password');
             $table->string('remember_token')->nullable();
             $table->string('statut',5);
+            $table->string('activate_token',255);
             $table->string('terms',5);
             $table->integer('typeidentite_id')->unsigned();
-            $table->integer('ville_id')->unsigned();
             $table->foreign('typeidentite_id')->references('id')->on('typeidentite');
-            $table->foreign('ville_id')->references('id')->on('ville');
         });
         Schema::create('contact',function (Blueprint $table){
             $table->increments('id');
@@ -64,6 +63,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->integer('identiteaccess_id')->unsigned();
             $table->string('nom',100);
             $table->string('prenoms',150);
+            $table->string('contact',20)->unique();
             $table->string('raisonsociale',150)->nullable();
             $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
         });
@@ -76,6 +76,8 @@ class CreateDatabaseTransvargo extends Migration
             $table->integer('limite')->default(0);
             $table->string('note')->nullable();
             $table->integer('typetransporteur_id')->unsigned();
+            $table->integer('ville_id')->unsigned();
+            $table->foreign('ville_id')->references('id')->on('ville');
             $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
             $table->foreign('typetransporteur_id')->references('id')->on('typetransporteur');
         });

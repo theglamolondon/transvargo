@@ -1,27 +1,16 @@
 <div class="rd-navbar-nav-wrap">
     <!-- Navbar Search and Customer-->
     <div class="rd-navbar-search">
-        <form action="" method="POST" class="rd-navbar-search-form">
-            <label class="rd-navbar-search-form-input">
-                <input type="text" name="s" placeholder="Recherche..." autocomplete="off">
-            </label>
-            <button type="submit" class="rd-navbar-search-form-submit fa-shopping-cart"></button>
-        </form>
-        <span class="rd-navbar-live-search-results"></span>
-        <button data-rd-navbar-toggle=".rd-navbar-search, .rd-navbar-live-search-results" type="submit" class="rd-navbar-search-toggle"></button>
-    </div>
+        <ul class="rd-navbar-nav">
+            <li class=""><a href="{{ route('accueil') }}">Accueil</a></li>
+            <li class=""><a href="./">Qui sommes-nous</a></li>
+            <li class=""><a href="{{ route('contact') }}">Contact</a></li>
 
-    <!-- RD Navbar Nav-->
-    <ul class="rd-navbar-nav">
-        <li class="active"><a href="{{ route('accueil') }}">Accueil</a></li>
-        <li class=""><a href="./">Qui sommes-nous</a></li>
-        <li><a href="#">Nos services</a></li>
-        <li class=""><a href="{{ route('contact') }}">Contact</a></li>
-
-        <li class="active">
             @if(\Illuminate\Support\Facades\Auth::guest())
-                <a href="{{ route('login') }}" class=""> <i></i> Connexion </a>
+            <li class=""><a href="{{ route('login') }}" class=""> <i></i> Espace membre </a></li>
+            <li class=""><a href="{{ route('register') }}" class=""> <i></i> Inscription </a></li>
             @else
+            <li class="">
                 <li>
                     <a href="#">Salut {{ request()->user()->authenticable->prenoms }}</a>
                     <ul class="rd-navbar-dropdown">
@@ -33,8 +22,11 @@
                         <li><a href="{{ route('logout') }}">Déconnexion</a></li>
                     </ul>
                 </li>
-                <a href="#" class="fa-shopping-cart"><span>10</span></a>
+            </li>
             @endif
-        </li>
-    </ul>
+        </ul>
+    </div>
+
+    <!-- RD Navbar Nav-->
+
 </div>

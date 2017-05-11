@@ -1,6 +1,6 @@
-@extends('layouts._site')
+ @extends('layouts._site')
 
-@section('slider')
+@section('slider2')
     <section>
         <div class="swiper-container swiper-slider swiper-slider-height-1">
             <div class="jumbotron-mod-1 text-center">
@@ -29,103 +29,41 @@
 @endsection
 
 @section('content')
-    <section class="section">
-        <div class="container">
-            <h2>Calculateur de transport de marchandises</h2>
-            <hr>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="col-md-5 col-lg-6 visible-md visible-lg">
-                        <div class="img-thumbnail-mod-2"><img src="images/index-2.jpg" width="705" height="655" alt=""></div>
-                    </div>
-                    <div class="col-sm-10 col-md-7 col-lg-6 inset-3">
-                        <p class="text-sm-left">Calcul basique de transport de marchandises.</p>
-                        <div class="calculator">
-                            <div data-price="1" class="form-group distance">
-                                <label for="dist" class="h6">Distance (km) *</label>
-                                <input type="text" id="dist" class="numbers-only">
-                            </div>
-                            <div data-price="2" class="form-group weight">
-                                <label for="weight" class="h6">Masse (kg)</label>
-                                <input type="text" id="weight" class="numbers-only">
-                            </div>
-                            <div id="capacity" data-price="1" class="capacity clearfix">
-                                <div class="form-group">
-                                    <label for="length" class="h6">Longueur (m)</label>
-                                    <input type="text" id="length" class="numbers-only">
-                                </div>
-                                <div class="form-group">
-                                    <label for="height" class="h6">Hauteur (m)</label>
-                                    <input type="text" id="height" class="numbers-only">
-                                </div>
-                                <div class="form-group">
-                                    <label for="width" class="h6">Largeur (m)</label>
-                                    <input type="text" id="width" class="numbers-only">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <p class="h6">Fragile</p>
-                                <div class="radio">
-                                    <label>
-                                        <input data-price="25" type="radio" name="blankRadio" id="blankRadioYes" value="option1" class="numbers-only"><span class="radio-field"></span><span>Oui</span>
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="blankRadio" id="blankRadioNo" value="option2" class="numbers-only"><span class="radio-field"></span><span>Non</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <p class="h6">Extra services:</p>
-                                <div class="checkbox-group">
-                                    <label class="checkbox-inline">
-                                        <input data-price="15" type="checkbox" id="extra1" class="numbers-only"><span class="checkbox-field"></span><span>Assusrance</span>
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input data-price="20" type="checkbox" id="extra2" class="numbers-only"><span class="checkbox-field"></span><span>Livraison expresse</span>
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input data-price="25" type="checkbox" id="extra3" class="numbers-only"><span class="checkbox-field"></span><span>Emballage</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group border-top inset-4 h4">
-                                <p>Total:<span id="total">0</span></p>
-                            </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 550px">
+            <section id="map" style="height: 100%;"></section>
+            <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                <div class="calculatrice">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12 col-sm-12 col-xs-12">
+                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-upload"></i> </span>
+                            <input class="form-control" placeholder="Lieu d'enlèvement">
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-download"></i> </span>
+                            <input class="form-control" placeholder="Lieu de livraison">
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i> </span>
+                            <input class="form-control" type="number" placeholder="poids total">
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
+                            <select class="form-control">
+                                <option value="T">Tonnes</option>
+                                <option value="KG">Kilos</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1 col-sm-2 col-xs-12 input-group">
+                            <input type="submit" class="form-control btn btn-primary" style="padding: 5px 10px;" value="Tarif direct">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="section section-inset-1 bg-primary">
+    </div>
+    <section class="section section-inset-2 bg-light">
         <div class="container">
-            <h2 class="text-center">A propos de la compagnie</h2>
-            <hr>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 text-center text-md-left inset-1"><img src="images/index-1.jpg" alt=""></div>
-                <div class="col-xs-12 col-sm-12 col-md-6 text-sm-left well1">
-                    <p>Our transportation company with 30 years of experience is your best choice for shipping cargo of any size, storage, packing or delivering wares to your customers.</p>
-                    <p>Our professional employees will take care of your goods, whenever you send them.</p>
-                    <div class="progress-container text-left">
-                        <p class="font-secondary h6">Air Transportation</p>
-                        <!-- Progress Bar-->
-                        <div data-value="50" data-stroke="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-horizontal progress-bar-default"></div>
-                        <p class="font-secondary h6">Marine Transportation</p>
-                        <div data-value="90" data-stroke="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-horizontal progress-bar-default"></div>
-                        <p class="font-secondary h6">Trucking Services</p>
-                        <div data-value="80" data-stroke="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-horizontal progress-bar-default"></div>
-                        <p class="font-secondary h6">Safety Escort Services</p>
-                        <div data-value="20" data-stroke="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-horizontal progress-bar-default"></div>
-                    </div>
-                </div>
-            </div><a href="#" class="btn btn-white btn-sm btn-min-width">learn more</a>
-        </div>
-    </section>
-    <section class="section section-inset-2">
-        <div class="container">
-            <h2 class="text-center">Counters</h2>
+            <h2 class="text-center">Quelques chiffres</h2>
             <hr>
             <div class="row">
                 <div class="progress-container row offset-7 flow-offset-1">
@@ -166,62 +104,9 @@
             </div>
         </div>
     </section>
-    <section class="section section-inset-1 bg-light">
-        <div class="container">
-            <h2>Latest blog posts</h2>
-            <hr>
-            <div class="row text-sm-left">
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="blog-post thumbnail-1 thumbnail-mod-2"><img src="images/index-8.jpg" alt="">
-                        <div class="caption">
-                            <div class="blog-post-title">
-                                <h4 class="text-primary text-transform-none"><a href="blog_post.html">Our network now embraces 5000 cities all over the world</a></h4>
-                            </div>
-                            <div class="blog-post-time">
-                                <time datetime="2015-12-26">December 26, 2015</time>
-                            </div>
-                            <div class="blog-post-body">
-                                <p>You can send your shipments all over the world. We have representatives and warehouses in more than 5000 cities and towns in almost 200 countries.</p><a href="blog_post.html" class="badge fa-comment font-secondary text-primary">10</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="blog-post thumbnail-1 thumbnail-mod-2"><img src="images/index-9.jpg" alt="">
-                        <div class="caption">
-                            <div class="blog-post-title">
-                                <h4 class="text-primary text-transform-none"><a href="blog_post.html">Top-grade security on all levels</a></h4>
-                            </div>
-                            <div class="blog-post-time">
-                                <time datetime="2015-12-26">December 26, 2015</time>
-                            </div>
-                            <div class="blog-post-body">
-                                <p>We are aware of the fact that unforeseen incidents make occur in transit of shipments, so we provide full insurance for your shipments by best insurance companies.</p><a href="blog_post.html" class="badge fa-comment font-secondary text-primary">16</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4">
-                    <div class="blog-post thumbnail-1 thumbnail-mod-2"><img src="images/index-10.jpg" alt="">
-                        <div class="caption">
-                            <div class="blog-post-title">
-                                <h4 class="text-primary text-transform-none"><a href="blog_post.html">Less Than a Container Loads</a></h4>
-                            </div>
-                            <div class="blog-post-time">
-                                <time datetime="2015-12-26">December 26, 2015</time>
-                            </div>
-                            <div class="blog-post-body">
-                                <p>You can receive an addition discount using our Less than a Container Load (LCL) options. This type of freight is similar to the consolidated cargo, but is much faster to deliver.</p><a href="blog_post.html" class="badge fa-comment font-secondary text-primary">20</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><a href="blog_default.html" class="btn btn-primary-variant-1 btn-sm btn-min-width">view all blog posts</a>
-        </div>
-    </section>
     <section class="section section-inset-1">
         <div class="container">
-            <h2 class="text-center">Our satisfied clients</h2>
+            <h2 class="text-center">Ils nous ont fait confiance</h2>
             <hr>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
@@ -251,41 +136,9 @@
             </div>
         </div>
     </section>
-    <section class="bg-light rd-parallax">
-        <div data-speed="0" data-md-speed="0.2" data-type="media" data-url="images/index-11.jpg" class="rd-parallax-layer"></div>
-        <div class="container section section-inset-1 z-index">
-            <h2 class="text-center">Contactez-nous</h2>
-            <hr>
-            <div class="row offset-3">
-                <div class="col-xs-12 col-md-9 col-lg-6 col-md-offset-2 col-lg-offset-3">
-                    <!--p.fw-l.h5.text-transform-none Enter your email address to receive all company news, special offers and other discount information.-->
-                    <!-- RD Mailform-->
-                    <form data-result-class="rd-mailform-validate" data-form-type="contact" method="post" action="bat/rd-mailform.php" class="rd-mailform row">
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" name="name" data-constraints="@NotEmpty" placeholder="Votre prénoms...">
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" name="name" data-constraints="@NotEmpty" placeholder="Votre nom...">
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" name="email" data-constraints="@NotEmpty @Email" placeholder="Votre email...">
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" data-constraints="@Phone" name="phone" placeholder="Votre contact..." class="form-input">
-                        </div>
-                        <div class="col-xs-12 col-sm-12">
-                            <textarea name="message" data-constraints="@NotEmpty" placeholder="Ecrivez-nous votre message ici"></textarea>
-                        </div>
-                        <!-- RD SelectMenu-->
-                        <button class="btn btn-primary btn-sm btn-min-width">Envoyer</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section section-inset-1">
+    <section class="section section-inset-1 bg-light">
         <div class="container">
-            <h2>testimonials</h2>
+            <h2>Témoinages</h2>
             <hr>
             <div class="row">
                 <div class="col-xs-12">
@@ -386,4 +239,37 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script type="application/ecmascript">
+        function initMap() {
+            var points = [
+                new google.maps.LatLng(5.332671, -3.944913),
+                new google.maps.LatLng(5.372388, -4.008172),
+                new google.maps.LatLng(5.496260, -3.366919),
+                new google.maps.LatLng(7.866661, -5.251074),
+                new google.maps.LatLng(9.435738, -5.593572),
+                new google.maps.LatLng(6.679373, -3.478391)
+            ];
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 5.341620,
+                    lng:  -3.993370
+                },
+                zoom: 12
+            });
+
+            for (var i = 0; i < points.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: points[i],
+                    map: map,
+                    icon: '{{ config('app.url') }}/working/truck-map-marker30x42.png'
+                });
+            }
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ \App\Http\Controllers\MapController::API_KEY }}&libraries=places&callback=initMap">
+    </script>
 @endsection

@@ -23,23 +23,23 @@
                     <div class="row">
                         <div class="form-group date" data-provide="datepicker">
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="depart" class="h6">Date de chargement *</label>
+                                <label for="depart">Date de chargement *</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datechargement" id="datepicker">
-                                    <span class="input-group-addon"> <i class="glyphicon glyphicon-th"></i> </span>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="depart" class="h6">De (ville) *</label>
+                                <label for="depart">Lieu de chargement *</label>
                                 <input type="text" class="form-control autocomplete" name="lieudepart" id="lieudepart" data-change="0">
                                 <input type="hidden" name="coorddepart" id="coorddepart">
                                 <input type="checkbox" id="myPosition" > Utiliser ma position actuelle
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="arrivee" class="h6">A (ville) *</label> <span><img src="{{config('app.url')}}/balls.gif" id="spinner" style="display:none; left: 101%; position: absolute; top: 30%;"></span>
+                                <label for="arrivee">A (ville) *</label> <span><img src="{{config('app.url')}}/balls.gif" id="spinner" style="display:none; left: 101%; position: absolute; top: 30%;"></span>
                                 <input type="text" class="form-control autocomplete" name="lieuarrivee" id="lieuarrivee" data-change="0">
                                 <input type="hidden" name="coordarrivee" id="coordarrivee">
                             </div>
@@ -47,42 +47,53 @@
 
                         <div class="form-group distance">
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="distance" class="h6">Distance (km) *</label>
+                                <label for="distance">Distance (km) *</label>
                                 <input type="text" class="numbers-only form-control" id="distance" disabled>
                             </div>
 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="weight" class="h6">Masse (kg)</label>
+                                <label for="weight">Masse (kg)</label>
                                 <input type="text" id="weight" class="numbers-only form-control" name="masse">
                              </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="h6">Type de camion</label>
-                            <select name="typecamion_id" class="form-control">
-                                @foreach($types as $type)
-                                <option value="{{ $type->id }}">{{ $type->libelle }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <p class="h6">Fragile</p>
-                            <div class="radio">
-                                <label>
-                                    <input data-price="25" type="radio" name="fragile" id="blankRadioYes" value="1" class="numbers-only"><span class="radio-field"></span><span>Oui</span>
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="fragile" id="blankRadioNo" value="0" checked class="numbers-only"><span class="radio-field"></span><span>Non</span>
-                                </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <label>Type de camion</label>
+                                <select name="typecamion_id" class="form-control">
+                                    @foreach($types as $type)
+                                    <option value="{{ $type->id }}">{{ $type->libelle }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="h6">Remarques</label>
-                            <textarea class="form-control" name="remarque" placeholder="Veuillez saisir ici vos remarques sur cette expédition" maxlength="255">{{old('remaque')}}</textarea>
+                            <div class="col-md-2 col-sm-3 col-xs-4">
+                                <label>Fragile</label>
+                                <div class="radio">
+                                    <label>
+                                        <input data-price="25" type="radio" name="fragile" id="blankRadioYes" value="1" class="numbers-only">
+                                        <span class="radio-field"></span><span>Oui</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-4">
+                                <label>&nbsp;</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="fragile" id="blankRadioNo" value="0" checked class="numbers-only">
+                                        <span class="radio-field"></span><span>Non</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <label>Remarques</label>
+                                <textarea class="form-control" name="remarque" placeholder="Veuillez saisir ici vos remarques sur cette expédition" maxlength="255">{{old('remaque')}}</textarea>
+                            </div>
                         </div>
 
                         <div class="form-group border-top inset-4 h4">

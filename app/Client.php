@@ -16,4 +16,8 @@ class Client extends Authenticable
     protected $table = 'client';
     protected $guarded = [];
     public $timestamps = false;
+
+    public function identiteAccess(){
+        return $this->belongsTo('App\IdentiteAccess','identiteaccess_id');
+    }
 }

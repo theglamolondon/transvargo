@@ -1,8 +1,3 @@
-
-.description {
-    color:#777;
-    font-weight: normal;
-}
 small.description{
     font-size: small;
 }
@@ -33,4 +28,36 @@ div#waiting {
     left: 0;
     width: 100%;
     text-align: center;
+}
+.calculatrice {
+    position: relative;
+    height: 69px;
+    background: #FFF;
+    padding-top: 14px;
+    border: solid 1px #777;
+    top: -45px;
+}
+.article {
+    clear: both;
+    text-align: justify;
+}
+.titre-article {
+    color: #066AAD;
+    clear: both;
+}
+.description {
+    border-left: 1px solid #aaa;
+    padding-left: 10px;
+}
+.separateur{
+    background-color: #066AAD;
+    height: 3px;
+    width: 150px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    color:#777;
+    font-weight: normal;
+}
+.titre {
+    text-align: left;
 }

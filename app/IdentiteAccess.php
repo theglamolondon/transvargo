@@ -21,7 +21,7 @@ class IdentiteAccess extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password','statut','ville_id'
+        'email', 'password','statut','ville_id','terms','typeidentite_id','activate_token'
     ];
 
     /**
@@ -32,6 +32,10 @@ class IdentiteAccess extends Authenticatable
     protected $hidden = [
         'id','password', 'remember_token',
     ];
+
+    public function getId(){
+        return $this->id;
+    }
 
     public function authenticable(){
 

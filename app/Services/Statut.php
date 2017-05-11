@@ -26,6 +26,7 @@ class Statut
     const AUTRE_NON_NULL = 0;
     const AUTRE_NON_ACCEPTE = 1;
     const AUTRE_ACCEPTE = 2;
+    const AUTRE_NON_CONFRIME = 3;
 
     public static function create($type, $etat, $autre = self::AUTRE_NON_NULL){
         return $type.$etat.$autre;
