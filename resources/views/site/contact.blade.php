@@ -1,36 +1,56 @@
 @extends('layouts._site')
 
 @section('content')
-    <section class="bg-light section-lg">
-        <ol class="breadcrumb">
-            <li class="active">Contactez-nous !</li>
-        </ol>
-    </section>
     <section class="section section-inset-1">
         <div class="container">
-            <h2>Contact us</h2>
-            <hr>
+            <h2 class="titre">Contactez-nous</h2>
+            <div class="separateur"></div>
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
-                    <!-- RD Mailform-->
-                    <form data-result-class="rd-mailform-validate" data-form-type="contact" method="post" action="bat/rd-mailform.php" class="rd-mailform row">
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" name="name" data-constraints="@NotEmpty" placeholder="Your first name...">
+
+                    @foreach($errors->all() as $erreur)
+                        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
+                    @endforeach
+
+                    <form method="post" action="" class="form-horizontal">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-xs-12 col-sm-5">Nom et prénoms *</label>
+                            <div class="col-md-8 col-xs-12 col-sm-7">
+                                <input type="text" name="fullname" class="form-control" placeholder="Votre nom et prénoms" required>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" name="name" data-constraints="@NotEmpty" placeholder="Your last name...">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-xs-12 col-sm-5">Objet du message</label>
+                            <div class="col-md-8 col-xs-12 col-sm-7">
+                                <input type="text" name="subject" placeholder="Objet du message" class="form-control">
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" name="email" data-constraints="@NotEmpty @Email" placeholder="Your e-mail...">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-xs-12 col-sm-5">Email *</label>
+                            <div class="col-md-8 col-xs-12 col-sm-7">
+                                <input type="text" name="email" class="form-control" placeholder="Votre adresse email" required>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <input type="text" data-constraints="@Phone" name="phone" placeholder="Your phone..." class="form-input">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-xs-12 col-sm-5">Téléphone (facultatif)</label>
+                            <div class="col-md-8 col-xs-12 col-sm-7">
+                                <input type="text" name="contact" placeholder="Votre téléphone" class="form-control">
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12">
-                            <textarea name="message" data-constraints="@NotEmpty" placeholder="Message:"></textarea>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-xs-12 col-sm-5">Message *</label>
+                            <div class="col-md-8 col-xs-12 col-sm-7">
+                                <textarea name="message" placeholder="Laissez nous votre message" class="form-control" required></textarea>
+                            </div>
                         </div>
-                        <!-- RD SelectMenu-->
-                        <button class="btn btn-primary btn-sm btn-min-width">send message</button>
+
+                        <br class="clearfix"/>
+                        <button class="btn btn-primary btn-sm btn-min-width" type="submit">Envoyer</button>
                     </form>
                 </div>
             </div>
@@ -44,10 +64,11 @@
                         <div class="media">
                             <div class="media-left"><span class="icon icon-primary icon-sm fa-map-marker"></span></div>
                             <div class="media-body">
-                                <p class="h6">Postal Address</p><span><a href="#">
-                          The Company Name Inc.
-                          9863 - 9867 Mill Road,
-                          Cambridge, MG09 99HT.</a></span>
+                                <p class="h6">Adresse postale</p><span>
+                                    <a href="#">
+                                      The Company Name Inc.
+                                      9863 - 9867 Mill Road,
+                                      Cambridge, MG09 99HT.</a></span>
                             </div>
                         </div>
                     </address>
@@ -57,12 +78,12 @@
                         <div class="media">
                             <div class="media-left"><span class="icon icon-primary icon-sm fa-phone"></span></div>
                             <div class="media-body">
-                                <p class="h6">Phones</p>
+                                <p class="h6">Contact</p>
                                 <dl class="dl-horizontal">
                                     <dt>Phone:</dt>
-                                    <dd><a href="callto:#">+1 800 603 6035</a></dd>
+                                    <dd><a href="callto:0022500112233">(+225) 00 11 22 33</a></dd>
                                     <dt>FAX:</dt>
-                                    <dd><a href="callto:#">+1 800 889 9898</a></dd>
+                                    <dd><a href="callto:0022544556677">(+225) 44 55 66 77</a></dd>
                                 </dl>
                             </div>
                         </div>
@@ -73,7 +94,7 @@
                         <div class="media">
                             <div class="media-left"><span class="icon icon-primary icon-sm fa-envelope"></span></div>
                             <div class="media-body">
-                                <p class="h6">Email</p><a href="mailto:#">mail@demolink.org</a>
+                                <p class="h6">Email</p><a href="mailto:contact@transvargo.com">contact@transvargo.com</a>
                             </div>
                         </div>
                     </address>

@@ -39,8 +39,4 @@ class Expedition extends Model
     public function chargement(){
         return $this->belongsTo('App\Chargement');
     }
-
-    public function livraison(){
-        return $this->belongsTo('App\Livraison');
-    }
 }

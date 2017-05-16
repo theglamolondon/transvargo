@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\IdentiteAccess;
 use App\Services\Statut;
+use App\Work\Tools;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class SiteController extends Controller
 {
@@ -56,5 +60,41 @@ class SiteController extends Controller
         }catch (\Exception $e){
             return redirect()->route('login')->withErrors($e->getMessage());
         }
+
+        return redirect()->route('client.myexpedition');
+    }
+
+    public function sendResponseContact(Request $request)
+    {
+        $this->validate($request,$this->validateRules());
+
+        try{
+            $this->sendEmail($request->except('_token'));
+        }catch (\Swift_TransportException $e){
+            Log::error($e->getMessage());
+            return back()->withErrors($e->getMessage());
+        }
+
+        return back()->with(Tools::MESSAGE_SUCCESS,Lang::get('message.site.contact'));
+    }
+
+    private function validateRules()
+    {
+        return [
+            'fullname' => 'required',
+            'email' => 'required|email',
+            'message' => 'required',
+            'subject' => 'present',
+            'contact' => 'present',
+        ];
+    }
+
+    private function sendEmail(array $data)
+    {
+        $obj = new Collection($data);
+        Mail::raw($obj->get('message'),function ($message) use($obj){
+            $message->to(env('APP_EMAIL','contact@transvargo.com'))
+                    ->from($obj->get('email'),$obj->get('fullname','Internaute anonyme'));
+            });
     }
 }

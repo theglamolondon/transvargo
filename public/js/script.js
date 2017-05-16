@@ -15,8 +15,8 @@ var userAgent = navigator.userAgent.toLowerCase(),
         pointerEvents: isIE && isIE < 11 ? 'js/pointer-events.min.js' : false,
         smoothScroll: $html.hasClass('use--smoothscroll') ? 'js/smoothscroll.min.js' : false,
         tooltip: $('[data-toggle="tooltip"]'),
-        timePicker: $(".rd-mailform-time-picker"),
-        datePicker: $('.form-input[type="date"]'),
+        //timePicker: $(".rd-mailform-time-picker"),
+        //datePicker: $('.form-input[type="date"]'),
         dropdownSelect: $(".rd-mailform-select"),
         flickrfeed: $('.flickr'),
         filePicker: $('.rd-file-picker'),
@@ -366,13 +366,13 @@ $document.ready(function () {
      * @license      MIT License
      * @link         http://cms.devoffice.com/coding-demo/mnemon1k/rd-timepicker/demo/
      */
-    if (plugins.timePicker.length) {
+/*    if (plugins.timePicker.length) {
         for (i = 0; i < plugins.timePicker.length; i++) {
             var timePickerItem = plugins.timePicker[i];
             $(timePickerItem).RDTimePicker();
         }
     }
-
+*/
     /**
      * @module       Easy Responsive Tabs Plugin
      * @author       Samson.Onna (samson3d@gmail.com)
@@ -489,13 +489,13 @@ $document.ready(function () {
      * @license      MIT License
      * @link         http://cms.devoffice.com/coding-dev/rd-datepicker/demo/
      */
-    if (plugins.datePicker.length) {
+/*    if (plugins.datePicker.length) {
         for (i = 0; i < plugins.datePicker.length; i++) {
             var datePickerItem = plugins.datePicker[i];
             $(datePickerItem).RDDatePicker();
         }
     }
-
+*/
     /**
      * @module       RD Filepicker
      * @author       Aleksey Patsurkovskiy
@@ -543,7 +543,7 @@ $document.ready(function () {
      * @see          http://keith-wood.name/countdown.html
      * @license      MIT License
      */
-    if (plugins.countDown.length) {
+/*    if (plugins.countDown.length) {
         for (i = 0; i < plugins.countDown.length; i++) {
             var countDownItem = plugins.countDown[i],
                 d = new Date(),
@@ -558,7 +558,7 @@ $document.ready(function () {
             $(countDownItem).countdown(settings);
         }
     }
-
+*/
     /**
      * @module      TimeCircles
      * @author      Wim Barelds
@@ -566,7 +566,7 @@ $document.ready(function () {
      * @see         http://www.wimbarelds.nl/
      * @license     MIT License
      */
-    if (plugins.dateCountdown.length) {
+/*    if (plugins.dateCountdown.length) {
         for (i = 0; i < plugins.dateCountdown.length; i++) {
             var dateCountdownItem = plugins.dateCountdown[i],
                 time = {
@@ -618,7 +618,7 @@ $document.ready(function () {
             });
         }
     }
-
+*/
     /**
      * @module      Buttons
      * @author      Twitter, Inc.
@@ -641,18 +641,18 @@ $document.ready(function () {
      * @author       Evgeniy Gusarov
      * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
      * @version      1.0.0
-     */
+
     if (plugins.calendar.length) {
         for (i = 0; i < plugins.calendar.length; i++) {
             var calendarItem = plugins.calendar[i];
 
             $(calendarItem).rdCalendar({
-                days: $(calendarItem).attr("data-days") ? c.attr("data-days").split(/\s?,\s?/i) : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                month: $(calendarItem).attr("data-months") ? c.attr("data-months").split(/\s?,\s?/i) : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                days: $(calendarItem).attr("data-days") ? c.attr("data-days").split(/\s?,\s?/i) : ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                month: $(calendarItem).attr("data-months") ? c.attr("data-months").split(/\s?,\s?/i) : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
             });
         }
     }
-
+    */
     /**
      * Progress bar
      * @description  Enable progress bar

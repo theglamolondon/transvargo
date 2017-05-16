@@ -3,7 +3,8 @@
 return [
     'erreur' => [
         'expedition' => [
-            'affectation' => 'Oups! Un professionnel vous a dévancé sur ce coup! Cette offre a été déjà acceptée. Soyez plus rapide la prochaine fois.'
+            'affectation' => 'Oups! Un professionnel vous a dévancé sur ce coup! Cette offre a été déjà acceptée. Soyez plus rapide la prochaine fois.',
+            'notfound' => 'Cette expédition est introuvable. La référence est peut-être erronée.'
         ],
         'vehicule' => [
             'limite' => 'Votre statut de professionnel ne vous permet pas d\'ajouter un véhicule.'
@@ -31,6 +32,10 @@ return [
 
     'vehicule' => [
         'nouveau' => 'Un nouveau véhicule immatriculation :immat a été ajouté à votre flotte.'
+    ],
+
+    'site' => [
+        'contact' => 'Votre message a été bien envoyé à notre équipe. Transvargo vous remercie !'
     ]
 
 ];

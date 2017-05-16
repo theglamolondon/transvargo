@@ -30,12 +30,11 @@ div#waiting {
     text-align: center;
 }
 .calculatrice {
-    position: relative;
-    height: 69px;
     background: #FFF;
-    padding-top: 14px;
-    border: solid 1px #777;
-    top: -45px;
+    padding: 5px 9px;
+    border: solid 1px #BBB;
+    box-shadow: 0 0 3px #DDD;
+    border-radius: 2px;
 }
 .article {
     clear: both;
@@ -60,4 +59,103 @@ div#waiting {
 }
 .titre {
     text-align: left;
+}
+.box{
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color: #fff;
+    padding: 5px 20px 20px;
+    text-align: center;
+}
+.step.active {
+    color: #000;
+}
+.step {
+    float: left;
+    width: 156px;
+    text-align: center;
+    color: #ccc;
+}
+.step .round {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    height: 70px;
+    width: 70px;
+}
+.step.active .ring, .step.done .ring {
+    background-color: #066AAD;
+}
+.ring {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: #eee;
+}
+.ring.one {
+    top: 0;
+    right: 0;
+    border-radius: 0 100% 0 0;
+}
+.ring.two {
+    bottom: 0;
+    right: 0;
+    border-radius: 0 0 100% 0;
+}
+.ring.three {
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 0 100%;
+}
+.ring.four {
+    top: 0;
+    left: 0;
+    border-radius: 100% 0 0 0;
+}
+.cutout {
+    padding-top: 6px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+.step.active .title {
+    color: #000;
+    border-bottom: 3px solid #066AAD;
+}
+.step .title {
+    margin: 12px 0 0 0;
+    padding-bottom: 7px;
+    border-bottom: 3px solid #777;
+}
+.title{
+    font-weight: 600;
+    font-size: 16px;
+}
+.steps {
+    padding-bottom: 0!important;
+    border-bottom: 2px solid #066AAD;
+}
+.ibox-content {
+    clear: both;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+.cutout .time {
+    display: block;
+    font-weight: 700;
+    font-size: 36px;
 }

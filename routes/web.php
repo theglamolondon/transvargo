@@ -37,6 +37,7 @@ Route::get('/', 'SiteController@index');
 Route::get('/accueil.html', 'SiteController@index')->name('accueil');
 Route::get('/conditions-utilisation.html', 'SiteController@showTermOfUsesPage')->name('terms');
 Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
+Route::post('/contact.html', 'SiteController@sendResponseContact');
 Route::get('validation/{token}', 'SiteController@validation')->name('register.confirmation');
 //Route::get('/transporteur/conditions-utilisation.html', 'SiteController@showTransporteurTermOfUsesPage')->name('terms.transporteur');
 /* end site route */
@@ -44,9 +45,10 @@ Route::get('validation/{token}', 'SiteController@validation')->name('register.co
 /*Client*/
 
 Route::group(['middleware' => 'client'],function (){
-    Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
+    //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
     Route::get('/tableau-bord/nouvelle-expedition.html','ExpeditionController@showNewExpeditionForm')->name('client.newexpedition');
     Route::post('/tableau-bord/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
+    Route::get('/tableau-bord/commande/{reference}.html','ExpeditionController@showCommande')->name('client.commande');
     Route::get('/tableau-bord/mes-expeditions.html','ExpeditionController@showExpeditions')->name('client.myexpedition');
     //Route::get('/tableau-bord/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
     Route::get('/tableau-bord/mes-factures.html','ClientController@showDashboard')->name('client.myinvoice');

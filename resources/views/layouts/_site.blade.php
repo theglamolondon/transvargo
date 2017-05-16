@@ -71,15 +71,15 @@
                   </dl>
                   <dl class="dl-horizontal-mod-1">
                     <dt>Phone</dt>
-                    <dd><a href="callto:#" class="text-primary">(91) 8547 632521</a></dd>
+                    <dd><a href="callto:0022500112233" class="text-primary">(+225) 00 11 22 33</a></dd>
                   </dl>
                   <dl class="dl-horizontal-mod-1">
                     <dt>Fax</dt>
-                    <dd><a href="callto:#" class="text-primary">(91) 11 4752 1433</a></dd>
+                    <dd><a href="callto:0022544556677" class="text-primary">(+225) 44 55 66 77</a></dd>
                   </dl>
                   <dl class="dl-horizontal-mod-1">
                     <dt>Email</dt>
-                    <dd><a href="mailto:#" class="text-primary">info@demolink.org</a></dd>
+                    <dd><a href="mailto:contact@transvargo.com" class="text-primary">contact@transvargo.com</a></dd>
                   </dl>
                 </address>
                 <!--
@@ -142,7 +142,8 @@
     <!-- Java script-->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+    <!--
+    -->
     <script src="{{config('app.url')}}/js/core.min.js"></script>
     <script src="{{config('app.url')}}/js/script.js"></script>
     <script src="{{config('app.url')}}/js/custom.js"></script>

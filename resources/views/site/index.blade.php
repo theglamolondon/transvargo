@@ -29,38 +29,41 @@
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="">
         <div class="col-md-12 col-sm-12 col-xs-12" style="height: 550px">
-            <section id="map" style="height: 100%;"></section>
-            <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-                <div class="calculatrice">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12 col-sm-12 col-xs-12">
-                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-upload"></i> </span>
-                            <input class="form-control" placeholder="Lieu d'enlèvement">
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-download"></i> </span>
-                            <input class="form-control" placeholder="Lieu de livraison">
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i> </span>
-                            <input class="form-control" type="number" placeholder="poids total">
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-4 input-group">
-                            <select class="form-control">
-                                <option value="T">Tonnes</option>
-                                <option value="KG">Kilos</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 input-group">
-                            <input type="submit" class="form-control btn btn-primary" style="padding: 5px 10px;" value="Tarif direct">
-                        </div>
+            <aside id="map" style="height: 100%;"></aside>
+        </div>
+        <span class="clearfix"></span>
+    </div>
+    <section class="section section-inset-2" style="padding-top: 20px;">
+        <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+            <form class="form-inline calculatrice" action="" method="post">
+                <div class="form-group">
+                    <div class="col-md-2 col-sm-4 col-xs-12 input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-upload"></i> </span>
+                        <input class="form-control" placeholder="Lieu d'enlèvement">
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-download"></i> </span>
+                        <input class="form-control" placeholder="Lieu de livraison">
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i> </span>
+                        <input class="form-control" type="number" placeholder="poids total">
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 input-group">
+                        <select class="form-control">
+                            <option value="T">Tonnes</option>
+                            <option value="KG">Kilos</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-2 col-xs-12 input-group">
+                        <input type="submit" class="form-control btn btn-primary" style="padding: 5px 10px;" value="Tarif direct">
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </div>
+    </section>
     <section class="section section-inset-2 bg-light">
         <div class="container">
             <h2 class="text-center">Quelques chiffres</h2>

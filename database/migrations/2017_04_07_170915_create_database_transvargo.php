@@ -85,6 +85,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->integer('identiteaccess_id')->unsigned();
             $table->string('nom',100);
             $table->string('prenoms',150);
+            $table->string('role',20)->default('000');
             $table->string('raisonsociale',150)->nullable();
             $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
         });
@@ -116,13 +117,15 @@ class CreateDatabaseTransvargo extends Migration
         Schema::create('expedition',function (Blueprint $table){
             $table->increments('id');
             $table->string('reference',100);
-            $table->dateTime('datecreation');
+            $table->dateTime('dateheurecreation');
+            $table->dateTime('dateheureacceptation')->nullable();
+            $table->dateTime('dateheurelivraison')->nullable();
             $table->date('datechargement');
+            $table->date('dateexpirationt');
             $table->string('lieudepart',100);
             $table->string('coorddepart',100);
             $table->string('lieuarrivee',100);
             $table->string('coordarrivee',100);
-            $table->string('adresselivraison');
             $table->float('masse',6,2);
             $table->string('statut',5);
             $table->boolean('fragile')->default(false);
@@ -139,21 +142,14 @@ class CreateDatabaseTransvargo extends Migration
             $table->increments('id');
             $table->dateTime('dateheurechargement');
             $table->string('adressechargement');
-            $table->string('nomsociete',100);
-            $table->string('nomcontact',100);
-            $table->string('contact',70);
+            $table->string('societechargement',100);
+            $table->string('contactchargement',100);
+            $table->string('adresselivraison');
+            $table->string('societelivraison',100);
+            $table->string('contactlivraison',100);
             $table->integer('vehicule_id')->unsigned();
             $table->integer('expedition_id')->unsigned();
-            $table->integer('ville_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicule');
-            $table->foreign('expedition_id')->references('id')->on('expedition');
-            $table->foreign('ville_id')->references('id')->on('ville');
-        });
-        Schema::create('livraison',function (Blueprint $table){
-            $table->increments('id');
-            $table->dateTime('dateheurelivraison');
-            $table->string('commentaire')->nullable();
-            $table->integer('expedition_id')->unsigned();
             $table->foreign('expedition_id')->references('id')->on('expedition');
         });
         Schema::create('localisation',function (Blueprint $table){

@@ -1,65 +1,125 @@
 @extends('layouts._site')
 
 @section('content')
-<div class="col-md-12 col-xs-12">
-    <aside id="map" style="height: 550px;"></aside>
-</div>
-
-<div class="container">
+<div class="container bg-light">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 box">
+            <div class="ibox-content clearfix steps">
+                <div class="col-md-4 col-xs-4">
+                    <div class="step active">
+                        <div class="round">
+                            <div class="ring one"></div>
+                            <div class="cutout">
+                                <h3 class="time">1</h3>
+                            </div>
+                        </div>
+                        <h3 class="title">Tarif définitif</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="step">
+                        <div class="round">
+                            <div class="ring one"></div>
+                            <div class="ring two"></div>
+                            <div class="cutout">
+                                <h3 class="time">2</h3>
+                            </div>
+                        </div>
+                        <h3 class="title">Commande</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="step">
+                        <div class="round">
+                            <div class="ring one"></div>
+                            <div class="ring two"></div>
+                            <div class="ring three"></div>
+                            <div class="ring four"></div>
+                            <div class="cutout">
+                                <h3 class="time">3</h3>
+                            </div>
+                        </div>
+                        <h3 class="title">Confirmation</h3>
+                    </div>
+                </div>
+            </div>
+
+            <br/> <br/>
 
             @foreach($errors->all() as $erreur)
                 <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
             @endforeach
 
-            <div class="col-md-5 col-lg-6 visible-md visible-lg">
-                <div class="img-thumbnail-mod-2"><img src="{{config('app.url')}}/images/index-2.jpg" width="705" height="655" alt=""></div>
+            <div class="col-md-5 col-lg-6 col-xs-12">
+                <aside id="map" style="height: 550px;"></aside>
             </div>
+
             <div class="col-sm-10 col-md-7 col-lg-6 inset-3">
                 <br>
                 <form class="form-horizontal" action="" method="post">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="form-group date" data-provide="datepicker">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="depart">Date de chargement *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datechargement" id="datepicker">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="depart">Lieu de chargement *</label>
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Lieu de chargement *</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
                                 <input type="text" class="form-control autocomplete" name="lieudepart" id="lieudepart" data-change="0">
                                 <input type="hidden" name="coorddepart" id="coorddepart">
                                 <input type="checkbox" id="myPosition" > Utiliser ma position actuelle
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="arrivee">A (ville) *</label> <span><img src="{{config('app.url')}}/balls.gif" id="spinner" style="display:none; left: 101%; position: absolute; top: 30%;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Lieu de déchargement *</label> <span><img src="{{config('app.url')}}/balls.gif" id="spinner" style="display:none; left: 101%; position: absolute; top: 30%;"></span>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
                                 <input type="text" class="form-control autocomplete" name="lieuarrivee" id="lieuarrivee" data-change="0">
                                 <input type="hidden" name="coordarrivee" id="coordarrivee">
                             </div>
                         </div>
 
+                        <div class="nav nav-tabs"></div>
+                        <br/>
+
                         <div class="form-group distance">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="distance">Distance (km) *</label>
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Distance (km) *</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
                                 <input type="text" class="numbers-only form-control" id="distance" disabled>
                             </div>
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label for="weight">Masse (kg)</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Masse (kg)</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
                                 <input type="text" id="weight" class="numbers-only form-control" name="masse">
-                             </div>
+                            </div>
                         </div>
 
+                        <div class="nav nav-tabs"></div>
+                        <br/>
+
+                        <div class="form-group date">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Date d'expédition *</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datechargement" id="expedition" data-date-start-date="0d">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group date">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Date d'expiration *</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="dateexpirationt" id="expiration" data-date-start-date="0d">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nav nav-tabs"></div>
+                        <br/>
+
                         <div class="form-group">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <label>Type de camion</label>
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Type de camion *</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
                                 <select name="typecamion_id" class="form-control">
                                     @foreach($types as $type)
                                     <option value="{{ $type->id }}">{{ $type->libelle }}</option>
@@ -69,8 +129,8 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Fragile</label>
                             <div class="col-md-2 col-sm-3 col-xs-4">
-                                <label>Fragile</label>
                                 <div class="radio">
                                     <label>
                                         <input data-price="25" type="radio" name="fragile" id="blankRadioYes" value="1" class="numbers-only">
@@ -79,7 +139,6 @@
                                 </div>
                             </div>
                             <div class="col-md-2 col-sm-3 col-xs-4">
-                                <label>&nbsp;</label>
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="fragile" id="blankRadioNo" value="0" checked class="numbers-only">
@@ -90,8 +149,8 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <label>Remarques</label>
+                            <label class="control-label col-md-4 col-sm-6 col-xs-12">Remarques</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
                                 <textarea class="form-control" name="remarque" placeholder="Veuillez saisir ici vos remarques sur cette expédition" maxlength="255">{{old('remaque')}}</textarea>
                             </div>
                         </div>
@@ -102,7 +161,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Créer une nouvelle expédition</button>
+                    <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Suivant</button>
                 </form>
             </div>
         </div>
@@ -114,11 +173,12 @@
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.fr.min.js"></script>
-    <script type="application/ecmascript">
+    <script type="application/javascript">
         $('input.datepicker').datepicker({
             format: "dd/mm/yyyy",
             todayBtn: true,
-            language: "fr"
+            language: "fr",
+            autoclose: true,
         });
     </script>
 
@@ -126,6 +186,27 @@
         var DISTANCE_MATRIX_URL = '{{ route('ajax.distancematrix') }}';
         var directionsService = null;
         var directionsDisplay = null;
+
+        $(document).ready( a => {
+            $('#myPosition').click(function () {
+
+                if($(this).is(':checked'))
+                {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            lat = position.coords.latitude;
+                            lng = position.coords.longitude;
+
+                            //permettre la modification du champs
+                            $("#lieudepart").attr("data-change",1);
+
+                            document.getElementById("lieudepart").value = lat+","+lng;
+                            document.getElementById("coorddepart").value = lat+","+lng;
+                        });
+                    }
+                }
+            });
+        });
 
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -328,30 +409,19 @@
                                 $("#total").text(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
                                 $("#prix").val(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
                             })
+                        },
+                        error: function (xhr, obj) {
+                            $("#spinner").hide();
+                            var error = '<small style="color:red">Une erreur de connexion est survenue. Nous n\'arrivons pas à déterminer la distance en Km. Vérifier votre connexion SVP</small>';
+                            $(error).after("#distance");
                         }
                     });
                 } else {
+                    var error = '<small style="color:red">Une erreur de connexion est survenue. Nous n\'arrivons pas à déterminer la distance en Km. Vérifier votre connexion SVP</small>';
+                    $(error).after("#distance");
                     //window.alert('Directions request failed due to ' + status);
                 }
             });
-        }
-
-        function findMyPosition(arg) {
-            if($(arg).checked)
-            {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        lat = position.coords.latitude;
-                        lng = position.coords.longitude;
-
-                        //permettre la modification du champs
-                        $("#lieudepart").attr("data-change",1);
-
-                        document.getElementById("lieudepart").value = lat+","+lng;
-                        document.getElementById("coorddepart").value = lat+","+lng;
-                    });
-                }
-            }
         }
     </script>
     <script async defer
