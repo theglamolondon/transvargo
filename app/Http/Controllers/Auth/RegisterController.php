@@ -201,7 +201,7 @@ class RegisterController extends Controller
 
             $this->guard()->login($user);
 
-            return redirect()->route('client.tableaubord');
+            return redirect()->route('client.expeditions');
         }catch (\Exception $e){
             Log::error($e->getMessage());
             return back()->withErrors($e->getMessage());

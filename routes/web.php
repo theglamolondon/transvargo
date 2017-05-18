@@ -46,12 +46,13 @@ Route::get('validation/{token}', 'SiteController@validation')->name('register.co
 
 Route::group(['middleware' => 'client'],function (){
     //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
-    Route::get('/tableau-bord/nouvelle-expedition.html','ExpeditionController@showNewExpeditionForm')->name('client.newexpedition');
+    Route::get('/tableau-bord/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
     Route::post('/tableau-bord/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
-    Route::get('/tableau-bord/commande/{reference}.html','ExpeditionController@showCommande')->name('client.commande');
-    Route::get('/tableau-bord/mes-expeditions.html','ExpeditionController@showExpeditions')->name('client.myexpedition');
+    Route::get('/tableau-bord/commande/{reference}.html','ClientController@showCommande')->name('client.commande');
+    Route::post('/tableau-bord/commande/{reference}.html','ExpeditionController@publishExpedition');
+    Route::get('/tableau-bord/mes-expeditions.html','ClientController@showExpeditions')->name('client.expeditions');
     //Route::get('/tableau-bord/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
-    Route::get('/tableau-bord/mes-factures.html','ClientController@showDashboard')->name('client.myinvoice');
+    Route::get('/tableau-bord/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/tableau-bord/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
 });
 

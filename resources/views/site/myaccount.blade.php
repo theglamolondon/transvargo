@@ -80,4 +80,5 @@
     </div>
     <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg offset-5">proceed to checkout</button>
 </div>
+<br class="clearfix"/><br/>
 @endsection

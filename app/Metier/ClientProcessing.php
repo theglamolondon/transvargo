@@ -9,19 +9,18 @@
 namespace App\Metier;
 
 
+use App\Services\Statut;
+use App\Work\Tools;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+
 trait ClientProcessing
 {
-    public function validatorRules()
+    private function activateCheck()
     {
-        return [
-            'datechargement' => 'required|date_format:d/m/Y',
-            'coordarrivee' => 'required',
-            'lieuarrivee' => 'required',
-            'coorddepart' => 'required',
-            'lieudepart' => 'required',
-            'prix' => 'required|numeric',
-            'typecamion_id' => 'required|numeric',
-            'masse' => 'required|numeric',
-        ];
+        if (Auth::user()->statut == Statut::create(Statut::TYPE_IDENTITE_ACCESS , Statut::ETAT_ACTIF , Statut::AUTRE_NON_CONFRIME))
+            return false;
+        else
+            return true;
     }
 }

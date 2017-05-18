@@ -55,13 +55,18 @@ class SiteController extends Controller
             $identite->statut = Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_NULL);
 
             $identite->saveOrFail();
+
         }catch (ModelNotFoundException $e){
+
             return view('error.404');
+
         }catch (\Exception $e){
+
             return redirect()->route('login')->withErrors($e->getMessage());
+
         }
 
-        return redirect()->route('client.myexpedition');
+        return redirect()->route('client.expeditions');
     }
 
     public function sendResponseContact(Request $request)

@@ -50,18 +50,47 @@
                     <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
                 @endforeach
 
-                <form class="form-horizontal col-md-8" action="{{ route('register') }}" method="post">
+                <form class="form-horizontal col-md-8" action="{{ route('client.commande', ['reference' => $expedition->reference]) }}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Prénoms</label>
+                        <label class="control-label col-sm-4">Société au chargement *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" placeholder="Votre prénom..." id="prenoms" name="prenoms" class="form-control" value="{{old('prenoms')}}">
+                            <input type="text" placeholder="Nom de la société au chargement" id="societechargement" name="societechargement" class="form-control" value="{{old('societechargement')}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Nom *</label>
+                        <label class="control-label col-sm-4">Contact au chargement *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control" value="{{old('nom')}}">
+                            <input type="text" placeholder="Personne à contacter au chargement" id="contactchargement" name="contactchargement" class="form-control" value="{{old('contactchargement')}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaire sur le chargement</label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <textarea class="form-control" name="adressechargement" placeholder="Informations sur le lieu de chargement et des marchandises" maxlength="255">{{old('adressechargement')}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="nav nav-tabs"></div>
+                    <br/>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Société à la livraison *</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" placeholder="Nom de la société à la livraison" id="societelivraison" name="societelivraison" class="form-control" value="{{old('societelivraison')}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Contact à la livraison *</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" placeholder="Personne à contacter à la livraison" id="contactlivraison" name="contactlivraison" class="form-control" value="{{old('contactlivraison')}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaire sur la livraison</label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <textarea class="form-control" name="adresselivraison" placeholder="Informations sur le lieu de déchargement et des marchandises" maxlength="255">{{old('adresselivraison')}}</textarea>
                         </div>
                     </div>
 
@@ -69,62 +98,37 @@
                     <br/>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Raison sociale</label>
-                        <div class="col-sm-8 col-xs-12">
-                            <input class="form-control" name="raisonsociale" type="text" placeholder="Votre raison sociale" value="{{old('raisonsociale')}}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">N° téléphone *</label>
-                        <div class="col-sm-8 col-xs-12">
-                            <input class="form-control" name="contact" type="text" placeholder="Votre contact..." value="{{old('contact')}}" required>
+                        <label class="control-label col-md-4 col-sm-6 col-xs-12"></label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Commander</button>
                         </div>
                     </div>
 
-                    <div class="nav nav-tabs"></div>
-                    <br/>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">Email *</label>
-                        <div class="col-sm-8 col-xs-12">
-                            <input type="email" placeholder="email..." id="email" name="email" class="form-control" value="{{old('email')}}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">Mot de passe *</label>
-                        <div class="col-sm-8 col-xs-12">
-                            <input type="password" placeholder="Mot de passe..." id="password" name="password" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">Connfirmation *</label>
-                        <div class="col-sm-8 col-xs-12">
-                            <input type="password" placeholder="Confirmation mot de passe" id="password_confirmation" name="password_confirmation" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="nav nav-tabs"></div>
-                    <br/>
-
-                    <div class="form-group">
-                        <div class="col-sm-12 col-xs-12">
-                            <input name="terms" type="checkbox" value="1">
-                            En cliquant ici, vous acceptez <a class="" href="{{ route('terms') }}">les termes et conditions d'utilisations</a>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Inscription</button>
                 </form>
 
 
                 <div class="col-md-offset-1 col-md-3">
-                    <h3 >Compte client</h3>
+                    <h3 class="text-left">Expédition</h3>
                     <div class="separateur"></div>
-                    <p class="text-sm-left description">Un compte client vous permet de faire des demandes de transport de marchandises à une grande flotte de transporteurs disponible sur notre plateforme. Vous bénéficiez d'un service
-                        unique de qualité sans limitation en nombre de demande et à coût réduits.</p>
+                    <p class="text-left"><strong> <i class="fa fa-barcode"></i> {{ $expedition->reference }} </strong> </p>
+                    <p class="text-left"><strong> <i class="fa fa-money"></i> {{ number_format($expedition->prix,0,'.',' ') }} F CFA</strong> </p>
+                    <p class="text-left"><strong> <i class="fa fa-tachometer"></i> {{ number_format($expedition->prix/\App\Expedition::UNIT_PRICE,0,'.',' ') }} Km</strong> </p>
                 </div>
 
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script type="application/javascript">
+        $('input.datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: true,
+            language: "fr",
+            autoclose: true,
+        });
+    </script>
 @endsection

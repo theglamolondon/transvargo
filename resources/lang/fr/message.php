@@ -12,6 +12,9 @@ return [
         'offre' => [
             'nontrouve' => 'L\'offre que vous essayez de traiter est introuvable.'
         ],
+        'identite' => [
+            'noactivate' => 'Votre compte n\'a encore pas été confirmé. Veuillez cliquer sur le lien qu vous a été envoyé par email.'
+        ],
     ],
 
     'inscription' => [
@@ -26,6 +29,7 @@ return [
     ],
 
     'expedition' => [
+        'initiee' => 'Votre demande d\'expédition a été initée, veuillez complèter quelques informations',
         'create' => "Votre expédition a été programmé pour le :date. Vous serez contacté dans de bref délais.",
         'accept' => 'L\'offre d\'expédition :reference a été prise en charge par vous. Veuillez rentrer en contact avec le client dans de bref délais.',
     ],

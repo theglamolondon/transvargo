@@ -159,3 +159,6 @@ div#waiting {
     font-weight: 700;
     font-size: 36px;
 }
+.clearfix{
+    clear: both;
+}

@@ -46,10 +46,6 @@
 
             <br/> <br/>
 
-            @foreach($errors->all() as $erreur)
-                <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
-            @endforeach
-
             <div class="col-md-5 col-lg-6 col-xs-12">
                 <aside id="map" style="height: 550px;"></aside>
             </div>
@@ -62,16 +58,16 @@
                         <div class="form-group">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Lieu de chargement *</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control autocomplete" name="lieudepart" id="lieudepart" data-change="0">
-                                <input type="hidden" name="coorddepart" id="coorddepart">
+                                <input type="text" class="form-control autocomplete" name="lieudepart" id="lieudepart" data-change="0"  value="{{ old('lieudepart',$expedition->lieudepart) }}">
+                                <input type="hidden" name="coorddepart" id="coorddepart" value="{{ old('coorddepart',$expedition->coorddepart) }}">
                                 <input type="checkbox" id="myPosition" > Utiliser ma position actuelle
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Lieu de déchargement *</label> <span><img src="{{config('app.url')}}/balls.gif" id="spinner" style="display:none; left: 101%; position: absolute; top: 30%;"></span>
                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control autocomplete" name="lieuarrivee" id="lieuarrivee" data-change="0">
-                                <input type="hidden" name="coordarrivee" id="coordarrivee">
+                                <input type="text" class="form-control autocomplete" name="lieuarrivee" id="lieuarrivee" data-change="0" value="{{ old('lieuarrivee',$expedition->lieuarrivee) }}">
+                                <input type="hidden" name="coordarrivee" id="coordarrivee" value="{{ old('coordarrivee',$expedition->coordarrivee) }}">
                             </div>
                         </div>
 
@@ -81,13 +77,14 @@
                         <div class="form-group distance">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Distance (km) *</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                <input type="text" class="numbers-only form-control" id="distance" disabled>
+                                <input type="text" class="numbers-only form-control" id="distance" disabled value="{{ old('distance', $expedition->distance) }}">
+                                <input type="hidden" class="numbers-only form-control" name="distance" id="_distance" value="{{ old('distance',$expedition->distance) }}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Masse (kg)</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                <input type="text" id="weight" class="numbers-only form-control" name="masse">
+                                <input type="text" id="weight" class="numbers-only form-control" name="masse"  value="{{ old('masse',$expedition->masse) }}">
                             </div>
                         </div>
 
@@ -98,7 +95,7 @@
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Date d'expédition *</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datechargement" id="expedition" data-date-start-date="0d">
+                                    <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datechargement" id="expedition" data-date-start-date="0d" value="{{ old('datechargement',(new \Carbon\Carbon($expedition->datechargement))->format('d/m/Y')) }}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                                 </div>
                             </div>
@@ -108,7 +105,7 @@
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Date d'expiration *</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="dateexpirationt" id="expiration" data-date-start-date="0d">
+                                    <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="dateexpiration" id="expiration" data-date-start-date="0d" value="{{ old('dateexpiration',(new \Carbon\Carbon($expedition->dateexpiration))->format('d/m/Y')) }}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                                 </div>
                             </div>
@@ -122,7 +119,7 @@
                             <div class="col-md-8 col-sm-6 col-xs-12">
                                 <select name="typecamion_id" class="form-control">
                                     @foreach($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->libelle }}</option>
+                                    <option value="{{ $type->id }}" @if(old('typecamion_id',$expedition->typecamion_id) == $type->id ) selected @endif>{{ $type->libelle }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -133,7 +130,7 @@
                             <div class="col-md-2 col-sm-3 col-xs-4">
                                 <div class="radio">
                                     <label>
-                                        <input data-price="25" type="radio" name="fragile" id="blankRadioYes" value="1" class="numbers-only">
+                                        <input data-price="25" type="radio" name="fragile" id="blankRadioYes" value="1" class="numbers-only" @if(old('fragile',$expedition->fragile)) checked @endif />
                                         <span class="radio-field"></span><span>Oui</span>
                                     </label>
                                 </div>
@@ -141,23 +138,16 @@
                             <div class="col-md-2 col-sm-3 col-xs-4">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="fragile" id="blankRadioNo" value="0" checked class="numbers-only">
+                                        <input type="radio" name="fragile" id="blankRadioNo" value="0" checked class="numbers-only" @if(!old('fragile',$expedition->fragile)) checked @endif />
                                         <span class="radio-field"></span><span>Non</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-md-4 col-sm-6 col-xs-12">Remarques</label>
-                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                <textarea class="form-control" name="remarque" placeholder="Veuillez saisir ici vos remarques sur cette expédition" maxlength="255">{{old('remaque')}}</textarea>
-                            </div>
-                        </div>
-
                         <div class="form-group border-top inset-4 h4">
-                            <p>Total : <span id="total">0</span> F CFA</p>
-                            <input type="hidden" name="prix" id="prix" >
+                            <p>Total : <span id="total">{{ old('prix',$expedition->prix) }} </span> F CFA</p>
+                            <input type="hidden" name="prix" id="prix" value="{{ old('prix',$expedition->prix) }}">
                         </div>
                     </div>
 
@@ -404,7 +394,9 @@
                                 //Affichage du résultat de distance Matrix
                                 $("#distance").val(data.rows[0].elements[0].distance.text);
 
-                                var km = (data.rows[0].elements[0].distance.text).replace("/km/",'');
+                                var km = (data.rows[0].elements[0].distance.text).replace(" km",'');
+
+                                $("#_distance").val((data.rows[0].elements[0].distance.text).replace(" km",''));
 
                                 $("#total").text(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
                                 $("#prix").val(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});

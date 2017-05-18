@@ -25,18 +25,14 @@ class Expedition extends Model
 
 
     public function typeCamion(){
-        return $this->belongsTo('App\TypeCamion');
-    }
-
-    public function nature(){
-        return $this->belongsTo('App\Nature');
+        return $this->belongsTo(TypeCamion::class);
     }
 
     public function client(){
-        return $this->belongsTo('App\Client','client_id');
+        return $this->belongsTo(Client::class,'client_id');
     }
 
     public function chargement(){
-        return $this->belongsTo('App\Chargement');
+        return $this->hasOne(Chargement::class);
     }
 }

@@ -134,7 +134,27 @@
       @if(session()->has(\App\Work\Tools::MESSAGE_SUCCESS))
           <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Succès!</strong> {{ session(\App\Work\Tools::MESSAGE_SUCCESS) }}
+            <strong>Succès ! </strong> {{ session(\App\Work\Tools::MESSAGE_SUCCESS) }}
+          </div>
+      @endif
+      @if(session()->has(\App\Work\Tools::MESSAGE_WARNING))
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Attention ! </strong> {{ session(\App\Work\Tools::MESSAGE_WARNING) }}
+          </div>
+      @endif
+      @if(session()->has(\App\Work\Tools::MESSAGE_INFO))
+          <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Info ! </strong> {{ session(\App\Work\Tools::MESSAGE_INFO) }}
+          </div>
+      @endif
+      @if($errors->count())
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @foreach($errors->all() as $erreur)
+            <p><strong>Erreur ! </strong> <i class="fa fa-exclamation-circle"></i>{{ $erreur }}</p>
+            @endforeach
           </div>
       @endif
     </div>

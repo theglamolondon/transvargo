@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Connfirmation *</label>
+                                    <label class="control-label col-sm-4">Confirmation *</label>
                                     <div class="col-sm-8 col-xs-12">
                                         <input type="password" placeholder="Confirmation mot de passe" id="password_confirmation" name="password_confirmation" class="form-control">
                                     </div>
