@@ -43,7 +43,6 @@ Route::get('validation/{token}', 'SiteController@validation')->name('register.co
 /* end site route */
 
 /*Client*/
-
 Route::group(['middleware' => 'client'],function (){
     //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
     Route::get('/tableau-bord/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
@@ -56,7 +55,6 @@ Route::group(['middleware' => 'client'],function (){
     Route::get('/tableau-bord/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
 });
 
-
 /*Transporteur*/
 Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],function (){
     Route::get('tableau-bord.html','Carrier\TransporteurController@showDashboard')->name('transporteur.tableaubord');
@@ -64,6 +62,11 @@ Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],functi
     Route::post('vehicule/ajouter.html','VehiculeController@addNewVehicle')->name('transport.ajoutervehicule');
     Route::get('offres/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
     Route::post('offres/{reference}/accepter.html','ExpeditionController@acceptOffer');
+});
+
+/*Staff*/
+Route::group(['middleware' => 'staff', 'prefix' => 'admin'],function (){
+    Route::get('tableau-bord.html','Admin\AdminController@showDashboard')->name('admin.home');
 });
 
 /*AJAX*/

@@ -30,6 +30,6 @@ class AjaxController extends Controller
             ->where('statut',Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
             ->orderBy('datechargement')
             ->get()
-            ->toJson();
+            ->toJson(JSON_UNESCAPED_UNICODE);
     }
 }

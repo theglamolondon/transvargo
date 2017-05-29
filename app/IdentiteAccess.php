@@ -21,7 +21,7 @@ class IdentiteAccess extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password','statut','ville_id','terms','typeidentite_id','activate_token'
+        'email', 'password','statut','ville','terms','typeidentite_id','activate_token'
     ];
 
     /**

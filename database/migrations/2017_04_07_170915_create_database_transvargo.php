@@ -13,28 +13,9 @@ class CreateDatabaseTransvargo extends Migration
      */
     public function up()
     {
-        Schema::create('pays',function (Blueprint $table){
-            $table->increments('id');
-            $table->string('nom',100);
-            $table->string('indicatif',4);
-            $table->string('monnaie',10);
-            $table->string('abbreviation',5);
-            $table->string('longitude',25)->nullable();
-            $table->string('latitude',25)->nullable();
-        });
         Schema::create('typeidentite',function (Blueprint $table){
             $table->increments('id');
             $table->string('libelle',50);
-        });
-        Schema::create('typecontact',function (Blueprint $table){
-            $table->increments('id');
-            $table->string('libelle',50);
-        });
-        Schema::create('ville',function (Blueprint $table){
-            $table->increments('id');
-            $table->string('nom');
-            $table->integer('pays_id')->unsigned();
-            $table->foreign('pays_id')->references('id')->on('pays');
         });
         Schema::create('identiteaccess',function (Blueprint $table){
             $table->bigIncrements('id');
@@ -46,14 +27,6 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('terms',5);
             $table->integer('typeidentite_id')->unsigned();
             $table->foreign('typeidentite_id')->references('id')->on('typeidentite');
-        });
-        Schema::create('contact',function (Blueprint $table){
-            $table->increments('id');
-            $table->string('valeur',50);
-            $table->integer('identiteaccess_id')->unsigned();
-            $table->integer('typecontact_id')->unsigned();
-            $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
-            $table->foreign('typecontact_id')->references('id')->on('typecontact');
         });
         Schema::create('typetransporteur',function (Blueprint $table){
             $table->increments('id');
@@ -69,15 +42,28 @@ class CreateDatabaseTransvargo extends Migration
         });
         Schema::create('transporteur',function (Blueprint $table){
             $table->integer('identiteaccess_id')->unsigned();
-            $table->string('nom',100);
-            $table->string('prenoms',150);
-            $table->string('raisonsociale',150)->nullable();
+            $table->string('nom',100)->nullable();
+            $table->string('prenoms',150)->nullable();
+            $table->string('raisonsociale',150);
+            $table->string('contact');
             $table->string('comptecontribuable',100)->nullable();
-            $table->integer('limite')->default(0);
-            $table->string('note')->nullable();
-            $table->integer('typetransporteur_id')->unsigned();
-            $table->integer('ville_id')->unsigned();
-            $table->foreign('ville_id')->references('id')->on('ville');
+            $table->integer('limite')->default(0); //Pour la limite des véhicules à ajouter. 0 = illimité
+            $table->string('ville');
+            $table->unsignedInteger('typetransporteur_id');
+            $table->string('nationalite');
+
+            $table->string('nomprenomsU1')->nullable();
+            $table->string('professionU1')->nullable();
+            $table->string('contactU1')->nullable();
+            $table->string('localisationU1')->nullable();
+            $table->string('observatiionU1')->nullable();
+
+            $table->string('nomprenomsU2')->nullable();
+            $table->string('professionU2')->nullable();
+            $table->string('contactU2')->nullable();
+            $table->string('localisationU2')->nullable();
+            $table->string('observatiionU2')->nullable();
+
             $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
             $table->foreign('typetransporteur_id')->references('id')->on('typetransporteur');
         });
@@ -142,10 +128,10 @@ class CreateDatabaseTransvargo extends Migration
         Schema::create('chargement',function (Blueprint $table){
             $table->increments('id');
             $table->dateTime('dateheurechargement')->nullable();
-            $table->string('adressechargement');
+            $table->string('adressechargement')->nullable();
             $table->string('societechargement',100);
             $table->string('contactchargement',100);
-            $table->string('adresselivraison');
+            $table->string('adresselivraison')->nullable();
             $table->string('societelivraison',100);
             $table->string('contactlivraison',100);
             $table->integer('vehicule_id')->unsigned()->nullable();

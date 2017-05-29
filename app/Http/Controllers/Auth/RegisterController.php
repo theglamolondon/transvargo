@@ -114,9 +114,6 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $villes = Ville::orderBy('nom','asc')->get();
-        $countries = Pays::orderBy('nom','asc')->get();
-
         return view('auth.register',compact("villes","countries"));
     }
 
@@ -129,7 +126,7 @@ class RegisterController extends Controller
             'password' => 'required|min:6|confirmed',
             'comptecontribuable' => 'present',
             'raisonsociale' => 'present',
-            'ville_id' => 'required|numeric',
+            'ville' => 'required',
             'typetransporteur_id' => 'required|numeric',
             'terms' => 'accepted',
         ];
@@ -151,7 +148,7 @@ class RegisterController extends Controller
             'prenoms' => $data['prenoms'],
             'raisonsociale' => $data['raisonsociale'],
             'comptecontribuable' => $data['comptecontribuable'],
-            'ville_id' => $data['ville_id'],
+            'ville' => $data['ville'],
             'typetransporteur_id' => $data['typetransporteur_id'],
         ]);
 
@@ -184,9 +181,6 @@ class RegisterController extends Controller
 
     public function showTransporteurRegistrationForm()
     {
-        $villes = Ville::orderBy('nom','asc')->get();
-        $countries = Pays::orderBy('nom','asc')->get();
-
         return view('auth.carrier.register',compact("villes","countries"));
     }
 

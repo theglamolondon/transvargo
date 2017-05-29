@@ -138,28 +138,10 @@
                                         <input class="form-control" name="contact" type="text" placeholder="Votre contact..." value="{{old('contact')}}" required>
                                     </div>
                                 </div>
-
-                                <div class="nav nav-tabs"></div>
-                                <br/>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Pays</label>
-                                    <div class="col-sm-8 col-xs-12">
-                                        <select class="form-control" name="pays">
-                                            @foreach($countries as $pays)
-                                                <option value="{{ $pays->id }}" @if(old('pays') == $pays->id) selected @endif>{{ $pays->nom }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Ville *</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <select class="form-control" name="ville_id" required>
-                                            @foreach($villes as $ville)
-                                                <option value="{{ $ville->id }}" @if(old('ville_id') == $ville->id) selected @endif>{{ $ville->nom }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" placeholder="Ville..." id="ville" name="ville" class="form-control" value="{{old('ville')}}" required>
                                     </div>
                                 </div>
 
@@ -250,5 +232,20 @@
             $("#transporteur").fadeIn();
             $("#client").fadeOut();
         });
+    </script>
+
+    <script type="application/javascript">
+        function initMap() {
+            var options = {
+                componentRestrictions: {country: ['ci']}
+            };
+
+            var input = document.getElementById('ville');
+            var autocomplete = new google.maps.places.Autocomplete(input,options);
+        }
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ \App\Http\Controllers\MapController::API_KEY }}&libraries=places&callback=initMap">
     </script>
 @endsection

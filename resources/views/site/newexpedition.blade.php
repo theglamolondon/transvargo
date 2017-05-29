@@ -203,15 +203,18 @@
                 center: {lat: {{ \App\Http\Controllers\MapController::COORD_CI_LAT }}, lng: {{ \App\Http\Controllers\MapController::COORD_CI_LNG }} }, //7.5450345,-7.7914844
                 zoom: 7
             });
+            var options = {
+                componentRestrictions: {country: ['ci']}
+            };
 
             var inputD = document.getElementById('lieudepart');
             var inputA = document.getElementById('lieuarrivee');
 
             var autocompleteD = new google.maps.places.Autocomplete(inputD);
-            autocompleteD.bindTo('bounds', map);
+            autocompleteD.bindTo('bounds', options); //map
 
             var autocompleteA = new google.maps.places.Autocomplete(inputA);
-            autocompleteA.bindTo('bounds', map);
+            autocompleteA.bindTo('bounds', options); //map
 
             var infowindow = new google.maps.InfoWindow();
             var marker = new google.maps.Marker({

@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaire sur le chargement</label>
+                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaires sur le chargement</label>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                             <textarea class="form-control" name="adressechargement" placeholder="Informations sur le lieu de chargement et des marchandises" maxlength="255">{{old('adressechargement')}}</textarea>
                         </div>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaire sur la livraison</label>
+                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaires sur la livraison</label>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                             <textarea class="form-control" name="adresselivraison" placeholder="Informations sur le lieu de déchargement et des marchandises" maxlength="255">{{old('adresselivraison')}}</textarea>
                         </div>
@@ -103,7 +103,6 @@
                             <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Commander</button>
                         </div>
                     </div>
-
                 </form>
 
 

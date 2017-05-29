@@ -34,7 +34,12 @@ class TransporteurController extends Controller
 
     public function showOffersOnMap()
     {
-        return view('carrier.offers');
+        return view('carrier.offers-map');
+    }
+
+    public function showOfferOnListView()
+    {
+        return view('carrier.offers-list');
     }
 
     public function showAcceptOfferForm($reference){
