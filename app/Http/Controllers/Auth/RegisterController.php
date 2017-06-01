@@ -138,7 +138,8 @@ class RegisterController extends Controller
             'terms' => $data['terms'],
             'password' => bcrypt($data['password']),
             'typeidentite_id' => TypeIdentitite::TYPE_TRANSPORTEUR,
-            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_INACTIF,Statut::AUTRE_NON_CONFRIME)
+            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_INACTIF,Statut::AUTRE_NON_CONFRIME),
+            'activate_token' => base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email'])
         ]);
         $identite->saveOrFail();
 
@@ -149,11 +150,16 @@ class RegisterController extends Controller
             'raisonsociale' => $data['raisonsociale'],
             'comptecontribuable' => $data['comptecontribuable'],
             'ville' => $data['ville'],
+            'contact' => $data['contact'],
+            'nationalite' => $data['nationalite'],
+            'lieunaissance' => $data['lieunaissance'],
+            'datenaissance' => Carbon::createFromFormat('d/m/Y',$data['datenaissance'])->toDateString(),
             'typetransporteur_id' => $data['typetransporteur_id'],
+            'rib' => 'ND'
         ]);
 
         if($data['typetransporteur_id'] == TypeTransporteur::TYPE_CHAUFFEUR_PATRON)
-            $transporteur->limite =
+            $transporteur->limite = Transporteur::LIMITE_CHAUFFEUR_PATRON;
 
         $transporteur->saveOrFail();
 
@@ -164,7 +170,6 @@ class RegisterController extends Controller
 
     public function registerTransporteur(Request $request)
     {
-        dd($request);
         $this->validate($request, $this->validatorTransporteur());
 
         $identite = $this->createTransporteur($request->all());
@@ -175,8 +180,8 @@ class RegisterController extends Controller
 
         return $this->registered($request, $identite)
             ?: redirect()->route('accueil')
-                ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.inscription.transporteur'.Tools::MESSAGE_SUCCESS))
-                ->with(Tools::MESSAGE_INFO,Lang::get('message.inscription.transporteur'.Tools::MESSAGE_INFO));
+                ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.inscription.transporteur.'.Tools::MESSAGE_SUCCESS))
+                ->with(Tools::MESSAGE_INFO,Lang::get('message.inscription.transporteur.'.Tools::MESSAGE_INFO));
     }
 
     public function showTransporteurRegistrationForm()

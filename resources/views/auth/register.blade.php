@@ -8,10 +8,6 @@
                     <h3 class="titre">Inscription</h3>
                     <div class="separateur"></div>
 
-                    @foreach($errors->all() as $erreur)
-                        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
-                    @endforeach
-
                     <div class="form-group nav nav-tabs" role="tablist">
                         <label class="control-label col-md-2 col-sm-4 col-xs-4"> Vous êtes :</label>
                         <div class="col-md-3 col-sm-4 col-xs-4">
@@ -26,7 +22,7 @@
                     <br/>
 
                     <div class="tab-content" id="myTab">
-                        <div id="client" class="tab-pane active">
+                        <div id="client" class="tab-pane @if(! old('comptecontribuable')) active @endif">
                             <form class="form-horizontal col-md-8" action="{{ route('register') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -38,7 +34,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Nom *</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control" value="{{old('nom')}}">
+                                        <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control" value="{{old('nom')}}" required>
                                     </div>
                                 </div>
 
@@ -100,7 +96,7 @@
                                     unique de qualité sans limitation en nombre de demande et à coût réduits.</p>
                             </div>
                         </div>
-                        <div id="transporteur" class="tab-pane ">
+                        <div id="transporteur" class="tab-pane @if(old('comptecontribuable')) active @endif">
                             <form class="form-horizontal col-md-8" action="{{ route('register.transporteur') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -110,9 +106,34 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Nom</label>
+                                    <label class="control-label col-sm-4">Nom *</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control" value="{{old('nom')}}">
+                                        <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control" value="{{old('nom')}}" required>
+                                    </div>
+                                </div>
+
+                                <div class="nav nav-tabs"></div>
+                                <br/>
+
+                                <div class="form-group date">
+                                    <label for="datenaissance" class="control-label col-md-4 col-sm-6 col-xs-12">Date de naissance *</label>
+                                    <div class="col-md-8 col-sm-6 col-xs-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datenaissance" id="datenaissance" data-date-end-date="-18y" value="{{ old('datenaissance',\Carbon\Carbon::now()->addYear(-18)->format('d/m/Y')) }}">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Lieu de naissance *</label>
+                                    <div class="col-sm-8 col-xs-12">
+                                        <input type="text" placeholder="Lieu de naissance..." id="lieunaissance" name="lieunaissance" class="form-control" value="{{old('lieunaissance')}}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Nationnalité *</label>
+                                    <div class="col-sm-8 col-xs-12">
+                                        <input type="text" placeholder="Nationalité..." id="nationalite" name="nationalite" class="form-control" value="{{old('nationalite')}}" required>
                                     </div>
                                 </div>
 
@@ -222,7 +243,16 @@
 @endsection
 
 @section('script')
-    <script type="application/ecmascript">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script type="application/javascript">
+        $('#datenaissance').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: true,
+            language: "fr",
+            autoclose: true,
+        });
+
         $('#chk-client').click(function () {
             $("#client").fadeIn();
             $("#transporteur").fadeOut();
@@ -232,9 +262,8 @@
             $("#transporteur").fadeIn();
             $("#client").fadeOut();
         });
-    </script>
 
-    <script type="application/javascript">
+        //Map
         function initMap() {
             var options = {
                 componentRestrictions: {country: ['ci']}
@@ -242,6 +271,8 @@
 
             var input = document.getElementById('ville');
             var autocomplete = new google.maps.places.Autocomplete(input,options);
+            var inputL = document.getElementById('lieunaissance');
+            var autocompleteL = new google.maps.places.Autocomplete(inputL,options);
         }
     </script>
 

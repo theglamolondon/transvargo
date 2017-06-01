@@ -8,7 +8,6 @@
 
 namespace App;
 
-
 use App\Work\Authenticable;
 
 class Transporteur extends Authenticable
@@ -22,6 +21,6 @@ class Transporteur extends Authenticable
     public $timestamps = false;
 
     public function identiteAccess(){
-        return $this->belongsTo('App\IdentiteAccess','identiteaccess_id');
+        return $this->belongsTo(IdentiteAccess::class,'identiteaccess_id');
     }
 }

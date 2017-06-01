@@ -22,7 +22,7 @@ Route::get('deconnexion.html', 'Auth\LoginController@logout')->name('logout');
 Route::get('inscription.html', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('inscription.html', 'Auth\RegisterController@register');
 //Transporteur
-Route::get('/transporteur/inscription.html','Auth\RegisterController@showTransporteurRegistrationForm')->name('register.transporteur');
+Route::get('/transporteur/inscription.html','Auth\RegisterController@showRegistrationForm')->name('register.transporteur');
 Route::post('/transporteur/inscription.html','Auth\RegisterController@registerTransporteur');
 
 // Password Reset Routes...

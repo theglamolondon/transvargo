@@ -67,4 +67,9 @@ class LoginController extends Controller
         return $this->authenticated($request, $this->guard()->user())
             ?: redirect()->intended($this->redirectPath());
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        dd($user);
+    }
 }

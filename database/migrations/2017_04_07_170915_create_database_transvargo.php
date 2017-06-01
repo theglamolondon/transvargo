@@ -51,7 +51,14 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('ville');
             $table->unsignedInteger('typetransporteur_id');
             $table->string('nationalite');
+            $table->date('datenaissance');
+            $table->string('lieunaissance');
+            $table->string('rib');
 
+            $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
+            $table->foreign('typetransporteur_id')->references('id')->on('typetransporteur');
+        });
+        Schema::create('chauffeurpatron',function (Blueprint $table){
             $table->string('nomprenomsU1')->nullable();
             $table->string('professionU1')->nullable();
             $table->string('contactU1')->nullable();
@@ -62,12 +69,13 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('professionU2')->nullable();
             $table->string('contactU2')->nullable();
             $table->string('localisationU2')->nullable();
-            $table->string('observatiionU2')->nullable();
+            $table->string('observationU2')->nullable();
 
-            $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
-            $table->foreign('typetransporteur_id')->references('id')->on('typetransporteur');
+            $table->unsignedInteger('transport_id');
+            $table->primary('transport_id');
+            $table->foreign('transport_id')->references('identiteaccess_id')->on('transporteur');
         });
-        Schema::create('administrateur',function (Blueprint $table){
+        Schema::create('staff',function (Blueprint $table){
             $table->integer('identiteaccess_id')->unsigned();
             $table->string('nom',100);
             $table->string('prenoms',150);
@@ -164,6 +172,7 @@ class CreateDatabaseTransvargo extends Migration
         Schema::dropIfExists('vehicule');
         Schema::dropIfExists('typecamion');
         Schema::dropIfExists('administrateur');
+        Schema::dropIfExists('chauffeurpatron');
         Schema::dropIfExists('transporteur');
         Schema::dropIfExists('client');
         Schema::dropIfExists('typetransporteur');
