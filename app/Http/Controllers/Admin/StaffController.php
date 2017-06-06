@@ -65,32 +65,28 @@ class StaffController extends Controller
     public function validTransporteurAccount($token, Request $request)
     {
         $transporteur = $this->getTransporteurByActivateTokenField($token);
-
         $this->validate($request,$this->validatorTransporteur());
 
         try{
-            DB::transaction(function () use($transporteur,$request) {
+            $transporteur->valid_by = Auth::user()->id;
 
-                //update Transposteurif possible
-                $transporteur->valid_by = Auth::user()->id;
-                $transporteur->identiteAccess->statut = Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_NULL);
-                $transporteur->update($this->extractData($request->all()));
+            $transporteur->identiteAccess->statut = Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_NULL);
+            //$transporteur->update($this->extractData($request->all()));
 
-                if( $transporteur->typeTransporteur = TypeTransporteur::TYPE_CHAUFFEUR_PATRON ){
-                    $this->validate($request,$this->validChauffeurPatron());
+            if( $transporteur->typeTransporteur->id == TypeTransporteur::TYPE_CHAUFFEUR_PATRON ){
+                $this->validate($request,$this->validChauffeurPatron());
 
-                    $this->saveChauffeurPatron($transporteur,$request->except('_token'));
+                $this->saveChauffeurPatron($transporteur,$request->except('_token'));
 
-                    $data = $request->except('_token');
-                    $data['chauffeur'] = $transporteur->nom.' '.$transporteur->prenoms;
-                    $data['telephone'] = $transporteur->contact;
-                    $this->createVehicule($transporteur,$data);
-                }
+                $data = $request->except('_token');
+                $data['chauffeur'] = $transporteur->nom.' '.$transporteur->prenoms;
+                $data['telephone'] = $transporteur->contact;
+                $this->createVehicule($transporteur,$data);
+            }
 
-                if( $transporteur->typeTransporteur = TypeTransporteur::TYPE_PROPRIETAIRE_FLOTTE ){
-
-                }
-            });
+            if( $transporteur->typeTransporteur = TypeTransporteur::TYPE_PROPRIETAIRE_FLOTTE ){
+                dd($request->all());
+            }
         }catch (ModelNotFoundException $e){
             return back()->withErrors($e->getMessage());
         }catch (QueryException $e){

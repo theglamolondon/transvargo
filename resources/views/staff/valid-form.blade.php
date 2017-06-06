@@ -3,6 +3,13 @@
 @section('content')
     <section class="section section-inset-1">
         <div class="col-md-offset-1 col-md-10">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <h3 class="text-left">Validation de transporteur</h3>
+                <div class="separateur"></div>
+            </div>
+
+            <br class="clearfix"/>
+
             <div class="panel panel-primary">
                 <div class="panel-heading">Fiche transporteur ({{ $transporteur->typeTransporteur->libelle }}) : {{ $transporteur->raisonsociale }}</div>
                 <div class="panel-body">
@@ -68,7 +75,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">Compte contribuable</label>
                                 <div class="col-sm-8 col-xs-12">
-                                    <input type="text" required placeholder="Compte contribuable..." id="comptecontribuable" name="comptecontribuable" class="form-control" value="{{old('comptecontribuable',$transporteur->comptecontribuable)}}">
+                                    <input type="text" placeholder="Compte contribuable..." id="comptecontribuable" name="comptecontribuable" class="form-control" value="{{old('comptecontribuable',$transporteur->comptecontribuable)}}">
                                 </div>
                             </div>
                         </div>
@@ -141,8 +148,9 @@
             ];
 
             inputs.forEach(function (e) {
-               console.log(e);
-                new google.maps.places.Autocomplete(e,options);
+                if(e){
+                   new google.maps.places.Autocomplete(e,options);
+                }
             });
         }
     </script>

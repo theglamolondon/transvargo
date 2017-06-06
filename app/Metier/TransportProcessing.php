@@ -128,4 +128,15 @@ trait TransportProcessing
 
         $patron->saveOrFail();
     }
+
+    protected function validateVehicule()
+    {
+        return [
+            "immatriculation" => "required|unique:vehicule|regex:/^([0-9]{4}[a-zA-Z]{2}[0-2]{2})$/g",
+            "capacite" => "required|numeric",
+            "chauffeur" => "required",
+            "telephone" => "required|regex:/^([0-9]{2}\\s?){4}$/g",
+            "typecamion_id" => "required|numeric|exist:typecamion",
+        ];
+    }
 }
