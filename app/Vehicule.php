@@ -11,7 +11,7 @@ class Vehicule extends Model
     public $timestamps = false;
 
     public function transporteur(){
-        return $this->belongsTo('App\Transporteur');
+        return $this->belongsTo('App\Transporteur','transporteur_id');
     }
 
     public function typeCamion(){

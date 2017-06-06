@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Lang;
 
 trait ClientProcessing
 {
-    private function activateCheck()
+    protected function validatorClient()
     {
-        if (Auth::user()->statut == Statut::create(Statut::TYPE_IDENTITE_ACCESS , Statut::ETAT_ACTIF , Statut::AUTRE_NON_CONFRIME))
-            return false;
-        else
-            return true;
+        return  [
+            'nom' => 'required|max:255',
+            'prenoms' => 'present',
+            'raisonsociale' => 'present',
+            'contact' => 'required|unique:client,contact',
+        ];
     }
 }

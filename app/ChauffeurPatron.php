@@ -8,9 +8,10 @@ class ChauffeurPatron extends Model
 {
     protected $table = "chauffeurpatron";
     protected $primaryKey = "transport_id";
+    protected $guarded = [];
     public $timestamps = false;
 
-    protected function transporteur(){
+    public function transporteur(){
         return $this->belongsTo(Transporteur::class,'transport_id','identiteaccess_id');
     }
 }

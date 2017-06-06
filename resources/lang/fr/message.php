@@ -15,6 +15,9 @@ return [
         'identite' => [
             'noactivate' => 'Votre compte n\'a encore pas été confirmé. Veuillez cliquer sur le lien qui vous a été envoyé par email.'
         ],
+        'transporteur' => [
+            'notfound' => 'Transporteur non trouvé.'
+        ],
     ],
 
     'inscription' => [
@@ -40,6 +43,10 @@ return [
 
     'site' => [
         'contact' => 'Votre message a été bien envoyé à notre équipe. Transvargo vous remercie !'
-    ]
+    ],
+
+    'staff' => [
+        'valid-transporteur' > "Le transporteur :transporteur est désomais actif et capable de recevoir des offres."
+    ],
 
 ];

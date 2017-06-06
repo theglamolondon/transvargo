@@ -24,6 +24,9 @@ class TransporteurController extends Controller
 
     public function showDashboard()
     {
+        if(!Auth::user()->activateCheck())
+            return $this->showNoValidAccount();
+
         $vehicules = Vehicule::where('transporteur_id',Auth::user()->id)
             ->with('typeCamion')
             ->get();
@@ -32,13 +35,24 @@ class TransporteurController extends Controller
         return view('carrier.dashboard',compact("vehicules","types"));
     }
 
+    public function showNoValidAccount()
+    {
+        return view('carrier.no-valid-account');
+    }
+
     public function showOffersOnMap()
     {
+        if(!Auth::user()->activateCheck())
+            return $this->showNoValidAccount();
+
         return view('carrier.offers-map');
     }
 
     public function showOfferOnListView()
     {
+        if(!Auth::user()->activateCheck())
+            return $this->showNoValidAccount();
+
         return view('carrier.offers-list');
     }
 

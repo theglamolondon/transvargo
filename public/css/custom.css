@@ -28,6 +28,7 @@ div#waiting {
     left: 0;
     width: 100%;
     text-align: center;
+    z-index: 999;
 }
 .calculatrice {
     background: #FFF;
@@ -161,4 +162,7 @@ div#waiting {
 }
 .clearfix{
     clear: both;
+}
+.bg-no-valid-account{
+
 }

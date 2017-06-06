@@ -119,7 +119,7 @@
                                     <label for="datenaissance" class="control-label col-md-4 col-sm-6 col-xs-12">Date de naissance *</label>
                                     <div class="col-md-8 col-sm-6 col-xs-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datenaissance" id="datenaissance" data-date-end-date="-18y" value="{{ old('datenaissance',\Carbon\Carbon::now()->addYear(-18)->format('d/m/Y')) }}">
+                                            <input type="text" required class="form-control datepicker" data-date-format="dd/mm/yyyy" name="datenaissance" id="datenaissance" data-date-end-date="-18y" value="{{ old('datenaissance',\Carbon\Carbon::now()->addYear(-18)->format('d/m/Y')) }}">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                                         </div>
                                     </div>
@@ -170,9 +170,9 @@
                                 <br/>
 
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Email *</label>
+                                    <label class="control-label col-sm-4">Identifiant *</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <input type="email" placeholder="email..." id="email" name="email" class="form-control" value="{{old('email')}}" required>
+                                        <input type="text" placeholder="Email ou n° de téléphone" id="email" name="email" class="form-control" value="{{old('email')}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">

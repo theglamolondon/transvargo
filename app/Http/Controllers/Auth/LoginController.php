@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Administrateur;
+use App\Client;
 use App\Http\Controllers\Controller;
+use App\Staff;
+use App\Transporteur;
 use App\TypeIdentitite;
 use App\Ville;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -53,12 +57,7 @@ class LoginController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        $this->guard()->user()->authenticable;
-
-        if( $this->guard()->user()->typeidentite_id == TypeIdentitite::TYPE_TRANSPORTEUR )
-        {
-            return redirect()->route('transporteur.tableaubord');
-        }
+        //$this->guard()->user()->authenticable;
 
         $request->session()->regenerate();
 
@@ -70,6 +69,20 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        dd($user);
+        $route = null;
+
+        if($user->authenticable instanceof Transporteur ){
+            redirect()->route('transporteur.tableaubord');
+        }
+
+        if($user->authenticable instanceof Client ){
+            redirect()->route('client.expeditions');
+        }
+
+        if($user->authenticable instanceof Staff ){
+            redirect()->route('admin.tableaubord');
+        }
+
+        return $route;
     }
 }

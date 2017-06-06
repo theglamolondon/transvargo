@@ -24,6 +24,9 @@ Route::post('inscription.html', 'Auth\RegisterController@register');
 //Transporteur
 Route::get('/transporteur/inscription.html','Auth\RegisterController@showRegistrationForm')->name('register.transporteur');
 Route::post('/transporteur/inscription.html','Auth\RegisterController@registerTransporteur');
+//Staff
+Route::get('/admin/inscription.html','Auth\RegisterController@showRegistrationForm')->name('register.transporteur');
+Route::post('/admin/inscription.html','Auth\RegisterController@registerTransporteur');
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -65,8 +68,12 @@ Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],functi
 });
 
 /*Staff*/
-Route::group(['middleware' => 'staff', 'prefix' => 'admin'],function (){
-    Route::get('tableau-bord.html','Admin\AdminController@showDashboard')->name('admin.home');
+Route::group(['middleware' => 'staff', 'prefix' => 'staff'],function (){
+    Route::get('tableau-bord.html','Admin\StaffController@showDashboard')->name('admin.tableaubord');
+    Route::get('transporteurs/recents.html','Admin\StaffController@showRecentCarrier')->name('admin.transporteur.recents');
+    Route::get('transporteurs.html','Admin\StaffController@showCarriers')->name('admin.transporteur.all');
+    Route::get('transporteurs/fiche/{token}.html','Admin\StaffController@showValidateFormCarrier')->name('staff.valid.transporteur');
+    Route::post('transporteurs/fiche/{token}.html','Admin\StaffController@validTransporteurAccount');
 });
 
 /*AJAX*/

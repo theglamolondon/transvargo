@@ -11,7 +11,7 @@ namespace App;
 
 use App\Work\Authenticable;
 
-class Administrateur extends Authenticable
+class Staff extends Authenticable
 {
-    protected $table = 'administrateur';
+    protected $table = 'staff';
 }

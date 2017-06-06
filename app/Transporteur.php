@@ -9,6 +9,7 @@
 namespace App;
 
 use App\Work\Authenticable;
+use Illuminate\Notifications\Notifiable;
 
 class Transporteur extends Authenticable
 {
@@ -20,7 +21,21 @@ class Transporteur extends Authenticable
 
     public $timestamps = false;
 
+    use Notifiable;
+
     public function identiteAccess(){
         return $this->belongsTo(IdentiteAccess::class,'identiteaccess_id');
+    }
+
+    public function typeTransporteur(){
+        return $this->belongsTo(TypeTransporteur::class,'typetransporteur_id');
+    }
+
+    public function extension(){
+        return $this->hasOne(ChauffeurPatron::class,'transport_id');
+    }
+
+    public function vehicules(){
+        return $this->hasMany(Vehicule::class,'transporteur_id');
     }
 }

@@ -38,6 +38,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('prenoms',150);
             $table->string('contact',20)->unique();
             $table->string('raisonsociale',150)->nullable();
+            $table->boolean('grandcompte')->default(false);
             $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
         });
         Schema::create('transporteur',function (Blueprint $table){
@@ -54,21 +55,24 @@ class CreateDatabaseTransvargo extends Migration
             $table->date('datenaissance');
             $table->string('lieunaissance');
             $table->string('rib');
+            $table->dateTime('datecreation');
+            $table->unsignedInteger('valid_by')->nullable();
 
             $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
             $table->foreign('typetransporteur_id')->references('id')->on('typetransporteur');
+            $table->foreign('valid_by')->references('id')->on('identiteaccess');
         });
         Schema::create('chauffeurpatron',function (Blueprint $table){
-            $table->string('nomprenomsU1')->nullable();
-            $table->string('professionU1')->nullable();
-            $table->string('contactU1')->nullable();
-            $table->string('localisationU1')->nullable();
-            $table->string('observatiionU1')->nullable();
+            $table->string('nomprenomsU1');
+            $table->string('professionU1');
+            $table->string('contactU1');
+            $table->string('localisationU1');
+            $table->string('observationU1')->nullable();
 
-            $table->string('nomprenomsU2')->nullable();
-            $table->string('professionU2')->nullable();
-            $table->string('contactU2')->nullable();
-            $table->string('localisationU2')->nullable();
+            $table->string('nomprenomsU2');
+            $table->string('professionU2');
+            $table->string('contactU2');
+            $table->string('localisationU2');
             $table->string('observationU2')->nullable();
 
             $table->unsignedInteger('transport_id');
@@ -171,7 +175,7 @@ class CreateDatabaseTransvargo extends Migration
         Schema::dropIfExists('nature');
         Schema::dropIfExists('vehicule');
         Schema::dropIfExists('typecamion');
-        Schema::dropIfExists('administrateur');
+        Schema::dropIfExists('staff');
         Schema::dropIfExists('chauffeurpatron');
         Schema::dropIfExists('transporteur');
         Schema::dropIfExists('client');

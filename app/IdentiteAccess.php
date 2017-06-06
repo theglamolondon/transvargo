@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Statut;
 use App\Work\Authenticable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,15 +53,15 @@ class IdentiteAccess extends Authenticatable
     }
 
     public function client(){
-        return $this->hasOne('App\Client','identiteaccess_id');
+        return $this->hasOne(Client::class,'identiteaccess_id');
     }
 
     public function transporteur(){
-        return $this->hasOne('App\Transporteur','identiteaccess_id');
+        return $this->hasOne(Transporteur::class,'identiteaccess_id');
     }
 
     public function staff(){
-        return $this->hasOne('App\Transporteur','identiteaccess_id');
+        return $this->hasOne(Staff::class,'identiteaccess_id');
     }
 
     public function setAuthenticable(Authenticable $authenticable){
@@ -69,5 +70,13 @@ class IdentiteAccess extends Authenticatable
 
     public function getAuthenticable(){
         return $this->authenticable;
+    }
+
+    public function activateCheck()
+    {
+        if ($this->statut == Statut::create(Statut::TYPE_IDENTITE_ACCESS , Statut::ETAT_ACTIF , Statut::AUTRE_NON_CONFRIME))
+            return false;
+        else
+            return true;
     }
 }

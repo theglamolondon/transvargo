@@ -28,7 +28,7 @@ class ClientController extends Controller
 
     public function showNewExpeditionForm(Request $request)
     {
-        if($this->activateCheck())
+        if(Auth::user()->activateCheck())
         {
             $expedition = new Expedition();
 
@@ -50,7 +50,7 @@ class ClientController extends Controller
 
     public function showMyAccount()
     {
-        if($this->activateCheck()) {
+        if(Auth::user()->activateCheck()) {
 
             return view('site.myaccount');
 
@@ -86,7 +86,7 @@ class ClientController extends Controller
 
     public function showInvoices()
     {
-        if($this->activateCheck()) {
+        if(Auth::user()->activateCheck()) {
 
             return view('site.invoices');
 

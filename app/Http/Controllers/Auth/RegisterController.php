@@ -6,6 +6,8 @@ use App\Client;
 use App\Events\ExpediteurCreate;
 use App\Events\TransporteurCreate;
 use App\IdentiteAccess;
+use App\Metier\ClientProcessing;
+use App\Metier\TransportProcessing;
 use App\Pays;
 use App\Services\Statut;
 use App\Transporteur;
@@ -39,7 +41,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers, TransportProcessing, ClientProcessing;
 
     /**
      * Where to redirect users after registration.
@@ -64,15 +66,27 @@ class RegisterController extends Controller
      *
      * @return array
      */
-    protected function validator()
-    {
+
+    protected function validatorIdentiteAccess(){
         return  [
-            'nom' => 'required|max:255',
             'email' => 'required|email|max:255|unique:identiteaccess,email',
-            'contact' => 'required|unique:client,contact',
             'password' => 'required|min:6|confirmed',
             'terms' => 'accepted',
         ];
+    }
+
+    private function createIdentiteAccess(array $data, $identiteType)
+    {
+        $identite = new IdentiteAccess([
+            'email' => $data['email'],
+            'terms' => $data['terms'],
+            'password' => bcrypt($data['password']),
+            'typeidentite_id' => $identiteType,
+            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_CONFRIME),
+            'activate_token' => base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email'])
+        ]);
+        $identite->saveOrFail();
+        return $identite;
     }
 
     /**
@@ -81,19 +95,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return IdentiteAccess
      */
-    protected function create(array $data)
+    protected function createClient(array $data, IdentiteAccess $identite)
     {
-        $identite = new IdentiteAccess([
-            'email' => $data['email'],
-            'terms' => $data['terms'],
-            'password' => bcrypt($data['password']),
-            'typeidentite_id' => TypeIdentitite::TYPE_CLIENT,
-            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_CONFRIME),
-            'activate_token' => base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email'])
-        ]);
-        $identite->saveOrFail();
-
-        $identite->makeVisible('id');
+        //$identite->makeVisible('id');
 
         $client = new Client([
             'nom' => $data['nom'],
@@ -107,94 +111,46 @@ class RegisterController extends Controller
 
         $client->saveOrFail();
 
-        //Log::error(base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email']));
-
-        return $identite;
-    }
-
-    public function showRegistrationForm()
-    {
-        return view('auth.register',compact("villes","countries"));
-    }
-
-
-    private function validatorTransporteur()
-    {
-        return [
-            'nom' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:identiteaccess,email',
-            'password' => 'required|min:6|confirmed',
-            'comptecontribuable' => 'present',
-            'raisonsociale' => 'present',
-            'ville' => 'required',
-            'typetransporteur_id' => 'required|numeric',
-            'terms' => 'accepted',
-        ];
-    }
-
-    private function createTransporteur(array $data){
-        $identite = new IdentiteAccess([
-            'email' => $data['email'],
-            'terms' => $data['terms'],
-            'password' => bcrypt($data['password']),
-            'typeidentite_id' => TypeIdentitite::TYPE_TRANSPORTEUR,
-            'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_INACTIF,Statut::AUTRE_NON_CONFRIME),
-            'activate_token' => base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email'])
-        ]);
-        $identite->saveOrFail();
-
-        $transporteur = new Transporteur([
-            'identiteaccess_id' => $identite->id,
-            'nom' => $data['nom'],
-            'prenoms' => $data['prenoms'],
-            'raisonsociale' => $data['raisonsociale'],
-            'comptecontribuable' => $data['comptecontribuable'],
-            'ville' => $data['ville'],
-            'contact' => $data['contact'],
-            'nationalite' => $data['nationalite'],
-            'lieunaissance' => $data['lieunaissance'],
-            'datenaissance' => Carbon::createFromFormat('d/m/Y',$data['datenaissance'])->toDateString(),
-            'typetransporteur_id' => $data['typetransporteur_id'],
-            'rib' => 'ND'
-        ]);
-
-        if($data['typetransporteur_id'] == TypeTransporteur::TYPE_CHAUFFEUR_PATRON)
-            $transporteur->limite = Transporteur::LIMITE_CHAUFFEUR_PATRON;
-
-        $transporteur->saveOrFail();
-
-        $identite->setAuthenticable($transporteur);
-
         return $identite;
     }
 
     public function registerTransporteur(Request $request)
     {
-        $this->validate($request, $this->validatorTransporteur());
+        $validateRules = $this->validatorTransporteur();
+        unset($validateRules['rib']);
+        $this->validate($request, $validateRules);
 
-        $identite = $this->createTransporteur($request->all());
+        try{
+            $identite = $this->createIdentiteAccess($request->all(),TypeIdentitite::TYPE_TRANSPORTEUR);
 
-        event(new TransporteurCreate($identite->getAuthenticable()));
+            $identite = $this->createTransporteur($request->all(),$identite);
 
-        //$this->guard()->login($dentite);
+            event(new TransporteurCreate($identite->getAuthenticable()));
 
-        return $this->registered($request, $identite)
-            ?: redirect()->route('accueil')
-                ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.inscription.transporteur.'.Tools::MESSAGE_SUCCESS))
-                ->with(Tools::MESSAGE_INFO,Lang::get('message.inscription.transporteur.'.Tools::MESSAGE_INFO));
+            return $this->registered($request, $identite)
+                ?: redirect()->route('accueil')
+                    ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.inscription.transporteur.'.Tools::MESSAGE_SUCCESS))
+                    ->with(Tools::MESSAGE_INFO,Lang::get('message.inscription.transporteur.'.Tools::MESSAGE_INFO));
+
+        }catch (\Exception $e){
+            Log::error($e->getMessage());
+            return back()->withErrors($e->getMessage());
+        }
     }
 
-    public function showTransporteurRegistrationForm()
+    public function showRegistrationForm()
     {
-        return view('auth.carrier.register',compact("villes","countries"));
+        return view('auth.register');
     }
 
     public function register(Request $request)
     {
-        $this->validate($request,$this->validator());
+        $this->validate($request,$this->validatorIdentiteAccess());
+        $this->validate($request,$this->validatorClient());
 
         try{
-            $user = $this->create($request->all());
+            $identite = $this->createIdentiteAccess($request->all(),TypeIdentitite::TYPE_CLIENT);
+            $user = $this->createClient($request->all(),$identite);
 
             event(new ExpediteurCreate($user->getAuthenticable()));
 

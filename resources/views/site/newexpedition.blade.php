@@ -210,11 +210,11 @@
             var inputD = document.getElementById('lieudepart');
             var inputA = document.getElementById('lieuarrivee');
 
-            var autocompleteD = new google.maps.places.Autocomplete(inputD);
-            autocompleteD.bindTo('bounds', options); //map
+            var autocompleteD = new google.maps.places.Autocomplete(inputD,options);
+            autocompleteD.bindTo('bounds', map); //map
 
-            var autocompleteA = new google.maps.places.Autocomplete(inputA);
-            autocompleteA.bindTo('bounds', options); //map
+            var autocompleteA = new google.maps.places.Autocomplete(inputA,options);
+            autocompleteA.bindTo('bounds', map); //map
 
             var infowindow = new google.maps.InfoWindow();
             var marker = new google.maps.Marker({
@@ -223,7 +223,9 @@
             });
 
             autocompleteD.addListener('place_changed', function(e) {
+                console.log(autocompleteD.getBounds());
                 $("#lieudepart").attr("data-change",0);
+
                 document.getElementById('coorddepart').value = autocompleteD.getBounds().getCenter().lat()+','+autocompleteD.getBounds().getCenter().lng();
                 infowindow.close();
                 marker.setVisible(false);

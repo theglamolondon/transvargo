@@ -28,5 +28,24 @@ class DatabaseTransvargoSeeder extends Seeder
             [ "libelle"  => "Chauffeur patron" ],
             [ "libelle"  => "Propriétaire de flotte" ],
         ]);
+
+        DB::table('identiteaccess')->insert([
+            [
+                "email"  => "admin@transvargo.com" ,
+                "password"  => bcrypt('azerty'),
+                "statut" => \App\Services\Statut::TYPE_IDENTITE_ACCESS.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL,
+                "activate_token" => "ND",
+                "terms" => 1,
+                "typeidentite_id" => 3
+            ],
+        ]);
+        DB::table('staff')->insert([
+            [
+                "nom" => "Toubo",
+                "prenoms" => "Yanick",
+                "role" => "ceo",
+                "identiteaccess_id" => 1
+            ],
+        ]);
     }
 }

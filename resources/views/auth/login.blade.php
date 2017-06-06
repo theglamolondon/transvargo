@@ -39,7 +39,7 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail" class="control-label">Email ou N° de téléphone</label>
-                                    <input type="email" placeholder="E-mail..." id="exampleInputEmail" class="form-control" name="email" value="{{ old('email') }}">
+                                    <input type="text" placeholder="E-mail ou n° de téléphone" id="exampleInputEmail" class="form-control" name="email" value="{{ old('email') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1" class="control-label">Mot de passe</label>
@@ -53,8 +53,8 @@
                             <form class="login-form" method="post" action="" id="forget" style="display: none;">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label for="exampleInputEmail" class="control-label">Email ou N° de téléphone</label>
-                                    <input type="email" placeholder="E-mail..." id="exampleInputEmail" class="form-control" name="email" value="{{ old('email') }}">
+                                    <label for="exampleInputEmail1" class="control-label">Email ou N° de téléphone</label>
+                                    <input type="text" placeholder="E-mail ou n° de téléphone" id="exampleInputEmail1" class="form-control" name="email" value="{{ old('email') }}">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Envoyer</button>
                                 <br/><br/>
