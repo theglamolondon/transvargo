@@ -2,7 +2,7 @@
     <div class="rd-navbar-search">
         <ul class="rd-navbar-nav">
             <li class=""><a href="{{ route('accueil') }}">Accueil</a></li>
-            <li class=""><a href="./">Qui sommes-nous</a></li>
+            <li class=""><a href="{{ route('apropos') }}">Qui sommes-nous</a></li>
             <li class=""><a href="{{ route('contact') }}">Contact</a></li>
 
             @if(\Illuminate\Support\Facades\Auth::guest())

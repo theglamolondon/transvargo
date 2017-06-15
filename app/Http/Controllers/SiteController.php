@@ -21,6 +21,10 @@ class SiteController extends Controller
         return view('site.index');
     }
 
+    public function showAboutUs(){
+        return view('about-us');
+    }
+
     public function showTermOfUsesPage(Request $request){
         return view('site.terms');
     }

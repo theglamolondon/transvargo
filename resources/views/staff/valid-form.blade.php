@@ -153,6 +153,12 @@
                 }
             });
         }
+
+        //For proprietaire de flotte
+            $("#btnAdd").click(function () {
+                var template =  $(".vehicle-panel .model:first").clone();
+                $('.vehicle-panel').append(template);
+            });
     </script>
 
     <script async defer

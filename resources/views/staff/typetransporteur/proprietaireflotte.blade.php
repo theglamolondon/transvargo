@@ -1,10 +1,11 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <h3 class="text-left">Véhicule</h3>
+    <div class="separateur"></div>
+    <br class="clearfix" />
+    <a href="javascript:void(0);" id="btnAdd" class="pull-left btn btn-primary">Ajouter</a>
+</div>
 <div class="vehicle-panel">
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <h3 class="text-left">Véhicule</h3>
-            <div class="separateur"></div>
-        </div>
-
+    <div class="col-md-4 col-sm-6 col-xs-12 model">
         <div class="form-group">
             <label class="control-label col-sm-4">Immatriculation *</label>
             <div class="col-sm-8 col-xs-12">

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="utf-8">
-    <link rel="icon" href="{{config('app.url')}}/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{config('app.url')}}/images/transvargo-ico.png" type="image/png">
     <!-- Stylesheets-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -34,7 +34,7 @@
                 <!-- RD Navbar Toggle-->
                 <button data-rd-navbar-toggle=".rd-navbar-nav-wrap" type="submit" class="rd-navbar-toggle"><span></span></button>
                 <!-- RD Navbar Brand-->
-                <div class="rd-navbar-brand"><a href="{{ route('accueil') }}" class="brand-name"><span class="icon fa-truck"></span><span>Transvargo</span></a></div>
+                <div class="rd-navbar-brand"><a href="{{ route('accueil') }}" class="brand-name"><img src="{{ config('app.url') }}/images/transvargo-logo.png"/> </a></div>
               </div>
               @if( \Illuminate\Support\Facades\Auth::guest() || request()->user()->typeidentite_id == \App\TypeIdentitite::TYPE_CLIENT )
                 @include('site.navigation.nav')
@@ -62,6 +62,13 @@
           <div class="container">
             <div class="row text-left clearleft-custom">
               <div class="col-xs-12 col-sm-6 col-lg-3">
+                <h4>Notre société</h4>
+                  <ul class="list-marked well6">
+                    <li><a href="{{ route('apropos') }}">Qui sommes-nous</a></li>
+                    <li><a href="{{ route('terms') }}">Conditions d'utilisations</a></li>
+                    <li><a href="{{ route('contact') }}">Nous contacter</a></li>
+                </ul>
+            <!--
                 <div class="rd-navbar-brand undefined"><a href="{{ route('accueil') }}" class="brand-name"><span class="icon fa-truck"></span><span>{{ config('app.name') }}</span></a></div>
                 <p>Feel free to contact us. We are always ready to help you.</p>
                 <address>
@@ -82,6 +89,7 @@
                     <dd><a href="mailto:contact@transvargo.com" class="text-primary">contact@transvargo.com</a></dd>
                   </dl>
                 </address>
+                  -->
                 <!--
                 <ul class="well6 offset-5">
                   <li><a href="#" class="text-gray small"><span class="icon icon-xs icon-info-2 fa-facebook postfix-1"></span>Suivez-nous sur Facebook</a></li>
@@ -90,27 +98,23 @@
                 -->
               </div>
               <div class="col-xs-12 col-sm-6 col-lg-3">
-                <h4>Blogroll</h4>
+                <h4>Nos applications</h4>
                 <ul class="list-marked well6">
-                  <li><a href="#">Documentation</a></li>
-                  <li><a href="#">Feedback</a></li>
-                  <li><a href="#">Plugins</a></li>
-                  <li><a href="#">Support Forums</a></li>
-                  <li><a href="#">Themes</a></li>
-                  <li><a href="#">WordPress Blog</a></li>
-                  <li><a href="#">Transporteur</a></li>
+                  <li><a href="#">Bientôt</a></li>
+                </ul>
+                <a href="#"><img src="{{config('app.url')}}/working/playstore.png" style="width: 180px;"></a>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-3">
+                <h4>Espace membre</h4>
+                <ul class="list-marked well6">
+                  <li><a href="{{ route('login') }}">Connexion</a></li>
+                  <li><a href="{{ route('password.request') }}">Mot de passe oublié</a></li>
+                  <li><a href="{{ route('register') }}">Inscription</a></li>
                 </ul>
               </div>
-              <div class="col-xs-12 col-lg-offset-3 col-sm-6 col-lg-3">
+              <div class="col-xs-12 col-sm-6 col-lg-3">
                 <h4>Newsletter</h4>
                 <p>Enter your email address to receive all company news, special offers and other discount information.</p>
-                <!-- RD Mailform-->
-                <form data-result-class="rd-mailform-validate" data-form-type="subscribe" method="post" action="bat/rd-mailform.php" class="rd-mailform subscribe">
-                  <input type="text" name="email" data-constraints="@NotEmpty @Email" placeholder="Your e-mail...">
-                  <button class="btn btn-sm btn-min-width btn-primary">S'incrire</button>
-                </form>
-                <p class="count h6 pull-lg-left offset-2">15 473 654<span class="text-gray fw-r">Total de chargement</span></p>
-                <p class="count h6 pull-lg-right offset-2 preffix-3">18 654<span class="text-gray fw-r">Clients</span></p>
               </div>
             </div>
           </div>
@@ -124,7 +128,7 @@
             </ul>
           </div>
         </section>
-        <small>Powered by <a rel="nofollow" href="#" target="_blank"> Glamo Corporation </a></small>
+        <small>Powered by <a rel="nofollow" href="#" target="_blank"> IvorianFabri'k </a></small>
       </footer>
       <!-- Rd Mailform result field-->
       <div class="rd-mailform-validate"></div>

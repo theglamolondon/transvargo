@@ -41,6 +41,7 @@ Route::get('/accueil.html', 'SiteController@index')->name('accueil');
 Route::get('/conditions-utilisation.html', 'SiteController@showTermOfUsesPage')->name('terms');
 Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
 Route::post('/contact.html', 'SiteController@sendResponseContact');
+Route::get('/propos-nous.html', 'SiteController@showAboutUs')->name('apropos');
 Route::get('validation/{token}', 'SiteController@validation')->name('register.confirmation');
 //Route::get('/transporteur/conditions-utilisation.html', 'SiteController@showTransporteurTermOfUsesPage')->name('terms.transporteur');
 /* end site route */

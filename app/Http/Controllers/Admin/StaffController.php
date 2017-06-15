@@ -10,6 +10,7 @@ use App\Services\Statut;
 use App\Transporteur;
 use App\TypeCamion;
 use App\TypeTransporteur;
+use App\Vehicule;
 use App\Work\Tools;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
@@ -85,7 +87,37 @@ class StaffController extends Controller
             }
 
             if( $transporteur->typeTransporteur = TypeTransporteur::TYPE_PROPRIETAIRE_FLOTTE ){
-                dd($request->all());
+                DB::begintransaction();
+                try{
+                    $data = null;
+                    foreach ($request->input('immatriculation') as $k => $v)
+                    {
+                        $data = [
+                            "immatriculation" => $request->input('immatriculation')[$k],
+                            "capacite" => $request->input('capacite')[$k],
+                            "chauffeur" => $request->input('chauffeur')[$k],
+                            "telephone" => $request->input('telephone')[$k],
+                            "typecamion_id" => $request->input('typecamion_id')[$k],
+                        ];
+
+                        $validator = Validator::make($data,$this->validateVehicule());
+
+                        $vehicule = new Vehicule($data);
+
+                        $vehicule->statut = Statut::TYPE_VEHICULE.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL;
+                        $vehicule->transporteur()->associate($transporteur);
+
+                        $vehicule->saveOrFail();
+                    }
+                }catch (ModelNotFoundException $e){
+                    return  back()->withErrors($e->getMessage());
+                    DB::rollback();
+                }catch (\Exception $e){
+                    return  back()->withErrors($e->getMessage());
+                    DB::rollback();
+                }
+                DB::commit();
+
             }
         }catch (ModelNotFoundException $e){
             return back()->withErrors($e->getMessage());
