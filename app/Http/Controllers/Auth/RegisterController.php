@@ -106,7 +106,7 @@ class RegisterController extends Controller
             'raisonsociale' => $data['raisonsociale'],
         ]);
         $client->identiteAccess()->associate($identite);
-
+        $client->datecreation = Carbon::now()->toDateTimeString();
         $identite->setAuthenticable($client);
 
         $client->saveOrFail();

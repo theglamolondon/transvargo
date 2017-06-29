@@ -6,12 +6,12 @@
             <div class="jumbotron-mod-1 text-center">
                 <div>
                     <h1>
-                        <small>rapide et sûr</small>
+                        <small>rapide et fiable</small>
                         <span class='text-bold question'>Vous cherchez un camion pour transporter vos produits ou marchandises ?</span>
                     </h1>
                     <div class="slogan">
                         <p class="response">Transvargo vous offre un vaste réseau de transporteur de confiance</p>
-                    </div><div class='btn-group-variant'> <div><a class='btn btn-primary btn-sm' href='#'>Nos avantages</a> <a class='btn btn-white btn-sm' href='{{ route('register') }}'>Créer son compte</a></div></div>
+                    </div><div class='btn-group-variant'> <div><a class='btn btn-primary btn-sm' href='{{ route('apropos') }}#avantages'>Nos avantages</a> <a class='btn btn-white btn-sm' href='{{ route('register') }}'>Créer son compte</a></div></div>
                 </div>
             </div>
             <div class="swiper-wrapper">
@@ -77,7 +77,7 @@
                     <div class="col-sm-6 col-md-2">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <div data-value="50" data-stroke="10" data-trail="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-radial progress-bar-default"></div>
+                                <img src="{{ config('app.url')}}/working/desk.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Renseigner votre besoin</p>
                         </div>
@@ -85,7 +85,7 @@
                     <div class="col-sm-6 col-md-2">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <div data-value="75" data-stroke="10" data-trail="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-radial progress-bar-default"></div>
+                                <img src="{{ config('app.url')}}/working/package.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Envoi aux transporteurs</p>
                         </div>
@@ -93,7 +93,7 @@
                     <div class="col-sm-6 col-md-2">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <div data-value="25" data-stroke="10" data-trail="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-radial progress-bar-default"></div>
+                                <img src="{{ config('app.url')}}/working/phone.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Un transporteur accepte</p>
                         </div>
@@ -101,15 +101,15 @@
                     <div class="col-sm-6 col-md-2">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <div data-value="100" data-stroke="10" data-trail="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-radial progress-bar-default"></div>
+                                <img src="{{ config('app.url')}}/working/sent.png"/>
                             </div>
-                            <p class="h5 fw-l inline-block">Valider votre commande</p>
+                            <p class="h5 fw-l inline-block">Valider et envoi la commande</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-2">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <div data-value="100" data-stroke="10" data-trail="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-radial progress-bar-default"></div>
+                                <img src="{{ config('app.url')}}/working/car.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Suivez votre expédition</p>
                         </div>
@@ -117,7 +117,7 @@
                     <div class="col-sm-6 col-md-2">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <div data-value="100" data-stroke="10" data-trail="10" data-easing="linear" data-duration="1000" data-counter="true" class="progress-bar progress-bar-radial progress-bar-default"></div>
+                                <img src="{{ config('app.url')}}/working/finish.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Livraison du colis</p>
                         </div>
@@ -128,30 +128,27 @@
     </section>
     <section class="section section-inset-1">
         <div class="container">
-            <h2 class="text-center">Ils nous ont fait confiance</h2>
+            <h2 class="text-center">Ils nous font confiance</h2>
             <hr>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="thumbnail thumbnail-mod-1"><img src="images/partner-8.png" alt="">
-                        <div class="caption-mod-1">
-                            <h6 class="text-primary">Tourner</h6><a href="#" class="text-gray">www.tourner.com</a>
-                            <p>We believe in the ability of all people to thrive, not just exist.</p>
+                    <div class="thumbnail thumbnail-mod-1">
+                        <div class="partner">
+                            <img src="{{ config('app.url')}}/partners/softn_fix.png" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="thumbnail thumbnail-mod-1"><img src="images/partner-9.png" alt="">
-                        <div class="caption-mod-1">
-                            <h6 class="text-primary">Frank`s Co.</h6><a href="#" class="text-gray">www.franksco.com</a>
-                            <p>We are open and transparent about the work we do and how we do it.</p>
+                    <div class="thumbnail thumbnail-mod-1">
+                        <div class="partner">
+                            <img src="images/partner-9.png" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4">
-                    <div class="thumbnail thumbnail-mod-1"><img src="images/partner-10.png" alt="">
-                        <div class="caption-mod-1">
-                            <h6 class="text-primary">Retro Press</h6><a href="#" class="text-gray">www.retropress.com</a>
-                            <p>We are commited to achieving demonstrable impact for our stakeholders.</p>
+                    <div class="thumbnail thumbnail-mod-1">
+                        <div class="partner">
+                            <img class="partner" src="images/partner-10.png" alt="">
                         </div>
                     </div>
                 </div>

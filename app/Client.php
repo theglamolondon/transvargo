@@ -18,6 +18,10 @@ class Client extends Authenticable
     public $timestamps = false;
 
     public function identiteAccess(){
-        return $this->belongsTo('App\IdentiteAccess','identiteaccess_id');
+        return $this->belongsTo(IdentiteAccess::class,'identiteaccess_id');
+    }
+
+    public function validBy(){
+        return $this->belongsTo(Staff::class,"valid_by","identiteaccess_id");
     }
 }

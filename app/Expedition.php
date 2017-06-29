@@ -35,4 +35,8 @@ class Expedition extends Model
     public function chargement(){
         return $this->hasOne(Chargement::class);
     }
+
+    public function facture(){
+        return $this->belongsTo(Facture::class);
+    }
 }

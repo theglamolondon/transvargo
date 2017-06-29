@@ -98,7 +98,7 @@
                 -->
               </div>
               <div class="col-xs-12 col-sm-6 col-lg-3">
-                <h4>Nos applications</h4>
+                <h4>Téléchargement</h4>
                 <ul class="list-marked well6">
                   <li><a href="#">Bientôt</a></li>
                 </ul>
@@ -114,7 +114,11 @@
               </div>
               <div class="col-xs-12 col-sm-6 col-lg-3">
                 <h4>Newsletter</h4>
-                <p>Enter your email address to receive all company news, special offers and other discount information.</p>
+                <p>Entrez votre adresse email pour recevoir nos offres de promo et de remises exceptionnelles.</p>
+                <form method="post" action="{{ route('newsletter.add') }}" class="rd-mailform subscribe">
+                  <input type="email" class="form-control" name="email" placeholder="Votre email">
+                  <button type="submit" class="btn btn-sm btn-min-width btn-primary">s'inscrire</button>
+                </form>
               </div>
             </div>
           </div>
@@ -123,12 +127,11 @@
           <div class="container">
             <p class="pull-sm-left">&#169; <span id="copyright-year"></span> Tous droits réservés - <a href="{{ route('terms') }}">Conditions d'utilisation</a></p>
             <ul class="list-inline pull-sm-right offset-3">
-              <li><a href="#" class="fa-facebook"></a></li>
+              <li><a href="https://www.facebook.com/transvargo" target="_blank" class="fa-facebook"></a></li>
               <li><a href="#" class="fa-twitter"></a></li>
             </ul>
           </div>
         </section>
-        <small>Powered by <a rel="nofollow" href="#" target="_blank"> IvorianFabri'k </a></small>
       </footer>
       <!-- Rd Mailform result field-->
       <div class="rd-mailform-validate"></div>
@@ -153,7 +156,7 @@
             <strong>Info ! </strong> {{ session(\App\Work\Tools::MESSAGE_INFO) }}
           </div>
       @endif
-      @if($errors->count())
+      @if(isset($errors) && $errors->count())
           <div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             @foreach($errors->all() as $erreur)

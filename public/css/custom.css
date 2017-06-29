@@ -204,3 +204,17 @@ p.citation:after{
 .media h4.text-primary {
     color: #2CAFFC;
 }
+.partner{
+    width: 234px;
+    height: 218px;
+}
+.toselect:hover{
+    cursor: pointer;
+}
+.about-us{
+    font-size: 22px;
+}
+
+#btn {
+
+}

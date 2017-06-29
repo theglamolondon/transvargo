@@ -11,13 +11,13 @@
         <div class="container">
             <h2 class="text-center"> Qui sommes-nous ?</h2>
             <hr/>
-            <p>Transvargo est une plateforme de réservation de camion en ligne qui met en relation transporteur et expéditeur.
+            <p class="about-us">Transvargo est une plateforme de réservation de camion en ligne qui met en relation transporteur et expéditeur.
                 A travers notre plateforme web  et notre application mobile nous voulons révolutionner ce secteur délaissé en aidant les expéditeurs
                 à expédier rapidement, simplement et à moindre  coût mais aussi les transporteurs à trouver du fret. </p>
         </div>
     </section>
 
-    <section class="section section-inset-1">
+    <section class="section section-inset-1" id="avantages">
         <div class="container">
             <h2 class="text-center">Vos avantages</h2>
             <hr>

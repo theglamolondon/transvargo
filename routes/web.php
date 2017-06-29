@@ -41,7 +41,7 @@ Route::get('/accueil.html', 'SiteController@index')->name('accueil');
 Route::get('/conditions-utilisation.html', 'SiteController@showTermOfUsesPage')->name('terms');
 Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
 Route::post('/contact.html', 'SiteController@sendResponseContact');
-Route::get('/propos-nous.html', 'SiteController@showAboutUs')->name('apropos');
+Route::get('/a-propos.html', 'SiteController@showAboutUs')->name('apropos');
 Route::get('validation/{token}', 'SiteController@validation')->name('register.confirmation');
 //Route::get('/transporteur/conditions-utilisation.html', 'SiteController@showTransporteurTermOfUsesPage')->name('terms.transporteur');
 /* end site route */
@@ -75,7 +75,14 @@ Route::group(['middleware' => 'staff', 'prefix' => 'staff'],function (){
     Route::get('transporteurs.html','Admin\StaffController@showCarriers')->name('admin.transporteur.all');
     Route::get('transporteurs/fiche/{token}.html','Admin\StaffController@showValidateFormCarrier')->name('staff.valid.transporteur');
     Route::post('transporteurs/fiche/{token}.html','Admin\StaffController@validTransporteurAccount');
+    Route::get('grand-compte/recherche.html','Admin\GrandCompteController@searchClient')->name('staff.gc.search');
+    Route::get('grand-compte.html','Admin\GrandCompteController@showList')->name('staff.gc.liste');
+    Route::post('client/switch/grand-compte.html','Admin\GrandCompteController@switchGrandClient')->name('staff.switch.gc');
+    Route::get('invoice/grang-compte/0000-{id}.html','Admin\Invoice\InvoiceController@showInvoiceBoard')->name('staff.invoice');
 });
+
+/*Newsletter*/
+Route::post('/newsletter/sign-up','NewsLetter\SignUpController@register')->name('newsletter.add');
 
 /*AJAX*/
 Route::post('/ajax/distanceMatrix','AjaxController@getDistanceMatrix')->name('ajax.distancematrix');

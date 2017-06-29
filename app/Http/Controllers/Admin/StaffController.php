@@ -73,7 +73,6 @@ class StaffController extends Controller
             $transporteur->valid_by = Auth::user()->id;
 
             $transporteur->identiteAccess->statut = Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_NULL);
-            //$transporteur->update($this->extractData($request->all()));
 
             if( $transporteur->typeTransporteur->id == TypeTransporteur::TYPE_CHAUFFEUR_PATRON ){
                 $this->validate($request,$this->validChauffeurPatron());
@@ -100,21 +99,14 @@ class StaffController extends Controller
                             "typecamion_id" => $request->input('typecamion_id')[$k],
                         ];
 
-                        $validator = Validator::make($data,$this->validateVehicule());
-
-                        $vehicule = new Vehicule($data);
-
-                        $vehicule->statut = Statut::TYPE_VEHICULE.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL;
-                        $vehicule->transporteur()->associate($transporteur);
-
-                        $vehicule->saveOrFail();
+                        $this->createTransporteurProprietaireFlotte($transporteur,$data);
                     }
                 }catch (ModelNotFoundException $e){
-                    return  back()->withErrors($e->getMessage());
                     DB::rollback();
+                    return  back()->withErrors($e->getMessage());
                 }catch (\Exception $e){
-                    return  back()->withErrors($e->getMessage());
                     DB::rollback();
+                    return  back()->withErrors($e->getMessage());
                 }
                 DB::commit();
 
@@ -128,5 +120,12 @@ class StaffController extends Controller
         }
 
         return redirect()->route('admin.transporteur.recents')->with(Tools::MESSAGE_SUCCESS,Lang::get('message.staff.valid-transporteur',['transporteur' => $transporteur->nom.' '.$transporteur->prenoms]));
+    }
+
+    public function createTransporteurProprietaireFlotte(Transporteur $transporteur, array $data)
+    {
+        Validator::make($data,$this->validateVehicule());
+
+        $this->createVehicule($transporteur, $data);
     }
 }

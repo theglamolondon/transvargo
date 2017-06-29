@@ -8,10 +8,6 @@
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
 
-                    @foreach($errors->all() as $erreur)
-                        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ $erreur }}</div>
-                    @endforeach
-
                     <form method="post" action="" class="form-horizontal">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -66,9 +62,8 @@
                             <div class="media-body">
                                 <p class="h6">Adresse postale</p><span>
                                     <a href="#">
-                                      The Company Name Inc.
-                                      9863 - 9867 Mill Road,
-                                      Cambridge, MG09 99HT.</a></span>
+                                      {{config('app.name','Transvargo')}} SARL.
+                                      Marcory résidentiel</a></span>
                             </div>
                         </div>
                     </address>
@@ -81,9 +76,9 @@
                                 <p class="h6">Contact</p>
                                 <dl class="dl-horizontal">
                                     <dt>Phone:</dt>
-                                    <dd><a href="callto:0022500112233">(+225) 00 11 22 33</a></dd>
+                                    <dd><a href="callto:0022540504663">(+225) 40 50 46 63</a></dd>
                                     <dt>FAX:</dt>
-                                    <dd><a href="callto:0022544556677">(+225) 44 55 66 77</a></dd>
+                                    <dd><a href="callto:78264623">(+225) 78 26 46 23</a></dd>
                                 </dl>
                             </div>
                         </div>
