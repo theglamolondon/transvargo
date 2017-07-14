@@ -35,6 +35,9 @@ $total = 0;
                                 @if($expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE)
                                     <a href="{{ route('client.newexpedition',['ref'=>base64_encode($expedition->reference)]) }}" title="Modifier l'expedition" class="icon icon-xs fa-pencil icon-gray"></a>
                                 @endif
+                                @if($expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_ACCEPTE)
+                                    <a href="{{ route('payment.choice',['reference'=>$expedition->reference]) }}" title="Modifier l'expedition" class="icon icon-xs fa-money icon-gray"></a>
+                                @endif
                             </td>
                             <td>{{ $expedition->reference }}</td>
                             <td>De [ {{ $expedition->lieudepart }} ]  à [ {{ $expedition->lieuarrivee }} ]</td>

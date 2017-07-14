@@ -39,4 +39,9 @@ class Expedition extends Model
     public function facture(){
         return $this->belongsTo(Facture::class);
     }
+
+    public function __toString()
+    {
+        return "Expédition N° ".$this->reference." de ".$this->lieudepart." à ".$this->lieuarrivee.". (Distance ".$this->distance." km)";
+    }
 }

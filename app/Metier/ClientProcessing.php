@@ -10,15 +10,9 @@ namespace App\Metier;
 
 
 use App\Client;
-use App\Services\Statut;
-use App\Work\Tools;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Lang;
 
 trait ClientProcessing
 {

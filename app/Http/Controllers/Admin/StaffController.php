@@ -73,6 +73,7 @@ class StaffController extends Controller
             $transporteur->valid_by = Auth::user()->id;
 
             $transporteur->identiteAccess->statut = Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_NULL);
+            $transporteur->save();
 
             if( $transporteur->typeTransporteur->id == TypeTransporteur::TYPE_CHAUFFEUR_PATRON ){
                 $this->validate($request,$this->validChauffeurPatron());
@@ -85,7 +86,7 @@ class StaffController extends Controller
                 $this->createVehicule($transporteur,$data);
             }
 
-            if( $transporteur->typeTransporteur = TypeTransporteur::TYPE_PROPRIETAIRE_FLOTTE ){
+            if( $transporteur->typeTransporteur->id == TypeTransporteur::TYPE_PROPRIETAIRE_FLOTTE ){
                 DB::begintransaction();
                 try{
                     $data = null;
@@ -98,7 +99,6 @@ class StaffController extends Controller
                             "telephone" => $request->input('telephone')[$k],
                             "typecamion_id" => $request->input('typecamion_id')[$k],
                         ];
-
                         $this->createTransporteurProprietaireFlotte($transporteur,$data);
                     }
                 }catch (ModelNotFoundException $e){

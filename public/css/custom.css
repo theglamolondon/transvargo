@@ -218,3 +218,11 @@ p.citation:after{
 #btn {
 
 }
+.money{
+    width: 200px;
+    display: block;
+}
+.x200{
+    height: 200px;
+    width: 200px;
+}

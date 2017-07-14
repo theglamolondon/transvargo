@@ -16,6 +16,7 @@ use App\Http\Controllers\MapController;
 use App\Services\Statut;
 use App\Work\Tools;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ use Symfony\Component\Debug\Exception\FatalErrorException;
 
 trait ExpeditionProcessing
 {
-    use MapProcessing;
+    //use MapProcessing;
 
     public function validatorRules()
     {
@@ -95,6 +96,7 @@ trait ExpeditionProcessing
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.affectation'));
 
         $expedition->statut = Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_ACCEPTE;
+        $expedition->dateheureacceptation = Carbon::now()->toDateTimeString();
         $expedition->save();
 
         return $expedition;
@@ -160,5 +162,28 @@ trait ExpeditionProcessing
         $chargement->expedition()->associate($expedition);
 
         $chargement->saveOrFail();
+    }
+
+
+    public function getOffersToJson()
+    {
+        return $this->getOffers()
+            ->get()
+            ->toJson(JSON_UNESCAPED_UNICODE);
+    }
+
+    public function getOffersList()
+    {
+        return $this->getOffers()
+            ->paginate(30);
+    }
+
+    /**
+     * @return Builder
+     */
+    protected function getOffers(){
+        return Expedition::with("client","chargement")
+            ->where('statut',Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
+            ->orderBy('datechargement');
     }
 }

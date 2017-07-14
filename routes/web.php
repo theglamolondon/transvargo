@@ -47,22 +47,30 @@ Route::get('validation/{token}', 'SiteController@validation')->name('register.co
 /* end site route */
 
 /*Client*/
-Route::group(['middleware' => 'client'],function (){
+Route::group(['middleware' => 'client', "prefix" => "tableau-bord"],function (){
     //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
-    Route::get('/tableau-bord/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
-    Route::post('/tableau-bord/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
+    Route::get('/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
+    Route::post('/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
     Route::get('/tableau-bord/commande/{reference}.html','ClientController@showCommande')->name('client.commande');
-    Route::post('/tableau-bord/commande/{reference}.html','ExpeditionController@publishExpedition');
-    Route::get('/tableau-bord/mes-expeditions.html','ClientController@showExpeditions')->name('client.expeditions');
-    //Route::get('/tableau-bord/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
-    Route::get('/tableau-bord/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
-    Route::get('/tableau-bord/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
+    Route::post('/commande/{reference}.html','ExpeditionController@publishExpedition');
+    Route::get('/mes-expeditions.html','ClientController@showExpeditions')->name('client.expeditions');
+    //Route::get('/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
+    Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
+    Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
+});
+
+/*Payment*/
+Route::group(["middleware" => "auth", "prefix" => "billing"],function (){
+    Route::get("expedition/{reference}/option-de-paiement.html",'Finance\PaymentController@showChoosePayment')->name("payment.choice");
+    Route::post("orange-money/purchase/success.html",'Finance\PaymentController@omPaySuccess')->name("payment.om.success");
+    Route::post("orange-money/purchase/error.html",'Finance\PaymentController@omPayError')->name("payment.om.error");
 });
 
 /*Transporteur*/
 Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],function (){
     Route::get('tableau-bord.html','Carrier\TransporteurController@showDashboard')->name('transporteur.tableaubord');
-    Route::get('offres.html','Carrier\TransporteurController@showOffersOnMap')->name('transporteur.offres');
+    Route::get('offres-map.html','Carrier\TransporteurController@showOffersOnMap')->name('transporteur.offres.map');
+    Route::get('offres-liste.html','Carrier\TransporteurController@showOfferOnListView')->name('transporteur.offres.liste');
     Route::post('vehicule/ajouter.html','VehiculeController@addNewVehicle')->name('transport.ajoutervehicule');
     Route::get('offres/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
     Route::post('offres/{reference}/accepter.html','ExpeditionController@acceptOffer');
@@ -86,4 +94,4 @@ Route::post('/newsletter/sign-up','NewsLetter\SignUpController@register')->name(
 
 /*AJAX*/
 Route::post('/ajax/distanceMatrix','AjaxController@getDistanceMatrix')->name('ajax.distancematrix');
-Route::get('/ajax/transporteur/offers','AjaxController@getOffers')->name('ajax.offers');
+Route::get('/ajax/transporteur/offers','AjaxController@getOffersToJson')->name('ajax.offers');
