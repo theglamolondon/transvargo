@@ -9,6 +9,7 @@ use App\Services\Sms\Textlocal;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ExpeditionAcceptListener
 {
@@ -81,7 +82,7 @@ class ExpeditionAcceptListener
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }finally{
-            Log::error('Expedtion accptée');
+            Log::error('Expedtion acceptée');
         }
     }
 }

@@ -12,7 +12,6 @@ namespace App\Metier;
 use App\Chargement;
 use App\Events\AcceptExpedition;
 use App\Expedition;
-use App\Http\Controllers\MapController;
 use App\Services\Statut;
 use App\Work\Tools;
 use Carbon\Carbon;
@@ -21,7 +20,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Symfony\Component\Debug\Exception\FatalErrorException;
 
 trait ExpeditionProcessing
 {

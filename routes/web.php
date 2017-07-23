@@ -51,12 +51,13 @@ Route::group(['middleware' => 'client', "prefix" => "tableau-bord"],function (){
     //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
     Route::get('/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
     Route::post('/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
-    Route::get('/tableau-bord/commande/{reference}.html','ClientController@showCommande')->name('client.commande');
+    Route::get('/commande/{reference}.html','ClientController@showCommande')->name('client.commande');
     Route::post('/commande/{reference}.html','ExpeditionController@publishExpedition');
     Route::get('/mes-expeditions.html','ClientController@showExpeditions')->name('client.expeditions');
     //Route::get('/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
+    Route::get('/pdf.html','Admin\Invoice\InvoiceController@showPDF')->name('client.pdf');
 });
 
 /*Payment*/
@@ -83,9 +84,12 @@ Route::group(['middleware' => 'staff', 'prefix' => 'staff'],function (){
     Route::get('transporteurs.html','Admin\StaffController@showCarriers')->name('admin.transporteur.all');
     Route::get('transporteurs/fiche/{token}.html','Admin\StaffController@showValidateFormCarrier')->name('staff.valid.transporteur');
     Route::post('transporteurs/fiche/{token}.html','Admin\StaffController@validTransporteurAccount');
+
     Route::get('grand-compte/recherche.html','Admin\GrandCompteController@searchClient')->name('staff.gc.search');
     Route::get('grand-compte.html','Admin\GrandCompteController@showList')->name('staff.gc.liste');
+
     Route::post('client/switch/grand-compte.html','Admin\GrandCompteController@switchGrandClient')->name('staff.switch.gc');
+
     Route::get('invoice/grang-compte/0000-{id}.html','Admin\Invoice\InvoiceController@showInvoiceBoard')->name('staff.invoice');
 });
 

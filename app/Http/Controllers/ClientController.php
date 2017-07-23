@@ -77,6 +77,7 @@ class ClientController extends Controller
     public function showExpeditions()
     {
         $expeditions = Expedition::with('client','chargement')
+            ->where('client_id',Auth::id())
             ->whereNotIn('statut',[Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_NON_NULL])
             ->orderBy('datechargement')
             ->paginate(30);
