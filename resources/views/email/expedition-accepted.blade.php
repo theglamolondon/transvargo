@@ -9,7 +9,7 @@
             </tr>
             <tr>
                 <td style="padding-top: 30px; padding-bottom: 50px; padding-left: 20px; padding-right: 20px;" width="100%">
-                    <h3>Bonjour {{ $client->prenoms }} {{ $client->nom }},</h3><br>
+                    <h3>Bonjour {{ $expedition->client->prenoms }} {{ $expedition->client->nom }},</h3><br>
                     Votre expédition <strong>{{ $expedition->reference }}</strong>  a été acceptée par un transporteur.<br><br>
 
                     Afin de regler les frais d'expédition, merci de cliquer sur le bouton ci-dessous&nbsp;:<br><br><br><br>
