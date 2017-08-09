@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AuthApiMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -21,6 +22,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\ClientMiddleware::class,
         \App\Http\Middleware\TransporteurMiddleware::class,
         \App\Http\Middleware\StaffMiddleware::class,
+        \App\Http\Middleware\AppAndroidMiddleware::class,
     ];
 
     /**
@@ -45,6 +47,8 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \App\Http\Middleware\AppAndroidMiddleware::class,
+
         ],
     ];
 
@@ -65,5 +69,6 @@ class Kernel extends HttpKernel
         'client' => \App\Http\Middleware\ClientMiddleware::class,
         'transporteur' => \App\Http\Middleware\TransporteurMiddleware::class,
         'staff' => \App\Http\Middleware\StaffMiddleware::class,
+        'api.auth' => \App\Http\Middleware\AuthApiMiddleware::class,
     ];
 }

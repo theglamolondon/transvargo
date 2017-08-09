@@ -71,15 +71,18 @@ class LoginController extends Controller
     {
         $route = null;
 
-        if($user->authenticable instanceof Transporteur ){
+        if($user->authenticable instanceof Transporteur )
+        {
             redirect()->route('transporteur.tableaubord');
         }
 
-        if($user->authenticable instanceof Client ){
+        if($user->authenticable instanceof Client )
+        {
             redirect()->route('client.expeditions');
         }
 
-        if($user->authenticable instanceof Staff ){
+        if($user->authenticable instanceof Staff )
+        {
             redirect()->route('admin.tableaubord');
         }
 
