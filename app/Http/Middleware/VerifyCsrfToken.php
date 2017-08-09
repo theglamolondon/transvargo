@@ -12,6 +12,8 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        '/ajax/distanceMatrix'
+        '/ajax/distanceMatrix',
+        '/api/refresh/token',
+        '/api/login',
     ];
 }

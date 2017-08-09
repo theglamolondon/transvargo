@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 
 class OmPay extends Payement
 {
-    const URL_BASE = "https://ompay.orange.ci/e-commerce_test_gw";
+    const URL_BASE = "https://ompay.orange.ci/e-commerce_test_gw/";
 
-    const URL_INIT = self::URL_BASE."/init.php";
+    const URL_INIT = self::URL_BASE."init.php";
     const URL_SENT_DATA = self::URL_BASE;
 
     private $logo_url;

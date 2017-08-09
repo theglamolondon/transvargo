@@ -13,7 +13,7 @@
             <div class="col-md-12">
                 <h3>Veuillez choisir votre moyen de paiement ci-dessous :</h3>
                 <div class="col-md-4">
-                    <form action="https://ompay.orange.ci/e-commerce_test_gw" method="post">
+                    <form action="{{ $OM::URL_SENT_DATA }}" method="post">
                         <input type="hidden" name="purchaseref" value="{{ $expedition->reference }}" />
                         <input type="hidden" name="amount" value="{{ $expedition->prix }}" />
                         <input type="hidden" name="token" value="{{ $OM->getToken() }}" >
@@ -26,18 +26,18 @@
                         <input type="hidden" name="returnAdress"  value="{{ $OM->getReturnAdress() }}" />
                         <input type="hidden" name="errorReturnAdress"  value="{{ $OM->getErrorReturnAdress() }}" />
 
-                        <button class="x200" type="submit"><img class="money" src="{{config("app.url")}}/money/pay-orange-money.png" alt="Orange-money"/> </button>
+                        <button class="x200" type="submit"><img class="money" src="{{ asset("money/pay-orange-money.png") }}" alt="Orange-money"/> </button>
                     </form>
                 </div>
                 <div class="col-md-4">
                     <form action="#" method="post">
-                        <button class="x200" type="button"><img class="money" style="padding-top: 4px;" src="{{config("app.url")}}/money/pay-visa.png" alt="Visa"/> </button>
+                        <button class="x200" type="button"><img class="money" style="padding-top: 4px;" src="{{ asset("money/pay-visa.png") }}" alt="Visa"/> </button>
                     </form>
 
                 </div>
                 <div class="col-md-4">
-                    <form action="https://api.pont-hkb.com" method="post">
-                        <button class="x200" type="submit"><img class="money" src="{{config("app.url")}}/money/pay-mtn-money.jpg" alt="MTN-money"/> </button>
+                    <form action="#" method="post">
+                        <button class="x200" type="submit"><img class="money" src="{{ asset("money/pay-mtn-money.jpg") }}" alt="MTN-money"/> </button>
                     </form>
                 </div>
             </div>
