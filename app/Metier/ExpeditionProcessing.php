@@ -13,6 +13,7 @@ use App\Chargement;
 use App\Events\AcceptExpedition;
 use App\Expedition;
 use App\Services\Statut;
+use App\Vehicule;
 use App\Work\Tools;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -88,10 +89,15 @@ trait ExpeditionProcessing
 
     private function reserveOffer(array $data)
     {
-        $expedition = Expedition::where('reference',$data['reference'])->first();
+        $expedition = Expedition::with("chargement")->where('reference',$data['reference'])->first();
+
+
 
         if(!$expedition)
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.affectation'));
+
+        $vehicule = Vehicule::where('immatriculation',$data['immatriculation'])->first();
+        $expedition->chargement->associate($vehicule);
 
         $expedition->statut = Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_ACCEPTE;
         $expedition->dateheureacceptation = Carbon::now()->toDateTimeString();
@@ -113,7 +119,7 @@ trait ExpeditionProcessing
             return back()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('transporteur.offres')
+        return redirect()->route('transporteur.offres.liste')
             ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.expedition.accept',['reference' => $request->input('reference')]));
     }
 
