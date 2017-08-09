@@ -16,6 +16,6 @@ class Chargement extends Model
     }
 
     public function vehicule(){
-        return $this->belongsTo('App\Vehicule');
+        return $this->belongsTo(Vehicule::class);
     }
 }

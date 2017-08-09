@@ -91,13 +91,13 @@ trait ExpeditionProcessing
     {
         $expedition = Expedition::with("chargement")->where('reference',$data['reference'])->first();
 
-
-
         if(!$expedition)
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.affectation'));
 
         $vehicule = Vehicule::where('immatriculation',$data['immatriculation'])->first();
-        $expedition->chargement->associate($vehicule);
+
+        $expedition->chargement->vehicule()->associate($vehicule);
+        $expedition->chargement->save();
 
         $expedition->statut = Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_ACCEPTE;
         $expedition->dateheureacceptation = Carbon::now()->toDateTimeString();
@@ -114,7 +114,7 @@ trait ExpeditionProcessing
 
             $expedition = $this->reserveOffer($request->except('token'));
 
-            event(new AcceptExpedition($expedition));
+            //event(new AcceptExpedition($expedition));
 
         } catch (ModelNotFoundException $e ){
             return back()->withErrors($e->getMessage());

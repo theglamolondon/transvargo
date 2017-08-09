@@ -9,7 +9,7 @@
                 <li role="presentation"><a href="{{ route('transporteur.offres.liste') }}">Liste</a></li>
             </ul>
         </li>
-        <li class=""><a href="#">Mes chargements</a></li>
+        <li class=""><a href="{{ route('transporteur.chargement') }}">Mes chargements</a></li>
         <li class=""><a href="#">Factures</a></li>
         <li class="">
             <a href="javascript:void(0)">{{ request()->user()->authenticable->raisonsociale ? request()->user()->authenticable->raisonsociale : request()->user()->authenticable->prenoms }}</a>

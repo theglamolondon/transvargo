@@ -8,10 +8,7 @@ $total = 0;
 <section class="section section-inset-1">
     <div class="col-md-offset-1 col-md-10">
         <div class="">
-            <div class="col-md-2 col-sm-4 col-xs-12">
-                <a href="{{ route('client.newexpedition') }}" class="btn btn-primary btn-sm text-left">Nouvelle expédition</a>
-                <div class="separateur"></div>
-            </div>
+
 
             <div class="col-md-12 col-sm-12 col-xs-12 section-inset-1">
                 <div class="table-responsive">

@@ -61,6 +61,11 @@ class TransporteurController extends Controller
         return view('carrier.offers-list',compact("offres"));
     }
 
+    public function showChargement()
+    {
+        return view('carrier.chargement');
+    }
+
     public function showAcceptOfferForm($reference){
         global $expedition;
         $expedition = Expedition::where('reference',$reference)->first();

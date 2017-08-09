@@ -75,6 +75,7 @@ Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],functi
     Route::post('vehicule/ajouter.html','VehiculeController@addNewVehicle')->name('transport.ajoutervehicule');
     Route::get('offres/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
     Route::post('offres/{reference}/accepter.html','ExpeditionController@acceptOffer');
+    Route::get('chargement.html','Carrier\TransporteurController@showChargement')->name('transporteur.chargement');
 });
 
 /*Staff*/
