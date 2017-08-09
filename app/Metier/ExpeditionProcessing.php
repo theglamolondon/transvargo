@@ -91,8 +91,6 @@ trait ExpeditionProcessing
     {
         $expedition = Expedition::with("chargement")->where('reference',$data['reference'])->first();
 
-
-
         if(!$expedition)
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.affectation'));
 
@@ -102,7 +100,6 @@ trait ExpeditionProcessing
         $expedition->statut = Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_ACCEPTE;
         $expedition->dateheureacceptation = Carbon::now()->toDateTimeString();
         $expedition->save();
-
 
         return $expedition;
     }
