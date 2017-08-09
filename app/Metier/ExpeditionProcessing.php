@@ -103,7 +103,6 @@ trait ExpeditionProcessing
         $expedition->dateheureacceptation = Carbon::now()->toDateTimeString();
         $expedition->save();
 
-
         return $expedition;
     }
 
