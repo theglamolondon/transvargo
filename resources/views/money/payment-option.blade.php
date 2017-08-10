@@ -13,7 +13,8 @@
             <div class="col-md-12">
                 <h3>Veuillez choisir votre moyen de paiement ci-dessous :</h3>
                 <div class="col-md-4">
-                    <form action="{{ $OM::URL_SENT_DATA }}" method="post">
+                    <form action="{{ $OM::URL_SENT_DATA }}" method="post" enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="merchandid" value="{{ $OM->getComteId() }}" />
                         <input type="hidden" name="purchaseref" value="{{ $expedition->reference }}" />
                         <input type="hidden" name="amount" value="{{ $expedition->prix }}" />
                         <input type="hidden" name="token" value="{{ $OM->getToken() }}" >

@@ -40,6 +40,7 @@ $total = 0;
                                 @endif
                                 @if($expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_ACCEPTE)
                                     <a href="{{ route('payment.choice',['reference'=>$expedition->reference]) }}" title="Payer l'expedition" class="icon icon-xs fa-money icon-gray"></a>
+                                    <a href="{{ route('client.pdf.facture',['reference'=>$expedition->reference]) }}" title="Télécharger la facture de l'expedition" class="icon icon-xs fa-file-pdf-o icon-gray"></a>
                                 @endif
                             </td>
                             <td>{{ $expedition->reference }}</td>
