@@ -19,7 +19,7 @@ $total = 0;
                             <th>Référence</th>
                             <th>Itininéraire</th>
                             <th>Distance</th>
-                            <th>Statut</th>
+                            <th>Date chargement</th>
                             <th>Nom du Chauffeur</th>
                             <th>Immatriculation</th>
                             <th>Contact</th>
@@ -27,28 +27,24 @@ $total = 0;
                         </tr>
                         </thead>
                         <tbody>
-                        @if($expeditions)
-                        @foreach($expeditions as $expedition)
+                        @if($chargement)
+                        @foreach($chargement as $chargements)
                         <tr>
                             <td>
                                 <a title="Annuler l'expedition" class="icon icon-xs fa-trash icon-gray"></a>
-                                @if($expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE)
-                                    <a href="{{ route('client.newexpedition',['ref'=>base64_encode($expedition->reference)]) }}" title="Modifier l'expedition" class="icon icon-xs fa-pencil icon-gray"></a>
-                                @endif
-                                @if($expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_ACCEPTE)
-                                    <a href="{{ route('payment.choice',['reference'=>$expedition->reference]) }}" title="Payer l'expedition" class="icon icon-xs fa-money icon-gray"></a>
+                                @if($chargements->expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE)
                                 @endif
                             </td>
-                            <td>{{ $expedition->reference }}</td>
-                            <td>De [ {{ $expedition->lieudepart }} ]  à [ {{ $expedition->lieuarrivee }} ]</td>
-                            <td>{{ $expedition->prix/\App\Expedition::UNIT_PRICE }} km</td>
-                            <td>@lang('statut.'.$expedition->statut)</td>
-                            <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->chauffeur : '' ) : ''}}</td>
-                            <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->immatriculation : '') : ''}}</td>
-                            <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->telephone : '') : '' }}</td>
-                            <td>{{ number_format($expedition->prix,0,',',' ') }} Fcfa </td>
+                            <td>{{ $chargements->expedition->reference }}</td>
+                            <td>De [ {{ $chargements->expedition->lieudepart }} ]  à [ {{ $chargements->expedition->lieuarrivee }} ]</td>
+                            <td>{{ $chargements->expedition->prix/\App\Expedition::UNIT_PRICE }} km</td>
+                            <td>{{ $chargements->expedition->datechargement }}</td>
+                            <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->chauffeur : '' ) : ''}}</td>
+                            <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->immatriculation : '') : ''}}</td>
+                            <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->telephone : '') : '' }}</td>
+                            <td>{{ number_format($chargements->expedition->prix,0,',',' ') }} Fcfa </td>
                             @php
-                                $total += $expedition->prix
+                                $total += $chargements->expedition->prix
                             @endphp
                         </tr>
                         @endforeach
@@ -59,7 +55,7 @@ $total = 0;
                         @endif
                         </tbody>
                     </table>
-                    {{ $expeditions->links() }}
+
                 </div>
                 <!--
                 <form class="rd-mailform coupon-form pull-sm-left">
@@ -87,7 +83,7 @@ $total = 0;
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Payer Maintenant</button>
+
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Carrier;
 
+use App\Chargement;
 use App\Expedition;
 use App\Metier\ExpeditionProcessing;
 use App\Services\Statut;
@@ -63,7 +64,12 @@ class TransporteurController extends Controller
 
     public function showChargement()
     {
-        return view('carrier.chargement');
+        $chargement = Chargement::with(['expedition','vehicule' => function ($query){
+
+           $query->where('transporteur_id',Auth::user()->id);}])
+           // ->orderBy('datechargement')
+            ->paginate(30);
+        return view('carrier.chargement', compact('chargement'));
     }
 
     public function showAcceptOfferForm($reference){
