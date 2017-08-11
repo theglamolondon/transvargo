@@ -42,9 +42,9 @@ $total = 0;
                             <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->chauffeur : '' ) : ''}}</td>
                             <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->immatriculation : '') : ''}}</td>
                             <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->telephone : '') : '' }}</td>
-                            <td>{{ number_format($chargements->expedition->prix,0,',',' ') }} Fcfa </td>
+                            <td>{{ number_format($chargements->expedition->prix* \App\Transporteur::POURCENTAGE,0,',',' ') }} Fcfa </td>
                             @php
-                                $total += $chargements->expedition->prix
+                                $total += $chargements->expedition->prix* \App\Transporteur::POURCENTAGE
                             @endphp
                         </tr>
                         @endforeach
