@@ -57,7 +57,7 @@ Route::group(['middleware' => 'client', "prefix" => "tableau-bord"],function (){
     //Route::get('/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
-    Route::get('/pdf.html','Admin\Invoice\InvoiceController@showPDF')->name('client.pdf');
+    Route::get('/facture/pdf/{reference}.html','Admin\Invoice\InvoiceController@showPDF')->name('client.pdf.facture');
 });
 
 /*Payment*/

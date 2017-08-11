@@ -21,7 +21,7 @@ abstract class Payement
     protected $returnAdress = null;
     protected $errorReturnAdress = null;
 
-    public function __construct()
+    public function __construct(Expedition $expedition)
     {
         if($this->boot()){
             //Change $token and $compte_id

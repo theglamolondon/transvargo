@@ -8,6 +8,7 @@
 
 namespace App\Work\Money\Partner;
 
+use App\Expedition;
 use App\Work\Money\Payement;
 use App\Work\Money\PayementException;
 use Illuminate\Http\Request;
@@ -33,15 +34,17 @@ class OmPay extends Payement
     public $tag;
     public $contact_partenaire;
 
-    public function __construct()
+    public function __construct(Expedition $expedition)
     {
-        $this->logo_url = config("app.url")."images/transvargo-logo.png";
+        $this->logo_url = config("app.url")."/images/transvargo-logo.png";
         $this->site_title = config("app.name");
         $this->sessionid = \Illuminate\Support\Facades\Request::cookie("laravel_session");
         $this->returnAdress = route("payment.om.success");
         $this->errorReturnAdress = route("payment.om.error");
+        $this->amount = $expedition->prix;
+        $this->purchaseref = $expedition->reference;
 
-        parent::__construct();
+        parent::__construct($expedition);
     }
 
     /**
@@ -71,15 +74,16 @@ class OmPay extends Payement
     public function boot()
     {
         $handle = curl_init(self::URL_INIT);
+
         curl_setopt_array($handle,[
             CURLOPT_POST => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POSTFIELDS => [
                 "merchantid" => $this->compte_id,
-                "amount" => 50000,
+                "amount" => $this->amount,
                 "sessionid" => $this->sessionid,
-                "purchaseref" => "REF",
+                "purchaseref" => $this->purchaseref,
                 "description" =>  "Nothing"
             ]
         ]);
