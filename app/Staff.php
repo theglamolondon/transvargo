@@ -13,5 +13,7 @@ use App\Work\Authenticable;
 
 class Staff extends Authenticable
 {
+    const POURCENTAGE = 0.25;
+
     protected $table = 'staff';
 }
