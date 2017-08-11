@@ -14,14 +14,14 @@
                 <h3>Veuillez choisir votre moyen de paiement ci-dessous :</h3>
                 <div class="col-md-4">
                     <form action="{{ $OM::URL_SENT_DATA }}" method="post" enctype="application/x-www-form-urlencoded">
-                        <input type="hidden" name="merchandid" value="{{ $OM->getComteId() }}" />
+                        <input type="hidden" name="merchantid" value="{{ $OM->getComteId() }}" />
                         <input type="hidden" name="purchaseref" value="{{ $expedition->reference }}" />
                         <input type="hidden" name="amount" value="{{ $expedition->prix }}" />
                         <input type="hidden" name="token" value="{{ $OM->getToken() }}" >
                         <input type="hidden" name="sessionid" value="{{ $OM->getSessionId() }}" />
                         <input type="hidden" name="description"  value="{{ $expedition->__toString() }}" />
                         <input type="hidden" name="tag"   value="{{ csrf_token() }}" />
-                        <input type="hidden" name="contact_partenaire"  value="{{ "XX XX XX XX" }}" />
+                        <input type="hidden" name="contact_partenaire"  value="{{ "40 50 46 63 / 78 26 46 23" }}" />
                         <input type="hidden" name="logo_url" value="{{ $OM->getLogoUrl() }}" />
                         <input type="hidden" name="site_title"  value="{{ $OM->getSiteTitle() }}" />
                         <input type="hidden" name="returnAdress"  value="{{ $OM->getReturnAdress() }}" />
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-4">
                     <form action="#" method="post">
-                        <button class="x200" type="submit"><img class="money" src="{{ asset("money/pay-mtn-money.jpg") }}" alt="MTN-money"/> </button>
+                        <button class="x200" type="button"><img class="money" src="{{ asset("money/pay-mtn-money.jpg") }}" alt="MTN-money"/> </button>
                     </form>
                 </div>
             </div>

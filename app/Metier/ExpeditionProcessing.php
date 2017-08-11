@@ -113,7 +113,7 @@ trait ExpeditionProcessing
 
             $expedition = $this->reserveOffer($request->except('token'));
 
-            //event(new AcceptExpedition($expedition));
+            event(new AcceptExpedition($expedition));
 
         } catch (ModelNotFoundException $e ){
             return back()->withErrors($e->getMessage());

@@ -31,10 +31,9 @@ class AppAndroidMiddleware
 
     private function validateUserAgent(Request $request)
     {
-        if($request->header('user-agent') !== "app-android-transvargo")
+        if($request->header('x-app-navigateur') !== "app-android-transvargo")
         {
             throw new \Exception("Forbidden",403);
         }
     }
 }
-//throw new \Exception("Unauthorized",401);

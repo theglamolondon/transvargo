@@ -78,7 +78,7 @@
                                     <dt>Phone:</dt>
                                     <dd><a href="callto:0022540504663">(+225) 40 50 46 63</a></dd>
                                     <dt>FAX:</dt>
-                                    <dd><a href="callto:78264623">(+225) 78 26 46 23</a></dd>
+                                    <dd><a href="callto:0022578264623">(+225) 78 26 46 23</a></dd>
                                 </dl>
                             </div>
                         </div>

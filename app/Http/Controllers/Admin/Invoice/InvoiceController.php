@@ -32,8 +32,7 @@ class InvoiceController extends Controller
 
         $invoices = PDF::loadView('invoices.factures',compact("invoices"))->setPaper('a4','portrait');
 
-        return $invoices->stream('facture.pdf');
-        //return view('invoices.factures');
+        return $invoices->stream("facture_$reference.pdf");
     }
 
     public function getSingle($reference)

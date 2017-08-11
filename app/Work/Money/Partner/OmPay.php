@@ -36,7 +36,7 @@ class OmPay extends Payement
 
     public function __construct(Expedition $expedition)
     {
-        $this->logo_url = config("app.url")."/images/transvargo-logo.png";
+        $this->logo_url = asset("images/pico.png");
         $this->site_title = config("app.name");
         $this->sessionid = \Illuminate\Support\Facades\Request::cookie("laravel_session");
         $this->returnAdress = route("payment.om.success");

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>{{ config('app.url') }}</title>
-    <link rel="stylesheet" href="{{config('app.url')}}/css/pdf-style.css" media="all" />
+    <link rel="stylesheet" href="{{asset('css/pdf-style.css')}}" media="all" />
     <style>
         .page{
             page-break-after: auto;
@@ -17,14 +17,15 @@
         <tr>
             <td width="50%" class="desc head">
                 <div id="logo">
-                    <a href="{{ config('app.url') }}"><img src="{{ config('app.url') }}/images/transvargo-logo.png"/></a>
+                    <a href="{{ config('app.url') }}"><img src="{{ asset('transvargo.png') }}"/></a>
                 </div>
             </td>
             <td width="50%" class="head">
                 <div id="">
                     <h2 class="name">{{ config('app.name') }}</h2>
-                    <div>455 Foggy Heights, AZ 85004, US</div>
-                    <div>(602) 519-0450</div>
+                    <div>Marcory résidentiel</div>
+                    <div>(+225) 40 50 46 63</div>
+                    <div>(+225) 78 26 46 23</div>
                     <div><a href="mailto:contact@transvargo.com">contact@transvargo.com</a></div>
                 </div>
             </td>

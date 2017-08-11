@@ -18,7 +18,7 @@
                 <td class="head">
                     <div id="invoice1">
                         <h1>Facture N° AS4550-10</h1>
-                        <div class="date">Date de facture : {{ \Carbon\Carbon::now()->format('d/m/Y') }}</div>
+                        <div class="date">Date de la facture : {{ (new \Carbon\Carbon($invoices->first()->dateheurecreation))->format('d/m/Y') }}</div>
                     </div>
                 </td>
             </tr>
@@ -40,9 +40,9 @@
         @foreach($invoices as $invoice)
         <tr>
             <td class="no">{{ $loop->index + 1 }}</td>
-            <td class="desc">Marchandise de {{ $invoice->masse }} kg</td>
-            <td class="qty"><h3>{{ $invoice->lieudepart }}</h3>{{ $invoice->chargement ? $invoice->chargement->adressechargement : '' }}</td>
-            <td class="qty"><h3>{{ $invoice->lieuarrivee }}</h3>{{ $invoice->chargement ? $invoice->chargement->adresselivraison : '' }}</td>
+            <td class="desc">Colis de {{ $invoice->masse }} kg</td>
+            <td class="desc">{{ $invoice->lieudepart }}<br/>{{ $invoice->chargement ? $invoice->chargement->adressechargement : '' }}</td>
+            <td class="desc">{{ $invoice->lieuarrivee }}<br/>{{ $invoice->chargement ? $invoice->chargement->adresselivraison : '' }}</td>
             <td class="unit">{{ $invoice->typeCamion ? $invoice->typeCamion->libelle : 'Non défini' }}</td>
             <td class="total">{{ number_format($invoice->prix,0,'.', ' ') }}</td>
             @php
@@ -71,7 +71,7 @@
     </table>
     <div id="notices">
         <div>Montant en lettre :</div>
-        <div class="notice">Facture arretée à la somme de {{ \App\Work\NombreToLettre::getLetter($total*1.18) }}</div>
+        <div class="notice">Facture arretée à la somme de {{ \App\Work\NombreToLettre::getLetter($total*1.18) }} FCFA</div>
     </div>
 
     <br/>

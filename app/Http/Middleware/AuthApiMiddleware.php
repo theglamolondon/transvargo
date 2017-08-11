@@ -33,7 +33,7 @@ class AuthApiMiddleware
 
     private function checkAuthorizationToken(Request $request)
     {
-        list($type,$stringToken) = $this->getAuthorizationHeader($request);
+        $stringToken = $this->getAuthorizationHeader($request);
 
         $this->validateToken($stringToken);
     }

@@ -67,7 +67,7 @@ class TransporteurController extends Controller
         $chargement = Chargement::with(['expedition','vehicule' => function ($query){
 
            $query->where('transporteur_id',Auth::user()->id);}])
-           // ->orderBy('datechargement')
+            //->orderBy('datechargement')
             ->paginate(30);
         return view('carrier.chargement', compact('chargement'));
     }

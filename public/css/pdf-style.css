@@ -102,6 +102,13 @@ table td {
     border-bottom: 1px solid #FFFFFF;
 }
 
+/*
+table td {
+    background: #FFFFFF;
+    border-bottom: 1px solid #1A2C3A;
+}
+*/
+
 table th {
     white-space: nowrap;
     font-weight: bold;
@@ -121,7 +128,7 @@ table td h3{
 table .no {
     color: #FFFFFF;
     font-size: 1.1em;
-    background: #547ABB;
+    background: #0087C3;
 }
 
 table .desc {
@@ -136,10 +143,11 @@ table .qty {
 }
 
 table .total {
-    background: #547ABB;
+    background: #0087C3;
     color: #FFFFFF;
 }
 
+table .desc,
 table td.unit,
 table td.qty,
 table td.total {

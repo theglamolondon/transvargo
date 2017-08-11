@@ -44,7 +44,7 @@ trait JtwPassport
 
         $token = $builder->setIssuer(config('app.url'))
                         ->setAudience('com.transvargo.transvargo')
-                        ->setExpiration(time() + 10) //secondes * minutes * heures * jours
+                        ->setExpiration(time() + 60*60*24*7) //secondes * minutes * heures * jours
                         ->set('email',$identite->email)
                         ->sign($this->getSigner(), $this->getKey())
                         ->getToken();
@@ -90,7 +90,7 @@ trait JtwPassport
             throw new \Exception("Forbidden",403);
         }
 
-        return explode(" ",$request->header('authorization'));
+        return explode(" ",$request->header('authorization'))[1]; //;
     }
 
     public function refreshToken(Request $request)
@@ -99,7 +99,7 @@ trait JtwPassport
 
         try{
 
-            list($type,$stringToken) = $this->getAuthorizationHeader($request);
+            $stringToken = $this->getAuthorizationHeader($request);
 
             $token = $this->getTokenObject($stringToken);
 
