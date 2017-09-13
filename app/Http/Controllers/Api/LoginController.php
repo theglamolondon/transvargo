@@ -29,6 +29,16 @@ class LoginController extends  Controller
 
             $data = $this->attemptLogin($request->input('email'), $request->input('password'));
 
+            if(! $data)
+            {
+                throw new \Exception("Le login ou le mot de passe est incorrect",403);
+            }
+
+            if($data->transporteur == null)
+            {
+                throw new \Exception("Votre compte ne vous permet pas de vous connecter comme transporteur",403);
+            }
+
         }catch (\Exception $e){
             return response(["error" => $e->getCode(), "message" => $e->getMessage()],$e->getCode());
         }

@@ -25,7 +25,7 @@ class Expedition extends Model
 
 
     public function typeCamion(){
-        return $this->belongsTo(TypeCamion::class);
+        return $this->belongsTo(TypeCamion::class,'typecamion_id');
     }
 
     public function client(){

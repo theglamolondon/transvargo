@@ -48,7 +48,6 @@ trait JtwPassport
                         ->set('email',$identite->email)
                         ->sign($this->getSigner(), $this->getKey())
                         ->getToken();
-
         return $token;
     }
 
@@ -66,6 +65,11 @@ trait JtwPassport
         return true;
     }
 
+    /**
+     * @param Token $token
+     * @return bool
+     * @throws \Exception
+     */
     protected function verifyToken(Token $token)
     {
         if(!$token->verify($this->getSigner(), $this->getKey()))
@@ -103,9 +107,11 @@ trait JtwPassport
 
             $token = $this->getTokenObject($stringToken);
 
-            $identite = new IdentiteAccess(['email' => $token->getClaim('email')]);
+            if($this->verifyToken($token)){
+                $identite = new IdentiteAccess(['email' => $token->getClaim('email')]);
 
-            $tokenRenew = $this->generateToken($identite);
+                $tokenRenew = $this->generateToken($identite);
+            }
 
         }catch (\Exception $e){
 

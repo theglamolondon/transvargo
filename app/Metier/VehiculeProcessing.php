@@ -30,4 +30,14 @@ trait VehiculeProcessing
 
         $vehicule->saveOrFail();
     }
+
+    /**
+     * @param Transporteur $transporteur
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function getVehiculeBuilder(Transporteur $transporteur)
+    {
+        return Vehicule::with('typeCamion')
+            ->where('transporteur_id',$transporteur->identiteaccess_id);
+    }
 }

@@ -106,19 +106,28 @@ trait ExpeditionProcessing
         return $expedition;
     }
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    private function accept(Request $request)
+    {
+        $this->validate($request, $this->validateAnOffer());
+
+        $expedition = $this->reserveOffer($request->except('token'));
+
+        event(new AcceptExpedition($expedition));
+
+        return true;
+    }
+
     public function acceptOffer(Request $request)
     {
         try{
-            $this->validate($request, $this->validateAnOffer());
-
-            $expedition = $this->reserveOffer($request->except('token'));
-
-            event(new AcceptExpedition($expedition));
-
+            $this->accept($request);
         } catch (ModelNotFoundException $e ){
             return back()->withErrors($e->getMessage());
         }
-
         return redirect()->route('transporteur.offres.liste')
             ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.expedition.accept',['reference' => $request->input('reference')]));
     }
@@ -186,7 +195,7 @@ trait ExpeditionProcessing
      * @return Builder
      */
     protected function getOffers(){
-        return Expedition::with("client","chargement")
+        return Expedition::with("client","chargement","typeCamion")
             ->where('statut',Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
             ->orderBy('datechargement');
     }
