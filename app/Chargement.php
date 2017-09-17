@@ -12,10 +12,10 @@ class Chargement extends Model
     public $timestamps = false;
 
     public function expedition(){
-        return $this->belongsTo('App\Expedition');
+        return $this->belongsTo(Expedition::class);
     }
 
     public function vehicule(){
-        return $this->belongsTo(Vehicule::class);
+        return $this->belongsTo(Vehicule::class,"vehicule_id");
     }
 }

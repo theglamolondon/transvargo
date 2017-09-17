@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
 
 trait ExpeditionProcessing
 {
@@ -116,7 +117,11 @@ trait ExpeditionProcessing
 
         $expedition = $this->reserveOffer($request->except('token'));
 
-        event(new AcceptExpedition($expedition));
+        try{
+            event(new AcceptExpedition($expedition));
+        }catch (\Exception $e){
+            Log::error($e->getMessage());
+        }
 
         return true;
     }

@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('api')->post('/login','Api\LoginController@login');
 
 Route::get('/refresh/token','Api\LoginController@refreshToken');
-//TODO: Gérer dans l'application Android comment faire le mécanisme de refresh du token JWT
 
 Route::middleware('api.auth')->group(function (){
 
@@ -26,7 +25,8 @@ Route::middleware('api.auth')->group(function (){
     Route::get('/expeditions/transporteur/{transporteur}/vehicule/{typecamion}/list','Api\VehiculeController@liste');
 
     Route::post('/expeditions/offers/accept','Api\OffreController@acceptOffre');
-    //TODO: Donner la possibilité d'accepter sur l'appareil Android
+
+    Route::get('/{transporteur}/expeditions/list','Api\TransporteurController@myExpeditions');
 });
 
 

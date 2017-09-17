@@ -6,6 +6,7 @@ use App\Metier\ExpeditionProcessing;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Lang;
 
 class OffreController extends Controller
 {

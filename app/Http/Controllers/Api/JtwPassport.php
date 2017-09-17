@@ -115,9 +115,9 @@ trait JtwPassport
 
         }catch (\Exception $e){
 
-            return response(["error" => $e->getCode(), "message" => $e->getMessage()],$e->getCode());
+            return response()->json(["error" => $e->getCode(), "message" => $e->getMessage()],$e->getCode(),[],JSON_UNESCAPED_UNICODE);
         }
 
-        return response([ "token" => $tokenRenew->__toString() ]);
+        return response()->json([ "token" => $tokenRenew->__toString() ]);
     }
 }

@@ -23,7 +23,6 @@ class Expedition extends Model
 
     const UNIT_PRICE = 1000;
 
-
     public function typeCamion(){
         return $this->belongsTo(TypeCamion::class,'typecamion_id');
     }
@@ -42,6 +41,7 @@ class Expedition extends Model
 
     public function __toString()
     {
-        return "Expédition N° ".$this->reference." de ".$this->lieudepart." à ".$this->lieuarrivee.". (Distance ".$this->distance." km)";
+        return sprintf("Expédition N° %s de %s à %s (Distance %s km)",
+            $this->reference, $this->lieudepart, $this->lieuarrivee, $this->distance);
     }
 }

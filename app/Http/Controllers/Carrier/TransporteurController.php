@@ -64,10 +64,11 @@ class TransporteurController extends Controller
 
     public function showChargement()
     {
-        $chargement = Chargement::with(['expedition','vehicule' => function ($query){
-
-           $query->where('transporteur_id',Auth::user()->id);}])
-            //->orderBy('datechargement')
+        $chargement = Chargement::with(['expedition','vehicule' ])
+            ->join("vehicule","vehicule.id","=","chargement.vehicule_id","inner")
+            ->where("vehicule.transporteur_id","=", Auth::id())
+            ->orderBy('dateheurechargement')
+            ->select("chargement.*")
             ->paginate(30);
         return view('carrier.chargement', compact('chargement'));
     }
@@ -82,7 +83,7 @@ class TransporteurController extends Controller
         if($expedition->statut != Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
             return back()->withErrors(Lang::get('message.erreur.expedition.affectation'));
 
-        $vehicules = Vehicule::where('transporteur_id',Auth::user()->id)
+        $vehicules = Vehicule::where('transporteur_id',Auth::id())
             ->with(['typeCamion' => function ($query){
                 global $expedition;
                 $query->where('id',$expedition->typecamion_id);
