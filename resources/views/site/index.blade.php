@@ -7,11 +7,11 @@
                 <div>
                     <h1>
                         <small>rapide et fiable</small>
-                        <span class='text-bold question'>Vous cherchez un camion pour transporter vos produits ou marchandises ?</span>
+                        <span class='text-bold question'>Souhaitez-vous transporter vos produits ?</span>
                     </h1>
                     <div class="slogan">
-                        <p class="response">Transvargo vous offre un vaste réseau de transporteur de confiance</p>
-                    </div><div class='btn-group-variant'> <div><a class='btn btn-primary btn-sm' href='{{ route('apropos') }}#avantages'>Nos avantages</a> <a class='btn btn-white btn-sm' href='{{ route('register') }}'>Créer son compte</a></div></div>
+                        <p class="response">Profitez de notre vaste réseau de camions partout en Côte d’ivoire.</p>
+                    </div><div class='btn-group-variant'> <div><!--<a class='btn btn-primary btn-sm' href='{{ route('apropos') }}#avantages'>Nos avantages</a>--> <a class='btn btn-white btn-sm' href='{{ route('register') }}'>Créer son compte</a></div></div>
                 </div>
             </div>
             <div class="swiper-wrapper">
@@ -69,44 +69,53 @@
     </section>
     <section class="section section-inset-2 bg-light">
         <div class="container">
-            <h2 class="text-center">Comment ça marche </h2>
+            <h2 class="text-center">Devenez client Transvargo</h2>
+            <h3 class="text-center">Faites du transport un avantage compétitif pour augmenter la satisfaction client</h3>
             <hr>
             <div class="row">
                 <div class="progress-container row offset-7 flow-offset-1">
                     <!-- Progress Bar-->
-                    <div class="col-sm-6 col-md-2">
+                    <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
                                 <img src="{{ config('app.url')}}/working/desk.png"/>
                             </div>
-                            <p class="h5 fw-l inline-block">Renseigner votre besoin</p>
+                            <p class="h5 fw-l inline-block">Prix Compétitif</p>
+                            <p class="h5 fw-l inline-block">les prix que propose transvargo est très abordable et stable. Vous ne payez que pour le service effectué.</p>
+
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-2">
+                    <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
                                 <img src="{{ config('app.url')}}/working/package.png"/>
                             </div>
-                            <p class="h5 fw-l inline-block">Envoi aux transporteurs</p>
+                            <p class="h5 fw-l inline-block">Rapide</p>
+                            <p class="h5 fw-l inline-block">Avec transvargo vous ne perdez plus de temps et vôtre équipe  a le temps de se consacrer à autre chose car vous expédiez vos produits en seulement quelques clics.</p>
+
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-2">
+                    <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
                                 <img src="{{ config('app.url')}}/working/phone.png"/>
                             </div>
-                            <p class="h5 fw-l inline-block">Un transporteur accepte</p>
+                            <p class="h5 fw-l inline-block">Transparent</p>
+                            <p class="h5 fw-l inline-block">Vous faites des économies sur le contrat de transport car tout transparent et justifié, pas besoin de frais supplémentaires. </p>
+
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-2">
+                    <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
                                 <img src="{{ config('app.url')}}/working/sent.png"/>
                             </div>
-                            <p class="h5 fw-l inline-block">Valider et envoi la commande</p>
+                            <p class="h5 fw-l inline-block" >Sécurisé</p>
+                            <p class="h5 fw-l inline-block">Nos partenaires transporteurs sont uniquement des professionnels et en plus vous pouvez suivre l’acheminement de vos produits  en temps réel grâce notre outil de géolocalisation.</p>
+
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-2">
+                   <!-- <div class="col-sm-6 col-md-2">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
                                 <img src="{{ config('app.url')}}/working/car.png"/>
@@ -121,35 +130,42 @@
                             </div>
                             <p class="h5 fw-l inline-block">Livraison du colis</p>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
     </section>
     <section class="section section-inset-1">
         <div class="container">
-            <h2 class="text-center">Ils nous font confiance</h2>
+            <h2 class="text-center">Devenez transporteur partenaire Transvargo</h2>
+            <h4 class="text-center">Désormais travailler de manière professionnelle et rendez votre entreprise pérenne.</h4>
             <hr>
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="thumbnail thumbnail-mod-1">
-                        <div class="partner">
-                            <img src="{{ config('app.url')}}/partners/softn_fix.png" alt="">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail-mod-1">
+                        <div class="progress-bar-wrapper">
+                            <img src="{{ config('app.url')}}/working/car.png"/>
                         </div>
+                        <p class="h5 fw-l inline-block">Augmentez vos revenues </p>
+                        <p class="h5 fw-l inline-block">Ne peinez plus pour trouver de la marchandise à transporter  car avec transvargo vous avez accès à des centaines d’offres.</p>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="thumbnail thumbnail-mod-1">
-                        <div class="partner">
-                            <img src="images/partner-9.png" alt="">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail-mod-1">
+                        <div class="progress-bar-wrapper">
+                            <img src="{{ config('app.url')}}/working/finish.png"/>
                         </div>
+                        <p class="h5 fw-l inline-block">Transparence </p>
+                        <p class="h5 fw-l inline-block">Vous avez une maitrise sur votre activité car  vous savez désormais ce que vous gagnez.</p>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-4">
-                    <div class="thumbnail thumbnail-mod-1">
-                        <div class="partner">
-                            <img class="partner" src="images/partner-10.png" alt="">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail-mod-1">
+                        <div class="progress-bar-wrapper">
+                            <img src="{{ config('app.url')}}/working/finish.png"/>
                         </div>
+                        <p class="h5 fw-l inline-block">Accès gratuit </p>
+                        <p class="h5 fw-l inline-block">L’inscription à la plateforme transvargo est gratuite.</p>
                     </div>
                 </div>
             </div>
