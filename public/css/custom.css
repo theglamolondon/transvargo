@@ -226,3 +226,8 @@ p.citation:after{
     height: 200px;
     width: 200px;
 }
+.no-background .box {
+    background: none;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}

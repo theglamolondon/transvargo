@@ -11,9 +11,8 @@
         <div class="container">
             <h2 class="text-center"> Qui sommes-nous ?</h2>
             <hr/>
-            <p class="about-us">Transvargo est une plateforme de réservation de camion en ligne qui met en relation transporteur et expéditeur.
-                A travers notre plateforme web  et notre application mobile nous voulons révolutionner ce secteur délaissé en aidant les expéditeurs
-                à expédier rapidement, simplement et à moindre  coût mais aussi les transporteurs à trouver du fret. </p>
+            <p class="about-us">Transvargo est une plateforme de réservation de camion qui entend révolutionner le transport routier de marchandise. A travers notre application web et mobile nous connectons, quiconque veut expédier des produits avec des transporteurs, quel que soit sa position géographique.</p>
+            <p class="about-us">En plus d’offrir à nos clients une solution simple, rapide  et économique nous propulsons l’avenir du transport routier de marchandise en Afrique en aidant l’expéditeur à déplacer leurs marchandises de manière efficace et les transporteurs à augmenter leurs revenues.</p>
         </div>
     </section>
 

@@ -11,7 +11,13 @@
                     </h1>
                     <div class="slogan">
                         <p class="response">Profitez de notre vaste réseau de camions partout en Côte d’ivoire.</p>
-                    </div><div class='btn-group-variant'> <div><!--<a class='btn btn-primary btn-sm' href='{{ route('apropos') }}#avantages'>Nos avantages</a>--> <a class='btn btn-white btn-sm' href='{{ route('register') }}'>Créer son compte</a></div></div>
+                    </div>
+                    <div class='btn-group-variant'>
+                        <div>
+                        <!--<a class='btn btn-white btn-sm' href='{{ route('apropos') }}#avantages'>Nos avantages</a>-->
+                            <a class='btn btn-primary btn-sm' href='{{ route('register') }}'>Créer son compte</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="swiper-wrapper">

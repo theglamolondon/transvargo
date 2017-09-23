@@ -13,18 +13,26 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700%7COpen+Sans:400,300);">
 
-    <link rel="stylesheet" href="{{config('app.url')}}/css/style.css">
-    <link rel="stylesheet" href="{{config('app.url')}}/css/custom.css">
+    <link rel="stylesheet" href="{{config('/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="Vous utilisez un navigateur ancien et peu sécurisé. Pour une meilleure expérience, veuillez utiliser un navigateur récent."></a></div>
     <script src="{{config('app.url')}}/js/html5shiv.min.js"></script>
     <![endif]-->
 </head>
-<body style="background: #333 url('{{config('app.url')}}/images/index-11.jpg') center center no-repeat fixed;background-size: cover;">
+<!-- <body style="background: #333 url('{{config('app.url')}}/images/index-11.jpg') center center no-repeat fixed;background-size: cover;"> -->
+<body style="background: #1A2C3A;">
     <section class="section section-inset-1 connexion" >
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
+
+                    <div class="row offset-5 no-background">
+                        <div class="col-lg-6 col-lg-offset-3 col-xs-offset-1 col-xs-10 box">
+                            <img src="{{asset("transvargo.png")}}">
+                        </div>
+                    </div>
+                    
                     <div class="row offset-5">
 
                         <div class="col-lg-6 col-lg-offset-3 col-xs-offset-1 col-xs-10 box">

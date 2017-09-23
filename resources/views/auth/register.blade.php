@@ -92,8 +92,7 @@
                             <div class="col-md-offset-1 col-md-3">
                                 <h3 >Compte client</h3>
                                 <div class="separateur"></div>
-                                <p class="text-sm-left description">Un compte client vous permet de faire des demandes de transport de marchandises à une grande flotte de transporteurs disponible sur notre plateforme. Vous bénéficiez d'un service
-                                    unique de qualité sans limitation en nombre de demande et à coût réduits.</p>
+                                <p class="text-sm-left description">Travailler avec <b>Transvargo</b>, c’est travailler  de manière professionnelle. C’est aussi faire du transport un avantage compétitif pour augmenter la satisfaction client.</p>
                             </div>
                         </div>
                         <div id="transporteur" class="tab-pane @if(old('comptecontribuable')) active @endif">
@@ -230,8 +229,7 @@
                             <div class="col-md-offset-1 col-md-3">
                                 <h3>Compte professionnel</h3>
                                 <div class="separateur"></div>
-                                <p class="text-sm-left description">Un compte professionnel de transport vous permet d'être alerté des demandes que les clients feront sur la plateforme et vous permettra d'y répondre. Vous bénéficiez d'un service
-                                    unique de qualité sans limitation en nombre de demande et à coûts réduits.</p>
+                                <p class="text-sm-left description">Accéder à des centaines d’offres  gratuitement sur notre plateforme et augmenter vos revenus.</p>
                             </div>
                         </div>
                     </div>
