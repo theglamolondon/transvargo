@@ -11,6 +11,8 @@
                         <th></th>
                         <th>Référence</th>
                         <th>Itininéraire</th>
+                        <th>Enlevement</th>
+                        <th>Livraison</th>
                         <th>Distance</th>
                         <th>Fragile</th>
                         <th width="14%">Coût</th>
@@ -19,10 +21,13 @@
                     <tbody>
                     @if($offres)
                     @foreach($offres as $offre)
+
                     <tr>
                         <td><a href="{{ route('transport.accept',['reference' => $offre->reference]) }}"><i class="fa fa-check"></i> </a> </td>
                         <td>{{ $offre->reference }}</td>
                         <td>De {{ $offre->lieudepart }} à {{ $offre->lieuarrivee }}</td>
+                        <td> {{ $offre->chargement-> adressechargement}}</td>
+                        <td> {{ $offre->chargement-> adresselivraison}}</td>
                         <td>{{ $offre->distance }} km</td>
                         <td>{{ $offre->fragile ? "oui" : "non" }}</td>
                         <td>{{ number_format($offre->prix,0,"."," ") }} FCFA</td>
