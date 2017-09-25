@@ -27,6 +27,6 @@ Route::middleware('api.auth')->group(function (){
     Route::post('/expeditions/offers/accept','Api\OffreController@acceptOffre');
 
     Route::get('/{transporteur}/expeditions/list','Api\TransporteurController@myExpeditions');
+
+    Route::post('/{transporteur}/chargement/{reference}/demarrage','Api\ChargementController@startChargement');
 });
-
-

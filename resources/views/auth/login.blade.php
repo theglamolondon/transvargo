@@ -20,8 +20,7 @@
     <script src="{{config('app.url')}}/js/html5shiv.min.js"></script>
     <![endif]-->
 </head>
-<!-- <body style="background: #333 url('{{config('app.url')}}/images/index-11.jpg') center center no-repeat fixed;background-size: cover;"> -->
-<body style="background: #1A2C3A;">
+<body style="background: #1A2C3A url('{{asset('/images/login-background.jpg')}}') center center no-repeat fixed;background-size: cover;">
     <section class="section section-inset-1 connexion" >
         <div class="container">
             <div class="row">

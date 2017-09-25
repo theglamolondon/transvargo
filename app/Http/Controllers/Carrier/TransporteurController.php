@@ -75,13 +75,19 @@ class TransporteurController extends Controller
 
     public function showAcceptOfferForm($reference){
         global $expedition;
-        $expedition = Expedition::where('reference',$reference)->first();
 
-        if(!$expedition)
+        $expedition = Expedition::with("chargement")
+            ->where('reference',$reference)
+            ->first();
+
+        if(!$expedition) {
             return back()->withErrors(Lang::get('message.erreur.offre'));
+        }
 
-        if($expedition->statut != Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
+        if( (!($expedition->statut != Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE ) && ($expedition->chargement->vehicule_id != null)) )
+        {
             return back()->withErrors(Lang::get('message.erreur.expedition.affectation'));
+        }
 
         $vehicules = Vehicule::where('transporteur_id',Auth::id())
             ->with(['typeCamion' => function ($query){

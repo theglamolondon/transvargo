@@ -163,9 +163,11 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('adressechargement')->nullable();
             $table->string('societechargement',100);
             $table->string('contactchargement',100);
+            $table->string('telephonechargement',15);
             $table->string('adresselivraison')->nullable();
             $table->string('societelivraison',100);
             $table->string('contactlivraison',100);
+            $table->string('telephonelivraison',15);
             $table->integer('vehicule_id')->unsigned()->nullable();
             $table->integer('expedition_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicule');

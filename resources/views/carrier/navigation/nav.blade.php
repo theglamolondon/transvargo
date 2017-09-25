@@ -14,7 +14,7 @@
         <li class="">
             <a href="javascript:void(0)">{{ request()->user()->authenticable->raisonsociale ? request()->user()->authenticable->raisonsociale : request()->user()->authenticable->prenoms }}</a>
             <ul class="rd-navbar-dropdown">
-                <li class=""><a href="#">Mon profil</a></li>
+                <li class=""><a href="{{ route("update.transporteur") }}">Mon profil</a></li>
                 <li><a href="{{ route('logout') }}">Deconnexion</a></li>
             </ul>
         </li>

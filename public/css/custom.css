@@ -42,7 +42,7 @@ div#waiting {
     text-align: justify;
 }
 .titre-article {
-    color: #066AAD;
+    color: #ea4444;
     clear: both;
 }
 .description {
@@ -50,7 +50,7 @@ div#waiting {
     padding-left: 10px;
 }
 .separateur{
-    background-color: #066AAD;
+    background-color: #ea4444;
     height: 3px;
     width: 150px;
     margin-bottom: 30px;
@@ -86,7 +86,7 @@ div#waiting {
     width: 70px;
 }
 .step.active .ring, .step.done .ring {
-    background-color: #066AAD;
+    background-color: #ea4444;
 }
 .ring {
     position: absolute;
@@ -128,7 +128,7 @@ div#waiting {
 }
 .step.active .title {
     color: #000;
-    border-bottom: 3px solid #066AAD;
+    border-bottom: 3px solid #ea4444;
 }
 .step .title {
     margin: 12px 0 0 0;
@@ -141,7 +141,7 @@ div#waiting {
 }
 .steps {
     padding-bottom: 0!important;
-    border-bottom: 2px solid #066AAD;
+    border-bottom: 2px solid #ea4444;
 }
 .ibox-content {
     clear: both;
@@ -228,6 +228,36 @@ p.citation:after{
 }
 .no-background .box {
     background: none;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 30px;
+}
+.element{
+    float: left;
+}
+.element .state.active{
+    background: #FF5C5C;
+}
+.element .state{
+    font-weight: bold;
+    color: #ffffff;
+    background: #999999;
+    border-radius: 15px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin: 0 2px 0 12px;
+    padding: 4px 1px 1px 1px;
+}
+.element .state span{
+    color: #777777;
+}
+
+.bar{
+    border-bottom: solid 1px #d4d4d4;
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    margin: 0 5px;
+    width: 20px;
 }

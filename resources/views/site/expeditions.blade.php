@@ -34,13 +34,13 @@ $total = 0;
                         @foreach($expeditions as $expedition)
                         <tr>
                             <td>
-                                <a title="Annuler l'expedition" class="icon icon-xs fa-trash icon-gray"></a>
+                                <a title="Annuler l'expedition" class="glyphicon glyphicon-trash"></a>
                                 @if($expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE)
                                     <a href="{{ route('client.newexpedition',['ref'=>base64_encode($expedition->reference)]) }}" title="Modifier l'expedition" class="icon icon-xs fa-pencil icon-gray"></a>
                                 @endif
                                 @if($expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_ACCEPTE)
-                                    <a href="{{ route('payment.choice',['reference'=>$expedition->reference]) }}" title="Payer l'expedition" class="icon icon-xs fa-money icon-gray"></a>
-                                    <a href="{{ route('client.pdf.facture',['reference'=>$expedition->reference]) }}" title="Télécharger la facture de l'expedition" class="icon icon-xs fa-file-pdf-o icon-gray"></a>
+                                    <a href="{{ route('payment.choice',['reference'=>$expedition->reference]) }}" title="Payer l'expedition" class="glyphicon glyphicon-usd"></a>
+                                    <a href="{{ route('client.pdf.facture',['reference'=>$expedition->reference]) }}" title="Télécharger la facture de l'expedition" class="glyphicon glyphicon-file"></a>
                                 @endif
                             </td>
                             <td>{{ $expedition->reference }}</td>

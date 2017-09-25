@@ -155,9 +155,11 @@ trait ExpeditionProcessing
             'adressechargement' => 'present',
             'societechargement' => 'required',
             'contactchargement' => 'required',
+            'telephonechargement' => 'required',
             'adresselivraison' => 'present',
             'societelivraison' => 'required',
             'contactlivraison' => 'required',
+            'telephonelivraison' => 'required',
         ];
     }
 
@@ -169,9 +171,11 @@ trait ExpeditionProcessing
             'adressechargement' => $data['adressechargement'],
             'societechargement' => $data['societechargement'],
             'contactchargement' => $data['contactchargement'],
+            'telephonechargement' => $data['telephonechargement'],
             'adresselivraison' => $data['adresselivraison'],
             'societelivraison' => $data['societelivraison'],
             'contactlivraison' => $data['contactlivraison'],
+            'telephonelivraison' => $data['telephonelivraison'],
         ]);
 
         $expedition->statut = Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE;
@@ -201,7 +205,9 @@ trait ExpeditionProcessing
      */
     protected function getOffers(){
         return Expedition::with("client","chargement","typeCamion")
+            //->join("")
             ->where('statut',Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
-            ->orderBy('datechargement');
+            ->orderBy('datechargement')
+            ->select("expedition.*");
     }
 }

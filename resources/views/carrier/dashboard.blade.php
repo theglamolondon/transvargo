@@ -10,7 +10,7 @@
 
     <section class="section">
         <div class="row">
-            <div class="panel panel-primary col-md-4 col-sm-6 col-xs-12" style="border-color: #fff">
+            <div class="panel panel-primary col-md-4 col-sm-12 col-xs-12" style="border-color: #fff">
                 <div class="panel-heading"> Mes véhicules <span><a class="bg-dark left" style="display: inline-block;" href="javascript:void(0);" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square"></i></a> </span></div>
                 <div class="panel-body">
                     @foreach($errors->all() as $erreur)
@@ -51,6 +51,13 @@
                 </div>
             </div>
 
+            <div class="panel panel-primary col-md-8 col-sm-12 col-xs-12" style="border-color: #fff">
+                <div class="panel-heading">Géo position des véhicules</div>
+                <div class="panel-body">
+                    <div id="map" style="height: 650px;"></div>
+                </div>
+            </div>
+            <!--
             <div class="panel panel-primary col-md-8 col-sm-6 col-xs-12" style="border-color: #fff">
                 <div class="panel-heading">Tableau de bord</div>
                 <div class="panel-body">
@@ -59,7 +66,6 @@
                         <hr>
                         <div class="row">
                             <div class="progress-container row offset-7 flow-offset-1">
-                                <!-- Progress Bar-->
                                 <div class="col-sm-6 col-md-3">
                                     <div class="thumbnail-mod-1">
                                         <div class="progress-bar-wrapper">
@@ -97,15 +103,11 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
         <hr class="clearfix"/>
 
-        <div class="panel panel-primary col-md-12 col-sm-12 col-xs-12" style="border-color: #fff">
-            <div class="panel-heading">Géo position des véhicules</div>
-            <div class="panel-body">
-                <div id="map" style="height: 650px;"></div>
-            </div>
-        </div>
+
     </section>
 
     <!-- Modal -->

@@ -54,6 +54,10 @@ Route::group(['middleware' => 'client', "prefix" => "tableau-bord"],function (){
     Route::get('/commande/{reference}.html','ClientController@showCommande')->name('client.commande');
     Route::post('/commande/{reference}.html','ExpeditionController@publishExpedition');
     Route::get('/mes-expeditions.html','ClientController@showExpeditions')->name('client.expeditions');
+    Route::get('/mes-expeditions/encours.html','ClientController@showExpeditionsEnCours')->name('client.expeditions.encours');
+    Route::get('/mes-expeditions/programmees.html','ClientController@showExpeditionsProgrammees')->name('client.expeditions.programmees');
+    Route::get('/mes-expeditions/livrees.html','ClientController@showExpeditionsLivrees')->name('client.expeditions.livrees');
+    Route::get('/mes-expeditions/annulees.html','ClientController@showExpeditionsAnnulees')->name('client.expeditions.annulees');
     //Route::get('/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
@@ -76,6 +80,8 @@ Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],functi
     Route::get('offres/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
     Route::post('offres/{reference}/accepter.html','ExpeditionController@acceptOffer');
     Route::get('chargements.html','Carrier\TransporteurController@showChargement')->name('transporteur.chargement');
+    Route::get('profile.html','Auth\UpdateProfileController@getViewTransporteurProfile')->name('update.transporteur');
+    Route::post('profile.html','Auth\UpdateProfileController@updateTransporteur');
 });
 
 /*Staff*/

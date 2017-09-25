@@ -52,20 +52,30 @@
 
                 <form class="form-horizontal col-md-8" action="{{ route('client.commande', ['reference' => $expedition->reference]) }}" method="post">
                     {{ csrf_field() }}
+
+                    <h3 class="titre">Chargement</h3>
+                    <div class="separateur"></div>
+
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Société au chargement *</label>
+                        <label class="control-label col-sm-4">Société *</label>
                         <div class="col-sm-8 col-xs-12">
                             <input type="text" placeholder="Nom de la société au chargement" id="societechargement" name="societechargement" class="form-control" value="{{old('societechargement')}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Contact au chargement *</label>
+                        <label class="control-label col-sm-4">Nom du contact *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" placeholder="Personne à contacter au chargement" id="contactchargement" name="contactchargement" class="form-control" value="{{old('contactchargement')}}">
+                            <input type="text" placeholder="Nom du contact au chargement" id="contactchargement" name="contactchargement" class="form-control" value="{{old('contactchargement')}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaires sur le chargement</label>
+                        <label class="control-label col-sm-4">Téléphone du contact *</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" maxlength="15" placeholder="Téléphone du contact au chargement" id="telephonechargement" name="telephonechargement" class="form-control" value="{{old('telephonechargement')}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaires</label>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                             <textarea class="form-control" name="adressechargement" placeholder="Informations sur le lieu de chargement et des marchandises" maxlength="255">{{old('adressechargement')}}</textarea>
                         </div>
@@ -74,21 +84,29 @@
                     <div class="nav nav-tabs"></div>
                     <br/>
 
+                    <h3 class="titre">Livraison</h3>
+                    <div class="separateur"></div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Société à la livraison *</label>
+                        <label class="control-label col-sm-4">Société *</label>
                         <div class="col-sm-8 col-xs-12">
                             <input type="text" placeholder="Nom de la société à la livraison" id="societelivraison" name="societelivraison" class="form-control" value="{{old('societelivraison')}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Contact à la livraison *</label>
+                        <label class="control-label col-sm-4">Nom du contact *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" placeholder="Personne à contacter à la livraison" id="contactlivraison" name="contactlivraison" class="form-control" value="{{old('contactlivraison')}}">
+                            <input type="text" placeholder="Nom du contact à la livraison" id="contactlivraison" name="contactlivraison" class="form-control" value="{{old('contactlivraison')}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaires sur la livraison</label>
+                        <label class="control-label col-sm-4">Téléphone du contact  *</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" maxlength="15" placeholder="N° téléphone du contact à la livraison" id="telephonelivraison" name="telephonelivraison" class="form-control" value="{{old('telephonelivraison')}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-6 col-xs-12">Informations complémentaires</label>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                             <textarea class="form-control" name="adresselivraison" placeholder="Informations sur le lieu de déchargement et des marchandises" maxlength="255">{{old('adresselivraison')}}</textarea>
                         </div>

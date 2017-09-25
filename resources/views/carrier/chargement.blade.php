@@ -8,8 +8,7 @@ $total = 0;
 <section class="section section-inset-1">
     <div class="col-md-offset-1 col-md-10">
         <div class="">
-
-
+            <br/>
             <div class="col-md-12 col-sm-12 col-xs-12 section-inset-1">
                 <div class="table-responsive">
                     <table class="table table-hover text-left">
@@ -19,11 +18,11 @@ $total = 0;
                             <th>Référence</th>
                             <th>Itininéraire</th>
                             <th>Distance</th>
-                            <th>Date chargement</th>
-                            <th>Nom du Chauffeur</th>
+                            <th>Date d'acceptation</th>
                             <th>Immatriculation</th>
+                            <th>Nom du Chauffeur</th>
                             <th>Contact</th>
-                            <th width="14%">Coût</th>
+                            <th width="14%">Prix</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -31,18 +30,28 @@ $total = 0;
                         @foreach($chargement as $chargements)
                         <tr>
                             <td>
-                                <a title="Annuler l'expedition" class="icon icon-xs fa-trash icon-gray"></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('transport.accept',['reference' => $chargements->expedition->reference]) }}">
+                                            <i class="glyphicon glyphicon-book"></i>
+                                            Détails
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a title="Annuler l'expedition" href="#"><i class="glyphicon glyphicon-trash"></i> Annuler</a></li>
+                                </ul>
                                 @if($chargements->expedition->statut == \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE)
                                 @endif
                             </td>
                             <td>{{ $chargements->expedition->reference }}</td>
                             <td>De [ {{ $chargements->expedition->lieudepart }} ]  à [ {{ $chargements->expedition->lieuarrivee }} ]</td>
                             <td>{{ $chargements->expedition->prix/\App\Expedition::UNIT_PRICE }} km</td>
-                            <td>{{ $chargements->expedition->datechargement }}</td>
-                            <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->chauffeur : '' ) : ''}}</td>
+                            <td>{{ (new \Carbon\Carbon($chargements->expedition->dateheureacceptation))->format("d/m/Y à H:i") }}</td>
                             <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->immatriculation : '') : ''}}</td>
+                            <td>{{ $chargements->vehicule ? $chargements->vehicule->chauffeur : '' }}</td>
                             <td>{{ $chargements ? ($chargements->vehicule ? $chargements->vehicule->telephone : '') : '' }}</td>
-                            <td>{{ number_format($chargements->expedition->prix* \App\Transporteur::POURCENTAGE,0,',',' ') }} Fcfa </td>
+                            <td>{{ number_format($chargements->expedition->prix * \App\Transporteur::POURCENTAGE,0,',',' ') }} Fcfa </td>
                             @php
                                 $total += $chargements->expedition->prix* \App\Transporteur::POURCENTAGE
                             @endphp

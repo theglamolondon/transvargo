@@ -14,7 +14,17 @@
                     <a href="#">Bonjour {{ request()->user()->authenticable->raisonsociale ? request()->user()->authenticable->raisonsociale : request()->user()->authenticable->prenoms }}</a>
                     <ul class="rd-navbar-dropdown">
                         <li role="presentation"><a href="{{ route('client.newexpedition') }}">Nouvelle expédition</a></li>
-                        <li role="presentation"><a href="{{ route('client.expeditions') }}">Mes expéditions</a></li>
+                        <li role="presentation">
+                            <li>
+                            <a href="{{ route('client.expeditions') }}">Mes expéditions</a>
+                            <ul class="rd-navbar-dropdown">
+                                <li role="presentation"><a href="{{ route("client.expeditions.encours") }}">En cours</a></li>
+                                <li role="presentation"><a href="{{ route("client.expeditions.programmees") }}">Programmés</a></li>
+                                <li role="presentation"><a href="{{ route("client.expeditions.livrees") }}">Livrées</a></li>
+                                <li role="presentation"><a href="{{ route("client.expeditions.annulees") }}">Annulées</a></li>
+                            </ul>
+                            </li>
+                        </li>
                         <li role="presentation"><a href="{{ route('client.myinvoice' )}}">Mes factures</a></li>
                         <li role="presentation"><a href="{{ route('client.myaccount') }}">Mon compte</a></li>
                         <li><a href="{{ route('logout') }}">Déconnexion</a></li>
