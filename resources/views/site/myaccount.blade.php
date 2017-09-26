@@ -1,84 +1,96 @@
 @extends('layouts._site')
 
 @section('content')
-<section class="bg-light section-lg">
-    <ol class="breadcrumb">
-        <li class="">Client</li>
-        <li class="active">Tableau de bord</li>
-    </ol>
-</section>
-<div class="col-xs-12 section-inset-1">
-    <div class="table-responsive">
-        <table class="table table-hover text-left">
-            <thead>
-            <tr class="bg-dark">
-                <th></th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><span class="icon icon-xs fa-trash icon-gray"></span></td>
-                <td><a href="shop-product.html">Apple iPhone 5s 16GB (Space Gray)</a></td>
-                <td>$29.00</td>
-                <td>
-                    <form class="quantity">
-                        <label><span class="icon fa-angle-left icon-gray"></span>
-                            <input value="1"><span class="icon fa-angle-right icon-gray"></span>
-                        </label>
-                    </form>
-                </td>
-                <td>$29.00</td>
-            </tr>
-            <tr>
-                <td><span class="icon icon-xs fa-trash icon-gray"></span></td>
-                <td><a href="shop-product.html">Samsung Galaxy S III (S3) Triband (Virgin-Mobile)</a></td>
-                <td>$29.00</td>
-                <td>
-                    <form class="quantity">
-                        <label><span class="icon fa-angle-left icon-gray"></span>
-                            <input value="1"><span class="icon fa-angle-right icon-gray"></span>
-                        </label>
-                    </form>
-                </td>
-                <td>$29.00</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <form class="rd-mailform coupon-form pull-sm-left">
-        <div class="mfInput pull-sm-left">
-            <input placeholder="Coupon code">
+<section class="section section-inset-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <h3 class="titre">Mon profil</h3>
+                <div class="separateur"></div>
+
+
+                <form class="form-horizontal col-md-8" action="{{ route("client.myaccount") }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Prénoms</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" placeholder="Votre prénom..." id="prenoms" name="prenoms" class="form-control" value="{{old('prenoms', \Illuminate\Support\Facades\Auth::user()->client->prenoms)}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Nom *</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" placeholder="Votre nom..." id="nom" name="nom" class="form-control" value="{{old('nom', \Illuminate\Support\Facades\Auth::user()->client->nom)}}" required>
+                        </div>
+                    </div>
+
+                    <div class="nav nav-tabs"></div>
+                    <br/>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Raison sociale</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input class="form-control" name="raisonsociale" type="text" placeholder="Votre raison sociale" value="{{old('raisonsociale', \Illuminate\Support\Facades\Auth::user()->client->raisonsociale)}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">N° téléphone *</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input class="form-control" name="contact" type="text" placeholder="Votre contact..." value="{{old('contact', \Illuminate\Support\Facades\Auth::user()->client->contact)}}" required>
+                        </div>
+                    </div>
+
+                    <div class="nav nav-tabs"></div>
+                    <br/>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Email *</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="email" disabled placeholder="email..." id="email" name="email" class="form-control" value="{{old('email', \Illuminate\Support\Facades\Auth::user()->email)}}">
+                        </div>
+                    </div>
+
+                    <input name="passwordupdate" id="passwordupdate" type="checkbox" value="1"> Modifier le mot de passe
+
+                    <div id="passwordToggle" class="" style="display: none;">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Mot de passe *</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <input type="password" placeholder="Mot de passe..." id="password" name="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Confirmation *</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <input type="password" placeholder="Confirmation mot de passe" id="password_confirmation" name="password_confirmation" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav nav-tabs"></div>
+                    <br/>
+
+                    <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Mettre à jour</button>
+                </form>
+
+                <div class="col-md-offset-1 col-md-3">
+                    <h3 >Compte client</h3>
+                    <div class="separateur"></div>
+                    <p class="text-sm-left description">Travailler avec <b>Transvargo</b>, c’est travailler  de manière professionnelle. C’est aussi faire du transport un avantage compétitif pour augmenter la satisfaction client.</p>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-sm">apply coupon</button>
-    </form>
-    <button type="submit" class="btn btn-primary btn-sm pull-sm-right">update cart</button>
-</div>
-<div class="col-xs-12 col-sm-7 col-sm-offset-5 col-lg-4 col-lg-offset-8">
-    <div class="table-responsive">
-        <table class="table table-hover text-left">
-            <thead>
-            <tr class="bg-dark">
-                <th>Cart Totals</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="text-gray">Subtotal</td>
-                <td>$58.00</td>
-            </tr>
-            <tr>
-                <td class="text-gray">Total</td>
-                <td class="font-secondary">$58.00</td>
-            </tr>
-            </tbody>
-        </table>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg offset-5">proceed to checkout</button>
-</div>
-<br class="clearfix"/><br/>
+</section>
+@endsection
+@section("script")
+<script type="application/javascript">
+    $("#passwordupdate").click(function () {
+        if($("#passwordupdate").is(":checked") )
+        {
+            $("#passwordToggle").fadeIn();
+        }else {
+            $("#passwordToggle").fadeOut();
+        }
+    });
+</script>
 @endsection

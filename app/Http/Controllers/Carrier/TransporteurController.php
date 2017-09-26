@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Schema;
 
 class TransporteurController extends Controller
 {
-    use ExpeditionProcessing;
+    use ExpeditionProcessing, ChargementEvolution;
 
     public function __construct()
     {
@@ -97,5 +97,20 @@ class TransporteurController extends Controller
             ->get();
 
         return view('carrier.accept',compact('expedition','vehicules'));
+    }
+
+    public function changeStatut(Request $request)
+    {
+        $this->validate($request, [
+            "reference" => "required|exists:expedition",
+            "statut" => "required|numeric"
+        ]);
+
+         if( $this->changeStatutExpedition($request->input("reference"), $request->input("statut")) )
+         {
+            return back()->with(Tools::MESSAGE_SUCCESS, "Expédition démarrée");
+         }else{
+             return back()->withErrors("Impossible de démarrer l'expédition");
+         }
     }
 }

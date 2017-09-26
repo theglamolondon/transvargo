@@ -94,6 +94,13 @@
                         </div>
                     </div>
                 </form>
+                @else
+                    <form class="col-md-4" method="post" action="{{ route("chargement.change.statut", [ "reference" => $expedition->reference ]) }}">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="reference" value="{{ $expedition->reference }}">
+                        <input type="hidden" name="statut" value="{{ \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS.\App\Services\Statut::AUTRE_ACCEPTE }}">
+                        <button type="submit" class="btn btn-primary btn-xs form-control">Démarrer le chargement</button>
+                    </form>
                 @endif
             </div>
 
@@ -108,26 +115,21 @@
             <div class="col-md-12">
                 <div class="element">
                     <span class="state active">1</span>
-                    <span>Acceptée</span>
+                    <span>Programmé</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state">2</span>
-                    <span>En chargement</span>
+                    <span class="state @if($expedition->statut >= 252) active @endif">2</span>
+                    <span>En cours</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state">3</span>
-                    <span>Chargement terminée</span>
+                    <span class="state @if($expedition->statut >= 262) active @endif">3</span>
+                    <span>Livrée</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state">4</span>
-                    <span>En livraison</span>
-                    <span class="bar"></span>
-                </div>
-                <div class="element">
-                    <span class="state">5</span>
+                    <span class="state @if($expedition->statut > 262) active @endif">4</span>
                     <span>Terminé</span>
                 </div>
             </div>

@@ -31,6 +31,10 @@ return [
         ]
     ],
 
+    'profil' => [
+        "update" => "Votre profil a été modiffié avec succès !"
+    ],
+
     'expedition' => [
         'initiee' => 'Votre demande d\'expédition a été initée, veuillez complèter quelques informations',
         'create' => "La publication de votre offre a été effectuée avec succès.",

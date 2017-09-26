@@ -61,6 +61,7 @@ Route::group(['middleware' => 'client', "prefix" => "tableau-bord"],function (){
     //Route::get('/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
+    Route::post('/mon-compte.html','Auth\UpdateProfileController@updateClient');
     Route::get('/facture/pdf/{reference}.html','Admin\Invoice\InvoiceController@showPDF')->name('client.pdf.facture');
 });
 
@@ -77,8 +78,9 @@ Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],functi
     Route::get('offres-map.html','Carrier\TransporteurController@showOffersOnMap')->name('transporteur.offres.map');
     Route::get('offres-liste.html','Carrier\TransporteurController@showOfferOnListView')->name('transporteur.offres.liste');
     Route::post('vehicule/ajouter.html','VehiculeController@addNewVehicle')->name('transport.ajoutervehicule');
-    Route::get('offres/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
-    Route::post('offres/{reference}/accepter.html','ExpeditionController@acceptOffer');
+    Route::get('expedition/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
+    Route::post('expedition/{reference}/accepter.html','ExpeditionController@acceptOffer');
+    Route::post('expedition/{reference}/change-statut.action','Carrier\TransporteurController@changeStatut')->name('chargement.change.statut');
     Route::get('chargements.html','Carrier\TransporteurController@showChargement')->name('transporteur.chargement');
     Route::get('profile.html','Auth\UpdateProfileController@getViewTransporteurProfile')->name('update.transporteur');
     Route::post('profile.html','Auth\UpdateProfileController@updateTransporteur');
