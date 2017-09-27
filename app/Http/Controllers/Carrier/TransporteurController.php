@@ -23,7 +23,7 @@ class TransporteurController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth','transporteur']);
+
     }
 
     public function showDashboard()
@@ -76,7 +76,7 @@ class TransporteurController extends Controller
     public function showAcceptOfferForm($reference){
         global $expedition;
 
-        $expedition = Expedition::with("chargement")
+        $expedition = Expedition::with("chargement.vehicule.typeCamion")
             ->where('reference',$reference)
             ->first();
 

@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Administrateur;
 use App\Client;
 use App\Http\Controllers\Controller;
+use App\Services\Statut;
 use App\Staff;
 use App\Transporteur;
 use App\TypeIdentitite;
 use App\Ville;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -73,18 +75,25 @@ class LoginController extends Controller
 
         if($user->authenticable instanceof Transporteur )
         {
+            session(["role" => Transporteur::class]);
             redirect()->route('transporteur.tableaubord');
         }
 
         if($user->authenticable instanceof Client )
         {
+            session(["role" => Client::class]);
             redirect()->route('client.expeditions');
         }
 
         if($user->authenticable instanceof Staff )
         {
+            session(["role" => Staff::class]);
             redirect()->route('admin.tableaubord');
         }
+
+        $timeToLive = 60*24*30; //minutes * heures * nombre jours = 1 mois de 30 jours
+
+        Cookie::queue("email",  $user->email, $timeToLive);
 
         return $route;
     }

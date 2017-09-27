@@ -14,7 +14,8 @@ return [
     \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_NON_NULL => 'Programmée',
     \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_ACCEPTE => 'Programmée (pris en charge)',
     \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_NON_ACCEPTE => 'Programmée (non pris en charge)',
-    \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_ANNULEE.\App\Services\Statut::AUTRE_NON_NULL => 'Annulée',
+    \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_ANNULEE.\App\Services\Statut::AUTRE_ACCEPTE => 'Annulée',
+    \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS.\App\Services\Statut::AUTRE_ACCEPTE => 'En cours',
     \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE => 'Initiée',
 
 

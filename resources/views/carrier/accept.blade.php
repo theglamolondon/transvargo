@@ -94,14 +94,25 @@
                         </div>
                     </div>
                 </form>
-                @else
-                    <form class="col-md-4" method="post" action="{{ route("chargement.change.statut", [ "reference" => $expedition->reference ]) }}">
+                <div class="col-md-4">
+                @elseif($expedition->statut == 251 )
+                    <form method="post" action="{{ route("chargement.change.statut", [ "reference" => $expedition->reference ]) }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="reference" value="{{ $expedition->reference }}">
                         <input type="hidden" name="statut" value="{{ \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS.\App\Services\Statut::AUTRE_ACCEPTE }}">
                         <button type="submit" class="btn btn-primary btn-xs form-control">Démarrer le chargement</button>
                     </form>
                 @endif
+                    <br>
+                    <p class="text-left">
+                        <span><i class="glyphicon glyphicon-user"></i> Chauffeur </span> <br/>
+                        <strong>{{ $expedition->chargement->vehicule->chauffeur }}</strong>
+                    </p>
+                    <p class="text-left">
+                        <span><i class="glyphicon glyphicon-cd"></i> Véhicule </span> <br/>
+                        <strong>{{ $expedition->chargement->vehicule->immatriculation }}</strong>
+                    </p>
+                </div>
             </div>
 
             @if($expedition->chargement->vehicule_id != null )

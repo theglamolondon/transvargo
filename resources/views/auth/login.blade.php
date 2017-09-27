@@ -46,7 +46,7 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail" class="control-label">Email ou N° de téléphone</label>
-                                    <input type="text" placeholder="E-mail ou n° de téléphone" id="exampleInputEmail" class="form-control" name="email" value="{{ old('email') }}">
+                                    <input type="text" placeholder="E-mail ou n° de téléphone" id="exampleInputEmail" class="form-control" name="email" value="{{ old('email', \Illuminate\Support\Facades\Cookie::get("email")) }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1" class="control-label">Mot de passe</label>
