@@ -47,7 +47,7 @@ Route::get('validation/{token}', 'SiteController@validation')->name('register.co
 /* end site route */
 
 /*Client*/
-Route::group(['middleware' => 'client', "prefix" => "tableau-bord"],function (){
+Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function (){
     //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
     Route::get('/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
     Route::post('/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
@@ -66,14 +66,14 @@ Route::group(['middleware' => 'client', "prefix" => "tableau-bord"],function (){
 });
 
 /*Payment*/
-Route::group(["middleware" => "auth", "prefix" => "billing"],function (){
+Route::group(["middleware" => ["auth","client"], "prefix" => "billing"],function (){
     Route::get("expedition/{reference}/option-de-paiement.html",'Finance\PaymentController@showChoosePayment')->name("payment.choice");
     Route::post("orange-money/purchase/success.html",'Finance\PaymentController@omPaySuccess')->name("payment.om.success");
     Route::post("orange-money/purchase/error.html",'Finance\PaymentController@omPayError')->name("payment.om.error");
 });
 
 /*Transporteur*/
-Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],function (){
+Route::group(['middleware' => ['auth','transporteur'], 'prefix' => 'transporteur' ],function (){
     Route::get('tableau-bord.html','Carrier\TransporteurController@showDashboard')->name('transporteur.tableaubord');
     Route::get('offres-map.html','Carrier\TransporteurController@showOffersOnMap')->name('transporteur.offres.map');
     Route::get('offres-liste.html','Carrier\TransporteurController@showOfferOnListView')->name('transporteur.offres.liste');
@@ -87,7 +87,7 @@ Route::group(['middleware' => 'transporteur', 'prefix' => 'transporteur'],functi
 });
 
 /*Staff*/
-Route::group(['middleware' => 'staff', 'prefix' => 'staff'],function (){
+Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function (){
     Route::get('tableau-bord.html','Admin\StaffController@showDashboard')->name('admin.tableaubord');
     Route::get('transporteurs/recents.html','Admin\StaffController@showRecentCarrier')->name('admin.transporteur.recents');
     Route::get('transporteurs.html','Admin\StaffController@showCarriers')->name('admin.transporteur.all');

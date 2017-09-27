@@ -139,6 +139,12 @@
                     <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Inscription</button>
                 </form>
                 <div class="col-md-offset-1 col-md-3">
+
+                    <div class="photo">
+                        <img src="" id="pp" />
+                        <input name="pp-input" id="pp-input" type="file" >
+                    </div>
+
                     <h3>Compte professionnel</h3>
                     <div class="separateur"></div>
                     <p class="text-sm-left description">Accéder à des centaines d’offres  gratuitement sur notre plateforme et augmenter vos revenus.</p>
