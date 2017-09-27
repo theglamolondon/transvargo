@@ -39,6 +39,27 @@ class DatabaseTransvargoSeeder extends Seeder
                 "typeidentite_id" => 3
             ],
         ]);
+        DB::table('identiteaccess')->insert([
+            [
+                "email"  => "glamolondon@gmail.com" ,
+                "password"  => bcrypt('azerty'),
+                "statut" => \App\Services\Statut::TYPE_IDENTITE_ACCESS.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL,
+                "activate_token" => "ND",
+                "terms" => 1,
+                "typeidentite_id" => 1
+            ],
+        ]);
+        DB::table('identiteaccess')->insert([
+            [
+                "email"  => "glamolondon@live.fr" ,
+                "password"  => bcrypt('azerty'),
+                "statut" => \App\Services\Statut::TYPE_IDENTITE_ACCESS.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL,
+                "activate_token" => "ND",
+                "terms" => 1,
+                "typeidentite_id" => 2
+            ],
+        ]);
+
         DB::table('staff')->insert([
             [
                 "nom" => "Toubo",
@@ -46,6 +67,35 @@ class DatabaseTransvargoSeeder extends Seeder
                 "role" => "ceo",
                 "identiteaccess_id" => 1
             ],
+        ]);
+
+        DB::table('client')->insert([
+           [
+               "nom" => "Koffi",
+               "prenoms" => "Willy",
+               "contact" => "47631443",
+               "raisonsociale" => "Koffi",
+               "datecreation" => Carbon\Carbon::now()->toDateTimeString(),
+               "identiteaccess_id" => 2
+           ]
+        ]);
+
+        DB::table('transporteur')->insert([
+            [
+                "nom" => "Koff",
+                "prenoms" => "Berenger",
+                "raisonsociale" => "BYES",
+                "contact" => "22437318",
+                "comptecontribuable" => "CI-ABJ-2014-125A",
+                "ville" => "ABIDJAN",
+                "nationalite" => "Ivoirienne",
+                "typetransporteur_id" => 1,
+                "datecreation" => Carbon\Carbon::now()->toDateTimeString(),
+                "datenaissance" => "1967-05-25",
+                "lieunaissance" => "Cocody",
+                "rib" => "12548896587",
+                "identiteaccess_id" => 3
+            ]
         ]);
     }
 }
