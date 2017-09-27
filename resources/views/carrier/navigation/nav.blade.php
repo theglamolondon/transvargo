@@ -10,7 +10,6 @@
             </ul>
         </li>
         <li class=""><a href="{{ route('transporteur.chargement') }}">Mes chargements</a></li>
-        <li class=""><a href="#">Factures</a></li>
         <li class="">
             <a href="javascript:void(0)">{{ request()->user()->authenticable->raisonsociale ? request()->user()->authenticable->raisonsociale : request()->user()->authenticable->prenoms }}</a>
             <ul class="rd-navbar-dropdown">
