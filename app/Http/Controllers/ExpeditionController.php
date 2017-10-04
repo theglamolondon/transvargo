@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewExpedition;
 use App\Expedition;
 use App\Metier\ExpeditionProcessing;
 use App\Services\Statut;
@@ -36,7 +37,9 @@ class ExpeditionController extends Controller
         try{
             $this->validate($request,$this->validateCommande());
 
-            $this->saveCommande($this->getExpeditionByReference($reference),$request->all());
+            $expedition = $this->saveCommande($this->getExpeditionByReference($reference),$request->all());
+
+            event(new NewExpedition($expedition));
 
             return redirect()
                 ->route('client.expeditions')

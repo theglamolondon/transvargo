@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\IdentiteAccess;
+use App\Services\Firebase\Linked;
 use App\Services\Statut;
 use App\Work\Tools;
 use Carbon\Carbon;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 class SiteController extends Controller
 {
-    //
+    use Linked;
 
     public function index(Request $request){
         return view('site.index');

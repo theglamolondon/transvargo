@@ -70,8 +70,10 @@
                     </p>
                 </div>
 
+
+                <div class="col-md-4">
                 @if($expedition->chargement->vehicule_id == null )
-                <form class="col-md-4" method="post" action="">
+                    <form method="post" action="">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -94,8 +96,7 @@
                         </div>
                     </div>
                 </form>
-                <div class="col-md-4">
-                @elseif($expedition->statut == 251 )
+                @elseif($expedition->statut == 242 )
                     <form method="post" action="{{ route("chargement.change.statut", [ "reference" => $expedition->reference ]) }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="reference" value="{{ $expedition->reference }}">

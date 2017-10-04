@@ -163,11 +163,16 @@ trait ExpeditionProcessing
         ];
     }
 
+    /**
+     * @param Expedition $expedition
+     * @param array $data
+     * @return Expedition
+     */
     private function saveCommande(Expedition $expedition,array $data)
     {
         //dd($expedition);
         $chargement = new Chargement([
-            'dateheurechargement' => Carbon::now()->toDateTimeString(),
+            //'dateheurechargement' => Carbon::now()->toDateTimeString(),
             'adressechargement' => $data['adressechargement'],
             'societechargement' => $data['societechargement'],
             'contactchargement' => $data['contactchargement'],
@@ -184,6 +189,8 @@ trait ExpeditionProcessing
         $chargement->expedition()->associate($expedition);
 
         $chargement->saveOrFail();
+
+        return $chargement->expedition;
     }
 
 

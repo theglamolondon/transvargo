@@ -49,6 +49,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->integer('identiteaccess_id')->unsigned();
             $table->string('nom',100)->nullable();
             $table->string('prenoms',150)->nullable();
+            $table->string('photo',150)->default('default_profile.png');
             $table->string('raisonsociale',150);
             $table->string('contact');
             $table->string('comptecontribuable',100)->nullable();
@@ -98,7 +99,7 @@ class CreateDatabaseTransvargo extends Migration
         Schema::create('vehicule',function (Blueprint $table){
             $table->increments('id');
             $table->string('immatriculation',15);
-            $table->float('capacite',6,2);
+            $table->float('capacite',8,2);
             $table->string('chauffeur',150);
             $table->string('telephone',70);
             $table->string('statut')->defalut(\App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL);
@@ -168,6 +169,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('societelivraison',100);
             $table->string('contactlivraison',100);
             $table->string('telephonelivraison',15);
+            $table->dateTime('dateheurelivraison')->nullable();
             $table->integer('vehicule_id')->unsigned()->nullable();
             $table->integer('expedition_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicule');

@@ -108,3 +108,5 @@ Route::post('/newsletter/sign-up','NewsLetter\SignUpController@register')->name(
 /*AJAX*/
 Route::post('/ajax/distanceMatrix','AjaxController@getDistanceMatrix')->name('ajax.distancematrix');
 Route::get('/ajax/transporteur/offers','AjaxController@getOffersToJson')->name('ajax.offers');
+
+Route::get('/test',"SiteController@test");

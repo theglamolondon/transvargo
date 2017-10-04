@@ -261,3 +261,11 @@ p.citation:after{
     margin: 0 5px;
     width: 60px;
 }
+.photo img#pp{
+    width: 212px;
+    border: 1px solid #777777;
+    padding: 5px;
+}
+.dropdown-point .dropdown-menu{
+    top:30%;
+}
