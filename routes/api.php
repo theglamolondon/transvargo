@@ -35,5 +35,5 @@ Route::middleware('api.auth')->group(function (){
 
     Route::post('{transporteur}/chargement/delivry','Api\ChargementController@delivry');
 
-    Route::post('{transporteur}/chargement/delivry/otp-check','Api\ChargementController@checkOTP');
+    Route::post('{transporteur}/chargement/finish','Api\ChargementController@finish');
 });

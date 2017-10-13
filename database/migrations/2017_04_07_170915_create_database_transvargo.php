@@ -136,7 +136,6 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('reference',100);
             $table->dateTime('dateheurecreation');
             $table->dateTime('dateheureacceptation')->nullable();
-            $table->dateTime('dateheurelivraison')->nullable();
             $table->date('datechargement');
             $table->date('dateexpiration');
             $table->string('lieudepart',100);
@@ -169,6 +168,8 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('societelivraison',100);
             $table->string('contactlivraison',100);
             $table->string('telephonelivraison',15);
+            $table->string('otp',5)->nullable();
+            $table->dateTime('dateheureotp')->nullable();
             $table->dateTime('dateheurelivraison')->nullable();
             $table->integer('vehicule_id')->unsigned()->nullable();
             $table->integer('expedition_id')->unsigned();

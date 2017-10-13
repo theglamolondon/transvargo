@@ -16,17 +16,15 @@ class DelivryChargement
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $expedition;
-    public $otp;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Expedition $expedition, $otp = null)
+    public function __construct(Expedition $expedition)
     {
         $this->expedition = $expedition;
-        $this->otp = $otp;
     }
 
     /**

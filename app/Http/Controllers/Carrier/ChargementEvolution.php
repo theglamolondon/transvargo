@@ -45,8 +45,10 @@ trait ChargementEvolution
 
             case Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_ACCEPTE :
                 $chargement->dateheurelivraison = Carbon::now()->toDateTimeString();
-                $chargement->vehicule->statut = Statut::TYPE_VEHICULE.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL; //Véhicule devient livre
+                $chargement->vehicule->statut = Statut::TYPE_VEHICULE.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL; //Véhicule devient libre
                 break;
         }
+
+        $chargement->vehicule->save();
     }
 }
