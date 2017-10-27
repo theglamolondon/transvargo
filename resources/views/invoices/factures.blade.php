@@ -1,4 +1,4 @@
-@extends('invoices.layout')
+web@extends('invoices.layout')
 @php
     $total = 0;
 @endphp
