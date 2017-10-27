@@ -36,25 +36,7 @@ class ChargementController extends Controller
 
     public function delivry($transporteur)
     {
-        try{
-            $expedition = Expedition::with("chargement")
-                            ->where("reference",request()->input("reference"))
-                            ->first();
-
-            $this->generateOtp($expedition->chargement);
-
-            event(new DelivryChargement($expedition));
-
-            return response()->json([
-                "message" => "Livraison en attente de validation",
-                "otp" => $expedition->chargement->otp
-            ],200,[
-                "Content-Type" => "text/json; charset=utf-8"
-            ],JSON_UNESCAPED_UNICODE);
-
-        }catch (ModelNotFoundException $e){
-            return response()->json(["message" => "Ce chargement n'existe dans votre liste."], 400);
-        }
+        return $this->livrerChargement(request());
     }
 
     public function finish($transporteur)
@@ -75,14 +57,5 @@ class ChargementController extends Controller
         }catch (ModelNotFoundException $e){
             return response()->json(["message" => "Ce chargement n'existe dans votre liste."], 400);
         }
-    }
-
-    private function generateOtp(Chargement $chargement)
-    {
-        $otp = rand(10000,99999);
-        $chargement->otp = $otp;
-        $chargement->dateheureotp = Carbon::now()->toDateTimeString();
-        $chargement->saveOrFail();
-        return $otp;
     }
 }

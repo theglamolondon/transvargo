@@ -18,6 +18,10 @@ class SiteController extends Controller
 {
     use Linked;
 
+    public function test(){
+
+    }
+
     public function index(Request $request){
         return view('site.index');
     }

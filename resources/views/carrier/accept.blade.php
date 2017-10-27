@@ -103,8 +103,9 @@
                         <input type="hidden" name="statut" value="{{ \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS.\App\Services\Statut::AUTRE_ACCEPTE }}">
                         <button type="submit" class="btn btn-primary btn-xs form-control">Démarrer le chargement</button>
                     </form>
+                    <br/>
                 @endif
-                    <br>
+                @if( $expedition->chargement->vehicule != null )
                     <p class="text-left">
                         <span><i class="glyphicon glyphicon-user"></i> Chauffeur </span> <br/>
                         <strong>{{ $expedition->chargement->vehicule->chauffeur }}</strong>
@@ -113,6 +114,11 @@
                         <span><i class="glyphicon glyphicon-cd"></i> Véhicule </span> <br/>
                         <strong>{{ $expedition->chargement->vehicule->immatriculation }}</strong>
                     </p>
+                    <form action="{{ route('chargement.livrer', [ "reference" => $expedition->reference ]) }}" method="post">
+                        {{ csrf_field() }}
+                        <button type="button" class="btn btn-primary btn-xs form-control" data-toggle="modal" data-target="#myModal" onclick="beginLivraison();">Livrer</button>
+                    </form>
+                @endif
                 </div>
             </div>
 
@@ -154,6 +160,33 @@
     </section>
 
     <br class="clearfix"/>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+        <form action="{{ route("chargement.valide.livraison", [ "reference" => $expedition->reference ]) }}" method="post">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Vérification du OTP envoyé par SMS</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{csrf_field()}}
+                        <div class="row">
+                            <div class="form-group distance">
+                                <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Code OTP *</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <input type="hidden" name="reference" value="{{ $expedition->reference }}">
+                                    <input type="text" class="numbers-only form-control" max="5" maxlength="5" name="otp" id="otp" placeholder="XXXXX">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Vérifier</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 
 @section('script')
@@ -189,6 +222,21 @@
                 if (status == 'OK') {
                     directionsDisplay.setDirections(result);
                 }
+            });
+        }
+
+        function beginLivraison() {
+            $.ajax({
+                type:"POST",
+                url:"{{ route("chargement.livrer", [ "reference" => $expedition->reference ]) }}",
+                data:{
+                    _token: "{{ csrf_token() }}",
+                    reference: "{{ $expedition->reference }}"
+                },
+                success : function (data, status, xhr) {
+                    
+                }
+                
             });
         }
     </script>

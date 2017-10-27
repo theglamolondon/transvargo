@@ -81,6 +81,8 @@ Route::group(['middleware' => ['auth','transporteur'], 'prefix' => 'transporteur
     Route::get('expedition/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
     Route::post('expedition/{reference}/accepter.html','ExpeditionController@acceptOffer');
     Route::post('expedition/{reference}/change-statut.action','Carrier\TransporteurController@changeStatut')->name('chargement.change.statut');
+    Route::post('expedition/{reference}/livrer.html','Carrier\TransporteurController@delivry')->name('chargement.livrer');
+    Route::post('expedition/{reference}/livraison/valider','Carrier\TransporteurController@validerLivraison')->name('chargement.valide.livraison');
     Route::get('chargements.html','Carrier\TransporteurController@showChargement')->name('transporteur.chargement');
     Route::get('profile.html','Auth\UpdateProfileController@getViewTransporteurProfile')->name('update.transporteur');
     Route::post('profile.html','Auth\UpdateProfileController@updateTransporteur');
@@ -100,6 +102,8 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::post('client/switch/grand-compte.html','Admin\GrandCompteController@switchGrandClient')->name('staff.switch.gc');
 
     Route::get('invoice/grang-compte/0000-{id}.html','Admin\Invoice\InvoiceController@showInvoiceBoard')->name('staff.invoice');
+
+    Route::get('offres.html','Admin\OffreController@liste')->name('staff.offres');
 });
 
 /*Newsletter*/

@@ -113,4 +113,25 @@ class TransporteurController extends Controller
              return back()->withErrors("Impossible de démarrer l'expédition");
          }
     }
+
+    public function delivry(Request $request)
+    {
+        return $this->livrerChargement($request);
+    }
+
+    public function validerLivraison(Request $request)
+    {
+        if($r)
+        try{
+            if(
+            !$this->changeStatutExpedition(request()->input("reference"), Statut::create(Statut::TYPE_EXPEDITION, Statut::ETAT_LIVREE, Statut::AUTRE_ACCEPTE))
+            ){
+                throw new ModelNotFoundException();
+            }
+
+            return redirect()->route("transporteur.offres.liste")->with(Tools::MESSAGE_SUCCESS, sprintf("Expédition %s livrée et terminée", $request->input("reference")));
+        }catch (ModelNotFoundException $e){
+            return back()->withErrors("Ce chargement n'existe dans votre liste.");
+        }
+    }
 }

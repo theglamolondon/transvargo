@@ -17,6 +17,7 @@ return [
     \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_ANNULEE.\App\Services\Statut::AUTRE_ACCEPTE => 'Annulée',
     \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS.\App\Services\Statut::AUTRE_ACCEPTE => 'En cours',
     \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE => 'Initiée',
+    \App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE.\App\Services\Statut::AUTRE_ACCEPTE=> 'Livré',
 
 
     \App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_INACTIF.\App\Services\Statut::AUTRE_NON_NULL => 'Véhicule inactif',
