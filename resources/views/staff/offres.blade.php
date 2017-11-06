@@ -64,7 +64,7 @@
     <div class="col-md-12">
         <div class="">
             <div class="col-md-6 col-sm-8 col-xs-12">
-                <h3 class="text-left">Liste des offres</h3>
+                <h3 class="text-left">Liste des offres ({{ number_format($expeditions->count(),0,".", " ") }} offres trouvées)</h3>
                 <div class="separateur"></div>
             </div>
         </div>
@@ -83,6 +83,7 @@
                     <th>Date chargement</th>
                     <th>Distance</th>
                     <th>Client</th>
+                    <th>Statut</th>
                     <th>Transporteur</th>
                     <th>Véhicule</th>
                     <th>Type camion</th>
@@ -91,7 +92,7 @@
                 <tbody>
                 @foreach($expeditions as $expedition)
                     <tr>
-                        <td><a href="#">{{ $expedition->reference }}</a></td>
+                        <td><a href="{{ route("staff.offre.details",["reference" => $expedition->reference]) }}">{{ $expedition->reference }}</a></td>
                         <td>{{ (new \Carbon\Carbon($expedition->dateheurecreation))->format('d/m/Y H:i') }}</td>
                         <td>{{ (new \Carbon\Carbon($expedition->dateexpiration))->format('d/m/Y') }}</td>
                         <td>{{ $expedition->lieudepart }}</td>
@@ -99,6 +100,7 @@
                         <td>{{ (new \Carbon\Carbon($expedition->datechargement))->format('d/m/Y') }}</td>
                         <td>{{ number_format($expedition->distance,0,','," ")}} km</td>
                         <td>{{ $expedition->client->nom }} {{ $expedition->client->prenoms }}</td>
+                        <td>{{ \Illuminate\Support\Facades\Lang::get('statut.'.$expedition->statut) }}</td>
                         <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->transporteur->raisonsociale : "") : ""}}</td>
                         <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->immatriculation : "") : ""}}</td>
                         <td>{{ $expedition->typeCamion->libelle }}</td>

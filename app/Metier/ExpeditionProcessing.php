@@ -139,12 +139,15 @@ trait ExpeditionProcessing
 
     private function getExpeditionByReference($reference)
     {
-        $expedition = Expedition::where('reference',$reference)
-            ->with('chargement')
-            ->firstOrNew([]);
+        $expedition = null;
+        try {
+            $expedition = Expedition::with('chargement.vehicule.transporteur', 'client', 'typeCamion')
+                ->where('reference', $reference)
+                ->firstOrFail();
 
-        if(!$expedition->exists)
+        }catch (ModelNotFoundException $e){
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.notfound'));
+        }
 
         return $expedition;
     }

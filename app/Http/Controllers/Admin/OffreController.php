@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Expedition;
+use App\Metier\ExpeditionProcessing;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class OffreController extends Controller
 {
+    use ExpeditionProcessing;
+
     public function liste(Request $request)
     {
         $expeditions = Expedition::with('typeCamion','client','chargement.vehicule.transporteur')
@@ -46,6 +50,18 @@ class OffreController extends Controller
                     ->join("transporteur", "transporteur.identiteaccess_id", "=", "vehicule.transporteur_id")
                 ->whereRaw("concat(transporteur.nom, transporteur.prenoms, transporteur.raisonsociale) like '%".$request->query("transporteur_name")."%'");
             }
+        }
+    }
+
+    public function details($reference)
+    {
+        try{
+            $expedition = $this->getExpeditionByReference($reference);
+
+            return view("carrier.accept", compact("expedition"));
+        }catch (ModelNotFoundException $e){
+            logger($e->getTraceAsString());
+            return back()->withErrors($e->getMessage());
         }
     }
 }

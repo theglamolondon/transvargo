@@ -42,12 +42,7 @@ class ChargementController extends Controller
     public function finish($transporteur)
     {
         try{
-            if(
-            !$this->changeStatutExpedition(request()->input("reference"), Statut::create(Statut::TYPE_EXPEDITION, Statut::ETAT_LIVREE, Statut::AUTRE_ACCEPTE))
-            ){
-                throw new ModelNotFoundException();
-            }
-
+            $this->finishExpedition(\request());
             return response()->json([
                 "message" => sprintf("Expédition %s livrée et terminée", request()->input("reference"))
             ],200,[

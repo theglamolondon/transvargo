@@ -19,7 +19,7 @@ Route::get('/refresh/token','Api\LoginController@refreshToken');
 
 Route::middleware('api.auth')->group(function (){
 
-    //TODO: Recevoir une notification à chaque nouvelle publication sur la plateforme à chaque nouvelle publication d'expédition
+    Route::post('token/refresh','Api\LocalisationController@refreshToken');
 
     Route::get('/expeditions/offers/list','Api\OffreController@liste');
 
@@ -36,4 +36,6 @@ Route::middleware('api.auth')->group(function (){
     Route::post('{transporteur}/chargement/delivry','Api\ChargementController@delivry');
 
     Route::post('{transporteur}/chargement/finish','Api\ChargementController@finish');
+
+    Route::post('gps/location/store','Api\LocalisationController@storePosition');
 });

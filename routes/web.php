@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
     Route::post('/mon-compte.html','Auth\UpdateProfileController@updateClient');
-    Route::get('/facture/pdf/{reference}.html','Admin\Invoice\InvoiceController@showPDF')->name('client.pdf.facture');
+    Route::get('/facture/pdf/{reference}.html','Admin\Invoice\InvoiceController@showFacturePDF')->name('client.pdf.facture');
 });
 
 /*Payment*/
@@ -100,10 +100,9 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('grand-compte.html','Admin\GrandCompteController@showList')->name('staff.gc.liste');
 
     Route::post('client/switch/grand-compte.html','Admin\GrandCompteController@switchGrandClient')->name('staff.switch.gc');
-
     Route::get('invoice/grang-compte/0000-{id}.html','Admin\Invoice\InvoiceController@showInvoiceBoard')->name('staff.invoice');
-
     Route::get('offres.html','Admin\OffreController@liste')->name('staff.offres');
+    Route::get('offre/{reference}/details.html','Admin\OffreController@details')->name('staff.offre.details');
 });
 
 /*Newsletter*/

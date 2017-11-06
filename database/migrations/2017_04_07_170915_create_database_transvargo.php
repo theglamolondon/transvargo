@@ -98,6 +98,7 @@ class CreateDatabaseTransvargo extends Migration
         });
         Schema::create('vehicule',function (Blueprint $table){
             $table->increments('id');
+            $table->string('firebasetoken',255)->nullable();
             $table->string('immatriculation',15);
             $table->float('capacite',8,2);
             $table->string('chauffeur',150);
@@ -117,6 +118,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('nom',100);
             $table->string('contact',70);
         });
+        /*
         Schema::create('facture',function (Blueprint $table){
             $table->bigIncrements('id');
             $table->dateTime('datefacture');
@@ -131,6 +133,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->foreign("staff_id")->references("identiteaccess_id")->on("staff");
             $table->foreign("staff_id")->references("identiteaccess_id")->on("client");
         });
+        */
         Schema::create('expedition',function (Blueprint $table){
             $table->increments('id');
             $table->string('reference',100);
@@ -151,11 +154,12 @@ class CreateDatabaseTransvargo extends Migration
             //$table->integer('nature_id')->unsigned();
             $table->integer('client_id')->unsigned();
             $table->integer('typecamion_id')->unsigned();
-            $table->unsignedInteger("facture_id")->nullable();
+            $table->string("facture", 100)->nullable();
+            $table->string("bonlivraison", 100)->nullable();
             $table->foreign('typecamion_id')->references('id')->on('typecamion');
             //$table->foreign('nature_id')->references('id')->on('nature');
             $table->foreign('client_id')->references('identiteaccess_id')->on('client');
-            $table->foreign('facture_id')->references('id')->on('facture');
+            //$table->foreign('facture_id')->references('id')->on('facture');
         });
         Schema::create('chargement',function (Blueprint $table){
             $table->increments('id');
@@ -180,6 +184,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->bigIncrements('id');
             $table->string('latitude',50);
             $table->string('longitude',50);
+            $table->string('speed',15)->default("0");
             $table->integer('vehicule_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicule');
         });

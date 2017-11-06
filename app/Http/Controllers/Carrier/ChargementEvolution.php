@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Carrier;
 
 use App\Chargement;
 use App\Events\DelivryChargement;
+use App\Events\ExpeditionFinish;
 use App\Expedition;
 use App\Services\Statut;
 use Carbon\Carbon;
@@ -75,6 +76,23 @@ trait ChargementEvolution
         }catch (ModelNotFoundException $e){
             return response()->json(["message" => "Ce chargement n'existe dans votre liste."], 400);
         }
+    }
+
+    private function finishExpedition(Request $request)
+    {
+        if(
+        !$this->changeStatutExpedition(request()->input("reference"), Statut::create(Statut::TYPE_EXPEDITION, Statut::ETAT_LIVREE, Statut::AUTRE_ACCEPTE))
+        ){
+            throw new ModelNotFoundException();
+        }
+
+        $expedition = Expedition::with('client','chargement.vehicule.transporteur','typeCamion')
+            ->where("reference", $request->input("reference"))->firstOrFail();
+
+        event(new ExpeditionFinish($expedition));
+
+        $expedition->bonlivraison = sprintf("BL%s-%04d", date('Ym'), $expedition->id);
+        $expedition->saveOrFail();
     }
 
     private function generateOtp(Chargement $chargement)
