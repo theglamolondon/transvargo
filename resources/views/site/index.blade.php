@@ -84,7 +84,7 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <img src="{{ config('app.url')}}/working/desk.png"/>
+                                <img src="{{ asset('working/FINGER.png')}}"/>
                             </div>
                             <p class="h5 fw-l inline-block">Prix Compétitif</p>
                             <p class="h5 fw-l inline-block">les prix que propose transvargo est très abordable et stable. Vous ne payez que pour le service effectué.</p>
@@ -94,7 +94,7 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <img src="{{ config('app.url')}}/working/package.png"/>
+                                <img src="{{ asset('working/CARTIMEFAST')}}.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Rapide</p>
                             <p class="h5 fw-l inline-block">Avec transvargo vous ne perdez plus de temps et vôtre équipe  a le temps de se consacrer à autre chose car vous expédiez vos produits en seulement quelques clics.</p>
@@ -104,7 +104,7 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <img src="{{ config('app.url')}}/working/phone.png"/>
+                                <img src="{{ asset('working/BOLD-PARTNER')}}.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Transparent</p>
                             <p class="h5 fw-l inline-block">Vous faites des économies sur le contrat de transport car tout transparent et justifié, pas besoin de frais supplémentaires. </p>
@@ -114,7 +114,7 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <img src="{{ config('app.url')}}/working/sent.png"/>
+                                <img src="{{ asset('working/VERROU')}}.png"/>
                             </div>
                             <p class="h5 fw-l inline-block" >Sécurisé</p>
                             <p class="h5 fw-l inline-block">Nos partenaires transporteurs sont uniquement des professionnels et en plus vous pouvez suivre l’acheminement de vos produits  en temps réel grâce notre outil de géolocalisation.</p>
