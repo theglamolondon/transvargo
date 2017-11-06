@@ -26,6 +26,9 @@ class AcceptTransporteurListener
      */
     public function handle(AcceptTransporteur $event)
     {
+        $event->expedition->bonlivraison = sprintf("EXP%s-%04d", date('Ym'), $event->expedition->id);
+        $event->expedition->save();
+
         //Envoie de SMS
     }
 }

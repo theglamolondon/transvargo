@@ -17,7 +17,7 @@
                 </td>
                 <td class="head">
                     <div id="invoice1">
-                        <h1>Facture N° AS4550-10</h1>
+                        <h1>Facture N° {{ $invoices->first()->facture }}</h1>
                         <div class="date">Date de la facture : {{ (new \Carbon\Carbon($invoices->first()->dateheurecreation))->format('d/m/Y') }}</div>
                     </div>
                 </td>

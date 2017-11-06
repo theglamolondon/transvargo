@@ -4,24 +4,16 @@
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tr style="background-color: #266293;">
                 <td width="100%" style="padding: 10px;" align="center">
-                    <img src="{{ asset('/images/transvargo-logo.png') }} " height="50" alt="{{ config('app.name') }}">
+                    <img src="{{asset('/images/transvargo-logo.png')}}" height="50" alt="{{ config('app.name') }}">
                 </td>
             </tr>
             <tr>
                 <td style="padding-top: 30px; padding-bottom: 50px; padding-left: 20px; padding-right: 20px;" width="100%">
-                    <h3>Bonjour {{ $client->prenoms }} {{ $client->nom }},</h3><br>
-                    Nous vous souhaitons la bienvenue chez {{ config('app.name') }} !<br><br>
+                    <h3>Bonjour {{ $expedition->client->prenoms }} {{ $expedition->client->nom }},</h3><br>
+                    Votre expédition <strong>{{ $expedition->reference }}</strong>  a été livrée avec succès.<br><br>
 
-                    Afin de finaliser votre inscription et valider vos éventuels devis en cours, merci de cliquer sur le bouton ci-dessous&nbsp;:<br><br><br><br>
+                    Veuillez noter que votre numéro de bon de livraison <strong>{{ $expedition->bonlivraison }}</strong>&nbsp;:<br><br><br><br>
 
-                    <div align="center">
-                        <a href="{{ route('register.confirmation',['token' => $client->identiteAccess->activate_token]) }}" style="text-decoration: none; color: #ffffff; background-color: #0184F2; border-color: #266293; padding-top: 12px; padding-bottom: 12px; padding-right: 18px; padding-left: 18px; font-size: 16px; font-weight: bold;">
-                            VALIDER MON INSCRIPTION
-                        </a>
-                        <br><br>
-                        <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : {{ route('register.confirmation',['token' => $client->identiteAccess->activate_token]) }}</small>
-
-                    </div>
                     <br><br>
                     N'hésitez pas à reprendre contact avec nous si quelque chose ne va pas ou si vous avez besoin d’informations&nbsp;: nous lisons et répondons à tous les e-mails&nbsp;!
                     <br><br>
@@ -39,7 +31,7 @@
     </div>
     <br><br>
     <div>
-        <small>Vous recevez cet e-mail suite à votre inscription sur {{ config('app.name') }}.</small>
+        <small>Vous recevez cet e-mail suite à la livraison d'expédition sur la plateforme {{ config("app.name","Transvargo") }}.</small>
     </div>
 </div>
 </body>

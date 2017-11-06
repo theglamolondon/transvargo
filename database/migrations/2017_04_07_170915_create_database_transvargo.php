@@ -49,6 +49,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->integer('identiteaccess_id')->unsigned();
             $table->string('nom',100)->nullable();
             $table->string('prenoms',150)->nullable();
+            $table->string('photo',150)->default('default_profile.png');
             $table->string('raisonsociale',150);
             $table->string('contact');
             $table->string('comptecontribuable',100)->nullable();
@@ -97,8 +98,9 @@ class CreateDatabaseTransvargo extends Migration
         });
         Schema::create('vehicule',function (Blueprint $table){
             $table->increments('id');
+            $table->string('firebasetoken',255)->nullable();
             $table->string('immatriculation',15);
-            $table->float('capacite',6,2);
+            $table->float('capacite',8,2);
             $table->string('chauffeur',150);
             $table->string('telephone',70);
             $table->string('statut')->defalut(\App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL);
@@ -116,6 +118,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('nom',100);
             $table->string('contact',70);
         });
+        /*
         Schema::create('facture',function (Blueprint $table){
             $table->bigIncrements('id');
             $table->dateTime('datefacture');
@@ -130,12 +133,12 @@ class CreateDatabaseTransvargo extends Migration
             $table->foreign("staff_id")->references("identiteaccess_id")->on("staff");
             $table->foreign("staff_id")->references("identiteaccess_id")->on("client");
         });
+        */
         Schema::create('expedition',function (Blueprint $table){
             $table->increments('id');
             $table->string('reference',100);
             $table->dateTime('dateheurecreation');
             $table->dateTime('dateheureacceptation')->nullable();
-            $table->dateTime('dateheurelivraison')->nullable();
             $table->date('datechargement');
             $table->date('dateexpiration');
             $table->string('lieudepart',100);
@@ -151,11 +154,12 @@ class CreateDatabaseTransvargo extends Migration
             //$table->integer('nature_id')->unsigned();
             $table->integer('client_id')->unsigned();
             $table->integer('typecamion_id')->unsigned();
-            $table->unsignedInteger("facture_id")->nullable();
+            $table->string("facture", 100)->nullable();
+            $table->string("bonlivraison", 100)->nullable();
             $table->foreign('typecamion_id')->references('id')->on('typecamion');
             //$table->foreign('nature_id')->references('id')->on('nature');
             $table->foreign('client_id')->references('identiteaccess_id')->on('client');
-            $table->foreign('facture_id')->references('id')->on('facture');
+            //$table->foreign('facture_id')->references('id')->on('facture');
         });
         Schema::create('chargement',function (Blueprint $table){
             $table->increments('id');
@@ -168,6 +172,9 @@ class CreateDatabaseTransvargo extends Migration
             $table->string('societelivraison',100);
             $table->string('contactlivraison',100);
             $table->string('telephonelivraison',15);
+            $table->string('otp',5)->nullable();
+            $table->dateTime('dateheureotp')->nullable();
+            $table->dateTime('dateheurelivraison')->nullable();
             $table->integer('vehicule_id')->unsigned()->nullable();
             $table->integer('expedition_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicule');
@@ -177,6 +184,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->bigIncrements('id');
             $table->string('latitude',50);
             $table->string('longitude',50);
+            $table->string('speed',15)->default("0");
             $table->integer('vehicule_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicule');
         });

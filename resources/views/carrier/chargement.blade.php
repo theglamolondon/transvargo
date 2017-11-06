@@ -28,7 +28,7 @@ $total = 0;
                         <tbody>
                         @if($chargement)
                         @foreach($chargement as $chargements)
-                        <tr>
+                        <tr class="dropdown-point">
                             <td>
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                                 <ul class="dropdown-menu">

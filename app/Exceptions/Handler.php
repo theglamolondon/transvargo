@@ -48,7 +48,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
         //Log::error($exception->getMessage());
         if($exception instanceof TokenMismatchException ){
             return back()->withErrors(["Le formulaire n'a pas été validé. Veuillez recommencer SVP!"]);

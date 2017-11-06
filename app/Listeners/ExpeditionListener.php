@@ -3,11 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\NewExpedition;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Services\Firebase\Linked;
+use Illuminate\Support\Facades\Log;
 
 class ExpeditionListener
 {
+    use Linked;
     /**
      * Create the event listener.
      *
@@ -26,6 +27,7 @@ class ExpeditionListener
      */
     public function handle(NewExpedition $event)
     {
+        $this->sendNotificationToAndoidDriverApp($event->expedition);
         Log::info("Nouvelle expédition de transport de marchandise créée");
     }
 }

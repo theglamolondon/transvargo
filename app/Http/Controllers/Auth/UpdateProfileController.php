@@ -8,8 +8,10 @@ use App\Work\Tools;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateProfileController extends Controller
 {
@@ -26,11 +28,7 @@ class UpdateProfileController extends Controller
 
         $identite = IdentiteAccess::with("client")->find(Auth::id());
 
-        if($request->input("passwordupdate"))
-        {
-            $identite->password = bcrypt($request->input("password"));
-            $identite->save();
-        }
+        $this->changePassword($identite, $request);
 
         try{
             $identite->client()->update($request->only("prenoms", "nom", "raisonsociale", "contact"));
@@ -46,8 +44,61 @@ class UpdateProfileController extends Controller
         return view("carrier.compte");
     }
 
+    private function changePassword(IdentiteAccess &$identiteAccess, Request $request)
+    {
+        if($request->input("passwordupdate"))
+        {
+            $identiteAccess->password = bcrypt($request->input("password"));
+            $identiteAccess->save();
+        }
+    }
+
     public function updateTransporteur(Request $request)
     {
-        dd($request);
+        Storage::put("transporteur/profile/text.txt","Content");
+
+        $this->validate($request, $this->validRules());
+
+        $identite = IdentiteAccess::with("transporteur")->find(Auth::id());
+
+        $this->changePassword($identite, $request);
+
+
+
+        $photoString = $this->updateClient($request->file("photo"));
+    }
+
+    public function validRules()
+    {
+        $rules = [
+            'photo' => 'image',
+            'nom' => 'required|max:255',
+            'prenoms' => 'present',
+            'comptecontribuable' => 'present',
+            'raisonsociale' => 'present',
+            'ville' => 'required',
+            'typetransporteur_id' => 'required|numeric',
+            'contact' => 'present',
+            'nationalite' => 'present',
+            'datenaissance' => 'required|date_format:d/m/Y',
+            'lieunaissance' => 'required',
+            'rib' => 'present'
+        ];
+
+        return $rules;
+    }
+
+    /**
+     * @param UploadedFile $image
+     * @return bool
+     */
+    public function uploadImage(UploadedFile $image)
+    {
+        if(count($image) != 0)
+        {
+
+        }else{
+            return false;
+        }
     }
 }

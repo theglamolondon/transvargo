@@ -1,7 +1,12 @@
 <div class="rd-navbar-nav-wrap">
     <div class="rd-navbar-search">
         <ul class="rd-navbar-nav">
-            <li class=""><a href="{{route('admin.tableaubord')}}">Tableau de bord</a></li>
+            <li class="">
+                <a href="{{route('admin.tableaubord')}}">Tableau de bord</a>
+                <ul class="rd-navbar-dropdown">
+                    <li role="presentation"><a href="{{ route('staff.offres') }}">Liste des offres</a></li>
+                </ul>
+            </li>
             <li class="">
                 <a href="javascript:void(0);">Grand compte</a>
                 <ul class="rd-navbar-dropdown">

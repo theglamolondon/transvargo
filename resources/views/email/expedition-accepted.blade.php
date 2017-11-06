@@ -4,7 +4,7 @@
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tr style="background-color: #266293;">
                 <td width="100%" style="padding: 10px;" align="center">
-                    <img src="{{config('app.url')}}/images/transvargo-logo.png" height="50" alt="{{ config('app.name') }}">
+                    <img src="{{ asset('/images/transvargo-logo.png') }}" height="50" alt="{{ config('app.name') }}">
                 </td>
             </tr>
             <tr>

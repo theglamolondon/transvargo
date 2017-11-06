@@ -76,19 +76,19 @@ class LoginController extends Controller
         if($user->authenticable instanceof Transporteur )
         {
             session(["role" => Transporteur::class]);
-            redirect()->route('transporteur.tableaubord');
+            //$this->redirectTo = redirect()->route('transporteur.tableaubord');
         }
 
         if($user->authenticable instanceof Client )
         {
             session(["role" => Client::class]);
-            redirect()->route('client.expeditions');
+            //$this->redirectTo =  redirect()->route('client.expeditions');
         }
 
         if($user->authenticable instanceof Staff )
         {
             session(["role" => Staff::class]);
-            redirect()->route('admin.tableaubord');
+            //$this->redirectTo =  redirect()->route('admin.tableaubord');
         }
 
         $timeToLive = 60*24*30; //minutes * heures * nombre jours = 1 mois de 30 jours

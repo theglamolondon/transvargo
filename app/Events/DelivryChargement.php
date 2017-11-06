@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\Expedition;
-use App\Transporteur;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -12,14 +11,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class AcceptTransporteur
+class DelivryChargement
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * @var Transporteur $transporteur
-     */
-    public $transporteur;
     public $expedition;
 
     /**
@@ -27,10 +22,8 @@ class AcceptTransporteur
      *
      * @return void
      */
-
-    public function __construct(Transporteur $transporteur, Expedition $expedition)
+    public function __construct(Expedition $expedition)
     {
-        $this->$transporteur = $transporteur;
         $this->expedition = $expedition;
     }
 

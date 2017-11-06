@@ -139,12 +139,15 @@ trait ExpeditionProcessing
 
     private function getExpeditionByReference($reference)
     {
-        $expedition = Expedition::where('reference',$reference)
-            ->with('chargement')
-            ->firstOrNew([]);
+        $expedition = null;
+        try {
+            $expedition = Expedition::with('chargement.vehicule.transporteur', 'client', 'typeCamion')
+                ->where('reference', $reference)
+                ->firstOrFail();
 
-        if(!$expedition->exists)
+        }catch (ModelNotFoundException $e){
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.notfound'));
+        }
 
         return $expedition;
     }
@@ -163,11 +166,16 @@ trait ExpeditionProcessing
         ];
     }
 
+    /**
+     * @param Expedition $expedition
+     * @param array $data
+     * @return Expedition
+     */
     private function saveCommande(Expedition $expedition,array $data)
     {
         //dd($expedition);
         $chargement = new Chargement([
-            'dateheurechargement' => Carbon::now()->toDateTimeString(),
+            //'dateheurechargement' => Carbon::now()->toDateTimeString(),
             'adressechargement' => $data['adressechargement'],
             'societechargement' => $data['societechargement'],
             'contactchargement' => $data['contactchargement'],
@@ -184,6 +192,8 @@ trait ExpeditionProcessing
         $chargement->expedition()->associate($expedition);
 
         $chargement->saveOrFail();
+
+        return $chargement->expedition;
     }
 
 

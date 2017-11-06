@@ -23,7 +23,7 @@ class TransporteurController extends Controller
 
     public function __construct()
     {
-
+        //
     }
 
     public function showDashboard()
@@ -112,5 +112,20 @@ class TransporteurController extends Controller
          }else{
              return back()->withErrors("Impossible de démarrer l'expédition");
          }
+    }
+
+    public function delivry(Request $request)
+    {
+        return $this->livrerChargement($request);
+    }
+
+    public function validerLivraison(Request $request)
+    {
+        try{
+            $this->finishExpedition($request);
+            return redirect()->route("transporteur.offres.liste")->with(Tools::MESSAGE_SUCCESS, sprintf("Expédition %s livrée et terminée", $request->input("reference")));
+        }catch (ModelNotFoundException $e){
+            return back()->withErrors("Cette expédition n'existe dans votre liste.");
+        }
     }
 }

@@ -20,7 +20,7 @@
 
                 <div class="form-group date">
                     <div class="input-group">
-                        <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="dd" value="{{ (request()->has('dd') ? request()->input('dd') : \Carbon\Carbon::now()->format('d/m/Y')) }}">
+                        <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" name="dd" value="{{ (request()->has('dd') ? request()->input('dd') : \Carbon\Carbon::now()->firstOfMonth()->format('d/m/Y')) }}">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                     </div>
                 </div>

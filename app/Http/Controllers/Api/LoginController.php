@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\IdentiteAccess;
+use App\TypeTransporteur;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,7 @@ class LoginController extends  Controller
     public function login(Request $request)
     {
         $data = null;
+        $vehicule = null;
 
         try{
             $this->validateRequest($request);
@@ -39,13 +41,19 @@ class LoginController extends  Controller
                 throw new \Exception("Votre compte ne vous permet pas de vous connecter comme transporteur",403);
             }
 
+            if($data->transporteur->typetransporteur_id == TypeTransporteur::TYPE_CHAUFFEUR_PATRON)
+            {
+                $vehicule = $data->transporteur->vehicules()->first();
+            }
+
         }catch (\Exception $e){
             return response(["error" => $e->getCode(), "message" => $e->getMessage()],$e->getCode());
         }
 
         $token = $this->generateToken($data)->__toString();
 
-        return response()->json(compact('data', 'token'),200,[],JSON_UNESCAPED_UNICODE);
+
+        return response()->json(compact('data', 'token', "vehicule"),200,[],JSON_UNESCAPED_UNICODE);
     }
 
     /**
