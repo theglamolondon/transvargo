@@ -40,7 +40,6 @@ class IdentiteAccess extends Authenticatable
 
     public function authenticable()
     {
-
         if ( $this->typeidentite_id == TypeIdentitite::TYPE_CLIENT )
             return $this->client();
 

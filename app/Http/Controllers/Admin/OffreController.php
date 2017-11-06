@@ -37,7 +37,7 @@ class OffreController extends Controller
                 Carbon::createFromFormat("d/m/Y H:i:s", $request->query("periode_au")." 23:59:59")->toDateTimeString()
             ]);
 
-            //Cheeck if Client name is passed
+            //Check if Client name is passed
             if(!empty($request->query("client_name"))){
                 $expeditions = $expeditions->join("client","client.identiteaccess_id", "=", "expedition.client_id")
                     ->whereRaw("concat(client.nom, client.prenoms, client.raisonsociale) like '%".$request->query("client_name")."%'");
@@ -58,7 +58,7 @@ class OffreController extends Controller
         try{
             $expedition = $this->getExpeditionByReference($reference);
 
-            return view("carrier.accept", compact("expedition"));
+            return view("staff.offre-details", compact("expedition"));
         }catch (ModelNotFoundException $e){
             logger($e->getTraceAsString());
             return back()->withErrors($e->getMessage());

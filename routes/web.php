@@ -46,6 +46,9 @@ Route::get('validation/{token}', 'SiteController@validation')->name('register.co
 //Route::get('/transporteur/conditions-utilisation.html', 'SiteController@showTransporteurTermOfUsesPage')->name('terms.transporteur');
 /* end site route */
 
+/*PDF*/
+
+
 /*Client*/
 Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function (){
     //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
@@ -103,6 +106,9 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('invoice/grang-compte/0000-{id}.html','Admin\Invoice\InvoiceController@showInvoiceBoard')->name('staff.invoice');
     Route::get('offres.html','Admin\OffreController@liste')->name('staff.offres');
     Route::get('offre/{reference}/details.html','Admin\OffreController@details')->name('staff.offre.details');
+
+    Route::get('pdf/facture/{reference}','Admin\Invoice\InvoiceController@showFacturePDF')->name('staff.pdf.facture');
+    Route::get('pdf/bon-livraison/{reference}','Admin\Invoice\InvoiceController@showBonLivraisonPDF')->name('staff.pdf.bonlivraison');
 });
 
 /*Newsletter*/

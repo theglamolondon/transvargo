@@ -15,17 +15,21 @@ use Illuminate\Support\Facades\Auth;
 
 trait PdfMaker
 {
-    protected function getSingle($reference)
+    protected function getSingle($reference, $admin = false)
     {
-        return Expedition::with('client','chargement','typeCamion')
-            ->where('client_id',Auth::id())
+        $expeditions = Expedition::with('client','chargement','typeCamion')
             ->where('reference', $reference)
             ->whereNotIn('statut',[Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_NON_NULL])
-            ->orderBy('datechargement')
-            ->get();
+            ->orderBy('datechargement');
+
+        if(!$admin){
+            $expeditions = $expeditions->where('client_id',Auth::id());
+        }
+
+        return $expeditions->get();
     }
 
-    protected function getInvoice()
+    protected function getAllInvoice()
     {
         return Expedition::with('client','chargement','typeCamion')
             ->where('client_id',Auth::id())
@@ -36,19 +40,15 @@ trait PdfMaker
 
     public function showFacturePDF($reference = null)
     {
-        $invoices = $reference ? $this->getSingle($reference) : $this->getInvoice();
-
+        $invoices = $reference ? $this->getSingle($reference, (Auth::user()->staff != null)) : $this->getAllInvoice();
         $invoices = PDF::loadView('invoices.factures',compact("invoices"))->setPaper('a4','portrait');
-
         return $invoices->stream("Facture $reference.pdf");
     }
 
     public function showBonLivraisonPDF($reference)
     {
-        $invoices = $reference ? $this->getSingle($reference) : $this->getInvoice();
-
+        $invoices = $reference ? $this->getSingle($reference, (Auth::user()->staff != null)) : $this->getAllInvoice();
         $invoices = PDF::loadView('livraison.factures',compact("invoices"))->setPaper('a4','portrait');
-
         return $invoices->stream("Bon Livraison $reference.pdf");
     }
 }
