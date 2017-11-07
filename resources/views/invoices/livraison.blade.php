@@ -18,7 +18,7 @@
                 <td class="head">
                     <div id="invoice1">
                         <h1>Bon de livraison N° {{ $invoices->first()->bonlivraison }}</h1>
-                        <div class="date">Date de livraison : {{ (new \Carbon\Carbon($invoices->first()->dateheurecreation))->format('d/m/Y') }}</div>
+                        <div class="date">Date de livraison : {{ (new \Carbon\Carbon($invoices->first()->chargement->dateheurelivraison))->format('d/m/Y') }}</div>
                     </div>
                 </td>
             </tr>
@@ -30,9 +30,9 @@
         <tr>
             <th class="no">#</th>
             <th class="desc">NATURE DE <br> MARCHANDISE</th>
-            <th class="qty">LIEU <br> CHARGEMENT</th>
-            <th class="qty">LIEU <br> DECHARGEMENT</th>
-            <th class="unit">TYPE <br> CAMION</th>
+            <th class="qty">LIEU <br/> CHARGEMENT</th>
+            <th class="qty">LIEU <br/> DECHARGEMENT</th>
+            <th class="unit">TYPE <br/> CAMION</th>
         </tr>
         </thead>
         <tbody>
@@ -50,12 +50,11 @@
         @endforeach()
         </tbody>
     </table>
-    <div id="notices">
-        <div>Montant en lettre :</div>
-        <div class="notice">Facture arretée à la somme de {{ \App\Work\NombreToLettre::getLetter($total*1.18) }} FCFA</div>
-    </div>
-
+    <br/>
+    <br/>
     <br/>
 
     <div id="thanks">Merci de votre confiance!</div>
+    <br/>
+    <img src="{{ asset("working/livree_express.jpg") }}" />
 @endsection

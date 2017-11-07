@@ -258,9 +258,5 @@ return array(
          * Use the more-than-experimental HTML5 Lib parser
          */
         "DOMPDF_ENABLE_HTML5PARSER" => false,
-
-
     ),
-
-
 );

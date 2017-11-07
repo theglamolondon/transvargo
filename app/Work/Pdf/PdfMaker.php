@@ -9,17 +9,18 @@
 namespace App\Work\Pdf;
 
 use App\Expedition;
-use App\Services\Statut;
 use Barryvdh\DomPDF\Facade as PDF;
+use Elibyy\TCPDF\Facades\TCPDF;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 trait PdfMaker
 {
-    protected function getSingle($reference, $admin = false)
+    protected function getSingle(string $reference, $admin = false)
     {
         $expeditions = Expedition::with('client','chargement','typeCamion')
             ->where('reference', $reference)
-            ->whereNotIn('statut',[Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_NON_NULL])
+            //->whereNotIn('statut',[Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_NON_NULL])
             ->orderBy('datechargement');
 
         if(!$admin){
@@ -33,7 +34,7 @@ trait PdfMaker
     {
         return Expedition::with('client','chargement','typeCamion')
             ->where('client_id',Auth::id())
-            ->whereNotIn('statut',[Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_NON_NULL])
+            //->whereNotIn('statut',[Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_NON_NULL])
             ->orderBy('datechargement')
             ->get();
     }
@@ -48,7 +49,22 @@ trait PdfMaker
     public function showBonLivraisonPDF($reference)
     {
         $invoices = $reference ? $this->getSingle($reference, (Auth::user()->staff != null)) : $this->getAllInvoice();
-        $invoices = PDF::loadView('livraison.factures',compact("invoices"))->setPaper('a4','portrait');
+
+        //$this->generateTCPDF($invoices);
+
+        $invoices = PDF::loadView('invoices.livraison',compact("invoices"))->setPaper('a4','portrait');
         return $invoices->stream("Bon Livraison $reference.pdf");
+    }
+
+    private function generateTCPDF($invoices)
+    {
+        $view = \Illuminate\Support\Facades\View::make('invoices.livraison',compact("invoices"));
+        $html = $view->render();
+
+        $pdf = new TCPDF();
+        $pdf::SetTitle('Hello World');
+        $pdf::AddPage();
+        $pdf::writeHTML($html, true, false, true, false, '');
+        $pdf::Output('hello_world.pdf');
     }
 }

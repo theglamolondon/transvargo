@@ -32,8 +32,7 @@ class ExpeditionFinishListener
     {
         $event->expedition;
         $this->sendEmailToClient($event);
-
-        Log::info("Email envoyé à l'équipe Transvargo");
+        $this->sendEmailToAdmin($event);
     }
 
     private function sendEmailToClient(ExpeditionFinish $event)
