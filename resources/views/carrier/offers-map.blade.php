@@ -107,7 +107,7 @@
                             var marker = new google.maps.Marker({
                                 //anchorPoint: new google.maps.Point(0, -29),
                                 position:{lat: parseFloat((data[i].coorddepart.split(','))[0]), lng: parseFloat((data[i].coorddepart.split(','))[1]) },
-                                icon: '{{ config('app.url') }}/working/package32.png',
+                                icon: '{{ asset('working/package32.png') }}',
                                 map: map,
                             });
                             marker.ref = data[i];

@@ -182,6 +182,7 @@ class CreateDatabaseTransvargo extends Migration
         });
         Schema::create('localisation',function (Blueprint $table){
             $table->bigIncrements('id');
+            $table->dateTime('datelocalisation');
             $table->string('latitude',50);
             $table->string('longitude',50);
             $table->string('speed',15)->default("0");

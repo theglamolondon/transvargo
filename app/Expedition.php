@@ -35,10 +35,6 @@ class Expedition extends Model
         return $this->hasOne(Chargement::class);
     }
 
-    public function facture(){
-        return $this->belongsTo(Facture::class);
-    }
-
     public function __toString()
     {
         return sprintf("Expédition N° %s de %s à %s (Distance %s km)",

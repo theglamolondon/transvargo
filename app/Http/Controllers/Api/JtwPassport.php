@@ -76,7 +76,6 @@ trait JtwPassport
         {
             throw new \Exception('Votre jeton de sécurité est invalide',401);
         }
-
         return true;
     }
 
