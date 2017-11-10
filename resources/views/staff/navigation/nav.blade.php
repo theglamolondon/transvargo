@@ -27,7 +27,7 @@
                     <li class="presentation"><a href="#">Utilisateurs</a>
                         <ul class="rd-navbar-dropdown">
                             <li class="presentation"><a href="#">Ajouter</a></li>
-                            <li class="presentation"><a href="#">Liste</a></li>
+                            <li class="presentation"><a href="{{ route('admin.expediteur.all') }}">Liste</a></li>
                         </ul>
                     </li>
                 </ul>

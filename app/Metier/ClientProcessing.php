@@ -40,6 +40,15 @@ trait ClientProcessing
         return $client->saveOrFail();
     }
 
+    protected function getExpediteur($champs = null,$conditions = null,$value = null)
+    {
+        $clients = Client::with('identiteAccess')->orderBy('datecreation','asc');
+
+        if($champs)
+            $clients->where($champs, $conditions, $value);
+
+        return $clients->paginate(30);
+    }
 
     /**
      * @param $tofind string
