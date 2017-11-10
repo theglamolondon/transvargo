@@ -99,7 +99,7 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('transporteurs/fiche/{token}.html','Admin\StaffController@showValidateFormCarrier')->name('staff.valid.transporteur');
     Route::post('transporteurs/fiche/{token}.html','Admin\StaffController@validTransporteurAccount');
 
-    Route::get('expediteurs.html','Admin\StaffController@showClients')->name('admin.expediteur.all');
+    Route::get('expediteurs.html','Admin\ExpediteurController@showExpediteursListe')->name('admin.expediteur.all');
 
     Route::get('grand-compte/recherche.html','Admin\GrandCompteController@searchClient')->name('staff.gc.search');
     Route::get('grand-compte.html','Admin\GrandCompteController@showList')->name('staff.gc.liste');
