@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\ChauffeurPatron;
 use App\IdentiteAccess;
+use App\Metier\ClientProcessing;
 use App\Metier\TransportProcessing;
 use App\Metier\VehiculeProcessing;
 use App\Services\Statut;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
-    use TransportProcessing, VehiculeProcessing;
+    use TransportProcessing, VehiculeProcessing, ClientProcessing;
 
     public function __construct()
     {
@@ -41,6 +42,11 @@ class StaffController extends Controller
     public function showCarriers()
     {
         return $this->performView($this->getTransporteur(),"Tous les transporteurs");
+    }
+
+    public function showClients($clent)
+    {
+        return view('staff.expediteurslist', compact("client"));
     }
 
     public function showRecentCarrier()
