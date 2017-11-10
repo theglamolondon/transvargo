@@ -15,14 +15,12 @@ class Statut
     const TYPE_EXPEDITION = 2;
     const TYPE_VEHICULE = 3;
 
-    //Iidentité d'accès
+    //Identité d'accès
     const ETAT_ACTIF = 1;
     const ETAT_INACTIF = 2;
-
     //Véhicule
     const ETAT_EN_MISSION = 3;
-
-    //Mission
+    //Expédition
     const ETAT_PROGRAMMEE = 4;
     const ETAT_EN_COURS = 5;
     const ETAT_LIVREE = 6;

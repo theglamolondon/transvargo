@@ -8,6 +8,7 @@ class Chargement extends Model
 {
     protected $table = 'chargement';
     protected $guarded = [];
+    protected $hidden = ['otp', 'dateheureotp'];
 
     public $timestamps = false;
 

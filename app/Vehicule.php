@@ -11,10 +11,14 @@ class Vehicule extends Model
     public $timestamps = false;
 
     public function transporteur(){
-        return $this->belongsTo('App\Transporteur','transporteur_id');
+        return $this->belongsTo(Transporteur::class,'transporteur_id');
     }
 
     public function typeCamion(){
-        return $this->belongsTo('App\TypeCamion','typecamion_id');
+        return $this->belongsTo(TypeCamion::class,'typecamion_id');
+    }
+
+    public function localisation(){
+        return $this->hasMany(Localisation::class,"vehicule_id");
     }
 }

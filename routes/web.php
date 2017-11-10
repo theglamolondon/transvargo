@@ -108,6 +108,8 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('invoice/grang-compte/0000-{id}.html','Admin\Invoice\InvoiceController@showInvoiceBoard')->name('staff.invoice');
     Route::get('offres.html','Admin\OffreController@liste')->name('staff.offres');
     Route::get('offre/{reference}/details.html','Admin\OffreController@details')->name('staff.offre.details');
+    Route::get('cartographie/expeditions.html','Admin\MapExpedition@showMap')->name('staff.map.expedition');
+    Route::get('expeditions/localisations','Admin\MapExpedition@ajaxGetLocatisation')->name('staff.expeditions.localistion');
 
     Route::get('pdf/facture/{reference}','Admin\Invoice\InvoiceController@showFacturePDF')->name('staff.pdf.facture');
     Route::get('pdf/bon-livraison/{reference}','Admin\Invoice\InvoiceController@showBonLivraisonPDF')->name('staff.pdf.bonlivraison');

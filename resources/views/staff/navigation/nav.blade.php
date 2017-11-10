@@ -5,6 +5,7 @@
                 <a href="{{route('admin.tableaubord')}}">Tableau de bord</a>
                 <ul class="rd-navbar-dropdown">
                     <li role="presentation"><a href="{{ route('staff.offres') }}">Liste des offres</a></li>
+                    <li role="presentation"><a href="{{ route('staff.map.expedition') }}">Géolocalisation des expéditions</a></li>
                 </ul>
             </li>
             <li class="">
