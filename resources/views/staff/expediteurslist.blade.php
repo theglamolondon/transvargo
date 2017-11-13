@@ -51,16 +51,20 @@
         <div class="col-md-offset-1 col-md-10">
             <div class="clearfix">
                 <div class="col-md-6 col-sm-8 col-xs-12">
-                    <h3 class="text-left">{{ $title }}</h3>
+                    <h3 class="text-left">Liste des comptes d'expéditeurs</h3>
                     <div class="separateur"></div>
                 </div>
+            </div>
+        </div>
+        <br class="clearfix"/>
 
+        <div class="col-md-offset-1 col-md-10">
+            <div class="clearfix">
                 <div class="col-md-12 col-sm-12 col-xs-12 section-inset-1">
                     <div class="table-responsive">
                         <table class="table table-hover text-left">
                             <thead>
                             <tr class="bg-dark">
-                                <th></th>
                                 <th>Nom et Prenoms</th>
                                 <th>Type</th>
                                 <th>Contact</th>
@@ -72,9 +76,8 @@
                             @if($clients)
                                 @foreach($clients as $client)
                                     <tr>
-
-                                        <td>{{ $client->raisonsociale }} ({{ $client->nom }} {{ $client->prenoms }})</td>
-                                        <td>{{ $client->typeTransporteur->libelle }}</td>
+                                        <td>{{ $client->nom }} {{ $client->prenoms }} ({{ $client->raisonsociale ?? "Client particulier" }})</td>
+                                        <td>{{ $client->grandcompte ? "Grand compte" : "normal" }}</td>
                                         <td>{{ $client->contact }}</td>
                                         <td>{{ $client->ville }}</td>
                                         <td>{{ (new \Carbon\Carbon($client->datecreation))->format('d/m/Y à H:i:s') }}</td>
@@ -90,7 +93,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $transporteurs->links() }}
+                    {{ $clients->links() }}
                 </div>
             </div>
         </div>
