@@ -44,7 +44,7 @@ class StaffController extends Controller
         return $this->performView($this->getTransporteur(),"Tous les transporteurs");
     }
 
-    public function showClients($clent)
+    public function showClients($client)
     {
         return view('staff.expediteurslist', compact("client"));
     }
