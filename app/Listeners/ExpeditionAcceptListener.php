@@ -3,7 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\AcceptExpedition;
+use App\Expedition;
 use App\Mail\ExpeditionAccepted;
+use App\Services\Firebase\Linked;
 use App\Services\IpGeolocalisation;
 use App\Services\Sms\Textlocal;
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ExpeditionAcceptListener
 {
+    use Linked;
     /**
      * Create the event listener.
      *
@@ -32,6 +35,8 @@ class ExpeditionAcceptListener
     public function handle(AcceptExpedition $event)
     {
         Log::info('Expedition '.$event->expedition->reference.' acceptée');
+
+        $this->notifyChauffeur($event);
 
         $this->sendSMS($event);
 
@@ -83,6 +88,15 @@ class ExpeditionAcceptListener
             Log::error($e->getTraceAsString());
         }finally{
             Log::error('Expedtion acceptée');
+        }
+    }
+
+    private function notifyChauffeur(AcceptExpedition $event)
+    {
+        try{
+            $this->sendNotificationToOneDevice($event->expedition);
+        }catch (\Exception $e){
+            Log::error($e->getMessage());
         }
     }
 }

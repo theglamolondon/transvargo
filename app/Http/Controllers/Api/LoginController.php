@@ -52,7 +52,6 @@ class LoginController extends  Controller
 
         $token = $this->generateToken($data)->__toString();
 
-
         return response()->json(compact('data', 'token', "vehicule"),200,[],JSON_UNESCAPED_UNICODE);
     }
 

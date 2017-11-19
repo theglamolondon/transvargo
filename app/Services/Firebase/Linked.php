@@ -16,14 +16,32 @@ use Carbon\Carbon;
 
 trait Linked
 {
+    /**
+     * @param Expedition $expedition
+     * @return Push
+     */
+    private function initializePush(Expedition $expedition)
+    {
+        return new Push("Nouvelle expédition",sprintf("Expédition de %s à %s. Expiration le %s",
+                $expedition->lieudepart,
+                $expedition->lieuarrivee,
+                (new Carbon($expedition->dateexpiration))->format("d/m/Y"))
+        );
+    }
+
     public function sendNotificationToAndoidDriverApp(Expedition $expedition)
     {
-        $push = new Push("Nouvelle expédition",sprintf("Expédition de %s à %s. Expiration le %s",
-            $expedition->lieudepart,
-            $expedition->lieuarrivee,
-            (new Carbon($expedition->dateexpiration))->format("d/m/Y"))
-        );
+        $push = $this->initializePush($expedition);
         $firebase = new FirebaseBase();
         return $firebase->sendNotificationToAllDevices($push);
+    }
+
+    public function sendNotificationToOneDevice(Expedition $expedition)
+    {
+        $push = $this->initializePush($expedition);
+        $firebaseToken = $expedition->chargement->vehicule->firebasetoken;
+
+        $firebase = new FirebaseBase();
+        return $firebase->sendNotificationToOneDevice($firebaseToken, $push);
     }
 }

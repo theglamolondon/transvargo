@@ -14,12 +14,13 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('api')->post('/login','Api\LoginController@login');
+Route::middleware('api')->post('/login/chauffeur','Api\LoginChauffeurController@login');
 
 Route::get('/refresh/token','Api\LoginController@refreshToken');
 
 Route::middleware('api.auth')->group(function (){
 
-    Route::post('token/refresh','Api\LocalisationController@refreshToken');
+    Route::post('firebase/token/refresh','Api\FireBaseController@refreshToken');
 
     Route::get('/expeditions/offers/list','Api\OffreController@liste');
 

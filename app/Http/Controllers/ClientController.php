@@ -87,7 +87,7 @@ class ClientController extends Controller
             ->orderBy('datechargement');
     }
 
-    public function showExpeditions(Builder $builder = null)
+    public function showExpeditions(Builder $builder)
     {
         $expeditions = null;
 

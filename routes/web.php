@@ -43,7 +43,6 @@ Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
 Route::post('/contact.html', 'SiteController@sendResponseContact');
 Route::get('/a-propos.html', 'SiteController@showAboutUs')->name('apropos');
 Route::get('validation/{token}', 'SiteController@validation')->name('register.confirmation');
-//Route::get('/transporteur/conditions-utilisation.html', 'SiteController@showTransporteurTermOfUsesPage')->name('terms.transporteur');
 /* end site route */
 
 /*PDF*/
@@ -51,7 +50,6 @@ Route::get('validation/{token}', 'SiteController@validation')->name('register.co
 
 /*Client*/
 Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function (){
-    //Route::get('/tableau-bord.html','ClientController@showDashboard')->name('client.tableaubord');
     Route::get('/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
     Route::post('/nouvelle-expedition.html','ExpeditionController@saveNewExpedition');
     Route::get('/commande/{reference}.html','ClientController@showCommande')->name('client.commande');
@@ -61,7 +59,6 @@ Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function
     Route::get('/mes-expeditions/programmees.html','ClientController@showExpeditionsProgrammees')->name('client.expeditions.programmees');
     Route::get('/mes-expeditions/livrees.html','ClientController@showExpeditionsLivrees')->name('client.expeditions.livrees');
     Route::get('/mes-expeditions/annulees.html','ClientController@showExpeditionsAnnulees')->name('client.expeditions.annulees');
-    //Route::get('/expedition/{refrence}/details.html','ExpeditionController@showDetailsExpeditions')->name('client.myexpedition');
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
     Route::post('/mon-compte.html','Auth\UpdateProfileController@updateClient');

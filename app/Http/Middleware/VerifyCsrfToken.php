@@ -15,6 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/ajax/distanceMatrix',
         '/api/refresh/token',
         '/api/login',
+        '/api/login/chauffeur',
         '/api/gps/location/store'
     ];
 }
