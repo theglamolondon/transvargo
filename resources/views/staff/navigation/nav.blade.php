@@ -9,9 +9,10 @@
                 </ul>
             </li>
             <li class="">
-                <a href="javascript:void(0);">Grand compte</a>
+                <a href="javascript:void(0);">Clients</a>
                 <ul class="rd-navbar-dropdown">
-                    <li role="presentation"><a href="{{ route('staff.gc.liste') }}">Liste</a></li>
+                    <li role="presentation"><a href="{{ route('admin.expediteur.all') }}">Expéditeurs</a></li>
+                    <li role="presentation"><a href="{{ route('staff.gc.liste') }}">Grands comptes</a></li>
                     <li role="presentation"><a href="{{ route('staff.gc.search') }}">Recherche</a></li>
                 </ul>
             </li>
@@ -27,7 +28,7 @@
                     <li class="presentation"><a href="#">Utilisateurs</a>
                         <ul class="rd-navbar-dropdown">
                             <li class="presentation"><a href="#">Ajouter</a></li>
-                            <li class="presentation"><a href="{{ route('admin.expediteur.all') }}">Liste</a></li>
+                            <li class="presentation"><a href="#">Liste</a></li>
                         </ul>
                     </li>
                 </ul>
