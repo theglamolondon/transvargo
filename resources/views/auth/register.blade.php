@@ -145,7 +145,6 @@
                                         <input class="form-control" name="raisonsociale" type="text" placeholder="Votre raison sociale" value="{{old('raisonsociale')}}" required>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="control-label col-sm-4">Compte contribuable</label>
                                     <div class="col-sm-8 col-xs-12">

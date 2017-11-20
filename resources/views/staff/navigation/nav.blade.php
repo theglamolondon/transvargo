@@ -25,10 +25,10 @@
             </li>
             <li class=""><a href="javascript:void(0);">Administration</a>
                 <ul class="rd-navbar-dropdown">
-                    <li class="presentation"><a href="#">Utilisateurs</a>
+                    <li class="presentation"><a href="javascript:void(0);">Utilisateurs</a>
                         <ul class="rd-navbar-dropdown">
-                            <li class="presentation"><a href="#">Ajouter</a></li>
-                            <li class="presentation"><a href="#">Liste</a></li>
+                            <li class="presentation"><a href="{{ route("staff.user.ajout") }}">Ajouter</a></li>
+                            <li class="presentation"><a href="{{ route("staff.user.liste") }}">Liste</a></li>
                         </ul>
                     </li>
                 </ul>

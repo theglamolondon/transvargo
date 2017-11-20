@@ -64,7 +64,7 @@ class DatabaseTransvargoSeeder extends Seeder
             [
                 "nom" => "Toubo",
                 "prenoms" => "Yanick",
-                "role" => "ceo",
+                "role" => "CEO",
                 "identiteaccess_id" => 1
             ],
         ]);

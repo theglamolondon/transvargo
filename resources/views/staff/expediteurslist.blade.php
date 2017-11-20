@@ -47,7 +47,6 @@
             <br/><br/><br/>
         </div>
 
-
         <div class="col-md-offset-1 col-md-10">
             <div class="clearfix">
                 <div class="col-md-6 col-sm-8 col-xs-12">
@@ -77,7 +76,7 @@
                                 @foreach($clients as $client)
                                     <tr>
                                         <td>{{ $client->nom }} {{ $client->prenoms }} ({{ $client->raisonsociale ?? "Client particulier" }})</td>
-                                        <td>{{ $client->grandcompte ? "Grand compte" : "normal" }}</td>
+                                        <td>{{ $client->grandcompte ? "Grand compte" : "Normal" }}</td>
                                         <td>{{ $client->contact }}</td>
                                         <td>{{ $client->ville }}</td>
                                         <td>{{ (new \Carbon\Carbon($client->datecreation))->format('d/m/Y à H:i:s') }}</td>

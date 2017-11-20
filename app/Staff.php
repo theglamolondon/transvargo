@@ -15,5 +15,10 @@ class Staff extends Authenticable
 {
     const POURCENTAGE = 0.25;
 
+    public $timestamps = false;
     protected $table = 'staff';
+
+    public function identiteAcces(){
+        return $this->belongsTo(IdentiteAccess::class,"identiteaccess_id");
+    }
 }

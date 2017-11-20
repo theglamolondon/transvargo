@@ -110,6 +110,12 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
 
     Route::get('pdf/facture/{reference}','Admin\Invoice\InvoiceController@showFacturePDF')->name('staff.pdf.facture');
     Route::get('pdf/bon-livraison/{reference}','Admin\Invoice\InvoiceController@showBonLivraisonPDF')->name('staff.pdf.bonlivraison');
+
+    Route::get('account/nouveau.html','Admin\UserController@ajouter')->name('staff.user.ajout');
+    Route::post('account/nouveau.html','Admin\UserController@create');
+    Route::get('account/{email}/modifier.html','Admin\UserController@modifier')->name('staff.user.modifier');
+    Route::post('account/{email}/modifier.html','Admin\UserController@update');
+    Route::get('account/liste.html','Admin\UserController@liste')->name('staff.user.liste');
 });
 
 /*Newsletter*/
