@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AcceptExpedition;
+use App\Events\ExpeditionFinish;
+use App\Expedition;
 use App\IdentiteAccess;
 use App\Services\Firebase\Linked;
 use App\Services\Statut;
@@ -18,8 +21,11 @@ class SiteController extends Controller
 {
     use Linked;
 
-    public function test(){
-
+    public function test()
+    {
+        $expedition = Expedition::with('client','chargement.vehicule.transporteur','typeCamion')
+            ->find(9);
+        event(new AcceptExpedition($expedition));
     }
 
     public function index(Request $request){

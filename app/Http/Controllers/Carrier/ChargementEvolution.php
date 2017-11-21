@@ -89,10 +89,10 @@ trait ChargementEvolution
         $expedition = Expedition::with('client','chargement.vehicule.transporteur','typeCamion')
             ->where("reference", $request->input("reference"))->firstOrFail();
 
-        event(new ExpeditionFinish($expedition));
-
         $expedition->bonlivraison = sprintf("BL%s-%04d", date('Ym'), $expedition->id);
         $expedition->saveOrFail();
+
+        event(new ExpeditionFinish($expedition));
     }
 
     private function generateOtp(Chargement $chargement)

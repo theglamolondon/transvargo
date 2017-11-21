@@ -42,6 +42,7 @@ class ExpeditionFinishListener
                 ->send(new ExpeditionFinishClient($event->expedition));
         }catch (\Exception $e){
             Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
         }finally{
             Log::info("Email envoyé à l'expéditeur + Bon de Livraison");
         }
@@ -54,8 +55,9 @@ class ExpeditionFinishListener
                 ->send(new ExpeditionFinishAdmin($event->expedition));
         }catch (\Exception $e){
             Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
         }finally{
-            Log::info("Email envoyé à l'expéditeur + Bon de Livraison");
+            Log::info("Email envoyé aux équipes Transvargo");
         }
     }
 }

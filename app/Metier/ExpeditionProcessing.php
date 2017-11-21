@@ -88,12 +88,21 @@ trait ExpeditionProcessing
         return $_expedition;
     }
 
+    /**
+     * @param array $data
+     * @return Expedition;
+     */
     private function reserveOffer(array $data)
     {
-        $expedition = Expedition::with("chargement")->where('reference',$data['reference'])->first();
+        $expedition = Expedition::with("chargement","client")->where('reference',$data['reference'])->first();
 
         if(!$expedition)
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.affectation'));
+
+
+        if($expedition->client->grandcompte){
+            $this->makeFacture($expedition);
+        }
 
         $vehicule = Vehicule::where('immatriculation',$data['immatriculation'])->first();
 
@@ -105,6 +114,12 @@ trait ExpeditionProcessing
         $expedition->save();
 
         return $expedition;
+    }
+
+    private function makeFacture(Expedition $expedition)
+    {
+        $expedition->facture = sprintf("EXP%s-%04d", date('Ym'), $expedition->id);
+        $expedition->save();
     }
 
     /**
@@ -121,6 +136,7 @@ trait ExpeditionProcessing
             event(new AcceptExpedition($expedition));
         }catch (\Exception $e){
             Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
         }
 
         return true;

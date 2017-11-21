@@ -11,8 +11,5 @@ namespace App\Http\Controllers\Admin;
 
 trait UsersProcessing
 {
-    private function a()
-    {
 
-    }
 }

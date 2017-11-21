@@ -12,7 +12,8 @@
                     <h3>Bonjour {{ $expedition->client->prenoms }} {{ $expedition->client->nom }},</h3><br>
                     Votre expédition <strong>{{ $expedition->reference }}</strong>  a été livrée avec succès.<br><br>
 
-                    Veuillez noter que votre numéro de bon de livraison <strong>{{ $expedition->bonlivraison }}</strong>&nbsp;:<br><br><br><br>
+                    Veuillez noter que votre numéro de bon de livraison :<br><br>
+                    <strong>{{ $expedition->bonlivraison }}</strong>&nbsp;<br><br>
 
                     <br><br>
                     N'hésitez pas à reprendre contact avec nous si quelque chose ne va pas ou si vous avez besoin d’informations&nbsp;: nous lisons et répondons à tous les e-mails&nbsp;!

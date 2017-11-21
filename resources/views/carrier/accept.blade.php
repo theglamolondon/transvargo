@@ -114,10 +114,13 @@
                         <span><i class="glyphicon glyphicon-cd"></i> Véhicule </span> <br/>
                         <strong>{{ $expedition->chargement->vehicule->immatriculation }}</strong>
                     </p>
+
+                    @if($expedition->statut == 252 )
                     <form action="{{ route('chargement.livrer', [ "reference" => $expedition->reference ]) }}" method="post">
                         {{ csrf_field() }}
                         <button type="button" class="btn btn-primary btn-xs form-control" data-toggle="modal" data-target="#myModal" onclick="beginLivraison();">Livrer</button>
                     </form>
+                    @endif
                 @endif
                 </div>
             </div>
@@ -147,11 +150,12 @@
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if($expedition->statut > 262) active @endif">4</span>
+                    <span class="state @if($expedition->statut >= 262) active @endif">4</span>
                     <span>Terminé</span>
                 </div>
             </div>
             @endif
+
             <br class="clearfix">
         </div>
         <div class="col-md-4 col-sm-7 col-xs-12">

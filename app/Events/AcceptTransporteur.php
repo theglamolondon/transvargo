@@ -30,7 +30,7 @@ class AcceptTransporteur
 
     public function __construct(Transporteur $transporteur, Expedition $expedition)
     {
-        $this->$transporteur = $transporteur;
+        $this->transporteur = $transporteur;
         $this->expedition = $expedition;
     }
 

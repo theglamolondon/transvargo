@@ -13,13 +13,12 @@
                     L'expédition <strong>{{ $expedition->reference }}</strong>  du client <strong>{{ $expedition->client->prenoms }} {{ $expedition->client->nom }},</strong>
                     a été livrée avec succès.<br><br>
 
-                    Veuillez noter que le numéro de facture est <strong>{{ $expedition->facture }}</strong>&nbsp;:<br><br><br><br>
-                    Veuillez noter que le numéro de bon de livraison est <strong>{{ $expedition->bonlivraison }}</strong>&nbsp;:<br><br><br><br>
+                    Veuillez noter que le numéro de facture est&nbsp;:<br><br>
+                    <strong>{{ $expedition->facture }}</strong><br><br>
 
-                    <br><br>
-                    N'hésitez pas à reprendre contact avec nous si quelque chose ne va pas ou si vous avez besoin d’informations&nbsp;: nous lisons et répondons à tous les e-mails&nbsp;!
-                    <br><br>
-                    Bons transports avec {{ config('app.name') }} !
+                    Veuillez noter que le numéro de bon de livraison est :<br><br>
+                    <strong>{{ $expedition->bonlivraison }}</strong>&nbsp;<br><br>
+
                     <br><br>
                     L'application {{ config('app.name') }}<br>
                 </td>

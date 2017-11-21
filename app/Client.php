@@ -24,4 +24,8 @@ class Client extends Authenticable
     public function validBy(){
         return $this->belongsTo(Staff::class,"valid_by","identiteaccess_id");
     }
+
+    protected $casts = [
+      "grandcompte"  => "boolean"
+    ];
 }

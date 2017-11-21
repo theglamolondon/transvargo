@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Expedition;
+use App\Work\Pdf\PdfMaker;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,7 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ExpeditionAccepted extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, PdfMaker;
     private $expedition;
 
     /**
@@ -32,6 +33,10 @@ class ExpeditionAccepted extends Mailable
     {
         return $this->from(env('MAIL_USERNAME'))
             ->subject('Expedition #'.$this->expedition->reference." acceptée")
-            ->view('email.expedition-accepted');
+            ->view('email.expedition-accepted')
+            ->attachData($this->showFacturePDF($this->expedition->reference),
+                "Facture ".$this->expedition->facture."pdf", [
+                    "mime" => "application/pdf"
+                ]);
     }
 }

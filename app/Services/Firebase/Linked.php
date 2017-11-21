@@ -29,16 +29,30 @@ trait Linked
         );
     }
 
-    public function sendNotificationToAndoidDriverApp(Expedition $expedition)
+    public function sendNotificationToAndoidDriverApp(Expedition $expedition, string $message = null, string $titre = null, Carbon $delay = null)
     {
-        $push = $this->initializePush($expedition);
+        $push = null;
+
+        if($message == null){
+            $push = $this->initializePush($expedition);
+        }else{
+            $push = new Push( $titre ?? "Nouvelle expédition", $message);
+        }
+
         $firebase = new FirebaseBase();
         return $firebase->sendNotificationToAllDevices($push);
     }
 
-    public function sendNotificationToOneDevice(Expedition $expedition)
+    public function sendNotificationToOneDevice(Expedition $expedition, string $message = null, string $titre = null, Carbon $delay = null)
     {
-        $push = $this->initializePush($expedition);
+        $push = null;
+
+        if($message == null){
+            $push = $this->initializePush($expedition);
+        }else{
+            $push = new Push( $titre ?? "Nouvelle expédition", $message);
+        }
+
         $firebaseToken = $expedition->chargement->vehicule->firebasetoken;
 
         $firebase = new FirebaseBase();

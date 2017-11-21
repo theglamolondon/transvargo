@@ -43,9 +43,6 @@
                 <td class="desc">{{ $invoice->lieudepart }}<br/>{{ $invoice->chargement ? $invoice->chargement->adressechargement : '' }}</td>
                 <td class="desc">{{ $invoice->lieuarrivee }}<br/>{{ $invoice->chargement ? $invoice->chargement->adresselivraison : '' }}</td>
                 <td class="unit">{{ $invoice->typeCamion ? $invoice->typeCamion->libelle : 'Non défini' }}</td>
-                @php
-                    $total += $invoice->prix
-                @endphp
             </tr>
         @endforeach()
         </tbody>

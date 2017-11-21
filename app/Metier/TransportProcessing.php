@@ -31,7 +31,7 @@ trait TransportProcessing
             'comptecontribuable' => 'present',
             'raisonsociale' => 'present',
             'ville' => 'required',
-            'typetransporteur_id' => 'required|numeric',
+            'typetransporteur_id' => 'required|integer',
             'contact' => 'present',
             'nationalite' => 'present',
             'datenaissance' => 'required|date_format:d/m/Y',
