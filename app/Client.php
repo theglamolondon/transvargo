@@ -25,6 +25,10 @@ class Client extends Authenticable
         return $this->belongsTo(Staff::class,"valid_by","identiteaccess_id");
     }
 
+    public function expeditions(){
+        return $this->hasMany(Chargement::class,'client_id');
+    }
+
     protected $casts = [
       "grandcompte"  => "boolean"
     ];

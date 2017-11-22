@@ -99,7 +99,7 @@ class TransporteurController extends Controller
         return view('carrier.accept',compact('expedition','vehicules'));
     }
 
-    public function changeStatut(Request $request)
+    public function startChargement(Request $request)
     {
         $this->validate($request, [
             "reference" => "required|exists:expedition",

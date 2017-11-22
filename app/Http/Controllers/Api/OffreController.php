@@ -25,8 +25,8 @@ class OffreController extends Controller
             return response()->json(["message" => $e->getMessage()],500);
         }
 
-        return  response()->json([
-                    "message" => Lang::get('message.expedition.accept',['reference' => $request->input('reference')]),
-                ]);
+        return response()->json([
+            "message" => Lang::get('message.expedition.accept',['reference' => $request->input('reference')]),
+        ]);
     }
 }

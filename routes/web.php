@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth','transporteur'], 'prefix' => 'transporteur
     Route::post('vehicule/ajouter.html','VehiculeController@addNewVehicle')->name('transport.ajoutervehicule');
     Route::get('expedition/{reference}/accepter.html','Carrier\TransporteurController@showAcceptOfferForm')->name('transport.accept');
     Route::post('expedition/{reference}/accepter.html','ExpeditionController@acceptOffer');
-    Route::post('expedition/{reference}/change-statut.action','Carrier\TransporteurController@changeStatut')->name('chargement.change.statut');
+    Route::post('expedition/{reference}/change-statut.action','Carrier\TransporteurController@startChargement')->name('chargement.change.statut');
     Route::post('expedition/{reference}/livrer.html','Carrier\TransporteurController@delivry')->name('chargement.livrer');
     Route::post('expedition/{reference}/livraison/valider','Carrier\TransporteurController@validerLivraison')->name('chargement.valide.livraison');
     Route::get('chargements.html','Carrier\TransporteurController@showChargement')->name('transporteur.chargement');
@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::post('transporteurs/fiche/{token}.html','Admin\StaffController@validTransporteurAccount');
 
     Route::get('expediteurs.html','Admin\ExpediteurController@showExpediteursListe')->name('admin.expediteur.all');
+    Route::get('expediteur/{email}/fiche.html','Admin\ExpediteurController@showExpediteurFiche')->name('admin.expediteur.fiche');
 
     Route::get('grand-compte/recherche.html','Admin\GrandCompteController@searchClient')->name('staff.gc.search');
     Route::get('grand-compte.html','Admin\GrandCompteController@showList')->name('staff.gc.liste');
@@ -106,7 +107,8 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('offres.html','Admin\OffreController@liste')->name('staff.offres');
     Route::get('offre/{reference}/details.html','Admin\OffreController@details')->name('staff.offre.details');
     Route::get('cartographie/expeditions.html','Admin\MapExpedition@showMap')->name('staff.map.expedition');
-    Route::get('expeditions/localisations','Admin\MapExpedition@ajaxGetLocatisation')->name('staff.expeditions.localistion');
+    Route::get('expeditions/localisations','Admin\MapExpedition@ajaxGetLocatisation')->name('staff.expeditions.localisation');
+    Route::get('itineraire/{immatriculation}/{reference}/direction.html','Admin\MapExpedition@showInitenaireExpedition')->name('staff.expeditions.itineraire');
 
     Route::get('pdf/facture/{reference}','Admin\Invoice\InvoiceController@showFacturePDF')->name('staff.pdf.facture');
     Route::get('pdf/bon-livraison/{reference}','Admin\Invoice\InvoiceController@showBonLivraisonPDF')->name('staff.pdf.bonlivraison');

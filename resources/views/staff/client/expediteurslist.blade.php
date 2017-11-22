@@ -64,6 +64,7 @@
                         <table class="table table-hover text-left">
                             <thead>
                             <tr class="bg-dark">
+                                <th> </th>
                                 <th>Nom et Prenoms</th>
                                 <th>Type</th>
                                 <th>Contact</th>
@@ -75,6 +76,9 @@
                             @if($clients)
                                 @foreach($clients as $client)
                                     <tr>
+                                        <td>
+                                            <a href="{{ route('admin.expediteur.fiche',['email'=>base64_encode($client->identiteAccess->email)]) }}" title="Details Expéditeur"> <i class="icon icon-xs fa-pencil icon-gray"></i></a>
+                                        </td>
                                         <td>{{ $client->nom }} {{ $client->prenoms }} ({{ $client->raisonsociale ?? "Client particulier" }})</td>
                                         <td>{{ $client->grandcompte ? "Grand compte" : "Normal" }}</td>
                                         <td>{{ $client->contact }}</td>

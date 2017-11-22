@@ -33,7 +33,7 @@ class ExpeditionAccepted extends Mailable
     {
         return $this->from(env('MAIL_USERNAME'))
             ->subject('Expedition #'.$this->expedition->reference." acceptée")
-            ->view('email.expedition-accepted')
+            ->view('email.expedition-accepted', ["expedition" => $this->expedition])
             ->attachData($this->showFacturePDF($this->expedition->reference),
                 "Facture ".$this->expedition->facture."pdf", [
                     "mime" => "application/pdf"

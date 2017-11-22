@@ -33,6 +33,11 @@ trait ChargementEvolution
 
         $expedition->statut = $statut;
 
+        if($statut == Statut::TYPE_EXPEDITION.Statut::ETAT_EN_COURS.Statut::AUTRE_ACCEPTE)
+        {
+            $expedition->chargement->dateheurechargement = Carbon::now()->toDateTimeString();
+        }
+
         $this->markChange($expedition->chargement, $statut);
 
         return $expedition->save();
@@ -90,6 +95,7 @@ trait ChargementEvolution
             ->where("reference", $request->input("reference"))->firstOrFail();
 
         $expedition->bonlivraison = sprintf("BL%s-%04d", date('Ym'), $expedition->id);
+        $expedition->chargement->dateheurelivraison = Carbon::now()->toDateTimeString();
         $expedition->saveOrFail();
 
         event(new ExpeditionFinish($expedition));

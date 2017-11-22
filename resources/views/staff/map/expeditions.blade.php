@@ -60,34 +60,51 @@
 
         let infoWindow = new google.maps.InfoWindow;
 
-        $.get("{{ route('staff.expeditions.localistion') }}", function (data) {
+        $.get("{{ route('staff.expeditions.localisation') }}", function (data) {
             console.log(data);
-            let URL = '{{route("staff.offre.details", ['refrerence' => "_#_"])}}'
+            let URL = '{{route("staff.offre.details", ['refrerence' => "_#_"])}}';
+            let URL_ITINERAIRE = '{{route("staff.expeditions.itineraire", ['immatriculation' => "_#1_", 'refrerence' => "_#2_"])}}';
 
             for(i = 0; i < data.length; i++)
             {
-                let marker = new google.maps.Marker({
-                    map: map,
-                    animation: google.maps.Animation.DROP,
-                    position: new google.maps.LatLng(parseFloat(data[i].position.latitude), parseFloat(data[i].position.longitude)),
-                    icon: '{{ asset('working/truck-map-marker30x42.png') }}',
-                    tag : data[i],
-                });
+                if( data[i].position !== null)
+                {
+                    let marker = new google.maps.Marker({
+                        map: map,
+                        animation: google.maps.Animation.DROP,
+                        position: new google.maps.LatLng(parseFloat(data[i].position.latitude), parseFloat(data[i].position.longitude)),
+                        icon: '{{ asset('working/truck-map-marker30x42.png') }}',
+                        tag : data[i],
+                    });
 
-                let infowincontent = "<div>"
-                    +"<a href='#'><strong>Expédition " + data[i].expedition.reference+"</strong></a><br/>"
-                    +"<b>Transporteur</b> : " + data[i].expedition.chargement.vehicule.transporteur.raisonsociale + " (" +data[i].expedition.chargement.vehicule.transporteur.nom +" "+ data[i].expedition.chargement.vehicule.transporteur.prenoms +")<br/>"
-                    +"<b>Véhicule</b> : " + data[i].expedition.chargement.vehicule.immatriculation + " (" +data[i].expedition.type_camion.libelle + ")<br/>"
-                    +"<b>Chauffeur</b> : " + data[i].expedition.chargement.vehicule.chauffeur + " (<i class='glyphicon glyphicon-phone'></i>"+ data[i].expedition.chargement.vehicule.telephone +")" +"<br/>"
-                    +"</div>";
+                    let infowincontent = "<div>"
+                        +"<a href='"+URL.replace("_#_",data[i].expedition.reference)+"'>"
+                        +"<strong>Expédition " + data[i].expedition.reference+"</strong></a><br/>"
+                        +"<b>Transporteur</b> : " + data[i].expedition.chargement.vehicule.transporteur.raisonsociale + " (" +data[i].expedition.chargement.vehicule.transporteur.nom +" "+ data[i].expedition.chargement.vehicule.transporteur.prenoms +")<br/>"
+                        +"<b>Véhicule</b> : " + data[i].expedition.chargement.vehicule.immatriculation + " (" +data[i].expedition.type_camion.libelle + ")<br/>"
+                        +"<b>Chauffeur</b> : " + data[i].expedition.chargement.vehicule.chauffeur + " (<i class='glyphicon glyphicon-phone'></i>"+ data[i].expedition.chargement.vehicule.telephone +")" +"<br/>"
+                        +"<hr style='display: block; width: 100%; margin: 4px 0;'/>"
+                        +"<a href='"+ (URL_ITINERAIRE.replace("_#1_",data[i].expedition.chargement.vehicule.immatriculation)).replace("_#2_",data[i].expedition.reference)+"'>Afficher l'itinéraire ...</a>"+"<br/>"
+                        +"</div>";
 
-                marker.addListener('click', function() {
+                    marker.addListener('click', function() {
+                        toggleBounce(marker);
+                        //marker.setAnimation(google.maps.Animation.BOUNCE);
+                        infoWindow.setContent(infowincontent);
+                        infoWindow.open(map, marker);
+                    });
+
+                    EXPEDITIONS_ACTIVES[data[i].expedition.reference] = marker;
+                }
+            }
+
+            function toggleBounce(marker)
+            {
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                } else {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
-                    infoWindow.setContent(infowincontent);
-                    infoWindow.open(map, marker);
-                });
-
-                EXPEDITIONS_ACTIVES[data[i].expedition.reference] = marker;
+                }
             }
         });
     }
