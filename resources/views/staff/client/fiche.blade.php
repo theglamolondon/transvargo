@@ -10,9 +10,55 @@
             </div>
         </div>
         <br class="clearfix">
+        @if($identite)
         <div class="col-md-offset-1 col-md-10">
+            <div class="col-md-12 col-sm-12 col-xs-12">
 
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <p class="text-left">
+                        <span><i class="glyphicon glyphicon-calendar"></i> Date de Création </span> <br/>
+                        <strong>{{(new \Carbon\Carbon($identite->client->datecreation))->format("d/m/Y à H:i") }}</strong>
+                    </p>
+                    @if($identite->grandcompte=1)
+                        <p class="text-left">
+                            <span><i class="glyphicon glyphicon-calendar"></i> Statut Grand Compte </span> <br/>
+                            <strong>{{"ACTIVE"}} </strong>
+                            <br/>
+                        </p>
+                    <p class="text-left">
+                        <span><i class="glyphicon glyphicon-calendar"></i> Date Activation Grand Compte </span> <br/>
+                        <strong>{{(new \Carbon\Carbon($identite->client->dategrandcompte))->format("d/m/Y à H:i") }}</strong>
+                        <br/>
+                    </p>
+                    @endif
+                    <hr/>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <p class="text-left">
+                        <span><i class="glyphicon glyphicon-user"></i></i> Nom </span> <br/>
+                        <strong>{{$identite->client->nom}}</strong>
+                    </p>
+                    <p class="text-left">
+                        <span><i class="glyphicon glyphicon-user"></i> Prénoms</span> <br/>
+                        <strong>{{$identite->client->prenoms}}</strong>
+                        <br/>
+                    </p>
+                    <hr/>
+                </div>
+                <div class="col-md-4">
+                        <p class="text-left">
+                            <span><i class="glyphicon glyphicon-user"></i> Raison Sociale </span> <br/>
+                            <strong>{{$identite->client->raisonsociale}}</strong>
+                        </p>
+                        <p class="text-left">
+                            <span> <i class="glyphicon glyphicon-earphone"></i> Contact </span> <br/>
+                            <strong>{{$identite->client->contact}}</strong>
+                        </p>
+                </div>
+            </div>
         </div>
+@endif
+    </div>
 
         <div class="col-md-offset-1 col-md-10">
             <div class="">
