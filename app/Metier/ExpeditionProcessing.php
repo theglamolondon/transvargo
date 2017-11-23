@@ -238,4 +238,16 @@ trait ExpeditionProcessing
             ->orderBy('datechargement')
             ->select("expedition.*");
     }
+
+    public function details($reference)
+    {
+        try{
+            $expedition = $this->getExpeditionByReference($reference);
+
+            return view("staff.offre-details", compact("expedition"));
+        }catch (ModelNotFoundException $e){
+            logger($e->getTraceAsString());
+            return back()->withErrors($e->getMessage());
+        }
+    }
 }

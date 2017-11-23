@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function
     Route::get('/mes-expeditions/programmees.html','ClientController@showExpeditionsProgrammees')->name('client.expeditions.programmees');
     Route::get('/mes-expeditions/livrees.html','ClientController@showExpeditionsLivrees')->name('client.expeditions.livrees');
     Route::get('/mes-expeditions/annulees.html','ClientController@showExpeditionsAnnulees')->name('client.expeditions.annulees');
+    Route::get('mes-expeditions/{reference}/details.html','ClientController@details')->name('client.expeditions.details');
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
     Route::post('/mon-compte.html','Auth\UpdateProfileController@updateClient');

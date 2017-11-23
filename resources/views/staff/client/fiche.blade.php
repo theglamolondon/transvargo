@@ -16,21 +16,23 @@
 
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <p class="text-left">
-                        <span><i class="glyphicon glyphicon-calendar"></i> Date de Création </span> <br/>
+                        <span><i class="glyphicon glyphicon-calendar"></i> Date de création </span> <br/>
                         <strong>{{(new \Carbon\Carbon($identite->client->datecreation))->format("d/m/Y à H:i") }}</strong>
                     </p>
-                    @if($identite->grandcompte=1)
+
+                    @if($identite->client->grandcompte)
                         <p class="text-left">
                             <span><i class="glyphicon glyphicon-calendar"></i> Statut Grand Compte </span> <br/>
-                            <strong>{{"ACTIVE"}} </strong>
+                            <strong>Actif</strong>
                             <br/>
                         </p>
-                    <p class="text-left">
-                        <span><i class="glyphicon glyphicon-calendar"></i> Date Activation Grand Compte </span> <br/>
-                        <strong>{{(new \Carbon\Carbon($identite->client->dategrandcompte))->format("d/m/Y à H:i") }}</strong>
-                        <br/>
-                    </p>
+                        <p class="text-left">
+                            <span><i class="glyphicon glyphicon-calendar"></i> Date d'activation </span> <br/>
+                            <strong>{{(new \Carbon\Carbon($identite->client->dategrandcompte))->format("d/m/Y à H:i") }}</strong>
+                            <br/>
+                        </p>
                     @endif
+
                     <hr/>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
@@ -57,8 +59,7 @@
                 </div>
             </div>
         </div>
-@endif
-    </div>
+        @endif
 
         <div class="col-md-offset-1 col-md-10">
             <div class="">
