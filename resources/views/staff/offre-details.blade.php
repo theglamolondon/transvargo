@@ -72,7 +72,7 @@
 
 
                 <div class="col-md-4">
-                    @if($expedition->statut == 242 )
+                    @if(substr($expedition->statut, 1) == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE) )
                         <form method="post" action="{{ route("chargement.change.statut", [ "reference" => $expedition->reference ]) }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="reference" value="{{ $expedition->reference }}">
@@ -90,18 +90,14 @@
                             <span><i class="glyphicon glyphicon-cd"></i> Véhicule </span> <br/>
                             <strong>{{ $expedition->chargement->vehicule->immatriculation }}</strong>
                         </p>
-                        <form action="{{ route('chargement.livrer', [ "reference" => $expedition->reference ]) }}" method="post">
-                            {{ csrf_field() }}
-                            <button type="button" class="btn btn-primary btn-xs form-control" data-toggle="modal" data-target="#myModal" onclick="beginLivraison();">Livrer</button>
-                        </form>
                     @endif
 
                     <div class="">
-                    @if($expedition->statut >= 242)
+                    @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE))
                         <a class="h6" title="Télécharger la facture" target="_blank" href="{{ route("staff.pdf.facture", ["reference" => $expedition->reference]) }}"><i class="glyphicon glyphicon-save-file"></i> Facture</a>
                     @endif
                     <br/>
-                    @if($expedition->statut >= 262)
+                    @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS))
                         <a class="h6" title="Télécharger le bon de livraison" target="_blank" href="{{ route("staff.pdf.bonlivraison", ["reference" => $expedition->reference]) }}"><i class="glyphicon glyphicon-paste"></i> Bon de livraison</a>
                     @endif
                     </div>
@@ -122,17 +118,17 @@
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if($expedition->statut >= 252) active @endif">2</span>
+                    <span class="state @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS)) active @endif">2</span>
                     <span>En cours</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if($expedition->statut >= 262) active @endif">3</span>
+                    <span class="state @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE)) active @endif">3</span>
                     <span>Livrée</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if($expedition->statut > 262) active @endif">4</span>
+                    <span class="state @if($expedition->statut >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE.\App\Services\Statut::AUTRE_PAYEE)) active @endif">4</span>
                     <span>Terminé</span>
                 </div>
             </div>

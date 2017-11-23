@@ -18,7 +18,7 @@ $total = 0;
                     <table class="table table-hover text-left">
                         <thead>
                         <tr class="bg-dark">
-                            <th></th>
+                            <th width="10%">Actions</th>
                             <th>Référence</th>
                             <th>Itininéraire</th>
                             <th>Distance</th>
@@ -35,20 +35,23 @@ $total = 0;
                         <tr>
                             <td>
                                 @if($expedition->statut == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_NON_ACCEPTE) )
-                                    <a title="Annuler l'expedition" href="#" class="glyphicon glyphicon-trash"></a>
+                                    <a target="_blank" title="Annuler l'expedition" href="#" class="glyphicon glyphicon-trash"></a>
                                 @endif
                                 @if($expedition->statut == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_INITIE) )
-                                    <a href="{{ route('client.newexpedition',['ref'=>base64_encode($expedition->reference)]) }}" title="Modifier l'expedition" class="icon icon-xs fa-pencil icon-gray"></a>
+                                    <a target="_blank" href="{{ route('client.newexpedition',['ref'=>base64_encode($expedition->reference)]) }}" title="Modifier l'expedition" class="icon icon-xs fa-pencil icon-gray"></a>
                                 @endif
                                 @if(intval($expedition->statut) >=  intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_ACCEPTE) )
-                                    <a href="{{ route('payment.choice',['reference'=>$expedition->reference]) }}" title="Payer l'expedition" class="glyphicon glyphicon-usd"></a>
+                                    <a target="_blank" href="{{ route('client.pdf.facture',['reference'=>$expedition->reference]) }}" title="Télécharger la facture de l'expedition" class="glyphicon glyphicon-save-file"></a>
                                 @endif
-                                @if(substr($expedition->statut,2) ==  intval(\App\Services\Statut::AUTRE_PAYEE) )
-                                    <a href="{{ route('client.pdf.facture',['reference'=>$expedition->reference]) }}" title="Télécharger la facture de l'expedition" class="glyphicon glyphicon-file"></a>
+                                @if(intval($expedition->statut) >=  intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE.\App\Services\Statut::AUTRE_ACCEPTE) )
+                                    <a target="_blank" href="{{ route('client.pdf.bonlivraison',['reference'=>$expedition->reference]) }}" title="Télécharger le bon de livraison" class="glyphicon glyphicon-paste"></a>
+                                @endif
+                                @if(substr($expedition->statut,2) !=  intval(\App\Services\Statut::AUTRE_PAYEE) )
+                                    <a target="_blank" href="{{ route('payment.choice',['reference'=>$expedition->reference]) }}" title="Payer l'expedition" class="glyphicon glyphicon-usd"></a>
                                 @endif
                             </td>
                             <td><a title="Détails de l'expédition" href="{{ route("client.expeditions.details", ["reference" => $expedition->reference]) }}">{{ $expedition->reference }}</a></td>
-                            <td>De [ {{ $expedition->lieudepart }} ]  à [ {{ $expedition->lieuarrivee }} ]</td>
+                            <td>De {{ $expedition->lieudepart }} à {{ $expedition->lieuarrivee }}</td>
                             <td>{{ $expedition->prix/\App\Expedition::UNIT_PRICE }} km</td>
                             <td>@lang('statut.'.$expedition->statut)</td>
                             <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->chauffeur : '' ) : ''}}</td>

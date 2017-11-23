@@ -106,7 +106,7 @@ class TransporteurController extends Controller
             "statut" => "required|numeric"
         ]);
 
-         if( $this->changeStatutExpedition($request->input("reference"), $request->input("statut")) )
+         if( $this->changeStatutExpedition($request->input("reference"), Statut::TYPE_EXPEDITION.Statut::ETAT_EN_COURS) )
          {
             return back()->with(Tools::MESSAGE_SUCCESS, "Expédition démarrée");
          }else{

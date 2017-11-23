@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </form>
-                @elseif($expedition->statut == 242 )
+                @elseif( substr($expedition->statut, 1) == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE) )
                     <form method="post" action="{{ route("chargement.change.statut", [ "reference" => $expedition->reference ]) }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="reference" value="{{ $expedition->reference }}">
@@ -115,7 +115,7 @@
                         <strong>{{ $expedition->chargement->vehicule->immatriculation }}</strong>
                     </p>
 
-                    @if($expedition->statut == 252 )
+                    @if(substr($expedition->statut, 1) == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS) )
                     <form action="{{ route('chargement.livrer', [ "reference" => $expedition->reference ]) }}" method="post">
                         {{ csrf_field() }}
                         <button type="button" class="btn btn-primary btn-xs form-control" data-toggle="modal" data-target="#myModal" onclick="beginLivraison();">Livrer</button>
@@ -140,17 +140,17 @@
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if($expedition->statut >= 252) active @endif">2</span>
+                    <span class="state @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS)) active @endif">2</span>
                     <span>En cours</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if($expedition->statut >= 262) active @endif">3</span>
+                    <span class="state @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE)) active @endif">3</span>
                     <span>Livrée</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if($expedition->statut >= 262) active @endif">4</span>
+                    <span class="state @if($expedition->statut >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE.\App\Services\Statut::AUTRE_PAYEE)) active @endif">4</span>
                     <span>Terminé</span>
                 </div>
             </div>

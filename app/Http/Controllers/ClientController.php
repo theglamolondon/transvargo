@@ -7,6 +7,7 @@ use App\Metier\ClientProcessing;
 use App\Metier\ExpeditionProcessing;
 use App\Services\Statut;
 use App\TypeCamion;
+use App\Work\Pdf\PdfMaker;
 use App\Work\Tools;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Schema;
 
 class ClientController extends Controller
 {
-    use ClientProcessing, ExpeditionProcessing;
+    use ClientProcessing, ExpeditionProcessing, PdfMaker;
 
     public function __construct()
     {

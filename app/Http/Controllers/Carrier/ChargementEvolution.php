@@ -31,7 +31,8 @@ trait ChargementEvolution
             ->where("reference", $reference)
             ->first();
 
-        $expedition->statut = $statut;
+        //Nous ajoutons l'état payé ou accepté déjà existant du statut au nouveau statut
+        $expedition->statut = $statut.substr($expedition->statut,2,1);
 
         $this->markChange($expedition->chargement, $statut);
 
@@ -41,12 +42,12 @@ trait ChargementEvolution
     private function markChange(Chargement $chargement, $statut)
     {
         switch ($statut){
-            case Statut::TYPE_EXPEDITION.Statut::ETAT_EN_COURS.Statut::AUTRE_ACCEPTE :
+            case Statut::TYPE_EXPEDITION.Statut::ETAT_EN_COURS :
                 $chargement->dateheurechargement = Carbon::now()->toDateTimeString();
                 $chargement->vehicule->statut = Statut::TYPE_VEHICULE.Statut::ETAT_EN_MISSION.Statut::AUTRE_NON_NULL; //Véhicule en mission
                 break;
 
-            case Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_ACCEPTE :
+            case Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE :
                 $chargement->dateheurelivraison = Carbon::now()->toDateTimeString();
                 $chargement->vehicule->statut = Statut::TYPE_VEHICULE.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL; //Véhicule devient libre
                 break;
@@ -82,7 +83,7 @@ trait ChargementEvolution
     private function finishExpedition(Request $request)
     {
         if(
-        !$this->changeStatutExpedition(request()->input("reference"), Statut::create(Statut::TYPE_EXPEDITION, Statut::ETAT_LIVREE, Statut::AUTRE_ACCEPTE))
+        !$this->changeStatutExpedition(request()->input("reference"), Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE)
         ){
             throw new ModelNotFoundException();
         }

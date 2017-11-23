@@ -22,7 +22,7 @@ class ChargementController extends Controller
         try{
 
             if(
-            !$this->changeStatutExpedition(\request()->input("reference"), Statut::create(Statut::TYPE_EXPEDITION, Statut::ETAT_EN_COURS, Statut::AUTRE_ACCEPTE))
+            !$this->changeStatutExpedition(\request()->input("reference"), Statut::TYPE_EXPEDITION.Statut::ETAT_EN_COURS)
             ){
                 throw new ModelNotFoundException();
             }

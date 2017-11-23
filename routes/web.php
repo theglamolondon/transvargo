@@ -63,7 +63,8 @@ Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
     Route::post('/mon-compte.html','Auth\UpdateProfileController@updateClient');
-    Route::get('/facture/pdf/{reference}.html','Admin\Invoice\InvoiceController@showFacturePDF')->name('client.pdf.facture');
+    Route::get('/facture/pdf/{reference}.html','ClientController@showFacturePDF')->name('client.pdf.facture');
+    Route::get('/bonlivraison/pdf/{reference}.html','ClientController@showBonLivraisonPDF')->name('client.pdf.bonlivraison');
 });
 
 /*Payment*/

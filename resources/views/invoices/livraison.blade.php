@@ -17,7 +17,7 @@
                 </td>
                 <td class="head">
                     <div id="invoice1">
-                        <h1>Bon de livraison N° {{ $invoices->first()->bonlivraison }}</h1>
+                        <h2>Bon de livraison N° {{ $invoices->first()->bonlivraison }}</h2>
                         <div class="date">Date de livraison : {{ (new \Carbon\Carbon($invoices->first()->chargement->dateheurelivraison))->format('d/m/Y') }}</div>
                     </div>
                 </td>
