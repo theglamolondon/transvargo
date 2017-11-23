@@ -24,7 +24,8 @@ class SiteController extends Controller
     public function test()
     {
         $expedition = Expedition::with('client','chargement.vehicule.transporteur','typeCamion')
-            ->find(9);
+            ->find(11);
+        //return view('email.expedition-accepted', ["expedition" => $expedition]);
         event(new AcceptExpedition($expedition));
     }
 

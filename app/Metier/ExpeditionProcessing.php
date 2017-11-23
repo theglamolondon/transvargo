@@ -94,11 +94,12 @@ trait ExpeditionProcessing
      */
     private function reserveOffer(array $data)
     {
-        $expedition = Expedition::with("chargement","client")->where('reference',$data['reference'])->first();
+        $expedition = Expedition::with('client','chargement.vehicule.transporteur','typeCamion')
+            ->where('reference',$data['reference'])
+            ->first();
 
         if(!$expedition)
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.affectation'));
-
 
         if($expedition->client->grandcompte){
             $this->makeFacture($expedition);
@@ -138,7 +139,6 @@ trait ExpeditionProcessing
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
-
         return true;
     }
 
@@ -147,6 +147,8 @@ trait ExpeditionProcessing
         try{
             $this->accept($request);
         } catch (ModelNotFoundException $e ){
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
             return back()->withErrors($e->getMessage());
         }
         return redirect()->route('transporteur.offres.liste')
@@ -160,8 +162,9 @@ trait ExpeditionProcessing
             $expedition = Expedition::with('chargement.vehicule.transporteur', 'client', 'typeCamion')
                 ->where('reference', $reference)
                 ->firstOrFail();
-
         }catch (ModelNotFoundException $e){
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.notfound'));
         }
 
@@ -231,7 +234,6 @@ trait ExpeditionProcessing
      */
     protected function getOffers(){
         return Expedition::with("client","chargement","typeCamion")
-            //->join("")
             ->where('statut',Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
             ->orderBy('datechargement')
             ->select("expedition.*");

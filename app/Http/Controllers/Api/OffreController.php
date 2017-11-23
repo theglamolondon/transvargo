@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
 
 class OffreController extends Controller
 {
@@ -22,7 +23,9 @@ class OffreController extends Controller
         try{
             $this->accept($request);
         } catch (ModelNotFoundException $e ){
-            return response()->json(["message" => $e->getMessage()],500);
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+            return response()->json(["message" => $e->getMessage()],200);
         }
 
         return response()->json([

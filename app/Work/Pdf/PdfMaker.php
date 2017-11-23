@@ -39,16 +39,23 @@ trait PdfMaker
             ->get();
     }
 
-    public function showFacturePDF($reference = null)
+    public function showFacturePDF($reference)
     {
-        $invoices = $reference ? $this->getSingle($reference, (Auth::user() != null)) : $this->getAllInvoice();
+        //$invoices = $reference ? $this->getSingle($reference, (Auth::user() != null)) : $this->getAllInvoice();
+        $invoices = Expedition::with('client','chargement','typeCamion')
+            ->where('reference', $reference)
+            ->get();
+
         $invoices = PDF::loadView('invoices.factures',compact("invoices"))->setPaper('a4','portrait');
         return $invoices->stream("Facture $reference.pdf");
     }
 
     public function showBonLivraisonPDF($reference)
     {
-        $invoices = $reference ? $this->getSingle($reference, (Auth::user() != null)) : $this->getAllInvoice();
+        //$invoices = $reference ? $this->getSingle($reference, (Auth::user() != null)) : $this->getAllInvoice();
+        $invoices = Expedition::with('client','chargement','typeCamion')
+            ->where('reference', $reference)
+            ->get();
 
         //$this->generateTCPDF($invoices);
 
