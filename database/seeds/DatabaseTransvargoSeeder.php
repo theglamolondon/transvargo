@@ -22,6 +22,8 @@ class DatabaseTransvargoSeeder extends Seeder
             [ 'libelle' => 'Camion porteur' ],
             [ 'libelle' => 'Camion semi-remorque' ],
             [ 'libelle' => 'Camion plateau' ],
+            [ 'libelle' => 'Bachet' ],
+            [ 'libelle' => 'Utilitaire' ],
         ]);
 
         DB::table('typetransporteur')->insert([

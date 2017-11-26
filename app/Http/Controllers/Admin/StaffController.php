@@ -2,32 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ChauffeurPatron;
-use App\IdentiteAccess;
 use App\Metier\ClientProcessing;
 use App\Metier\TransportProcessing;
-use App\Metier\VehiculeProcessing;
 use App\Services\Statut;
 use App\Transporteur;
 use App\TypeCamion;
 use App\TypeTransporteur;
-use App\Vehicule;
 use App\Work\Tools;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
-    use TransportProcessing, VehiculeProcessing, ClientProcessing;
+    use TransportProcessing, ClientProcessing;
 
     public function __construct()
     {
@@ -94,7 +88,7 @@ class StaffController extends Controller
                     foreach ($request->input('immatriculation') as $k => $v)
                     {
                         $data = [
-                            "immatriculation" => $request->input('immatriculation')[$k],
+                            "immatriculation" => strtoupper($request->input('immatriculation')[$k]),
                             "capacite" => $request->input('capacite')[$k],
                             "chauffeur" => $request->input('chauffeur')[$k],
                             "telephone" => $request->input('telephone')[$k],

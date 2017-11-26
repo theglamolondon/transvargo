@@ -177,7 +177,7 @@
         var directionsService = null;
         var directionsDisplay = null;
 
-        $(document).ready( a => {
+        $(document).ready(function (){
             $('#myPosition').click(function () {
 
                 if($(this).is(':checked'))
@@ -288,14 +288,16 @@
                     map.setCenter(place.geometry.location);
                     map.setZoom(17);  // Why 17? Because it looks good.
                 }
+
                 marker.setIcon(/** @type {google.maps.Icon} */({
                     url: place.icon,
-                    icon: '{{ config('app.url') }}/working/package32.png',
+                    icon: '{{ asset('/working/package32.png') }}',
                     size: new google.maps.Size(71, 71),
                     origin: new google.maps.Point(0, 0),
                     anchor: new google.maps.Point(17, 34),
                     scaledSize: new google.maps.Size(35, 35)
                 }));
+
                 marker.setPosition(place.geometry.location);
                 marker.setVisible(true);
 
@@ -387,13 +389,13 @@
                         complete : function (xhr, obj) {
                             $("#spinner").hide();
                             xhr.done(function (data) {
-                                //console.log(data);
+                                console.log(data);
 
                                 //Changement de la description des villes
-                                if($("#lieudepart").attr("data-change") == 1)
+                                //if($("#lieudepart").attr("data-change") == 1)
                                     $('#lieudepart').val(data.origin_addresses[0]);
 
-                                if($("#lieuarrivee").attr("data-change") == 1)
+                                //if($("#lieuarrivee").attr("data-change") == 1)
                                     $('#lieuarrivee').val(data.destination_addresses[0]);
 
                                 //Affichage du résultat de distance Matrix

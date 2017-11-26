@@ -15,20 +15,29 @@ use App\Vehicule;
 
 trait VehiculeProcessing
 {
-    public function createVehicule(Transporteur $transporteur, array $data)
+    public function createVehicule(Transporteur $transporteur, array $data, Vehicule $vehicule = null)
     {
-        $vehicule = new Vehicule([
-            "immatriculation" => $data["immatriculation"],
-            "capacite" => $data["capacite"],
-            "chauffeur" => $data["chauffeur"],
-            "telephone" => $data["telephone"],
-            "statut" => Statut::TYPE_VEHICULE.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL,
-            "typecamion_id" => $data["typecamion_id"],
-        ]);
+        if(!$vehicule){
+            $vehicule = new Vehicule($this->extractVehiculeData($data));
+            $vehicule->statut = Statut::TYPE_VEHICULE.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL;
+        }else{
+            $vehicule->fill($this->extractVehiculeData($data));
+        }
 
         $vehicule->transporteur()->associate($transporteur);
 
         $vehicule->saveOrFail();
+    }
+
+    protected function extractVehiculeData(array $data)
+    {
+        return [
+            "immatriculation" => strtoupper($data["immatriculation"]),
+            "capacite" => $data["capacite"],
+            "chauffeur" => $data["chauffeur"],
+            "telephone" => $data["telephone"],
+            "typecamion_id" => $data["typecamion_id"],
+        ];
     }
 
     /**

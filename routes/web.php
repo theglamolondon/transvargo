@@ -45,9 +45,6 @@ Route::get('/a-propos.html', 'SiteController@showAboutUs')->name('apropos');
 Route::get('validation/{token}', 'SiteController@validation')->name('register.confirmation');
 /* end site route */
 
-/*PDF*/
-
-
 /*Client*/
 Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function (){
     Route::get('/nouvelle-expedition.html','ClientController@showNewExpeditionForm')->name('client.newexpedition');
@@ -60,6 +57,7 @@ Route::group(['middleware' => ['auth','client'], "prefix" => "account"],function
     Route::get('/mes-expeditions/livrees.html','ClientController@showExpeditionsLivrees')->name('client.expeditions.livrees');
     Route::get('/mes-expeditions/annulees.html','ClientController@showExpeditionsAnnulees')->name('client.expeditions.annulees');
     Route::get('mes-expeditions/{reference}/details.html','ClientController@details')->name('client.expeditions.details');
+    Route::get('expedition/{reference}/itineraire.html','ClientController@showItineraire')->name('client.expeditions.itineraire');
     Route::get('/mes-factures.html','ClientController@showInvoices')->name('client.myinvoice');
     Route::get('/mon-compte.html','ClientController@showMyAccount')->name('client.myaccount');
     Route::post('/mon-compte.html','Auth\UpdateProfileController@updateClient');
@@ -95,8 +93,9 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('tableau-bord.html','Admin\StaffController@showDashboard')->name('admin.tableaubord');
     Route::get('transporteurs/recents.html','Admin\StaffController@showRecentCarrier')->name('admin.transporteur.recents');
     Route::get('transporteurs.html','Admin\StaffController@showCarriers')->name('admin.transporteur.all');
-    Route::get('transporteurs/fiche/{token}.html','Admin\StaffController@showValidateFormCarrier')->name('staff.valid.transporteur');
-    Route::post('transporteurs/fiche/{token}.html','Admin\StaffController@validTransporteurAccount');
+    Route::get('transporteurs/fiche/{token}','Admin\StaffController@showValidateFormCarrier')->name('staff.valid.transporteur');
+    Route::post('transporteurs/fiche/{token}','Admin\StaffController@validTransporteurAccount');
+    Route::post('transporteurs/fiche/{token}/do.update','Admin\StaffController@updateTransporteurAccount')->name("staff.transporteur.update");
 
     Route::get('expediteurs.html','Admin\ExpediteurController@showExpediteursListe')->name('admin.expediteur.all');
     Route::get('expediteur/{email}/fiche.html','Admin\ExpediteurController@showExpediteurFiche')->name('admin.expediteur.fiche');
@@ -110,7 +109,7 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('offre/{reference}/details.html','Admin\OffreController@details')->name('staff.offre.details');
     Route::get('cartographie/expeditions.html','Admin\MapExpedition@showMap')->name('staff.map.expedition');
     Route::get('expeditions/localisations','Admin\MapExpedition@ajaxGetLocatisation')->name('staff.expeditions.localisation');
-    Route::get('itineraire/{immatriculation}/{reference}/direction.html','Admin\MapExpedition@showInitenaireExpedition')->name('staff.expeditions.itineraire');
+    Route::get('vehicule/{immatriculation}/mission/{reference}/itinaraire.html','Admin\MapExpedition@showInitenaireExpedition')->name('staff.expeditions.itineraire');
 
     Route::get('pdf/facture/{reference}','Admin\Invoice\InvoiceController@showFacturePDF')->name('staff.pdf.facture');
     Route::get('pdf/bon-livraison/{reference}','Admin\Invoice\InvoiceController@showBonLivraisonPDF')->name('staff.pdf.bonlivraison');

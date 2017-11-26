@@ -98,8 +98,11 @@ trait ExpeditionProcessing
             ->where('reference',$data['reference'])
             ->first();
 
-        if(!$expedition)
+        if( intval($expedition->statut) > Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
+        {
             throw new ModelNotFoundException(Lang::get('message.erreur.expedition.affectation'));
+        }
+
 
         if($expedition->client->grandcompte){
             $this->makeFacture($expedition);
@@ -235,10 +238,15 @@ trait ExpeditionProcessing
     protected function getOffers(){
         return Expedition::with("client","chargement","typeCamion")
             ->where('statut',Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
+            ->where("dateexpiration",">", Carbon::now()->addDay()->toDateString())
             ->orderBy('datechargement')
             ->select("expedition.*");
     }
 
+    /**
+     * @param $reference
+     * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function details($reference)
     {
         try{

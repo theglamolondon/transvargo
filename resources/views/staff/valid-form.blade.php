@@ -13,7 +13,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Fiche transporteur ({{ $transporteur->typeTransporteur->libelle }}) : {{ $transporteur->raisonsociale }}</div>
                 <div class="panel-body">
-                    <form class="form-horizontal login-form" method="post" action="">
+                    <form class="form-horizontal login-form" method="post" action="@if($transporteur->identiteAccess->statut == \App\Services\Statut::IdentiteActifConfirme()){{ request()->fullUrl() }}/do.update @endif">
                         {{ csrf_field() }}
                         <input type="hidden" name="typetransporteur_id" value="{{$transporteur->typetransporteur_id}}">
                         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -115,7 +115,9 @@
                         <div class="nav nav-tabs"></div>
                         <br/>
 
-                        <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Valider l'inscription</button>
+                        <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">
+                            @if($transporteur->identiteAccess->statut == \App\Services\Statut::IdentiteActifConfirme()) Modifier @else Valider l'inscription @endif
+                        </button>
 
                     </form>
                 </div>
@@ -156,7 +158,17 @@
 
         //For proprietaire de flotte
             $("#btnAdd").click(function () {
-                var template =  $(".vehicle-panel .model:first").clone();
+                if($(".vehicle-panel .model").length % 3 == 0)
+                {
+                    $('.vehicle-panel').append('<div class="nav nav-tabs"></div> <br/>');
+                }
+
+                let template =  $(".vehicle-panel .model:first").clone();
+                //Supprimer les valeurs des champs
+                (template).find('input').each(function (i,e) {
+                   $(e).val("");
+                });
+
                 $('.vehicle-panel').append(template);
             });
     </script>

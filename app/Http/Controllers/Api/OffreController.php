@@ -23,9 +23,11 @@ class OffreController extends Controller
         try{
             $this->accept($request);
         } catch (ModelNotFoundException $e ){
+            return response()->json(["message" => $e->getMessage()],200);
+        } catch (\Exception $e){
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
-            return response()->json(["message" => $e->getMessage()],200);
+            return response()->json(["message" => "Une erreur sérieuse vous empêche d'accepter cette offre !"],200);
         }
 
         return response()->json([

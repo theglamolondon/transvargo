@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Expedition;
 use App\Metier\ClientProcessing;
 use App\Metier\ExpeditionProcessing;
+use App\Metier\MapProcessing;
 use App\Services\Statut;
 use App\TypeCamion;
 use App\Work\Pdf\PdfMaker;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Schema;
 
 class ClientController extends Controller
 {
-    use ClientProcessing, ExpeditionProcessing, PdfMaker;
+    use ClientProcessing, ExpeditionProcessing, PdfMaker, MapProcessing;
 
     public function __construct()
     {
@@ -142,5 +143,11 @@ class ClientController extends Controller
                 ->route('client.expeditions')
                 ->with(Tools::MESSAGE_WARNING, Lang::get('message.erreur.identite.noactivate'));
         }
+    }
+
+    public function showItineraire(string $expedition)
+    {
+        $expedition_ = $this->getExpeditionByReference($expedition);
+        return $this->showInitenaireExpedition($expedition_->chargement->vehicule->immatriculation, $expedition);
     }
 }

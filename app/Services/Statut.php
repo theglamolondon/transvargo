@@ -31,8 +31,16 @@ class Statut
     const AUTRE_ACCEPTE = 2;
     const AUTRE_PAYEE = 3;
     const AUTRE_INITIE = 4;
+    const AUTRE_NON_CONFRIME =5;
 
     public static function create($type, $etat, $autre = self::AUTRE_NON_NULL){
         return $type.$etat.$autre;
+    }
+
+    public static function IdentiteActifNonConfirme(){
+        return self::TYPE_IDENTITE_ACCESS.self::ETAT_ACTIF.self::AUTRE_NON_CONFRIME;
+    }
+    public static function IdentiteActifConfirme(){
+        return self::TYPE_IDENTITE_ACCESS.self::ETAT_ACTIF.self::AUTRE_NON_NULL;
     }
 }

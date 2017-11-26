@@ -26,7 +26,11 @@
                     <hr class=""/>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <h3 class="text-center">{{ number_format($expedition->prix * \App\Transporteur::POURCENTAGE,0,',',' ') }} F CFA</h3>
+                    @if(\Illuminate\Support\Facades\Auth::user()->typeidentite_id == \App\TypeIdentitite::TYPE_TRANSPORTEUR)
+                        <h3 class="text-center">{{ number_format($expedition->prix * \App\Transporteur::POURCENTAGE,0,',',' ') }} F CFA</h3>
+                    @else
+                        <h3 class="text-center">{{ number_format($expedition->prix,0,',',' ') }} F CFA</h3>
+                    @endif
                 </div>
             </div>
 

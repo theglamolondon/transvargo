@@ -50,7 +50,10 @@ return [
     ],
 
     'staff' => [
-        'valid-transporteur' > "Le transporteur :transporteur est désomais actif et capable de recevoir des offres."
+        'valid-transporteur' => "Le transporteur :transporteur est désomais actif et capable de recevoir des offres.",
+        "transporteur" => [
+            "update" => "Les infos du transporteur ont été mises à jour avec succès."
+        ],
     ],
 
 ];

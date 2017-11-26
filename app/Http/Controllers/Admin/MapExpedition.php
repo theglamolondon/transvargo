@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Expedition;
 use App\Metier\ExpeditionProcessing;
+use App\Metier\MapProcessing;
 use App\Services\Statut;
 use App\Vehicule;
 use Carbon\Carbon;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class MapExpedition extends Controller
 {
-    use ExpeditionProcessing;
+    use ExpeditionProcessing, MapProcessing;
 
     public function showMap()
     {
@@ -52,26 +53,5 @@ class MapExpedition extends Controller
         return response()->json($output, 200, [
             "Content-Type" => "application/json"
         ], JSON_UNESCAPED_UNICODE);
-    }
-
-    public function showInitenaireExpedition(string $immatriculation, string $reference)
-    {
-        try{
-            $expedition = Expedition::with("chargement")->where("reference", $reference)->firstOrFail();
-            $vehicule = Vehicule::where("immatriculation", $immatriculation)->firstOrFail();
-
-            $positions = $vehicule->localisation()->whereBetween("datelocalisation",[$expedition->dateheureacceptation, $expedition->chargement->dateheurelivraison ?? Carbon::now()->toDateTimeString()])
-                ->orderBy("datelocalisation")
-                ->select("latitude","longitude","speed","datelocalisation")
-                ->get();
-
-            //dd($positions);
-            return view('staff.map.itineraire', compact("vehicule", "positions", "expedition"));
-        }catch (ModelNotFoundException $e){
-            Log::error($e->getMessage());
-            Log::error($e->getTraceAsString());
-            return back()->withErrors("Véhicule ou expédition introuvable");
-        }
-
     }
 }

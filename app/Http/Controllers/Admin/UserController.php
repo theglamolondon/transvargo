@@ -7,6 +7,7 @@ use App\Services\Statut;
 use App\Staff;
 use App\TypeIdentitite;
 use App\Work\Tools;
+use Dompdf\Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,9 +27,9 @@ class UserController extends Controller
 
         try{
             $this->addUserStaff($request->except("_token", "password_confirmation"));
-        }catch (ModelNotFoundException $e){
+        }catch (\Exception $e){
             logger($e->getTraceAsString());
-            return back()->withErrors("Une erreur s'est produite pendant l'enregistrement de l'utilisateur.");
+            return back()->withErrors("Une erreur s'est produite pendant l'enregistrement de l'utilisateur. Vérifier que l'email n'est pas déjà utilisé.");
         }
 
         return redirect()->route("staff.user.liste")->with(Tools::MESSAGE_SUCCESS, "Nouvel utilisateur ajouté avec succès !");
@@ -40,14 +41,18 @@ class UserController extends Controller
         $identite->email = sprintf("%s@transvargo.com", $data["email"]);
         $identite->password = bcrypt($data["password"]);
         $identite->statut = Statut::TYPE_IDENTITE_ACCESS.Statut::ETAT_ACTIF.Statut::AUTRE_NON_NULL;
-        $identite->term = 1;
+        $identite->terms = 1;
+        $identite->activate_token = base64_encode($identite->email);
         $identite->typeidentite_id = TypeIdentitite::TYPE_STAFF_USER;
         $identite->saveOrFail();
 
         $staff = new Staff();
+        $staff->identiteAcces()->associate($identite);
         $staff->nom = $data['nom'];
+        $staff->role = $data['role'];
         $staff->prenoms = $data['prenoms'];
         $staff->raisonsociale = config("app.name", "Transvargo");
+        $staff->saveOrFail();
     }
 
     private function validRequest(Request $request)

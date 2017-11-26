@@ -85,6 +85,7 @@ class RegisterController extends Controller
             'statut' => Statut::create(Statut::TYPE_IDENTITE_ACCESS,Statut::ETAT_ACTIF,Statut::AUTRE_NON_CONFRIME),
             'activate_token' => base64_encode(Carbon::now()->toDateTimeString().'|'.$data['email'])
         ]);
+
         $identite->saveOrFail();
         return $identite;
     }

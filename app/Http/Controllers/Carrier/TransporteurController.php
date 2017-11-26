@@ -36,6 +36,7 @@ class TransporteurController extends Controller
             ->get();
 
         $types = TypeCamion::all();
+
         return view('carrier.dashboard',compact("vehicules","types"));
     }
 
@@ -70,6 +71,7 @@ class TransporteurController extends Controller
             ->orderBy('dateheurechargement')
             ->select("chargement.*")
             ->paginate(30);
+
         return view('carrier.chargement', compact('chargement'));
     }
 

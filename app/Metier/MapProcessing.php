@@ -9,7 +9,12 @@
 namespace App\Metier;
 
 
+use App\Expedition;
 use App\Http\Controllers\MapController;
+use App\Vehicule;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 
 trait MapProcessing
 {
@@ -27,5 +32,25 @@ trait MapProcessing
             return $resultat;
         else
             throw (new \Exception('Google Distance Matrix API error'));
+    }
+
+    public function showInitenaireExpedition(string $immatriculation, string $reference)
+    {
+        try{
+            $expedition = Expedition::with("chargement")->where("reference", $reference)->firstOrFail();
+            $vehicule = Vehicule::where("immatriculation", $immatriculation)->firstOrFail();
+
+            $positions = $vehicule->localisation()->whereBetween("datelocalisation",[$expedition->dateheureacceptation, $expedition->chargement->dateheurelivraison ?? Carbon::now()->toDateTimeString()])
+                ->orderBy("datelocalisation")
+                ->select("latitude","longitude","speed","datelocalisation")
+                ->get();
+
+            //dd($positions);
+            return view('staff.map.itineraire', compact("vehicule", "positions", "expedition"));
+        }catch (ModelNotFoundException $e){
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+            return back()->withErrors("Véhicule ou expédition introuvable");
+        }
     }
 }
