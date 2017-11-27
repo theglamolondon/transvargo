@@ -25,7 +25,6 @@ $total = 0;
                             <th>Statut</th>
                             <th>Nom du Chauffeur</th>
                             <th>Immatriculation</th>
-                            <th>Contact</th>
                             <th width="14%">Coût</th>
                         </tr>
                         </thead>
@@ -44,7 +43,7 @@ $total = 0;
                                     <a target="_blank" href="{{ route('client.pdf.facture',['reference'=>$expedition->reference]) }}" title="Télécharger la facture de l'expedition" class="glyphicon glyphicon-save-file"></a>
                                 @endif
                                 @if(intval($expedition->statut) ==  intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS.\App\Services\Statut::AUTRE_ACCEPTE) )
-                                    <a target="_blank" href="{{ route('client.expeditions.itineraire',['reference'=>$expedition->reference]) }}" title="Suivre l'expedition" class="glyphicon glyphicon-map-marker"></a>
+                                    <a href="{{ route('client.expeditions.itineraire',['reference'=>$expedition->reference]) }}" title="Suivre l'expedition" class="glyphicon glyphicon-map-marker"></a>
                                 @endif
                                 @if(intval($expedition->statut) >=  intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE.\App\Services\Statut::AUTRE_ACCEPTE) )
                                     <a target="_blank" href="{{ route('client.pdf.bonlivraison',['reference'=>$expedition->reference]) }}" title="Télécharger le bon de livraison" class="glyphicon glyphicon-paste"></a>
@@ -59,7 +58,6 @@ $total = 0;
                             <td>@lang('statut.'.$expedition->statut)</td>
                             <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->chauffeur : '' ) : ''}}</td>
                             <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->immatriculation : '') : ''}}</td>
-                            <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->telephone : '') : '' }}</td>
                             <td>{{ number_format($expedition->prix,0,',',' ') }} Fcfa </td>
                             @php
                                 $total += $expedition->prix
