@@ -46,6 +46,9 @@ trait MapProcessing
                 ->get();
 
             //dd($positions);
+            if($positions->count() == 0){
+                return back()->withErrors("Aucune position trouvée pour cette expédition");
+            }
             return view('staff.map.itineraire', compact("vehicule", "positions", "expedition"));
         }catch (ModelNotFoundException $e){
             Log::error($e->getMessage());

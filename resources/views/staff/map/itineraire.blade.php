@@ -25,8 +25,9 @@
         let navigationPoints = [@foreach($positions as $position){lat: {{$position->latitude}},lng: {{$position->longitude}}},@endforeach];
         let map = new google.maps.Map(document.getElementById('map'), {
             center: {
-                lat: {{ $positions->last()->latitude }},
-                lng: {{ $positions->last()->longitude }} },
+                lat: {{ $positions->last()->latitude ?? 0 }},
+                lng: {{ $positions->last()->longitude ?? 0 }}
+            },
             zoom: 15
         });
 
@@ -66,14 +67,14 @@
         let markerArrivee = new google.maps.Marker({
             map: map,
             animation: google.maps.Animation.DROP,
-            position: {lat: {{$positions->last()->latitude}}, lng: {{$positions->last()->longitude}} },
+            position: {lat: {{$positions->last()->latitude ?? 0}}, lng: {{$positions->last()->longitude ?? 0}} },
             icon: '{{ asset('working/truck-map-marker30x42.png') }}',
         });
 
         let infowincontentArrivee = "<div>"
             +"<b>Immatriculation</b> {{ $vehicule->immatriculation }}<br/>"
-            +"<b>Vitesse</b> : {{ ceil($positions->last()->speed*3.6) }} km/h<br/>"
-            +"<b>Dernière position</b> : {{ (new \Carbon\Carbon($positions->last()->datelocalisation))->format("d/m/Y à H:i") }}<br/>"
+            +"<b>Vitesse</b> : {{ ceil( ($positions->last()->speed ?? 1)*3.6) }} km/h<br/>"
+            +"<b>Dernière position</b> : {{ (new \Carbon\Carbon($positions->last()->datelocalisation ?? ""))->format("d/m/Y à H:i") }}<br/>"
             +"</div>";
 
         markerArrivee.addListener('click', function() {
