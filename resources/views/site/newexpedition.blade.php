@@ -161,8 +161,8 @@
 @endsection
 
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script src="{{ asset("js/bootstrap-datepicker.min.js") }}"></script>
+    <script src="{{ asset("js/bootstrap-datepicker.fr.min.js") }}"></script>
     <script type="application/javascript">
         $('input.datepicker').datepicker({
             format: "dd/mm/yyyy",
@@ -223,6 +223,7 @@
             });
 
             autocompleteD.addListener('place_changed', function(e) {
+                console.log("place changed");
                 console.log(autocompleteD.getBounds());
                 $("#lieudepart").attr("data-change",0);
 
@@ -269,6 +270,7 @@
             });
 
             autocompleteA.addListener('place_changed', function(e) {
+                console.log("place changed");
                 $("#lieuarrivee").attr("data-change",0);
                 document.getElementById('coordarrivee').value = autocompleteA.getBounds().getCenter().lat()+','+autocompleteA.getBounds().getCenter().lng();
                 infowindow.close();
@@ -319,14 +321,16 @@
 
             directionsDisplay.setMap(map);
 
-            var onChangeHandler = function() {
+            var onChangeHandler = function(a) {
+                console.log("Lieu content value changed");
+                console.log(a);
                 calculateAndDisplayRoute(directionsService, directionsDisplay);
             };
             document.getElementById('lieudepart').addEventListener('change', onChangeHandler);
             document.getElementById('lieuarrivee').addEventListener('change', onChangeHandler);
 
             map.addListener('click',function (event) {
-                console.log(event);
+                console.log("Event",event);
                 //Déclaration des variables
                 var coord_ = event.latLng.lat()+","+event.latLng.lng();
                 var lieu_ = event.latLng.lat()+","+event.latLng.lng();
@@ -337,6 +341,7 @@
                     srvPlace.getDetails({
                         placeId: event.placeId
                     }, function(place, status) {
+                        console.log(status, place);
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                             //console.log(place);
                             coord_ = place.geometry.location.lat()+","+place.geometry.location.lng();
@@ -348,6 +353,7 @@
                         }
                     });
                 }else {
+                    console.log("Place Id undefined");
                     applyChange(coord_,lieu_,change_);
                 }
             });
@@ -377,8 +383,10 @@
                 destination: document.getElementById('lieuarrivee').value,
                 travelMode: 'DRIVING',
             }, function(response, status) {
+                console.log(response, status);
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
+                    console.log("Lancement de la requête Ajax");
                     $.ajax(DISTANCE_MATRIX_URL,{
                         method: 'post',
                         dataType: 'json',
@@ -391,11 +399,12 @@
                             xhr.done(function (data) {
                                 console.log(data);
 
-                                //Changement de la description des villes
-                                //if($("#lieudepart").attr("data-change") == 1)
+                                //Changement de la description des villes si dans les input les coordonnées sont affichées
+                                var regex = /^[\d\.,-]*$/;
+                                if($("#lieudepart").val().match(regex) != null)
                                     $('#lieudepart').val(data.origin_addresses[0]);
 
-                                //if($("#lieuarrivee").attr("data-change") == 1)
+                                if($("#lieuarrivee").val().match(regex) != null)
                                     $('#lieuarrivee').val(data.destination_addresses[0]);
 
                                 //Affichage du résultat de distance Matrix
@@ -416,6 +425,7 @@
                         }
                     });
                 } else {
+                    console.log("erreur de calcul de distance");
                     var error = '<small style="color:red">Une erreur de connexion est survenue. Nous n\'arrivons pas à déterminer la distance en Km. Vérifier votre connexion SVP</small>';
                     $(error).after("#distance");
                     //window.alert('Directions request failed due to ' + status);
