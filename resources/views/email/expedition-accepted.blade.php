@@ -19,7 +19,7 @@
                             PAYER LES FRAIS D'EXPEDITION
                         </a>
                         <br><br>
-                        <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : {{ route("payment.choice",[ "reference" => $expedition->refrence ]) }}</small>
+                        <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : {{ route("payment.choice",[ "reference" => $expedition->reference ]) }}</small>
 
                     </div>
                     <br><br>
@@ -38,7 +38,7 @@
         </table>
     </div>
     <br><br>
-    <div>
+    <div style="padding: 0 9px;">
         <small>Vous recevez cet e-mail suite à la publication d'une expédition sur la plateforme {{ config("app.name","Transvargo") }}.</small>
     </div>
 </div>

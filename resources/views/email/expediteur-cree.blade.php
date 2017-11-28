@@ -38,7 +38,7 @@
         </table>
     </div>
     <br><br>
-    <div>
+    <div style="padding: 0 9px;">
         <small>Vous recevez cet e-mail suite à votre inscription sur {{ config('app.name') }}.</small>
     </div>
 </div>
