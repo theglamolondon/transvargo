@@ -11,7 +11,7 @@
     <!-- Stylesheets-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu:400,500,700%7COpen+Sans:400,300);">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700%7COpen+Sans:400,300);">
 
     <link rel="stylesheet" href="{{asset('/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
@@ -28,13 +28,22 @@
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap header-corporate">
           <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fullwidth" data-md-layout="rd-navbar-fullwidth" data-lg-layout="rd-navbar-static" data-device-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-static" data-lg-stick-up-offset="117px">
+            <div class="rd-navbar-top-panel bg-dark">
+              <div class="rd-navbar-inner rd-navbar-nav">
+                <span class="text-right">
+                  <a href="mailto:contact@transvargo.com"  class="text-center fa-envelope-o">contact@transvargo.com</a><a href="callto:+25540504663" class="text-center fa-mobile-phone preffix-2">(255) 40 50 46 63</a>
+                </span>
+              </div>
+            </div>
             <div class="rd-navbar-inner">
               <!-- RD Navbar Panel-->
               <div class="rd-navbar-panel">
                 <!-- RD Navbar Toggle-->
                 <button data-rd-navbar-toggle=".rd-navbar-nav-wrap" type="submit" class="rd-navbar-toggle"><span></span></button>
                 <!-- RD Navbar Brand-->
-                <div class="rd-navbar-brand"><a href="{{ route('accueil') }}" class="brand-name"><img src="{{ config('app.url') }}/images/transvargo-logo.png"/> </a></div>
+                <div class="rd-navbar-brand">
+                  <a href="{{ route('accueil') }}" class="brand-name"><img src="{{ asset('/images/transvargo-logo.png') }}"/> </a>
+                </div>
               </div>
               @if( \Illuminate\Support\Facades\Auth::guest() || request()->user()->typeidentite_id == \App\TypeIdentitite::TYPE_CLIENT )
                 @include('site.navigation.nav')
@@ -102,7 +111,7 @@
                 <ul class="list-marked well6">
                   <li><a href="#">Bientôt</a></li>
                 </ul>
-                <a href="#"><img src="{{config('app.url')}}/working/playstore.png" style="width: 180px;"></a>
+                <a href="#"><img src="{{asset('/working/playstore.png')}}" style="width: 180px;"></a>
               </div>
               <div class="col-xs-12 col-sm-6 col-lg-3">
                 <h4>Espace membre</h4>
@@ -125,7 +134,7 @@
         </section>
         <section class="copyright bg-darkest well5">
           <div class="container">
-            <p class="pull-sm-left">&#169; <span id="copyright-year"></span> Tous droits réservés - <a href="{{ route('terms') }}">Conditions d'utilisation</a></p>
+            <p class="pull-sm-left">&#169; <span id="copyright-year"></span>{{ config("app.name") }} tous droits réservés - <a href="{{ route('terms') }}">Conditions d'utilisation</a></p>
             <ul class="list-inline pull-sm-right offset-3">
               <li><a href="https://www.facebook.com/transvargo" target="_blank" class="fa-facebook"></a></li>
               <li><a href="#" class="fa-twitter"></a></li>
@@ -166,14 +175,13 @@
       @endif
     </div>
 
-    <!-- Java script-->
+    <!-- Java script -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!--
-    -->
-    <script src="{{config('app.url')}}/js/core.min.js"></script>
-    <script src="{{config('app.url')}}/js/script.js"></script>
-    <script src="{{config('app.url')}}/js/custom.js"></script>
+    <!-- -->
+    <script src="{{asset('/js/core.min.js')}}"></script>
+    <script src="{{asset('/js/script.js')}}"></script>
+    <script src="{{asset('/js/custom.js')}}"></script>
 
     @yield('script')
 

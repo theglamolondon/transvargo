@@ -88,7 +88,7 @@ class CreateDatabaseTransvargo extends Migration
             $table->integer('identiteaccess_id')->unsigned();
             $table->string('nom',100);
             $table->string('prenoms',150);
-            $table->string('role',20)->default('000');
+            $table->string('role',255)->default('000');
             $table->string('raisonsociale',150)->nullable();
             $table->foreign('identiteaccess_id')->references('id')->on('identiteaccess');
         });
