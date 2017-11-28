@@ -150,7 +150,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail-mod-1">
                         <div class="progress-bar-wrapper">
-                            <img src="{{ config('app.url')}}/working/car.png"/>
+                            <img src="{{ config('app.url')}}/working/DIAGPCINCREASE.png"/>
                         </div>
                         <p class="h5 fw-l inline-block">Augmentez vos revenues </p>
                         <p class="h5 fw-l inline-block">Ne peinez plus pour trouver de la marchandise à transporter  car avec transvargo vous avez accès à des centaines d’offres.</p>
@@ -159,7 +159,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail-mod-1">
                         <div class="progress-bar-wrapper">
-                            <img src="{{ config('app.url')}}/working/finish.png"/>
+                            <img src="{{ config('app.url')}}/working/SECRET.png"/>
                         </div>
                         <p class="h5 fw-l inline-block">Transparence </p>
                         <p class="h5 fw-l inline-block">Vous avez une maitrise sur votre activité car  vous savez désormais ce que vous gagnez.</p>
@@ -168,7 +168,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail-mod-1">
                         <div class="progress-bar-wrapper">
-                            <img src="{{ config('app.url')}}/working/finish.png"/>
+                            <img src="{{ config('app.url')}}/working/OPDOOR.png"/>
                         </div>
                         <p class="h5 fw-l inline-block">Accès gratuit </p>
                         <p class="h5 fw-l inline-block">L’inscription à la plateforme transvargo est gratuite.</p>
