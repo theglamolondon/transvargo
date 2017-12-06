@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <div class="media">
-                        <div class="media-left"><img src="{{asset('working/local.png ')}}" alt="" class="square_150"/></div>
+                        <div class="media-left"><img src="{{asset('working/localizcar.png ')}}" alt="" class="square_150"/></div>
                         <div class="media-body">
                             <h4 class="text-primary">Suivi en temps réel.</h4>
                             <p class="h6">Avec notre outil de géolocalisation vous pouvez suivre  chaque étape de votre expédition.</p>

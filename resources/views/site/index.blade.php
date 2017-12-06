@@ -94,7 +94,7 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
                             <div class="progress-bar-wrapper">
-                                <img src="{{ asset('working/CARTIMEFAST')}}.png"/>
+                                <img src="{{ asset('working/FAST')}}.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Rapide</p>
                             <p class="h5 fw-l inline-block">Avec transvargo vous ne perdez plus de temps et vôtre équipe  a le temps de se consacrer à autre chose car vous expédiez vos produits en seulement quelques clics.</p>
