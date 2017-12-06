@@ -31,7 +31,7 @@
         </table>
     </div>
     <br><br>
-    <div>
+    <div style="padding: 0 9px;">
         <small>Vous recevez cet e-mail suite à la livraison d'expédition sur la plateforme {{ config("app.name","Transvargo") }}.</small>
     </div>
 </div>

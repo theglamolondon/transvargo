@@ -78,6 +78,7 @@
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Distance (km) *</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
                                 <input type="text" class="numbers-only form-control" id="distance" disabled value="{{ old('distance', $expedition->distance) }}">
+                                <small id="error" style="color:red"></small>
                                 <input type="hidden" class="numbers-only form-control" name="distance" id="_distance" value="{{ old('distance',$expedition->distance) }}">
                             </div>
                         </div>
@@ -407,27 +408,30 @@
                                 if($("#lieuarrivee").val().match(regex) != null)
                                     $('#lieuarrivee').val(data.destination_addresses[0]);
 
-                                //Affichage du résultat de distance Matrix
-                                $("#distance").val(data.rows[0].elements[0].distance.text);
+                                if(data.rows[0].elements[0].status != "ZERO_RESULTS")
+                                {
+                                    //Affichage du résultat de distance Matrix
+                                    $("#distance").val(data.rows[0].elements[0].distance.text);
 
-                                var km = (data.rows[0].elements[0].distance.text).replace(" km",'');
+                                    var km = (data.rows[0].elements[0].distance.text).replace(" km",'');
 
-                                $("#_distance").val((data.rows[0].elements[0].distance.text).replace(" km",''));
+                                    $("#_distance").val((data.rows[0].elements[0].distance.text).replace(" km",''));
 
-                                $("#total").text(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
-                                $("#prix").val(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
+                                    $("#total").text(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
+                                    $("#prix").val(parseInt(km) * {{\App\Expedition::UNIT_PRICE}});
+                                }else{
+
+                                }
                             })
                         },
                         error: function (xhr, obj) {
                             $("#spinner").hide();
-                            var error = '<small style="color:red">Une erreur de connexion est survenue. Nous n\'arrivons pas à déterminer la distance en Km. Vérifier votre connexion SVP</small>';
-                            $(error).after("#distance");
+                            $("#error").text("Une erreur de connexion est survenue. Nous n'arrivons pas à déterminer la distance en Km. Vérifier votre connexion SVP !");
                         }
                     });
                 } else {
                     console.log("erreur de calcul de distance");
-                    var error = '<small style="color:red">Une erreur de connexion est survenue. Nous n\'arrivons pas à déterminer la distance en Km. Vérifier votre connexion SVP</small>';
-                    $(error).after("#distance");
+                    $("#error").text("Une erreur de connexion est survenue. Nous n'arrivons pas à déterminer la distance en Km. Vérifier votre connexion SVP !");
                     //window.alert('Directions request failed due to ' + status);
                 }
             });

@@ -25,7 +25,7 @@ $total = 0;
                             <th>Statut</th>
                             <th>Nom du Chauffeur</th>
                             <th>Immatriculation</th>
-                            <th width="14%">Coût</th>
+                            <th width="14%">Prix</th>
                         </tr>
                         </thead>
                         <tbody>

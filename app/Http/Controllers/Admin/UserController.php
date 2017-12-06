@@ -28,6 +28,7 @@ class UserController extends Controller
         try{
             $this->addUserStaff($request->except("_token", "password_confirmation"));
         }catch (\Exception $e){
+            logger($e->getMessage());
             logger($e->getTraceAsString());
             return back()->withErrors("Une erreur s'est produite pendant l'enregistrement de l'utilisateur. Vérifier que l'email n'est pas déjà utilisé.");
         }
