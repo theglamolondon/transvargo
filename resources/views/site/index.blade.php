@@ -76,10 +76,10 @@
     <section class="section section-inset-2 bg-light">
         <div class="container">
             <h2 class="text-center">Devenez client Transvargo</h2>
-            <h3 class="text-center">Faites du transport un avantage compétitif pour augmenter la satisfaction client</h3>
+            <h3 class="text-center">Faites du transport un avantage compétitif pour la satisfaction client</h3>
             <hr>
             <div class="row">
-                <div class="progress-container row offset-7 flow-offset-1">
+                <div class="progress-container row offset-1 flow-offset-1">
                     <!-- Progress Bar-->
                     <div class="col-sm-6 col-md-3">
                         <div class="thumbnail-mod-1">
@@ -87,7 +87,7 @@
                                 <img src="{{ asset('working/FINGER.png')}}"/>
                             </div>
                             <p class="h5 fw-l inline-block">Prix Compétitif</p>
-                            <p class="h5 fw-l inline-block">les prix que propose transvargo est très abordable et stable. Vous ne payez que pour le service effectué.</p>
+                            <p class="h5 fw-l inline-block">Vous ne payez que pour le service effectué.</p>
 
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                                 <img src="{{ asset('working/FAST')}}.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Rapide</p>
-                            <p class="h5 fw-l inline-block">Avec transvargo vous ne perdez plus de temps et vôtre équipe  a le temps de se consacrer à autre chose car vous expédiez vos produits en seulement quelques clics.</p>
+                            <p class="h5 fw-l inline-block">Vous  expédiez vos produits en quelques clics.</p>
 
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                 <img src="{{ asset('working/BOLD-PARTNER')}}.png"/>
                             </div>
                             <p class="h5 fw-l inline-block">Transparent</p>
-                            <p class="h5 fw-l inline-block">Vous faites des économies sur le contrat de transport car tout transparent et justifié, pas besoin de frais supplémentaires. </p>
+                            <p class="h5 fw-l inline-block">Tout frais de transport est justifié. </p>
 
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                                 <img src="{{ asset('working/VERROU')}}.png"/>
                             </div>
                             <p class="h5 fw-l inline-block" >Sécurisé</p>
-                            <p class="h5 fw-l inline-block">Nos partenaires transporteurs sont uniquement des professionnels et en plus vous pouvez suivre l’acheminement de vos produits  en temps réel grâce notre outil de géolocalisation.</p>
+                            <p class="h5 fw-l inline-block">Nos  transporteurs  sont  des professionnels.</p>
 
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                             <img src="{{ config('app.url')}}/working/DIAGPCINCREASE.png"/>
                         </div>
                         <p class="h5 fw-l inline-block">Augmentez vos revenues </p>
-                        <p class="h5 fw-l inline-block">Ne peinez plus pour trouver de la marchandise à transporter  car avec transvargo vous avez accès à des centaines d’offres.</p>
+                        <p class="h5 fw-l inline-block">Ne peinez plus pour trouver du fret.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
@@ -162,7 +162,7 @@
                             <img src="{{ config('app.url')}}/working/SECRET.png"/>
                         </div>
                         <p class="h5 fw-l inline-block">Transparence </p>
-                        <p class="h5 fw-l inline-block">Vous avez une maitrise sur votre activité car  vous savez désormais ce que vous gagnez.</p>
+                        <p class="h5 fw-l inline-block">Vous savez désormais ce que vous gagnez.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
@@ -171,7 +171,8 @@
                             <img src="{{ config('app.url')}}/working/OPDOOR.png"/>
                         </div>
                         <p class="h5 fw-l inline-block">Accès gratuit </p>
-                        <p class="h5 fw-l inline-block">L’inscription à la plateforme transvargo est gratuite.</p>
+                        <p class="h5 fw-l inline-block">Accédez à des centaines de demande gratuites
+                            .</p>
                     </div>
                 </div>
             </div>
@@ -188,60 +189,72 @@
                         <div class="owl-item">
                             <blockquote class="quote"><img src="working/client.png" alt="" width="70" height="70" class="img-circle"/>
                                 <p>
-                                    <cite>Wilfied KOFFI</cite>
+                                    <cite>Amara Sylla <br>
+                                        DG de KBS industrie
+                                    </cite>
                                 </p>
                                 <p class="citation">
-                                    <q>Les prix sont parmi les plus compétitifs que j'ai pu obtenir [...] on est prévenus à chaque étape de la livraison</q>
+                                    <q>Transvargo a facilité l’acheminement de nos produits, en plus lorsque nos clients reçoivent leurs produits nous sommes alertés par mail.</q>
                                 </p>
                             </blockquote>
                         </div>
                         <div class="owl-item">
                             <blockquote class="quote"><img src="working/client.png" alt="" width="70" height="70" class="img-circle"/>
                                 <p>
-                                    <cite>Sidoine AKE</cite>
+                                    <cite>Koffi Ambroise <br>
+                                        DG KA Transit
+                                    </cite>
                                 </p>
                                 <p class="citation">
-                                    <q>Facile à utiliser et pratique pour organiser un transport de palettes en quelques instants [...] Plus avantageux en prix que les autres solutions que nous avions étudiées</q>
+                                    <q>Depuis longtemps nous étions à la recherche d’un transporteur pouvant nous permettre de suivre en temps en réel le transport des produits de nos clients, depuis que nous utilisons transvargo nous sommes satisfaits.</q>
                                 </p>
                             </blockquote>
                         </div>
                         <div class="owl-item">
                             <blockquote class="quote"><img src="working/client.png" alt="" width="70" height="70" class="img-circle"/>
                                 <p>
-                                    <cite>Yanick TOUBO</cite>
+                                    <cite>Zamblé Lou <br>
+                                        Commerçante
+                                    </cite>
                                 </p>
                                 <p class="citation">
-                                    <q>Ce qui est inédit, c'est d'avoir un tarif instantanément [...] Réactivité excellente : généralement un transporteur valide nos demandes dans les minutes qui suivent</q>
+                                    <q>Avant quand j’allais chercher mes marchandises en brousse il était difficile de trouver un camion et souvent mes produits pourrissaient. Avec transvargo c’est rapide pas besoin d’attendre quand je commande transvargo m’envoie un camion proche de moi.</q>
                                 </p>
                             </blockquote>
                         </div>
                         <div class="owl-item">
                             <blockquote class="quote"><img src="working/client.png" alt="" width="70" height="70" class="img-circle"/>
                                 <p>
-                                    <cite>Flavie AKE</cite>
+                                    <cite>Serge Kouassi<br>
+                                        Responsable appro. chez Agrinet
+                                    </cite>
                                 </p>
                                 <p class="citation">
-                                    <q>Avoir un devis instantanément est un énorme plus [...] Transvargo gère tout à notre place : chargement de la palette sans souci et suivi de livraison top</q>
+                                    <q>Transvargo a changé nos vies car  trouver  un camion était vraiment difficile mais aujourd’hui quelque soit notre position nous pouvons commander un camion sans tracas pour acheminer nos produits.</q>
                                 </p>
                             </blockquote>
                         </div>
                         <div class="owl-item">
                             <blockquote class="quote"><img src="working/client.png" alt="" width="70" height="70" class="img-circle"/>
                                 <p>
-                                    <cite>Jean Philippe KOBLAN</cite>
+                                    <cite>Tieu Denis<br>
+                                        PCA de Dikoueu coopérative
+                                    </cite>
                                 </p>
                                 <p class="citation">
-                                    <q>Prix compétitifs et aucun souci du chargement à la livraison [...] Transvargo a tout géré à notre place sans que nous nous occupions de rien</q>
+                                    <q>Le transport de nos produits était vraiment difficile, en plus les coûts qu’on nous proposait étaient très élevés mais depuis que nous utilisons transvargo nous avons considérablement réduit nos coûts de transport.</q>
                                 </p>
                             </blockquote>
                         </div>
                         <div class="owl-item">
                             <blockquote class="quote"><img src="working/client.png" alt="" width="70" height="70" class="img-circle"/>
                                 <p>
-                                    <cite>Virgile EKRA</cite>
+                                    <cite>François Ehui<br>
+                                        DG de Food delicious
+                                    </cite>
                                 </p>
                                 <p class="citation">
-                                    <q>La rapidité d'exécution qui nous a plu [...] Le temps annoncé à l'avance pour rechercher un chauffeur nous a séduit, c'est un vrai plus pour notre organisation</q>
+                                    <q>Transvargo nous a permis de gagner en efficacité, sa rapidité d’exécution nous a séduit et nos clients sont vraiment satisfaits de nos prestations. En outre l’entreprise transvargo est très flexible au niveau des paiements.</q>
                                 </p>
                             </blockquote>
                         </div>
