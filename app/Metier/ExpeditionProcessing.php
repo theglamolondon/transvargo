@@ -38,7 +38,7 @@ trait ExpeditionProcessing
             'lieudepart' => 'required',
             'prix' => 'present|numeric',
             'typecamion_id' => 'required|numeric',
-            'masse' => 'required|numeric',
+            //'masse' => 'required|numeric',
             'distance' => 'required|numeric',
         ];
     }

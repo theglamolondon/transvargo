@@ -15,4 +15,8 @@ class TypeCamion extends Model
 {
     protected $table = "typecamion";
     public $timestamps = false;
+
+    public function tonnage(){
+        return $this->hasMany(Tonnage::class, 'typecamion_id');
+    }
 }

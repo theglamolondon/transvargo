@@ -35,6 +35,10 @@ class Expedition extends Model
         return $this->hasOne(Chargement::class);
     }
 
+    public function assurance(){
+        $this->hasOne(Assurance::class, 'assurance_id');
+    }
+
     public function __toString()
     {
         return sprintf("Expédition N° %s de %s à %s (Distance %s km)",

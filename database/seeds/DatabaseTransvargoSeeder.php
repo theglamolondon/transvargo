@@ -19,11 +19,31 @@ class DatabaseTransvargoSeeder extends Seeder
         ]);
 
         DB::table('typecamion')->insert([
-            [ 'libelle' => 'Camion porteur' ],
-            [ 'libelle' => 'Camion semi-remorque' ],
-            [ 'libelle' => 'Camion plateau' ],
-            [ 'libelle' => 'Bachet' ],
-            [ 'libelle' => 'Utilitaire' ],
+            [ 'libelle' => 'Camion baché', "description" => "Camion pouvant accpeter une charge de 1 à 3 tonnes" ],
+            [ 'libelle' => 'Camion porteur', "description" => "Camion pouvant accepter une charge de 1 à 19 tonnes" ],
+            [ 'libelle' => 'Camion remorque', "description" => "Camion pouvant accepter une charge de plus de 20 tonnes" ],
+            [ 'libelle' => 'Camion plateau', "description" => "Marchandises en palette" ],
+            [ 'libelle' => 'Benne', "description" => "Benne camion pour sable, gravier et autre" ],
+        ]);
+
+        DB::table('tonnage')->insert([
+            [ 'masse' => 1, "typecamion_id" => 1],
+            [ 'masse' => 2, "typecamion_id" => 1],
+            [ 'masse' => 3, "typecamion_id" => 1],
+
+            [ 'masse' => 5, "typecamion_id" => 2],
+            [ 'masse' => 7, "typecamion_id" => 2],
+            [ 'masse' => 10, "typecamion_id" => 2],
+            [ 'masse' => 13, "typecamion_id" => 2],
+            [ 'masse' => 15, "typecamion_id" => 2],
+            [ 'masse' => 17, "typecamion_id" => 2],
+
+            [ 'masse' => 20, "typecamion_id" => 3],
+            [ 'masse' => 25, "typecamion_id" => 3],
+            [ 'masse' => 30, "typecamion_id" => 3],
+            [ 'masse' => 35, "typecamion_id" => 3],
+            [ 'masse' => 40, "typecamion_id" => 3],
+            [ 'masse' => 45, "typecamion_id" => 3],
         ]);
 
         DB::table('typetransporteur')->insert([
