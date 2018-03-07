@@ -19,11 +19,11 @@ class DatabaseTransvargoSeeder extends Seeder
         ]);
 
         DB::table('typecamion')->insert([
-            [ 'libelle' => 'Camion baché' ],
-            [ 'libelle' => 'Camion porteur' ],
-            [ 'libelle' => 'Camion remorque' ],
-            [ 'libelle' => 'Camion plateau' ],
-            [ 'libelle' => 'Benne' ],
+            [ 'libelle' => 'Camion baché', "description" => "Camion pouvant accpeter une charge de 1 à 3 tonnes" ],
+            [ 'libelle' => 'Camion porteur', "description" => "Camion pouvant accepter une charge de 1 à 19 tonnes" ],
+            [ 'libelle' => 'Camion remorque', "description" => "Camion pouvant accepter une charge de plus de 20 tonnes" ],
+            [ 'libelle' => 'Camion plateau', "description" => "Marchandises en palette" ],
+            [ 'libelle' => 'Benne', "description" => "Benne camion pour sable, gravier et autre" ],
         ]);
 
         DB::table('tonnage')->insert([

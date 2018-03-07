@@ -168,12 +168,14 @@ class CreateDatabaseTransvargo extends Migration
             $table->unsignedInteger('assurance_id');
             $table->integer('client_id')->unsigned();
             $table->integer('typecamion_id')->unsigned();
+            $table->integer('tonnage_id')->unsigned()->nullable();
             $table->string("facture", 100)->nullable();
             $table->string("bonlivraison", 100)->nullable();
             $table->foreign('typecamion_id')->references('id')->on('typecamion');
             //$table->foreign('nature_id')->references('id')->on('nature');
             $table->foreign('client_id')->references('identiteaccess_id')->on('client');
             $table->foreign('assurance_id')->references('id')->on('assurance');
+            $table->foreign('tonnage_id')->references('id')->on('tonnage');
             //$table->foreign('facture_id')->references('id')->on('facture');
         });
         Schema::create('chargement',function (Blueprint $table){
@@ -217,10 +219,12 @@ class CreateDatabaseTransvargo extends Migration
         Schema::dropIfExists('livraison');
         Schema::dropIfExists('chargement');
         Schema::dropIfExists('expedition');
-        Schema::dropIfExists('facture');
+        //Schema::dropIfExists('facture');
+        Schema::dropIfExists('assurance');
         Schema::dropIfExists('destinataire');
         Schema::dropIfExists('nature');
         Schema::dropIfExists('vehicule');
+        Schema::dropIfExists('tonnage');
         Schema::dropIfExists('typecamion');
         Schema::dropIfExists('staff');
         Schema::dropIfExists('chauffeurpatron');
