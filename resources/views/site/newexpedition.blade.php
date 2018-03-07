@@ -71,23 +71,6 @@
                             </div>
                         </div>
 
-                        <div class="nav nav-tabs"></div>
-                        <br/>
-
-                        <div class="form-group distance">
-                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Distance (km) *</label>
-                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                <input type="text" class="numbers-only form-control" id="distance" disabled value="{{ old('distance', $expedition->distance) }}">
-                                <small id="error" style="color:red"></small>
-                                <input type="hidden" class="numbers-only form-control" name="distance" id="_distance" value="{{ old('distance',$expedition->distance) }}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Masse (kg)</label>
-                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                <input type="text" id="weight" class="numbers-only form-control" name="masse"  value="{{ old('masse',$expedition->masse) }}">
-                            </div>
-                        </div>
 
                         <div class="nav nav-tabs"></div>
                         <br/>
@@ -127,6 +110,17 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Tonnage du camion</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <select name="tonnage_id" class="form-control">
+                                    @foreach($types as $type)
+                                        <option value="{{ $type->id }}" @if(old('typecamion_id',$expedition->typecamion_id) == $type->id ) selected @endif>{{ $type->libelle }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Fragile</label>
                             <div class="col-md-2 col-sm-3 col-xs-4">
                                 <div class="radio">
@@ -146,10 +140,42 @@
                             </div>
                         </div>
 
-                        <div class="form-group border-top inset-4 h4">
-                            <p>Total : <span id="total">{{ old('prix',$expedition->prix) }} </span> F CFA</p>
-                            <input type="hidden" name="prix" id="prix" value="{{ old('prix',$expedition->prix) }}">
+                        <div class="nav nav-tabs"></div>
+                        <br/>
+
+
+
+                        <div class="form-group">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Assurance</label>
+                            <div class="col-md-2 col-sm-3 col-xs-4">
+                                <div class="radio">
+                                    <label>
+                                        <input data-price="25" type="radio" name="fragile" id="blankRadioYes" value="1" class="numbers-only" @if(old('fragile',$expedition->fragile)) checked @endif />
+                                        <span class="radio-field"></span><span>Oui</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-4">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="fragile" id="blankRadioNo" value="0" checked class="numbers-only" @if(!old('fragile',$expedition->fragile)) checked @endif />
+                                        <span class="radio-field"></span><span>Non</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Type d'assurance</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <select name="assurance_id" class="form-control">
+                                    @foreach($types as $type)
+                                        <option value="{{ $type->id }}" @if(old('typecamion_id',$expedition->typecamion_id) == $type->id ) selected @endif>{{ $type->libelle }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Suivant</button>
