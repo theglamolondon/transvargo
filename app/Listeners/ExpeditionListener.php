@@ -32,7 +32,7 @@ class ExpeditionListener
        //$this->sendNotificationToAndoidDriverApp($event->expedition);
       //env('MAIL_USERNAME');
       try{
-          Mail::to("glamolondon@gmail.com")
+          Mail::to(env('MAIL_USERNAME'))
               ->send(new NotifTransvargoTeam($event->expedition));
       }catch (\Exception $e){
           Log::error($e->getMessage());

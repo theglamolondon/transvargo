@@ -10,20 +10,18 @@
             <tr>
                 <td style="padding-top: 30px; padding-bottom: 50px; padding-left: 20px; padding-right: 20px;" width="100%">
                     <h3>Bonjour Administrateur,</h3><br>
-                    l'expéditeur {{ $expedition->client->prenoms }} {{ $expedition->client->nom }} vient de créer l'expédition <strong>{{ $expedition->reference }}</strong>  a été acceptée par un transporteur.<br><br>
+                    <p>l'expéditeur {{ $expedition->client->prenoms }} {{ $expedition->client->nom }} vient de créer l'expédition <strong>{{ $expedition->reference }}</strong>.<br><br>
 
-                    Afin de la consulter et d'y affecter un transporteur, merci de cliquer sur le bouton ci-dessous&nbsp;:<br><br><br><br>
+                    Afin de la consulter et d'y affecter un transporteur, merci de cliquer sur le bouton ci-dessous&nbsp;:<br><br><br><br></p>
 
                     <div align="center">
                         <a href="#" style="text-decoration: none; color: #ffffff; background-color: #0184F2; border-color: #266293; padding-top: 12px; padding-bottom: 12px; padding-right: 18px; padding-left: 18px; font-size: 16px; font-weight: bold;">
-                            PAYER LES FRAIS D'EXPEDITION
+                            Consulter l'expédition
                         </a>
                         <br><br>
-                        <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : #
+                        <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : # </small>
                     </div>
-                    <br><br>
-                    N'hésitez pas à reprendre contact avec nous si quelque chose ne va pas ou si vous avez besoin d’informations&nbsp;: nous lisons et répondons à tous les e-mails&nbsp;!
-                    <br><br>
+
                     Bons transports avec {{ config('app.name') }} !
                     <br><br>
                     L'équipe {{ config('app.name') }}<br>
