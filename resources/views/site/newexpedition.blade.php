@@ -110,6 +110,22 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-6 col-xs-12">Type de camion</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <select id="demo-htmlselect">
+                                    <option value="0" data-imagesrc="http://i.imgur.com/XkuTj3B.png"
+                                            data-description="Description with Facebook">Facebook</option>
+                                    <option value="1" data-imagesrc="http://i.imgur.com/8ScLNnk.png"
+                                            data-description="Description with Twitter">Twitter</option>
+                                    <option value="2" selected="selected" data-imagesrc="http://i.imgur.com/aDNdibj.png"
+                                            data-description="Description with LinkedIn">LinkedIn</option>
+                                    <option value="3" data-imagesrc="http://i.imgur.com/kFAk2DX.png"
+                                            data-description="Description with Foursquare">Foursquare</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Tonnage du camion</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
                                 <select name="tonnage_id" class="form-control">
@@ -188,6 +204,9 @@
 @endsection
 
 @section('script')
+    <!-- Liste des combos -->
+    <script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js" ></script>
+
     <script src="{{ asset("js/bootstrap-datepicker.min.js") }}"></script>
     <script src="{{ asset("js/bootstrap-datepicker.fr.min.js") }}"></script>
     <script type="application/javascript">
@@ -196,6 +215,11 @@
             todayBtn: true,
             language: "fr",
             autoclose: true,
+        });
+        $('#demo-htmlselect').ddslick({
+            onSelected: function(selectedData){
+                //callback function: do something with selectedData;
+            }
         });
     </script>
 
