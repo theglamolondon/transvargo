@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Assurance;
 use App\Expedition;
 use App\Metier\ClientProcessing;
 use App\Metier\ExpeditionProcessing;
 use App\Metier\MapProcessing;
 use App\Services\Statut;
+use App\Tonnage;
 use App\TypeCamion;
 use App\Work\Pdf\PdfMaker;
 use App\Work\Tools;
@@ -40,7 +42,9 @@ class ClientController extends Controller
             }
 
             $types = TypeCamion::all();
-            return view('site.newexpedition',compact("types","expedition"));
+            $assurances = Assurance::all();
+            $tonnages = Tonnage::all();
+            return view('site.newexpedition',compact("types","expedition", "assurances", "tonnages"));
 
         }else{
 

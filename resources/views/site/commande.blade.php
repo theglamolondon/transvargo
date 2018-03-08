@@ -57,7 +57,7 @@
                     <div class="separateur"></div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Société *</label>
+                        <label class="control-label col-sm-4">Société </label>
                         <div class="col-sm-8 col-xs-12">
                             <input type="text" placeholder="Nom de la société au chargement" id="societechargement" name="societechargement" class="form-control" value="{{old('societechargement')}}">
                         </div>
@@ -65,13 +65,13 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">Nom du contact *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" placeholder="Nom du contact au chargement" id="contactchargement" name="contactchargement" class="form-control" value="{{old('contactchargement')}}">
+                            <input type="text" placeholder="Nom du contact au chargement" required id="contactchargement" name="contactchargement" class="form-control" value="{{old('contactchargement')}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">Téléphone du contact *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" maxlength="15" placeholder="Téléphone du contact au chargement" id="telephonechargement" name="telephonechargement" class="form-control" value="{{old('telephonechargement')}}">
+                            <input type="text" maxlength="15" placeholder="Téléphone du contact au chargement" required id="telephonechargement" name="telephonechargement" class="form-control" value="{{old('telephonechargement')}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,7 +88,7 @@
                     <div class="separateur"></div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Société *</label>
+                        <label class="control-label col-sm-4">Société </label>
                         <div class="col-sm-8 col-xs-12">
                             <input type="text" placeholder="Nom de la société à la livraison" id="societelivraison" name="societelivraison" class="form-control" value="{{old('societelivraison')}}">
                         </div>
@@ -96,13 +96,13 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">Nom du contact *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" placeholder="Nom du contact à la livraison" id="contactlivraison" name="contactlivraison" class="form-control" value="{{old('contactlivraison')}}">
+                            <input type="text" placeholder="Nom du contact à la livraison" id="contactlivraison" required name="contactlivraison" class="form-control" value="{{old('contactlivraison')}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">Téléphone du contact  *</label>
                         <div class="col-sm-8 col-xs-12">
-                            <input type="text" maxlength="15" placeholder="N° téléphone du contact à la livraison" id="telephonelivraison" name="telephonelivraison" class="form-control" value="{{old('telephonelivraison')}}">
+                            <input type="text" maxlength="15" placeholder="N° téléphone du contact à la livraison" required id="telephonelivraison" name="telephonelivraison" class="form-control" value="{{old('telephonelivraison')}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -128,8 +128,10 @@
                     <h3 class="text-left">Expédition</h3>
                     <div class="separateur"></div>
                     <p class="text-left"><strong> <i class="fa fa-barcode"></i> {{ $expedition->reference }} </strong> </p>
+                    <!--
                     <p class="text-left"><strong> <i class="fa fa-money"></i> {{ number_format($expedition->prix,0,'.',' ') }} F CFA</strong> </p>
                     <p class="text-left"><strong> <i class="fa fa-tachometer"></i> {{ number_format($expedition->prix/\App\Expedition::UNIT_PRICE,0,'.',' ') }} Km</strong> </p>
+                    -->
                 </div>
 
             </div>

@@ -36,10 +36,12 @@ trait ExpeditionProcessing
             'lieuarrivee' => 'required',
             'coorddepart' => 'required',
             'lieudepart' => 'required',
-            'prix' => 'present|numeric',
+            'isassure' => 'required|boolean',
+            'assurance_id' => 'required_if:isassure,1',
+            'tonnage_id' => 'required|numeric',
             'typecamion_id' => 'required|numeric',
             //'masse' => 'required|numeric',
-            'distance' => 'required|numeric',
+            //'distance' => 'required|numeric',
         ];
     }
 
@@ -72,9 +74,12 @@ trait ExpeditionProcessing
             'coordarrivee'=>$data['coordarrivee'],
             'statut' => Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_INITIE,
             'fragile'=>$data['fragile'],
-            'masse' => $data['masse'],
-            'prix' => $data['prix'],
-            'distance'=> $data['distance'],
+            'masse' => 0,
+            'prix' => 0,
+            'distance'=> 0,
+            'tonnage_id' => $data['tonnage_id'] == '-1' ? null : $data['tonnage_id'],
+            'isassure' => $data['isassure'],
+            'assurance_id' => $data['isassure'] ? $data['assurance_id'] : null,
             'typecamion_id'=> $data['typecamion_id'],
         ]);
 
@@ -178,11 +183,11 @@ trait ExpeditionProcessing
     {
         return [
             'adressechargement' => 'present',
-            'societechargement' => 'required',
+            'societechargement' => 'present',
             'contactchargement' => 'required',
             'telephonechargement' => 'required',
             'adresselivraison' => 'present',
-            'societelivraison' => 'required',
+            'societelivraison' => 'present',
             'contactlivraison' => 'required',
             'telephonelivraison' => 'required',
         ];
@@ -191,11 +196,11 @@ trait ExpeditionProcessing
     /**
      * @param Expedition $expedition
      * @param array $data
-     * @return Expedition
+     * @return mixed
+     * @throws \Throwable
      */
     private function saveCommande(Expedition $expedition,array $data)
     {
-        //dd($expedition);
         $chargement = new Chargement([
             //'dateheurechargement' => Carbon::now()->toDateTimeString(),
             'adressechargement' => $data['adressechargement'],

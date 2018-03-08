@@ -99,39 +99,22 @@
                         <br/>
 
                         <div class="form-group">
-                            <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Type de camion *</label>
+                            <label class="control-label col-md-4 col-sm-6 col-xs-12">Type de camion</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                <select name="typecamion_id" class="form-control">
+                                <select name="_typecamion_id" id="_typecamion_id"  class="form-control">
                                     @foreach($types as $type)
-                                    <option value="{{ $type->id }}" @if(old('typecamion_id',$expedition->typecamion_id) == $type->id ) selected @endif>{{ $type->libelle }}</option>
+                                        <option value="{{ $type->id }}" data-imagesrc="{{ asset("working/{$type->id}.jpg") }}" data-description="{{ $type->description }}" @if(old('typecamion_id',$expedition->typecamion_id) == $type->id ) selected @endif>{{ $type->libelle }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-4 col-sm-6 col-xs-12">Type de camion</label>
-                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                <select id="demo-htmlselect">
-                                    <option value="0" data-imagesrc="http://i.imgur.com/XkuTj3B.png"
-                                            data-description="Description with Facebook">Facebook</option>
-                                    <option value="1" data-imagesrc="http://i.imgur.com/8ScLNnk.png"
-                                            data-description="Description with Twitter">Twitter</option>
-                                    <option value="2" selected="selected" data-imagesrc="http://i.imgur.com/aDNdibj.png"
-                                            data-description="Description with LinkedIn">LinkedIn</option>
-                                    <option value="3" data-imagesrc="http://i.imgur.com/kFAk2DX.png"
-                                            data-description="Description with Foursquare">Foursquare</option>
-                                </select>
-                            </div>
+                            <input type="hidden" name="typecamion_id" id="typecamion_id">
                         </div>
 
                         <div class="form-group">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Tonnage du camion</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                <select name="tonnage_id" class="form-control">
-                                    @foreach($types as $type)
-                                        <option value="{{ $type->id }}" @if(old('typecamion_id',$expedition->typecamion_id) == $type->id ) selected @endif>{{ $type->libelle }}</option>
-                                    @endforeach
+                                <select name="tonnage_id" id="tonnage_id" class="form-control">
+                                    <option value="-1">Tonnage non précisé</option>
                                 </select>
                             </div>
                         </div>
@@ -159,14 +142,12 @@
                         <div class="nav nav-tabs"></div>
                         <br/>
 
-
-
                         <div class="form-group">
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Assurance</label>
                             <div class="col-md-2 col-sm-3 col-xs-4">
                                 <div class="radio">
                                     <label>
-                                        <input data-price="25" type="radio" name="fragile" id="blankRadioYes" value="1" class="numbers-only" @if(old('fragile',$expedition->fragile)) checked @endif />
+                                        <input data-price="25" type="radio" name="isassure" id="isassure_y" value="1" class="numbers-only" @if(old('fragile',$expedition->fragile)) checked @endif />
                                         <span class="radio-field"></span><span>Oui</span>
                                     </label>
                                 </div>
@@ -174,7 +155,7 @@
                             <div class="col-md-2 col-sm-3 col-xs-4">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="fragile" id="blankRadioNo" value="0" checked class="numbers-only" @if(!old('fragile',$expedition->fragile)) checked @endif />
+                                        <input type="radio" name="isassure" id="isassure_f" value="0" checked class="numbers-only" @if(!old('fragile',$expedition->fragile)) checked @endif />
                                         <span class="radio-field"></span><span>Non</span>
                                     </label>
                                 </div>
@@ -185,8 +166,9 @@
                             <label for="depart" class="control-label col-md-4 col-sm-6 col-xs-12">Type d'assurance</label>
                             <div class="col-md-8 col-sm-6 col-xs-12">
                                 <select name="assurance_id" class="form-control">
-                                    @foreach($types as $type)
-                                        <option value="{{ $type->id }}" @if(old('typecamion_id',$expedition->typecamion_id) == $type->id ) selected @endif>{{ $type->libelle }}</option>
+                                    <option value="-1">Aucune assurance</option>
+                                    @foreach($assurances as $assurance)
+                                        <option value="{{ $assurance->id }}" @if(old('assurance_id',$expedition->assurance_id) == $assurance->id ) selected @endif>{{ $assurance->libelle }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -216,11 +198,30 @@
             language: "fr",
             autoclose: true,
         });
-        $('#demo-htmlselect').ddslick({
-            onSelected: function(selectedData){
-                //callback function: do something with selectedData;
+
+        var Tonnages = {!! $tonnages->toJson() !!};
+
+        $('#_typecamion_id').ddslick({
+            width : $('#lieudepart').parent().width(),
+            onSelected: function(data){
+                updateTonnage(data.selectedData.value);
+                $("#typecamion_id").val(data.selectedData.value);
             }
         });
+
+        function updateTonnage(typeCamionId) {
+            var out = '';
+            for(var i=0 ; i < Tonnages.length ; i++){
+                if(Tonnages[i].typecamion_id == typeCamionId){
+                    out += '<option value="'+Tonnages[i].id+'">'+Tonnages[i].masse+' tonne(s)</option>';
+                }
+            }
+            if(out != '')
+                $('#tonnage_id').html(out);
+            else
+                $('#tonnage_id').html('<option value="-1">Tonnage non précisé</option>');
+        }
+
     </script>
 
     <script type="application/ecmascript">
