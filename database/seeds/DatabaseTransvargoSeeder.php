@@ -51,6 +51,11 @@ class DatabaseTransvargoSeeder extends Seeder
             [ "libelle"  => "Propriétaire de flotte" ],
         ]);
 
+        DB::table('assurance')->insert([
+            ["libelle" => "Accidents caratérisés + vols consécutifs"],
+            ["libelle" => "Accidents caratérisés + vols consécutifs + Risques de chargements et de décharchement"]
+        ]);
+
         DB::table('identiteaccess')->insert([
             [
                 "email"  => "admin@transvargo.com" ,

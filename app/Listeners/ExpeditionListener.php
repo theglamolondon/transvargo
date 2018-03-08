@@ -3,8 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\NewExpedition;
+use App\Mail\NotifTransvargoTeam;
 use App\Services\Firebase\Linked;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ExpeditionListener
 {
@@ -25,9 +27,18 @@ class ExpeditionListener
      * @param  NewExpedition  $event
      * @return void
      */
-    public function handle(NewExpedition $event)
-    {
-        $this->sendNotificationToAndoidDriverApp($event->expedition);
-        Log::info("Nouvelle expédition de transport de marchandise créée");
-    }
+   public function handle(NewExpedition $event)
+  {
+       //$this->sendNotificationToAndoidDriverApp($event->expedition);
+      //env('MAIL_USERNAME');
+      try{
+          Mail::to(env('MAIL_USERNAME'))
+              ->send(new NotifTransvargoTeam($event->expedition));
+      }catch (\Exception $e){
+          Log::error($e->getMessage());
+          Log::error($e->getTraceAsString());
+      }
+       Log::info("Nouvelle expédition de transport de marchandise créée");
+  }
+
 }
