@@ -68,9 +68,10 @@ class MapExpedition extends Controller
     public function affectExpeditionToCarrier($reference)
     {
         $sql = <<<EOD
-select DISTINCT v.id as veh_id, v.immatriculation, (select concat_ws(',',latitude, longitude) from localisation
-where vehicule_id = v.id order by datelocalisation desc limit 1) as coord, t.*
-from vehicule v join transporteur t on t.identiteaccess_id = v.transporteur_id;
+select DISTINCT v.id as veh_id, v.immatriculation, v.chauffeur, v.telephone as ch_telephone,
+(select concat_ws(',',latitude, longitude) from localisation
+where vehicule_id = v.id order by datelocalisation desc limit 1) as coord,  tc.libelle as typecamion, t.*
+from vehicule v join transporteur t on t.identiteaccess_id = v.transporteur_id join typecamion tc on tc.id = v.typecamion_id;
 EOD;
 
         try{
@@ -78,7 +79,7 @@ EOD;
                 ->where("reference", $reference)
                 ->firstOrFail();
             $localisations = DB::select($sql);
-            
+
             return view('staff.map.affectation', compact("expedition", "localisations"));
         }catch (ModelNotFoundException $e){
             return back()->withErrors("Expedition introuvable");

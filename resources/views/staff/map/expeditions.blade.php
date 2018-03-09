@@ -16,10 +16,9 @@
                 <div class="col-md-12">
                     <b>Expédition</b>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="N° d'expédition" name="reference" id="reference" value="{{ request()->query("reference") }}">
+                        <input type="text" class="form-control" placeholder="N° d'expédition" name="reference" id="reference" value="{{ $expedition->reference }}">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> </span>
                     </div>
-                    <br/><br/>
                 </div>
 
                 <div class="col-md-12">
