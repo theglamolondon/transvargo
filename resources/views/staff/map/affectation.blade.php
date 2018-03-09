@@ -52,7 +52,7 @@
 
 @section('script')
     <script type="application/javascript">
-        let EXPEDITIONS_ACTIVES = {};
+        let EXPEDITIONS_ACTIVES = {!! json_encode() !!};
 
         function initMap(){
             let map = new google.maps.Map(document.getElementById('map'), {

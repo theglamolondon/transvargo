@@ -52,4 +52,9 @@ class OffreController extends Controller
             }
         }
     }
+
+    public function saveAffect(Request $request)
+    {
+
+    }
 }

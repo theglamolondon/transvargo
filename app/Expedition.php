@@ -36,7 +36,11 @@ class Expedition extends Model
     }
 
     public function assurance(){
-        $this->hasOne(Assurance::class, 'assurance_id');
+        return $this->belongsTo(Assurance::class, 'assurance_id');
+    }
+
+    public function tonnage(){
+        return $this->belongsTo(Tonnage::class, 'tonnage_id');
     }
 
     public function __toString()

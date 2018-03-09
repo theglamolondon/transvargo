@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class MapExpedition extends Controller
@@ -64,17 +65,21 @@ class MapExpedition extends Controller
         ], JSON_UNESCAPED_UNICODE);
     }
 
-    public function affectExpedditionToCarrier($reference)
+    public function affectExpeditionToCarrier($reference)
     {
+        $sql = <<<EOD
+select DISTINCT v.id as veh_id, v.immatriculation, (select concat_ws(',',latitude, longitude) from localisation
+where vehicule_id = v.id order by datelocalisation desc limit 1) as coord, t.*
+from vehicule v join transporteur t on t.identiteaccess_id = v.transporteur_id;
+EOD;
+
         try{
-            $expedition = Expedition::with("chargement.vehicule.transporteur", "typeCamion", "assurance","tonnage")
+            $expedition = Expedition::with("typeCamion", "assurance", "tonnage")
                 ->where("reference", $reference)
                 ->firstOrFail();
-            $localisations = Localisation::with("vehicule")
-                ->latest("datelocalisation")
-                ->un
-
-            return view('staff.map.affectation', compact("expedition"));
+            $localisations = DB::select($sql);
+            
+            return view('staff.map.affectation', compact("expedition", "localisations"));
         }catch (ModelNotFoundException $e){
             return back()->withErrors("Expedition introuvable");
         }
