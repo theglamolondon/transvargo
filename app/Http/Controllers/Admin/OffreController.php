@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\AcceptExpedition;
 use App\Expedition;
 use App\Metier\ExpeditionProcessing;
+use App\Services\Statut;
 use App\Work\Tools;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -79,6 +80,9 @@ class OffreController extends Controller
 
         if($expedition->isassure)
             $expedition->mttassurance = intval($request->input('mttassurance')) + 5000;
+
+        $expedition->statut = Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_ACCEPTE;
+        $expedition->dateheureacceptation = Carbon::now()->toDateTimeString();
 
         $expedition->save();
 
