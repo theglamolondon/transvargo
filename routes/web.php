@@ -107,7 +107,7 @@ Route::group(['middleware' => ['auth','staff'], 'prefix' => 'staff'],function ()
     Route::get('invoice/grang-compte/0000-{id}.html','Admin\Invoice\InvoiceController@showInvoiceBoard')->name('staff.invoice');
     Route::get('offres.html','Admin\OffreController@liste')->name('staff.offres');
     Route::get('offre/{reference}/affectation.html','Admin\MapExpedition@affectExpeditionToCarrier')->name('staff.offre.affect');
-    Route::post('offre/{reference}/affectation.html','Admin\OffreContoller@saveAffect');
+    Route::post('offre/{reference}/affectation.html','Admin\OffreController@saveAffect');
     Route::get('offre/{reference}/details.html','Admin\OffreController@details')->name('staff.offre.details');
     Route::get('cartographie/expeditions.html','Admin\MapExpedition@showMap')->name('staff.map.expedition');
     Route::get('expeditions/localisations','Admin\MapExpedition@ajaxGetLocatisation')->name('staff.expeditions.localisation');

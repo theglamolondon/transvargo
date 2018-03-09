@@ -114,6 +114,9 @@
                         +"</div>";
 
                     marker.addListener('click', function() {
+                        $("#transporteur").val(marker.tag.chauffeur);
+                        $("#immatriculation").val(marker.tag.immatriculation);
+                        $("#vehicule_id").val(marker.tag.veh_id);
                         toggleBounce(marker);
                         infoWindow.setContent(infowincontent);
                         infoWindow.open(map, marker);
