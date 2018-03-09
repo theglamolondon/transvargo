@@ -53,8 +53,39 @@ class OffreController extends Controller
         }
     }
 
-    public function saveAffect(Request $request)
+    public function saveAffect(Request $request, $reference)
     {
+        $this->validate($request,[
+            'prix' => 'required|numeric',
+            'mttassurance' => 'required|numeric',
+            'vehicule_id' => 'required|numeric',
+            'expedition_id' => 'required|numeric'
+        ]);
 
+        $expedition = Expedition::with('client','chargement.vehicule.transporteur','typeCamion')
+            ->where('reference',$reference)
+            ->first();
+
+        if($request->input('expedition_id') != $expedition->id)
+            return back()->withErrors("Un problème au niveau de la reférence de l'expédition est survenu.");
+
+        $expedition->prix = $request->input('prix');
+        $expedition->chargement->vehicule_id = $request->input('vehicule_id');
+        $expedition->chargement->save();
+
+        if($expedition->isassure)
+            $expedition->mttassurance = intval($request->input('mttassurance')) + 5000;
+
+        $expedition->save();
+
+        try{
+            event(new AcceptExpedition($expedition));
+        }catch (\Exception $e){
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
+
+        return redirect()->route('staff.offres')
+            ->with(Tools::MESSAGE_SUCCESS,Lang::get('message.expedition.accept',['reference' => $request->input('reference')]));
     }
 }

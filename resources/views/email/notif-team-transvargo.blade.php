@@ -15,14 +15,14 @@
                     Afin de la consulter et d'y affecter un transporteur, merci de cliquer sur le bouton ci-dessous&nbsp;:<br><br><br><br></p>
 
                     <div align="center">
-                        <a href="#" style="text-decoration: none; color: #ffffff; background-color: #0184F2; border-color: #266293; padding-top: 12px; padding-bottom: 12px; padding-right: 18px; padding-left: 18px; font-size: 16px; font-weight: bold;">
+                        <a href="{{route("staff.offre.details",["reference"=>$expedition->reference])}}" style="text-decoration: none; color: #ffffff; background-color: #0184F2; border-color: #266293; padding-top: 12px; padding-bottom: 12px; padding-right: 18px; padding-left: 18px; font-size: 16px; font-weight: bold;">
                             Consulter l'expédition
                         </a>
                         <br><br>
-                        <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : # </small>
+                        <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : {{route("staff.offre.details",["reference"=>$expedition->reference])}} </small>
                     </div>
 
-                    Bons transports avec {{ config('app.name') }} !
+
                     <br><br>
                     L'équipe {{ config('app.name') }}<br>
                 </td>
