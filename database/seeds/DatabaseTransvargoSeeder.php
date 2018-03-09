@@ -86,6 +86,16 @@ class DatabaseTransvargoSeeder extends Seeder
                 "typeidentite_id" => 2
             ],
         ]);
+        DB::table('identiteaccess')->insert([
+            [
+                "email"  => "akejeansidoine@yahoo.fr" ,
+                "password"  => bcrypt('azerty'),
+                "statut" => \App\Services\Statut::TYPE_IDENTITE_ACCESS.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL,
+                "activate_token" => "ND",
+                "terms" => 1,
+                "typeidentite_id" => 2
+            ],
+        ]);
 
         DB::table('staff')->insert([
             [
@@ -122,6 +132,43 @@ class DatabaseTransvargoSeeder extends Seeder
                 "lieunaissance" => "Cocody",
                 "rib" => "12548896587",
                 "identiteaccess_id" => 3
+            ],
+            [
+                "nom" => "Aké",
+                "prenoms" => "Jean Sidoine",
+                "raisonsociale" => "SOFTN'FIX",
+                "contact" => "0878009",
+                "comptecontribuable" => "CI-ABJ-2002-456P",
+                "ville" => "ABIDJAN",
+                "nationalite" => "Ivoirienne",
+                "typetransporteur_id" => 1,
+                "datecreation" => Carbon\Carbon::now()->toDateTimeString(),
+                "datenaissance" => "1987-09-03",
+                "lieunaissance" => "Cocody",
+                "rib" => "12548896587",
+                "identiteaccess_id" => 4
+            ],
+        ]);
+        DB::table('vehicule')->insert([
+            [
+                "immatriculation" => "2345AB01",
+                "capacite" => 13,
+                "chauffeur" => "Ibrahim Toutou",
+                "telephone" => "0011223344",
+                "statut" => \App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL,
+                "transporteur_id" => 3,
+                "typecamion_id" => 2
+            ]
+        ]);
+        DB::table('vehicule')->insert([
+            [
+                "immatriculation" => "1145GZ01",
+                "capacite" => 25,
+                "chauffeur" => "Kouamé Bruno",
+                "telephone" => "99887766",
+                "statut" => \App\Services\Statut::TYPE_VEHICULE.\App\Services\Statut::ETAT_ACTIF.\App\Services\Statut::AUTRE_NON_NULL,
+                "transporteur_id" => 4,
+                "typecamion_id" => 3
             ]
         ]);
     }

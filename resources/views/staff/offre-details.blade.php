@@ -97,13 +97,15 @@
                     @endif
 
                     <div class="">
-                    @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE))
+                    @if(substr($expedition->statut, 0, 2) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE))
                         <a class="h6" title="Télécharger la facture" target="_blank" href="{{ route("staff.pdf.facture", ["reference" => $expedition->reference]) }}"><i class="glyphicon glyphicon-save-file"></i> Facture</a>
                     @endif
                     <br/>
-                    @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS))
+                    <!--
+                    @if(substr($expedition->statut, 0, 2) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS))
                         <a class="h6" title="Télécharger le bon de livraison" target="_blank" href="{{ route("staff.pdf.bonlivraison", ["reference" => $expedition->reference]) }}"><i class="glyphicon glyphicon-paste"></i> Bon de livraison</a>
                     @endif
+                    -->
                     </div>
                 </div>
             </div>
@@ -122,12 +124,12 @@
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS)) active @endif">2</span>
+                    <span class="state @if(substr($expedition->statut,  0, 2) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS)) active @endif">2</span>
                     <span>En cours</span>
                     <span class="bar"></span>
                 </div>
                 <div class="element">
-                    <span class="state @if(substr($expedition->statut, 1) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE)) active @endif">3</span>
+                    <span class="state @if(substr($expedition->statut,  0, 2) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE)) active @endif">3</span>
                     <span>Livrée</span>
                     <span class="bar"></span>
                 </div>
@@ -141,6 +143,9 @@
         </div>
         <div class="col-md-4 col-sm-7 col-xs-12">
             <div id="map" style="height: 550px"></div>
+            <br>
+            <br>
+            <a href="{{ route('staff.offre.affect', [ "reference" => $expedition->reference ]) }}" class="btn btn-primary btn-sm btn-min-width-lg">Affecter</a>
         </div>
 
     </section>

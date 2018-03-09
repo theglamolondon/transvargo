@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Expedition;
+use App\Localisation;
 use App\Metier\ExpeditionProcessing;
 use App\Metier\MapProcessing;
 use App\Services\Statut;
@@ -34,6 +35,14 @@ class MapExpedition extends Controller
             ])->get();
     }
 
+    private function getExpeditionNonAffectes()
+    {
+        return Expedition::with( "chargement.vehicule.transporteur", "typeCamion")
+            ->whereIn("statut", [
+                Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE,
+            ])->get();
+    }
+
     public function ajaxGetLocatisation()
     {
         $output = [];
@@ -53,5 +62,21 @@ class MapExpedition extends Controller
         return response()->json($output, 200, [
             "Content-Type" => "application/json"
         ], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function affectExpedditionToCarrier($reference)
+    {
+        try{
+            $expedition = Expedition::with("chargement.vehicule.transporteur", "typeCamion", "assurance","tonnage")
+                ->where("reference", $reference)
+                ->firstOrFail();
+            $localisations = Localisation::with("vehicule")
+                ->latest("datelocalisation")
+                ->un
+
+            return view('staff.map.affectation', compact("expedition"));
+        }catch (ModelNotFoundException $e){
+            return back()->withErrors("Expedition introuvable");
+        }
     }
 }
