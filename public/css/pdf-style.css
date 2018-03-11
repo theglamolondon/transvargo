@@ -101,13 +101,15 @@ table td {
     text-align: center;
     border-bottom: 1px solid #FFFFFF;
 }
-
-/*
-table td {
-    background: #FFFFFF;
-    border-bottom: 1px solid #1A2C3A;
+table tbody td{
+    background: rgba(238, 238, 238, 0.50);
 }
-*/
+table tbody .no, table tbody .total {
+    background: rgba(0, 135, 195, 0.50);
+}
+table tbody .unit {
+    background: rgba(221, 221, 221, 0.50);
+}
 
 table th {
     white-space: nowrap;

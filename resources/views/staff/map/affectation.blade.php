@@ -53,6 +53,12 @@
                                     <input type="number" class="form-control" placeholder="prix de l'assurance" name="mttassurance" id="mttassurance" value="0">
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <b>Frais Annexe</b><br>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Frais annexe de l'assurance" name="fraisannexe" id="fraisannexe" value="5000">
+                                </div>
+                            </div>
                         @endif
 
                         <div class="col-md-12">

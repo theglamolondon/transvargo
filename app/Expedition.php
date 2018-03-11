@@ -23,6 +23,11 @@ class Expedition extends Model
 
     const UNIT_PRICE = 1000;
 
+    public function getRealPrice()
+    {
+        return $this->fraisannexe + $this->mttassurance + $this->prix;
+    }
+
     public function typeCamion(){
         return $this->belongsTo(TypeCamion::class,'typecamion_id');
     }

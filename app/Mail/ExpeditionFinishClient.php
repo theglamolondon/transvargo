@@ -39,10 +39,12 @@ class ExpeditionFinishClient extends Mailable
     {
         return $this->from(env('MAIL_USERNAME'), config('app.name'))
             ->subject('Expedition #'.$this->expedition->reference." livrée")
-            ->view('email.expedition-finish', ["expedition" => $this->expedition])
+            ->view('email.expedition-finish', ["expedition" => $this->expedition]);
+            /*
             ->attachData($this->showBonLivraisonPDF($this->expedition->reference),
                 "Bon de Livraison ".$this->expedition->bonlivraison."pdf", [
                     "mime" => "application/pdf"
                 ]);
+            */
     }
 }

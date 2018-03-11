@@ -42,7 +42,7 @@ trait PdfMaker
     public function showFacturePDF($reference)
     {
         //$invoices = $reference ? $this->getSingle($reference, (Auth::user() != null)) : $this->getAllInvoice();
-        $invoices = Expedition::with('client','chargement','typeCamion')
+        $invoices = Expedition::with('client','chargement','typeCamion','tonnage', 'assurance')
             ->where('reference', $reference)
             ->get();
 

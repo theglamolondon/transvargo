@@ -63,6 +63,7 @@ class OffreController extends Controller
         $this->validate($request,[
             'prix' => 'required|numeric',
             'mttassurance' => 'required|numeric',
+            'fraisannexe' => 'required|numeric',
             'vehicule_id' => 'required|numeric',
             'expedition_id' => 'required|numeric'
         ]);
@@ -74,12 +75,17 @@ class OffreController extends Controller
         if($request->input('expedition_id') != $expedition->id)
             return back()->withErrors("Un problème au niveau de la reférence de l'expédition est survenu.");
 
+        $expedition->facture = sprintf("EXP%s-%04d", date('Ym'), $expedition->id);
         $expedition->prix = $request->input('prix');
+
         $expedition->chargement->vehicule_id = $request->input('vehicule_id');
         $expedition->chargement->save();
 
-        if($expedition->isassure)
-            $expedition->mttassurance = intval($request->input('mttassurance')) + 5000;
+        if($expedition->isassure){
+            $expedition->mttassurance = intval($request->input('mttassurance'));
+            $expedition->fraisannexe = intval($request->input('fraisannexe'));
+        }
+
 
         $expedition->statut = Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_ACCEPTE;
         $expedition->dateheureacceptation = Carbon::now()->toDateTimeString();

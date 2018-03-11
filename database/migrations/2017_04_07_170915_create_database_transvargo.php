@@ -159,12 +159,13 @@ class CreateDatabaseTransvargo extends Migration
             $table->float('masse',10,2);
             $table->string('statut',5);
             $table->boolean('fragile')->default(false);
-            $table->bigInteger('prix')->default(0);
+            $table->integer('prix')->default(0);
             $table->integer('distance')->nullable();
             //$table->string('remarque')->nullable();
             //$table->integer('nature_id')->unsigned();
             $table->boolean('isassure')->default(false);
             $table->integer('mttassurance')->default(0);
+            $table->integer("fraisannexe")->default(0);
             $table->unsignedInteger('assurance_id');
             $table->integer('client_id')->unsigned();
             $table->integer('typecamion_id')->unsigned();

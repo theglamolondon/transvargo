@@ -11,7 +11,7 @@
                     <div id="client">
                         <div class="to">CLIENT :</div>
                         <h2 class="name">{{ $invoices->first()->client->nom }} {{ $invoices->first()->client->prenoms }}</h2>
-                        <div class="address">{{ $invoices->first()->client->raisonsociale }} - Contact : {{ $invoices->first()->client->contact }}</div>
+                        <div class="address">Contact : {{ $invoices->first()->client->contact }}</div>
                         <div class="email"><a href="mailto:{{ $invoices->first()->client->identiteAccess->email }}">{{ $invoices->first()->client->identiteAccess->email }}</a></div>
                     </div>
                 </td>

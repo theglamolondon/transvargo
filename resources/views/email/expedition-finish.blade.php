@@ -11,14 +11,9 @@
                 <td style="padding-top: 30px; padding-bottom: 50px; padding-left: 20px; padding-right: 20px;" width="100%">
                     <h3>Bonjour {{ $expedition->client->prenoms }} {{ $expedition->client->nom }},</h3><br>
                     Votre expédition <strong>{{ $expedition->reference }}</strong>  a été livrée avec succès.<br><br>
-
-                    Veuillez noter que votre numéro de bon de livraison :<br><br>
-                    <strong>{{ $expedition->bonlivraison }}</strong>&nbsp;<br><br>
-
-                    <br><br>
                     N'hésitez pas à reprendre contact avec nous si quelque chose ne va pas ou si vous avez besoin d’informations&nbsp;: nous lisons et répondons à tous les e-mails&nbsp;!
                     <br><br>
-                    Bons transports avec {{ config('app.name') }} !
+                    Merci d'avoir utilisé {{ config('app.name') }} !
                     <br><br>
                     L'équipe {{ config('app.name') }}<br>
                 </td>
