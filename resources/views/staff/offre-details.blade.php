@@ -11,7 +11,7 @@
 
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <p class="text-left">
-                        <img src="{{ config('app.url') }}/working/package32.png">
+                        <img src="{{ asset('/working/package32.png') }}">
                         <strong>{{ $expedition->lieudepart }}</strong><br/>
                         <small class="small">A partir du {{ (new \Carbon\Carbon($expedition->datechargement))->format("d/m/Y") }}</small>
                     </p>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <p class="text-left">
-                        <img src="{{ config('app.url') }}/working/drapeaudamier32.gif">
+                        <img src="{{ asset('/working/drapeaudamier32.gif') }}">
                         <strong>{{ $expedition->lieuarrivee }}</strong><br/>
                         <small class="small">Jusqu'au {{ (new \Carbon\Carbon($expedition->dateexpiration))->format("d/m/Y") }}</small>
                     </p>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     @if(\Illuminate\Support\Facades\Auth::user()->typeidentite_id == \App\TypeIdentitite::TYPE_TRANSPORTEUR)
-                        <h3 class="text-center">{{ number_format($expedition->prix * \App\Transporteur::POURCENTAGE,0,',',' ') }} F CFA</h3>
+                        <h3 class="text-center">{{ number_format($expedition->prix,0,',',' ') }} F CFA</h3>
                     @else
                         <h3 class="text-center">{{ number_format($expedition->prix,0,',',' ') }} F CFA</h3>
                     @endif

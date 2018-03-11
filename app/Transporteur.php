@@ -15,7 +15,7 @@ class Transporteur extends Authenticable
 {
     const LIMITE_CHAUFFEUR_PATRON = 1;
     const LIMITE_TRANSPORTEUR_FLOTTE = null;
-    const POURCENTAGE = 0.75;
+    const POURCENTAGE = 1;
 
     protected $table = 'transporteur';
     protected $guarded = [];
