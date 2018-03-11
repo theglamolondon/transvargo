@@ -31,7 +31,7 @@ class NouveauExpediteurMailer extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_USERNAME'))
+        return $this->from(env('MAIL_USERNAME'), config('app.name'))
                 ->subject('Valider votre inscription')
                 ->view('email.expediteur-cree');
     }

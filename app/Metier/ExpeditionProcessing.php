@@ -241,7 +241,7 @@ trait ExpeditionProcessing
      * @return Builder
      */
     protected function getOffers(){
-        return Expedition::with("client","chargement","typeCamion")
+        return Expedition::with("client","chargement","typeCamion","tonnage")
             ->where('statut',Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
             ->where("dateexpiration",">", Carbon::now()->addDay()->toDateString())
             ->orderBy('datechargement')

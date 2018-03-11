@@ -37,7 +37,7 @@ class ExpeditionFinishAdmin extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_USERNAME'))
+        return $this->from(env('MAIL_USERNAME'), config('app.name'))
             ->subject('Expedition #'.$this->expedition->reference." livrée")
             ->view('email.expedition-finish-admin', ["expedition" => $this->expedition]);
     }

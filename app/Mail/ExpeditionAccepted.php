@@ -31,7 +31,7 @@ class ExpeditionAccepted extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_USERNAME'))
+        return $this->from(env('MAIL_USERNAME'), config('app.name'))
             ->subject('Expedition #'.$this->expedition->reference." acceptée")
             ->view('email.expedition-accepted', ["expedition" => $this->expedition])
             ->attachData($this->showFacturePDF($this->expedition->reference),

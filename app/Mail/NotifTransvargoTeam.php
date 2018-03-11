@@ -30,7 +30,7 @@ class NotifTransvargoTeam extends Mailable
      */
     public function build()
     {
-        return $this->from (env('MAIL_USERNAME'))
+        return $this->from (env('MAIL_USERNAME'), config('app.name'))
             ->view('email.notif-team-transvargo', ["expedition" => $this->expedition]);
     }
 }
