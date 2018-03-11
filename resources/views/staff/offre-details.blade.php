@@ -141,12 +141,15 @@
             <br class="clearfix">
 
         </div>
+
+        @if($expedition->statut == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_NON_ACCEPTE))
         <div class="col-md-4 col-sm-7 col-xs-12">
             <div id="map" style="height: 550px"></div>
             <br>
             <br>
             <a href="{{ route('staff.offre.affect', [ "reference" => $expedition->reference ]) }}" class="btn btn-primary btn-sm btn-min-width-lg">Affecter</a>
         </div>
+        @endif
 
     </section>
 

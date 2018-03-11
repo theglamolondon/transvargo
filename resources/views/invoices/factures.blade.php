@@ -87,7 +87,7 @@
     </table>
     <div id="notices">
         <div>Montant en lettre :</div>
-        <div class="notice">Facture arretée à la somme de {{ \App\Work\NombreToLettre::getLetter($total*1.18) }} FCFA</div>
+        <div class="notice">Facture arretée à la somme de {{ \App\Work\NombreToLettre::getLetter($total) }} FCFA</div>
     </div>
 
     <br/>

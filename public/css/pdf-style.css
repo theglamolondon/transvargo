@@ -108,6 +108,7 @@ table tbody .no, table tbody .total {
     background: rgba(0, 135, 195, 0.50);
 }
 table tbody .unit {
+    text-align: center;
     background: rgba(221, 221, 221, 0.50);
 }
 
