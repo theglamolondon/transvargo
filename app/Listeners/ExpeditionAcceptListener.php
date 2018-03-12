@@ -105,20 +105,21 @@ class ExpeditionAcceptListener
         try{
             $message = null;
 
+            /*
             if($event->expedition->chargement->vehicule->transporteur->typetransporteur_id == TypeTransporteur::TYPE_PROPRIETAIRE_FLOTTE)
-            {
-                $message = sprintf("L'expédition n°%s vous a été affectée. %s à %s. Expiration le %s",
-                    $event->expedition->reference,
-                    $event->expedition->lieudepart,
-                    $event->expedition->lieuarrivee,
-                    (new Carbon($event->expedition->dateexpiration))->format("d/m/Y"));
-            }
+            {} */
+
+            $message = sprintf("L'expédition n°%s vous a été affectée. %s à %s. Expiration le %s",
+                $event->expedition->reference,
+                $event->expedition->lieudepart,
+                $event->expedition->lieuarrivee,
+                (new Carbon($event->expedition->dateexpiration))->format("d/m/Y"));
 
             $this->sendNotificationToOneDevice($event->expedition, $message);
         }catch (\Exception $e){
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
-        logger("Notification Android envoyée");
+        logger("Notification android envoyée");
     }
 }

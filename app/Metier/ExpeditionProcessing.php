@@ -57,6 +57,11 @@ trait ExpeditionProcessing
         ];
     }
 
+    /**
+     * @param Request $request
+     * @return Expedition|\Illuminate\Database\Eloquent\Model|null|static
+     * @throws \Throwable
+     */
     private function createExpedition(Request $request)
     {
         $data = $request->all();
