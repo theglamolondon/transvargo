@@ -62,8 +62,8 @@ class OffreController extends Controller
     {
         $this->validate($request,[
             'prix' => 'required|numeric',
-            'mttassurance' => 'required|numeric',
-            'fraisannexe' => 'required|numeric',
+            'mttassurance' => 'required_if:isassure,1|numeric',
+            'fraisannexe' => 'required_if:isassure,1|numeric',
             'vehicule_id' => 'required|numeric',
             'expedition_id' => 'required|numeric'
         ]);

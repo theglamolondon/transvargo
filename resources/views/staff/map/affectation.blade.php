@@ -61,6 +61,8 @@
                             </div>
                         @endif
 
+                        <input type="hidden" name="isassure" value="{{ ($expedition->isassure) }}">
+
                         <div class="col-md-12">
                             <br><br><br>
                             <div class="input-group">

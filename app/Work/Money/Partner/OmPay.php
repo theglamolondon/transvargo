@@ -11,13 +11,14 @@ namespace App\Work\Money\Partner;
 use App\Expedition;
 use App\Work\Money\Payement;
 use App\Work\Money\PayementException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class OmPay extends Payement
 {
-    const URL_BASE = "https://ompay.orange.ci/e-commerce_test_gw/";
+    const URL_BASE = "https://ompay.orange.ci/e-commerce_test_gw";
 
-    const URL_INIT = self::URL_BASE."init.php";
+    const URL_INIT = self::URL_BASE."/init.php";
     const URL_SENT_DATA = self::URL_BASE;
 
     private $logo_url;
@@ -34,6 +35,11 @@ class OmPay extends Payement
     public $tag;
     public $contact_partenaire;
 
+    /**
+     * OmPay constructor.
+     * @param Expedition|Model $expedition
+     * @throws PayementException
+     */
     public function __construct(Expedition $expedition)
     {
         $this->logo_url = asset("images/pico.png");
