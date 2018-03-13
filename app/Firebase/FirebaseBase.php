@@ -27,6 +27,11 @@ class  FirebaseBase
         return $this->error;
     }
 
+    /**
+     * @param array $fields
+     * @return mixed
+     * @throws FirebaseException
+     */
     protected function sendPushNotification(array $fields) {
 
         $connexion = curl_init();
@@ -50,6 +55,11 @@ class  FirebaseBase
         return $result;
     }
 
+    /**
+     * @param Push $push
+     * @return mixed
+     * @throws FirebaseException
+     */
     public function sendNotificationToAllDevices(Push $push)
     {
         return $this->sendPushNotification(
@@ -60,6 +70,28 @@ class  FirebaseBase
         );
     }
 
+    /**
+     * @param Push $push
+     * @param string $topics
+     * @return mixed
+     * @throws FirebaseException
+     */
+    public function sendNotificationToSpecificTopics(Push $push, string $topics)
+    {
+        return $this->sendPushNotification(
+            [
+                "to" => "/topics/$topics",
+                "data" => $push->getMessagePush()
+            ]
+        );
+    }
+
+    /**
+     * @param $deviceToken
+     * @param Push $push
+     * @return mixed
+     * @throws FirebaseException
+     */
     public function sendNotificationToOneDevice($deviceToken, Push $push){
         return $this->sendPushNotification(
             [
