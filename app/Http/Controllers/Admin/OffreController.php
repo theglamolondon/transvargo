@@ -23,6 +23,7 @@ class OffreController extends Controller
     public function liste(Request $request)
     {
         $expeditions = Expedition::with('typeCamion','client','chargement.vehicule.transporteur')
+            ->where("statut", Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
             ->orderBy('dateheurecreation','desc');
 
         $this->filterExpeditions($request, $expeditions);

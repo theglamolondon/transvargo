@@ -90,7 +90,7 @@ class ClientController extends Controller
         return Expedition::with('client','chargement.vehicule')
             ->where('client_id',Auth::id())
             ->whereNotIn('statut',[Statut::TYPE_EXPEDITION.Statut::ETAT_LIVREE.Statut::AUTRE_NON_NULL])
-            ->orderBy('datechargement');
+            ->orderBy('datechargement','desc');
     }
 
     public function showExpeditions(Builder $builder)
