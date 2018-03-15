@@ -79,7 +79,7 @@ trait Linked
     {
         $push = $push = $this->initializePush($expedition);
         $firebase = new FirebaseBase();
-        $firebase->sendNotificationToSpecificTopics($push, str_replace("@",'#', $transporteur->identiteAccess->email));
+        $firebase->sendNotificationToSpecificTopics($push, str_replace("@","", $transporteur->identiteAccess->email));
 
         if($transporteur->typetransporteur_id == TypeTransporteur::TYPE_PROPRIETAIRE_FLOTTE)
         {

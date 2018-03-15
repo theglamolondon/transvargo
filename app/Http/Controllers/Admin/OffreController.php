@@ -6,6 +6,7 @@ use App\Events\AcceptExpedition;
 use App\Expedition;
 use App\Metier\ExpeditionProcessing;
 use App\Services\Statut;
+use App\Vehicule;
 use App\Work\Tools;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -78,7 +79,9 @@ class OffreController extends Controller
         $expedition->facture = sprintf("EXP%s-%04d", date('Ym'), $expedition->id);
         $expedition->prix = $request->input('prix');
 
-        $expedition->chargement->vehicule_id = $request->input('vehicule_id');
+        $vehicule = Vehicule::find($request->input('vehicule_id'));
+
+        $expedition->chargement->vehicule()->associate($vehicule);
         $expedition->chargement->save();
 
         if($expedition->isassure){
