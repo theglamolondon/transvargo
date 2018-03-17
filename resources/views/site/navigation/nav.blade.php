@@ -2,8 +2,8 @@
     <div class="rd-navbar-search">
         <ul class="rd-navbar-nav">
             <li class=""><a href="{{ route('accueil') }}">Accueil</a></li>
+            <li class=""><a href="{{ route('services') }}">Services</a></li>
             <li class=""><a href="{{ route('apropos') }}">A Propos</a></li>
-            <!--<li class=""><a href="{{ route('contact') }}">Contact</a></li>-->
 
             @if(\Illuminate\Support\Facades\Auth::guest())
             <li class=""><a href="{{ route('login') }}" class=""> <i></i> Espace membre </a></li>

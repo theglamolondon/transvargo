@@ -38,6 +38,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 /*Site route*/
 Route::get('/', 'SiteController@index');
 Route::get('/accueil.html', 'SiteController@index')->name('accueil');
+Route::get('/services.html', 'SiteController@showServicePage')->name('services');
 Route::get('/conditions-utilisation.html', 'SiteController@showTermOfUsesPage')->name('terms');
 Route::get('/contact.html', 'SiteController@showContactPage')->name('contact');
 Route::post('/contact.html', 'SiteController@sendResponseContact');

@@ -49,6 +49,10 @@ class SiteController extends Controller
         return view('site.contact');
     }
 
+    public function showServicePage(Request $request){
+        return view('services');
+    }
+
     public function validation($token)
     {
         //lecture et décode du token

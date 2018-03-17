@@ -60,10 +60,10 @@
                         <div class="media">
                             <div class="media-left"><span class="icon icon-primary icon-sm fa-map-marker"></span></div>
                             <div class="media-body">
-                                <p class="h6">Adresse postale</p><span>
+                                <p class="h6">Situation géographique</p><span>
                                     <a href="#">
-                                      {{config('app.name','Transvargo')}} SARL.
-                                      Marcory résidentiel</a></span>
+                                      {{config('app.name','Transvargo')}}.
+                                      Cocody deux plateaux</a></span>
                             </div>
                         </div>
                     </address>
@@ -76,9 +76,7 @@
                                 <p class="h6">Contact</p>
                                 <dl class="dl-horizontal">
                                     <dt>Phone:</dt>
-                                    <dd><a href="callto:0022540504663">(+225) 40 50 46 63</a></dd>
-                                    <dt>FAX:</dt>
-                                    <dd><a href="callto:0022578264623">(+225) 78 26 46 23</a></dd>
+                                    <dd><a href="callto:0022555596855">(+225) 55 596 855</a></dd>
                                 </dl>
                             </div>
                         </div>
