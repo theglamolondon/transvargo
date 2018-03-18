@@ -47,7 +47,7 @@
             <br/> <br/>
 
             <div class="col-md-5 col-lg-6 col-xs-12">
-                <aside id="map" style="height: 550px;"></aside>
+                <aside id="map" style="height: 750px;"></aside>
             </div>
 
             <div class="col-sm-10 col-md-7 col-lg-6 inset-3">
