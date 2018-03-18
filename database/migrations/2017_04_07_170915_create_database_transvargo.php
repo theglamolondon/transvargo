@@ -164,6 +164,7 @@ class CreateDatabaseTransvargo extends Migration
             //$table->string('remarque')->nullable();
             //$table->integer('nature_id')->unsigned();
             $table->boolean('isassure')->default(false);
+            $table->integer('valeurassuree')->default(0);
             $table->integer('mttassurance')->default(0);
             $table->integer("fraisannexe")->default(0);
             $table->unsignedInteger('assurance_id');

@@ -11,34 +11,7 @@
     </div>
 
     <div class="clearfix">
-        <div class="col-md-2 col-sm-12">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <b>Expédition</b>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="N° d'expédition" name="reference" id="reference" value="{{ $expedition->reference }}">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> </span>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <b>Véhicule</b>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Immatriculation" name="immatriculation" id="immatriculation" value="{{ request()->query("immatriculation") }}">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> </span>
-                    </div>
-                    <br/><br/>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="input-group">
-                        <button id="search" type="button" class="btn btn-sm bg-dark">Rechercher</button>
-                    </div>
-                    <br/><br/>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10 col-sm-12">
+        <div class="col-md-12 col-sm-12">
             <div id="map" style="height: 900px;"></div>
         </div>
     </div>

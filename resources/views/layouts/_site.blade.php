@@ -31,7 +31,7 @@
             <div class="rd-navbar-top-panel bg-dark">
               <div class="rd-navbar-inner rd-navbar-nav">
                 <span class="text-right">
-                  <a href="mailto:contact@transvargo.com"  class="text-center fa-envelope-o">contact@transvargo.com</a><a href="callto:+25540504663" class="text-center fa-mobile-phone preffix-2">(255) 40 50 46 63</a>
+                  <a href="mailto:contact@transvargo.com"  class="text-center fa-envelope-o">contact@transvargo.com</a><a href="callto:+255{{ trim(env("APP_CALL")) }}" class="text-center fa-phone preffix-2">(+255) {{ env("APP_CALL") }}</a>
                 </span>
               </div>
             </div>
@@ -137,7 +137,8 @@
             <p class="pull-sm-left">&#169; <span id="copyright-year"></span>{{ config("app.name") }} tous droits réservés - <a href="{{ route('terms') }}">Conditions d'utilisation</a></p>
             <ul class="list-inline pull-sm-right offset-3">
               <li><a href="https://www.facebook.com/transvargo" target="_blank" class="fa-facebook"></a></li>
-              <li><a href="#" class="fa-twitter"></a></li>
+              <li><a href="https://twitter.com/transvargo_com" target="_blank" class="fa-twitter"></a></li>
+              <li><a href="https://www.linkedin.com/company/transvargo/" target="_blank" class="fa-linkedin-square"></a></li>
             </ul>
           </div>
         </section>
@@ -150,19 +151,19 @@
       @if(session()->has(\App\Work\Tools::MESSAGE_SUCCESS))
           <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Succès ! </strong> {{ session(\App\Work\Tools::MESSAGE_SUCCESS) }}
+            <h4><strong>Succès ! </strong> {{ session(\App\Work\Tools::MESSAGE_SUCCESS) }}</h4>
           </div>
       @endif
       @if(session()->has(\App\Work\Tools::MESSAGE_WARNING))
           <div class="alert alert-warning alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Attention ! </strong> {{ session(\App\Work\Tools::MESSAGE_WARNING) }}
+            <h4><strong>Attention ! </strong> {{ session(\App\Work\Tools::MESSAGE_WARNING) }}</h4>
           </div>
       @endif
       @if(session()->has(\App\Work\Tools::MESSAGE_INFO))
           <div class="alert alert-info alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Info ! </strong> {{ session(\App\Work\Tools::MESSAGE_INFO) }}
+            <h4><strong>Info ! </strong> {{ session(\App\Work\Tools::MESSAGE_INFO) }}</h4>
           </div>
       @endif
       @if(isset($errors) && $errors->count())

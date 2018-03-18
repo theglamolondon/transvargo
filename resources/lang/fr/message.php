@@ -36,9 +36,9 @@ return [
     ],
 
     'expedition' => [
-        'initiee' => 'Votre demande d\'expédition a été initée, veuillez complèter quelques informations',
-        'create' => "La publication de votre offre a été effectuée avec succès.",
-        'accept' => 'L\'offre d\'expédition :reference a été prise en charge par vous. Veuillez rentrer en contact avec le client dans de bref délais.',
+        'initiee' => 'Votre demande d\'expédition a été initée, veuillez complèter quelques informations SVP.',
+        'create' => "Un commercial entrera en contact avec vous par téléphone pour vous faire un devis afin de mieux prendre en charge votre expédition.",
+        'accept' => 'L\'offre d\'expédition :reference a été affeectée à un transporteur.',
     ],
 
     'vehicule' => [

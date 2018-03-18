@@ -21,9 +21,16 @@ class ExpeditionController extends Controller
         $this->middleware(['auth']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Throwable
+     */
     public function saveNewExpedition(Request $request)
     {
-        $this->validate($request, $this->validatorRules());
+        $this->validate($request, $this->validatorRules(), [
+            "require_if.valeurassuree" => "La valeur monétaire de la machandise transportée est requise pour le calclu de l'assurance."
+        ]);
 
         $expedition = $this->createExpedition($request);
 

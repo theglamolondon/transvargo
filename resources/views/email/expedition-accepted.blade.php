@@ -10,8 +10,8 @@
             <tr>
                 <td style="padding-top: 30px; padding-bottom: 50px; padding-left: 20px; padding-right: 20px;" width="100%">
                     <h3>Bonjour {{ $expedition->client->prenoms }} {{ $expedition->client->nom }},</h3><br>
-                    Votre expédition <strong>{{ $expedition->reference }}</strong>  a été acceptée par un transporteur.<br><br>
-
+                    Votre expédition <strong>{{ $expedition->reference }}</strong> a été pris en charge, nous rentreront en contact avec vous pour le règlement et le début de votre expédition.
+                    <!--
                     Afin de regler les frais d'expédition, merci de cliquer sur le bouton ci-dessous&nbsp;:<br><br><br><br>
 
                     <div align="center">
@@ -20,8 +20,8 @@
                         </a>
                         <br><br>
                         <small>Si vous ne pouvez pas cliquer sur le bouton, copier-coller le lien suivant dans votre navigateur : {{ route("payment.choice",[ "reference" => $expedition->reference ]) }}</small>
-
                     </div>
+                    -->
                     <br><br>
                     N'hésitez pas à reprendre contact avec nous si quelque chose ne va pas ou si vous avez besoin d’informations&nbsp;: nous lisons et répondons à tous les e-mails&nbsp;!
                     <br><br>

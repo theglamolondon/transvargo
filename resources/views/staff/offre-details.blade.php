@@ -26,10 +26,10 @@
                     <hr class=""/>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    @if(\Illuminate\Support\Facades\Auth::user()->typeidentite_id == \App\TypeIdentitite::TYPE_TRANSPORTEUR)
-                        <h3 class="text-center">{{ number_format($expedition->prix,0,',',' ') }} F CFA</h3>
+                    @if($expedition->prix != 0)
+                        <!--<h3 class="text-center">{{ number_format($expedition->prix,0,',',' ') }} F CFA</h3>-->
                     @else
-                        <h3 class="text-center">{{ number_format($expedition->prix,0,',',' ') }} F CFA</h3>
+                        <h3 class="text-center label-warning">Non pris en charge</h3>
                     @endif
                 </div>
             </div>
@@ -97,7 +97,7 @@
                     @endif
 
                     <div class="">
-                    @if(substr($expedition->statut, 0, 2) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE))
+                    @if(substr($expedition->statut, 0, 2) >= intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE) && $expedition->prix != 0)
                         <a class="h6" title="Télécharger la facture" target="_blank" href="{{ route("staff.pdf.facture", ["reference" => $expedition->reference]) }}"><i class="glyphicon glyphicon-save-file"></i> Facture</a>
                     @endif
                     <br/>
@@ -142,16 +142,15 @@
 
         </div>
 
-        @if(\Illuminate\Support\Facades\Auth::user()->typeidentite_id == \App\TypeIdentitite::TYPE_STAFF_USER)
-            @if($expedition->statut == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_NON_ACCEPTE))
-            <div class="col-md-4 col-sm-7 col-xs-12">
-                <div id="map" style="height: 550px"></div>
-                <br>
-                <br>
-                <a href="{{ route('staff.offre.affect', [ "reference" => $expedition->reference ]) }}" class="btn btn-primary btn-sm btn-min-width-lg">Affecter</a>
-            </div>
+        <div class="col-md-4 col-sm-7 col-xs-12">
+            <div id="map" style="height: 550px"></div>
+            <br>
+            <br>
+            @if(\Illuminate\Support\Facades\Auth::user()->typeidentite_id == \App\TypeIdentitite::TYPE_STAFF_USER &&
+            $expedition->statut == intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_NON_ACCEPTE) )
+            <a href="{{ route('staff.offre.affect', [ "reference" => $expedition->reference ]) }}" class="btn btn-primary btn-sm btn-min-width-lg">Affecter</a>
             @endif
-        @endif
+        </div>
 
     </section>
 

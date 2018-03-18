@@ -23,9 +23,8 @@
             <td width="50%" class="head">
                 <div id="">
                     <h2 class="name">{{ config('app.name') }}</h2>
-                    <div>Marcory résidentiel</div>
-                    <div>(+225) 40 50 46 63</div>
-                    <div>(+225) 78 26 46 23</div>
+                    <div>Cocody deux plateaux</div>
+                    <div>(+225) {{ env("APP_CALL") }}</div>
                     <div><a href="mailto:contact@transvargo.com">contact@transvargo.com</a></div>
                 </div>
             </td>

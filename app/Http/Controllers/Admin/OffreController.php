@@ -23,7 +23,7 @@ class OffreController extends Controller
     public function liste(Request $request)
     {
         $expeditions = Expedition::with('typeCamion','client','chargement.vehicule.transporteur')
-            ->where("statut", Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
+            //->where("statut", Statut::TYPE_EXPEDITION.Statut::ETAT_PROGRAMMEE.Statut::AUTRE_NON_ACCEPTE)
             ->orderBy('dateheurecreation','desc');
 
         $this->filterExpeditions($request, $expeditions);
@@ -56,6 +56,11 @@ class OffreController extends Controller
                     ->join("vehicule", "vehicule.id","=", "chargement.vehicule_id")
                     ->join("transporteur", "transporteur.identiteaccess_id", "=", "vehicule.transporteur_id")
                 ->whereRaw("concat(transporteur.nom, transporteur.prenoms, transporteur.raisonsociale) like '%".$request->query("transporteur_name")."%'");
+            }
+
+            //Check if state is passed
+            if($request->query("state") != "all"){
+                $expeditions->where("statut", intval($request->query("state")));
             }
         }
     }

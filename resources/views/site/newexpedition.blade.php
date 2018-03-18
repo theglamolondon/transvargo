@@ -174,6 +174,12 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Valeur monétaire de la marchandise</label>
+                            <div class="col-sm-8 col-xs-12">
+                                <input type="number" placeholder="Valeur monétaire du bien transporté" required id="valeurassuree" name="valeurassuree" class="form-control" value="{{old('valeurassuree',0)}}">
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-sm btn-min-width-lg">Suivant</button>

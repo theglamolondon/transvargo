@@ -29,7 +29,7 @@
         <thead>
         <tr>
             <th class="no">#</th>
-            <th class="desc">NATURE DE <br> MARCHANDISE</th>
+            <th class="desc">POIDS DU CAMION</th>
             <th class="qty">LIEU <br/> CHARGEMENT</th>
             <th class="qty">LIEU <br/> DECHARGEMENT</th>
             <th class="unit">TYPE <br/> CAMION</th>

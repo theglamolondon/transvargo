@@ -47,6 +47,12 @@
 
                         @if($expedition->isassure)
                             <div class="col-md-12">
+                                <b>Valeur monétaire de la mdse</b><br>
+                                <div class="input-group">
+                                    <input type="text" disabled class="form-control" placeholder="Valeur mdses" name="valeurassuree" id="valeurassuree" value="{{ number_format($expedition->valeurassuree, 0, ".", " ") }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <b>Prix de l'assurance</b><br>
                                 <span>{{ $expedition->assurance->libelle }}</span>
                                 <div class="input-group">

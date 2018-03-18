@@ -48,6 +48,19 @@
                     </div>
 
                     <div class="col-md-2 col-sm-6 col-xs-12">
+                        <b>Etat</b>
+                        <div class="input-group">
+                            <select name="state" id="state" class="form-control">
+                                <option value="all">Tous les états</option>
+                                <option value="{{intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_NON_ACCEPTE)}}">Expeditions non acceptées</option>
+                                <option value="{{intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_PROGRAMMEE.\App\Services\Statut::AUTRE_ACCEPTE)}}">Expeditions acceptées</option>
+                                <option value="{{intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_EN_COURS.\App\Services\Statut::AUTRE_ACCEPTE)}}">Expeditions en cours</option>
+                                <option value="{{intval(\App\Services\Statut::TYPE_EXPEDITION.\App\Services\Statut::ETAT_LIVREE.\App\Services\Statut::AUTRE_ACCEPTE)}}">Expeditions livrées</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <b>&nbsp;</b>
                         <div class="input-group">
                             <button class="btn btn-primary btn-sm">Rechercher</button>
@@ -81,7 +94,7 @@
                     <th>Lieu de départ</th>
                     <th>Lieu d'arrivée</th>
                     <th>Date chargement</th>
-                    <th>Distance</th>
+                    <!--<th>Distance</th>-->
                     <th>Client</th>
                     <th>Statut</th>
                     <th>Transporteur</th>
@@ -98,7 +111,7 @@
                         <td>{{ $expedition->lieudepart }}</td>
                         <td>{{ $expedition->lieuarrivee }}</td>
                         <td>{{ (new \Carbon\Carbon($expedition->datechargement))->format('d/m/Y') }}</td>
-                        <td>{{ number_format($expedition->distance,0,','," ")}} km</td>
+                        <!--<td>{{ number_format($expedition->distance,0,','," ")}} km</td>-->
                         <td>{{ $expedition->client->nom }} {{ $expedition->client->prenoms }}</td>
                         <td>{{ \Illuminate\Support\Facades\Lang::get('statut.'.$expedition->statut) }}</td>
                         <td>{{ $expedition->chargement ? ($expedition->chargement->vehicule ? $expedition->chargement->vehicule->transporteur->raisonsociale : "") : ""}}</td>
