@@ -10,7 +10,8 @@ return [
             'limite' => 'Votre statut de professionnel ne vous permet pas d\'ajouter un véhicule.'
         ],
         'offre' => [
-            'nontrouve' => 'L\'offre que vous essayez de traiter est introuvable.'
+            'nontrouve' => 'L\'offre que vous essayez de traiter est introuvable.',
+            'incomplet' => 'L\'offre que vous essayer de traiter est incomplète.'
         ],
         'identite' => [
             'noactivate' => 'Votre compte n\'a encore pas été confirmé. Veuillez cliquer sur le lien qui vous a été envoyé par email.'

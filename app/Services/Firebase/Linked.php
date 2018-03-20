@@ -89,6 +89,10 @@ trait Linked
                 $expedition->lieuarrivee,
                 (new Carbon($expedition->dateexpiration))->format("d/m/Y"));
 
+            /*
+            $push = $this->initializePush($expedition,"Affectation d'offre", $message);
+            $firebase->sendNotificationToSpecificTopics($push, $expedition->chargement->vehicule->immatriculation);
+            */
             $this->sendNotificationToOneDevice($expedition, $message);
         }
     }

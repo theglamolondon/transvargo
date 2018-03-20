@@ -5,7 +5,7 @@
     <a href="javascript:void(0);" id="btnAdd" class="pull-left btn btn-primary">Ajouter</a>
 </div>
 <div class="vehicle-panel">
-    @if($transporteur->vehicules)
+    @if(count($transporteur->vehicules)!=0)
     @foreach($transporteur->vehicules as $vehicule)
     <div class="col-md-4 col-sm-6 col-xs-12 model">
         <input type="hidden" name="id[]" value="{{$vehicule->id}}">

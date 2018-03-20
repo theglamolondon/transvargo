@@ -264,6 +264,10 @@ trait ExpeditionProcessing
         try{
             $expedition = $this->getExpeditionByReference($reference);
 
+            if($expedition->chargement == null){
+                return back()->withErrors(Lang::get('message.erreur.offre.incomplet'));
+            }
+
             return view("staff.offre-details", compact("expedition"));
         }catch (ModelNotFoundException $e){
             logger($e->getTraceAsString());
