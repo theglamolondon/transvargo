@@ -40,7 +40,7 @@
         @foreach($invoices as $invoice)
         <tr>
             <td class="no">#{{ $loop->index + 1 }}</td>
-            <td class="desc">Transport de colis de {{ $invoice->tonnage ? $invoice->tonnage->masse." tonne(s)" : "Masse non définie" }} kg</td>
+            <td class="desc">Transport de colis de {{ $invoice->tonnage ? $invoice->tonnage->masse." tonne(s)" : "Masse non définie" }}</td>
             <td class="desc">{{ $invoice->lieudepart }}<br/>{{ $invoice->chargement ? $invoice->chargement->adressechargement : '' }}</td>
             <td class="desc">{{ $invoice->lieuarrivee }}<br/>{{ $invoice->chargement ? $invoice->chargement->adresselivraison : '' }}</td>
             <td class="unit">{{ $invoice->typeCamion ? $invoice->typeCamion->libelle : 'Non défini' }}</td>

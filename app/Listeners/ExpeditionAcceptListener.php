@@ -53,7 +53,7 @@ class ExpeditionAcceptListener
 
             //Envoi de SMS
             $number = [ "number" => "+225".$event->expedition->client->contact ];
-            $text = "Votre expédition {$event->expedition->reference} a été acceptée. Le transporteur vous contactera. Veuillez confirmer votre expédition.";
+            $text = "Votre expédition {$event->expedition->reference} a été pris en charge, nous rentrerons en contact avec vous pour le règlement et le début de votre expédition.";
 
             $response = $sms->sendSms($number, $text, "Transvargo");
 

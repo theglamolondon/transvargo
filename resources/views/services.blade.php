@@ -2,7 +2,7 @@
 
 @section('slider')
     <div class="row page-head height">
-        <!--<img src="images/about-us.jpg"> -->
+        <img src="{{ asset("working/transport_assurance.png") }}">
     </div>
 @endsection
 
