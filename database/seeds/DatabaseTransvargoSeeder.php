@@ -66,6 +66,7 @@ class DatabaseTransvargoSeeder extends Seeder
                 "typeidentite_id" => 3
             ],
         ]);
+        /*
         DB::table('identiteaccess')->insert([
             [
                 "email"  => "glamolondon@gmail.com" ,
@@ -96,6 +97,7 @@ class DatabaseTransvargoSeeder extends Seeder
                 "typeidentite_id" => 2
             ],
         ]);
+        */
 
         DB::table('staff')->insert([
             [
@@ -106,6 +108,7 @@ class DatabaseTransvargoSeeder extends Seeder
             ],
         ]);
 
+        /*
         DB::table('client')->insert([
            [
                "nom" => "Koffi",
@@ -171,5 +174,6 @@ class DatabaseTransvargoSeeder extends Seeder
                 "typecamion_id" => 3
             ]
         ]);
+        */
     }
 }
